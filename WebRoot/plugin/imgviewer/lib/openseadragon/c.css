@@ -1,0 +1,335 @@
+
+#img-list{
+    position: relative;
+    width: 100%;
+    height: 60px;
+    background: url(./images/bg-03.png);
+}
+.pre{
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    transition: background 0.3s;
+    background: url(./images/bg-03.png);
+}
+
+
+.pre>img,.nex>img{
+    display:block;
+    height: 40px;
+    margin-top: 40px;
+}
+.pre:hover,.nex:hover{
+    background: url(./images/bg-08.png);
+}
+#img-list>.pre{
+    transition:none;
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 5px;
+    background: url(./images/btn-img1.png) no-repeat;
+    background-position-x: -100px;
+    -ms-background-position-x: -100px;
+    background-position-y: -6px;
+    -ms-background-position-y: -6px;
+}
+#img-list>.pre:hover,
+#img-list>.nex:hover{
+    background-position-y: -65px;
+    -ms-background-position-y: -65px;
+}
+.nex{
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    transition: background 0.3s;
+    background: url(./images/bg-03.png);
+}
+
+.a, .b{
+	height: 120px;
+	margin-top: -70px;
+}
+.a img{
+	margin-left: 2px;
+}
+.b img{
+	margin-left: 7px;
+}
+
+#img-list>.nex{
+    transition:none;
+    display: none;
+    position: absolute;
+    width: 50px;
+    right: 0;
+    top: 5px;
+    height: 50px;
+    cursor: pointer;
+    background: url(./images/btn-img1.png) no-repeat;
+    background-position-x: -260px;
+    -ms-background-position-x: -260px;
+    background-position-y: -6px;
+    -ms-background-position-y: -6px;
+}
+#img-nav{
+	position: relative;
+	/*
+	position: fixed;
+	bottom:0px;
+	left:0px;*/
+    width: 100%;
+    height: 60px;
+    margin: 0 auto;
+    overflow: hidden;    
+}
+.img-nav-sc {
+    margin: 0 auto;
+    position: relative;
+    left: 0;
+}
+.img-nav-sc div.img-top{
+    float: left;
+    margin: 5px;
+    position: relative;
+    cursor: pointer;
+}
+.img-nav-sc div.img-top img{
+    display: block;
+    width: 72px;
+    height: 50px;
+}
+.img-nav-sc div.img-top .w{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    background: rgba(0, 0, 0, 0.5)
+}
+.img-nav-sc div.img-top.active .w{
+    background: none;
+}
+
+
+body{
+    overflow: hidden;
+}
+.page-search {
+    display: block;
+    width: 300px;
+    height: 620px;
+    border: 1px solid #292929;
+    position: absolute;
+    right: -300px;
+    top: 60px;
+    z-index: 999999;
+}
+
+
+#main-footer{
+	position: fixed;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    height: 100px;
+}
+
+
+.page-num-box{width: 30px; height: 22px; margin: 18px 2px 0px 0px; padding: 0px 5px; background: #394c5f;}
+.page-num-box #page-num{width: 100%; height: 100%; border: none; font-size: 14px; outline: none; color: #eee; background: none;}
+
+
+/**  切换国际化  **/
+.xlk {
+    position: relative;
+    width: 32px;
+    margin-right: 20px;
+    margin-top: 17px;
+    height: 25px;
+    line-height: 25px;
+    font-size: 14px;
+    text-align: center;
+    cursor: pointer;
+    z-index: 1000000;
+}
+
+.xlk .choose-list {
+    position: absolute;
+    top: 300%;
+    left: -19px;
+    font-size: 14px;
+    text-align: center;
+    border-radius: 5px;
+    display: none;
+    opacity: 0;
+    z-index: 888;
+    color: #94CDE2;
+}
+
+.xlk .choose-list li {
+    width: 70px;
+    height: 25px;
+    background: #3a656b;
+    transition: background 0.2s;
+}
+
+.xlk .choose-list li:first-child {
+    border-top: none;
+    border-bottom: 1px solid #838b98;
+}
+
+.xlk .choose-list li:hover {
+    color: #fff;
+    background: #838b98;
+}
+
+.lang-icon {
+    display: block;
+    width: 32px;
+    height: 28px;
+    background: url(../../image/language.png) no-repeat;
+    background-position-x: -2px;
+    -ms-background-position-x:-2px;
+    background-position-y: -2px;
+    -ms-background-position-y: -4px;
+}
+.xlk:hover .lang-icon{
+    background-position-y: -34px;
+    -ms-background-position-y: -37px;
+}
+
+.icon-pdf-browse{
+    display: block;
+    width: 32px;
+    height: 28px;
+    background: url(../../image/PDF.png) no-repeat;
+    background-position-x: -2px;
+    -ms-background-position-x: -2px;
+    background-position-y: -2px;
+    -ms-background-position-y: -4px;
+    animation:0;
+}
+.icon-pdf-browse:hover{
+    background: url(../../image/PDF_active.png) no-repeat;
+    background-position-x: -2px;
+    -ms-background-position-x: -2px;
+    background-position-y: -2px;
+    -ms-background-position-y: -4px;
+}
+/***  划词翻译 ***/
+#tranwin{
+    display: none;
+    position: absolute;
+    max-width: 400px;
+    font-size: 16px;
+    background: #FFF;
+    border: 1px solid #E0E0DF;
+    z-index: 19891016;
+    overflow-y: auto;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+#tranwin #tranresult{
+	font-size: 12px;
+    padding: 3px 10px;
+	line-height: 22px;
+	margin-top: 4px;
+    font-family: hm;
+}
+.arrow{
+    position: absolute;
+    width: 14px;
+    height: 7px;
+    top: -7px;
+    z-index: 999;
+    margin-left: 6px;
+    background: url(../../image/poparrow.png) 0 0 no-repeat;
+}
+.page-num-box{width: 30px; height: 22px; margin: 18px 2px 0px 0px; padding: 0px 5px; background: #394c5f;}
+.page-num-box #page-num{width: 100%; height: 100%; border: none; font-size: 14px; outline: none; color: #eee; background: none;}
+
+/**  切换国际化  **/
+.xlk {
+    position: relative;
+    width: 32px;
+    margin-right: 20px;
+    margin-top: 17px;
+    height: 25px;
+    line-height: 25px;
+    font-size: 14px;
+    text-align: center;
+    cursor: pointer;
+    z-index: 1000000;
+}
+
+.xlk .choose-list {
+    position: absolute;
+    top: 300%;
+    left: -19 px;
+    font-size: 14px;
+    text-align: center;
+    border-radius: 5px;
+    display: none;
+    opacity: 0;
+    z-index: 888;
+    color: #94CDE2;
+}
+
+.xlk .choose-list li {
+    width: 70px;
+    height: 25px;
+    background: #3a656b;
+    transition: background 0.2s;
+}
+
+.xlk .choose-list li:first-child {
+    border-top: none;
+    border-bottom: 1px solid #838b98;
+}
+
+.xlk .choose-list li:hover {
+    color: #fff;
+    background: #838b98;
+}
+
+.lang-icon {
+    display: block;
+    width: 32px;
+    height: 28px;
+    background: url(../../image/language.png) no-repeat;
+    background-position-x: -2px;
+    -ms-background-position-x:-2px;
+    background-position-y: -2px;
+    -ms-background-position-y: -4px;
+}
+.xlk:hover .lang-icon{
+    background-position-y: -34px;
+    -ms-background-position-y: -37px;
+}
+
+.icon-pdf-browse{
+    display: block;
+    width: 32px;
+    height: 28px;
+    background: url(../../image/PDF.png) no-repeat;
+    background-position-x: -2px;
+    -ms-background-position-x: -2px;
+    background-position-y: -2px;
+    -ms-background-position-y: -4px;
+    animation:0;
+}
+.icon-pdf-browse:hover{
+    background: url(../../image/PDF_active.png) no-repeat;
+    background-position-x: -2px;
+    -ms-background-position-x: -2px;
+    background-position-y: -2px;
+    -ms-background-position-y: -4px;
+}

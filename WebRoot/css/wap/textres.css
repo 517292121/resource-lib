@@ -1,0 +1,8 @@
+@CHARSET "UTF-8";
+/**基本信息及元数据**/
+.metadata{ min-height: 303px; margin: 10px 15px; background: #FFF;}
+.metadata table{width: 100%;}
+.metadata #title{padding-bottom: 10px;}
+.metadata #title span{height: 30px; padding: 3px 10px; color: #FFF; font-size: 18px;}
+.metadata #title #rsdaTitle{font-size: 24px; font-weight: bold; color: #323232;}
+.metadata table td {vertical-align: text-top; font-size: 15px; line-height: 28px; color: #444; padding-bottom: 7px;}

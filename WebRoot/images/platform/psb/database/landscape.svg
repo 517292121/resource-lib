@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1000" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#f8f0df"/><stop offset=".58" stop-color="#f4ead5"/><stop offset="1" stop-color="#e8e2cf"/></linearGradient>
+    <linearGradient id="mountain" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#d4d4c5"/><stop offset="1" stop-color="#b7c0b4"/></linearGradient>
+    <linearGradient id="snow" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#faf7ea"/><stop offset="1" stop-color="#ebe7d8"/></linearGradient>
+    <radialGradient id="mist"><stop stop-color="#fffdf4" stop-opacity=".78"/><stop offset="1" stop-color="#fffdf4" stop-opacity="0"/></radialGradient>
+  </defs>
+  <path fill="url(#sky)" d="M0 0h1920v1000H0z"/>
+  <ellipse fill="url(#mist)" cx="950" cy="520" rx="870" ry="520"/>
+  <path fill="#c6cbbd" opacity=".38" d="m0 675 170-160 76 78 120-201 128 138 96-86 125 146 113-116 113 104 119-201 132 165 113-117 138 156 112-119 165 138v400H0z"/>
+  <path fill="url(#mountain)" opacity=".48" d="m0 768 176-134 76 58 183-260 115 159 108-85 144 190 137-125 112 109 135-224 151 197 117-103 158 162 107-87 105 72v302H0z"/>
+  <path fill="url(#snow)" opacity=".88" d="m248 692 187-260 74 102 41-11-38 48 44 60-75-36-42 17-5-33-34-30-29 16-12 44-36-4-34 33-41-3zm693 62 135-224 82 107 49 5-45 33 7 44-39-27-37 1-12-35-33 13-28-26-24 26-16 46zm612-24 104-94 42 42 39 2-26 26 16 34-46-19-36 8-7-21-26 11z"/>
+  <path fill="#b4bdae" opacity=".32" d="M0 838q164-78 344 6t364 10q202-92 394 8t391-3q233-69 427 2v139H0z"/>
+  <path fill="#efe8d7" opacity=".82" d="M0 880q212-70 410 8t414-11q220-91 430 9t398-5q153-45 268 5v114H0z"/>
+</svg>

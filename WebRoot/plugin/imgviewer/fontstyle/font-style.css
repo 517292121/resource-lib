@@ -1,0 +1,243 @@
+@CHARSET "UTF-8";
+@font-face {
+	font-style: normal;
+	font-weight: normal;
+	font-family: hm;
+	src: url(../../../font/hm.eot);
+	src: local('A-Himalaya'), local('A-Himalaya'),
+		url(../../../font/A-Himalaya.ttf) format('truetype');
+}
+
+.clear::after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.setting-info {
+    /* width: 334px; */
+    width: 370px;
+    position: fixed;
+    bottom: 110px;
+    right: -334px;
+    z-index: 9999;
+}
+.setting-info-f{
+    position: relative;                      
+    padding-left: 36px;
+}
+.show-btn{
+    cursor: pointer;
+    position: absolute;
+    left: -15px;
+    top: 0;
+    width: 36px;
+    height: 100%;
+    z-index: 9999;
+    background: #00404e url(./setting.png) no-repeat center center;
+    display: none;
+}
+.show-btn:hover{
+    background-color: #033540;
+    transition: all 0.3s;
+}
+li{
+    list-style: none;
+}
+
+.txt-family,
+.txt-size-title,
+.txt-color,
+.txt-background,
+.txt-line-size,	
+.txt-align{
+    float: left;
+    cursor: pointer;
+    margin: 9px 9px 0px 9px;
+    width: 18px;
+    height: 18px;
+    background: url(./tool-icon.png) no-repeat;
+    background-position-y: 0px;
+    -ms-background-position-y:0px;
+}
+
+.txt-direction{
+	float: left;
+    cursor: pointer;
+}
+.txt-direction span{
+    font-size: 14px;
+    padding: 2px;
+    line-height: 13px;
+    width: 16px;
+    height: 16px;
+    display: block;
+    color: #87bac5;
+}
+.txt-direction span:hover{
+	color: #FFF;
+	border-color: #FFF;
+}	
+
+.btn-row{
+	margin: 7px 9px 0px 11px;
+}
+.btn-row span{
+	border-bottom: 1px solid #87bac5;
+}
+.btn-col{
+	margin: 9px 9px 0px 11px;
+}
+.btn-col span{
+	border-left: 1px solid #87bac5;
+	padding-left: 3px;
+}
+
+.txt-content{
+	display: flex;
+	min-height: 100%; 
+	direction: rtl;
+}
+.line-col p{
+	width: 18px;
+	padding: 0px 15px;
+	min-height:100%;
+	border-right: 1px solid #616b75;
+	line-height: 1.3;
+	word-break: break-word; /* 文本行的任意字内断开 */ 
+	word-wrap: break-word; /* IE */ 
+	white-space: -hp-pre-wrap; /* HP printers */ 
+	white-space: -o-pre-wrap; /* Opera 7 */ 
+	white-space: -pre-wrap; /* Opera 4-6 */ 
+	white-space: -moz-pre-wrap; /* Mozilla */ 
+	white-space: pre; /* CSS2 */ 
+	white-space: pre-wrap; /* CSS 2.1 */ 
+	white-space: pre-line; /* CSS 3 (and 2.1 as well, actually) */ 
+}
+.line-col p:last-child{
+	border-left: 1px solid #616b75;
+}
+
+
+.txt-family{
+    background-position-x: 0px;
+    -ms-background-position-x: 0px;
+    
+}
+.txt-size-title{
+    background-position-x: -32px;
+    -ms-background-position-x: -32px;
+}
+.txt-color{
+    background-position-x: -64px;
+    -ms-background-position-x: -64px;
+}
+.txt-color .sp-replacer, .txt-background .sp-replacer{
+    width: 18px;
+    height: 18px;
+    padding: 0px;
+    border: none;
+    background: none;
+    margin-top: -14px;
+}
+.txt-background {
+    background-position-x:-95px;
+    -ms-background-position-x: -95px;
+}
+.txt-line-size{
+	background-position-x:-218px;
+    -ms-background-position-x: -218px;
+}
+.align-left{
+    background-position-x: -126px;
+    -ms-background-position-x: -126px;
+}
+.align-center{
+    background-position-x: -157px;
+    -ms-background-position-x: -157px;
+}
+.align-right{
+    background-position-x: -188px;
+    -ms-background-position-x: -188px;
+}
+.txt-family:hover,
+.txt-size-title:hover,
+.txt-color:hover,
+.txt-background:hover,
+.txt-line-size:hover,
+.align-right:hover,
+.align-center:hover,
+.align-left:hover{
+    background-position-y: -28px;
+    -ms-background-position-y:-28px;
+}
+.align-right.active,
+.align-center.active,
+.align-left.active{
+    background-position-y: -28px;
+    -ms-background-position-y:-28px;
+}
+.txt-family-list .active,
+.txt-line-list .active,
+.txt-size .active {
+    color: #fff;
+}
+
+.setting-info .title {
+    color: #A5A5A5;
+    float: left;
+    font-size: 16px;
+}
+.txt-size,
+.txt-family-list,
+.txt-line-list
+{
+    position: absolute;
+    width: 95px;
+    background: #071829;
+    bottom:38px;
+    display: none;
+}
+.txt-family-list{
+    left: 0px;
+}
+.txt-size{
+    left: 40px;
+}
+.txt-line-list{
+    left: 150px;
+}
+.txt-family-list li{
+    font-size: 16px;
+}
+.txt-size,
+.txt-family-list,
+.txt-line-list
+{
+    padding: 5px 10px 10px;
+    cursor: pointer;
+    color: #888;
+}
+
+.sp-preview,
+.sp-dd{
+    display: none;
+}
+
+.txt-red,
+.txt-blue,
+.txt-yellow {
+    width: 20px;
+    height: 20px;
+}
+.txt-btn-list{
+    background: #00404e;
+    position: relative;
+    height: 36px;
+}
+.txt-btn-list ul li {
+	padding: 5px 0px;
+}
+.txt-btn-list ul li:hover {
+	color: #FFF;
+}

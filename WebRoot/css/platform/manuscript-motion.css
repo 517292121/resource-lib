@@ -1,0 +1,76 @@
+/* Light follows the original PS artwork; all effect coordinates are percentages. */
+.dh-presentation-ready .dh-manuscript-image{transform-origin:50% 70%;animation:dh-artwork-arrive 1.8s cubic-bezier(.16,1,.3,1) both}
+.dh-presentation-ready .dh-collection-plaque{animation:dh-plaque-arrive 1.2s .15s cubic-bezier(.16,1,.3,1) both}
+.dh-presentation-ready .dh-reveal-element{--dh-reveal-x:0px;--dh-reveal-y:24px;opacity:0;transform:translate(var(--dh-reveal-x),var(--dh-reveal-y))}
+.dh-presentation-ready .dh-stat-card:nth-child(even){--dh-reveal-y:-24px}
+.dh-presentation-ready .dh-introduction h2{--dh-reveal-x:-28px;--dh-reveal-y:0px}
+.dh-presentation-ready .dh-introduction p{--dh-reveal-x:28px;--dh-reveal-y:0px}
+.dh-presentation-ready .dh-reveal-element.dh-is-revealed{animation:dh-content-arrive 1.15s var(--dh-reveal-delay,0s) cubic-bezier(.16,1,.3,1) both}
+.dh-presentation-ready .dh-stat-card{transition:translate .35s,filter .35s}
+.dh-presentation-ready .dh-stat-card:hover,.dh-presentation-ready .dh-stat-card:focus-within{translate:0 -5px;filter:drop-shadow(0 7px 9px #62360755)}
+.dh-stage.dh-presentation-paused *,.dh-stage.dh-presentation-paused *::before,.dh-stage.dh-presentation-paused *::after{animation-play-state:paused!important}
+.dh-stage.dh-presentation-still .dh-reveal-element{opacity:1;transform:none;animation:none!important}
+.dh-stage.dh-presentation-still .dh-manuscript-image,.dh-stage.dh-presentation-still .dh-collection-plaque{animation:none!important}
+.dh-manuscript.dh-motion-ready{--dh-rx:0deg;--dh-ry:0deg;--dh-light-x:50%;--dh-light-y:30%;transform:perspective(1100px) rotateX(var(--dh-rx)) rotateY(var(--dh-ry));transform-origin:50% 70%;transition:transform .65s cubic-bezier(.2,.65,.25,1)}
+.dh-manuscript .dh-motion-art{position:absolute;pointer-events:none;user-select:none}
+.dh-presentation-ready .dh-scroll-ready .dh-manuscript-image{animation:none}
+.dh-manuscript .dh-scroll-board{z-index:0;inset:0;visibility:hidden;clip-path:polygon(12.9% 1.6%,86.8% 1.6%,98.2% 61%,1.8% 61%);background:url("../../images/platform/psb/home/manuscript-table-clean-v1.png") center/100% 100% no-repeat}
+.dh-manuscript .dh-scroll-sheet{visibility:hidden}
+.dh-scroll-ready .dh-scroll-board,.dh-scroll-ready .dh-scroll-sheet,.dh-scroll-ready .dh-scroll-roller,.dh-scroll-ready .dh-scroll-tuck{visibility:visible}
+.dh-manuscript .dh-scroll-sheet,.dh-manuscript .dh-scroll-roller,.dh-manuscript .dh-scroll-tuck{z-index:1;inset:0}
+.dh-manuscript .dh-scroll-sheet{z-index:2}
+.dh-manuscript .dh-scroll-tuck{z-index:1;visibility:hidden}
+.dh-scroll-ready .dh-scroll-tuck{visibility:visible}
+.dh-manuscript .dh-scroll-source{display:block;width:100%;height:100%;object-fit:fill}
+.dh-scroll-source{-webkit-mask-size:100% 100%;mask-size:100% 100%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;mask-mode:alpha}
+.dh-scroll-sheet .dh-scroll-source{-webkit-mask-image:url("../../images/platform/psb/home/manuscript-paper-mask.svg?v=6");mask-image:url("../../images/platform/psb/home/manuscript-paper-mask.svg?v=6")}
+.dh-scroll-roller .dh-scroll-source{-webkit-mask-image:url("../../images/platform/psb/home/manuscript-roller-mask.svg?v=6");mask-image:url("../../images/platform/psb/home/manuscript-roller-mask.svg?v=6")}
+.dh-scroll-tuck .dh-scroll-source{-webkit-mask-image:url("../../images/platform/psb/home/manuscript-tuck-mask.svg?v=2");mask-image:url("../../images/platform/psb/home/manuscript-tuck-mask.svg?v=2")}
+.dh-manuscript .dh-scroll-roller{z-index:3;visibility:hidden}
+.dh-scroll-ready .dh-scroll-roller{visibility:visible}
+.dh-scroll-opening .dh-scroll-sheet{animation:dh-unroll-paper 4.8s cubic-bezier(.3,.65,.22,1) both}
+.dh-scroll-opening .dh-scroll-roller,.dh-scroll-opening .dh-scroll-tuck{visibility:visible;animation:dh-unroll-roller 4.8s cubic-bezier(.3,.65,.22,1) both}
+.dh-scroll-opening .dh-paper-light{opacity:0}
+.dh-scroll-open .dh-scroll-sheet{clip-path:none}
+.dh-manuscript .dh-paper-light,.dh-manuscript .dh-table-trace,.dh-manuscript .dh-gold-dust{z-index:2}
+.dunhuang-home .dh-motion-ready .dh-library-entry{z-index:4}
+
+/* Both layers move by the same 65% offset. The curved left edge follows the
+   user's red seam (211,31) -> (155,249) in the 976 x 478 source artwork. */
+@keyframes dh-unroll-paper{from{clip-path:polygon(87.1% 0,100% 0,100% 100%,74.5% 100%,80.5% 52%,81.1% 46%,82.6% 34.3%,83.9% 24.1%,85.3% 14.2%,86.3% 6.4%)}to{clip-path:polygon(22.1% 0,100% 0,100% 100%,9.5% 100%,15.5% 52%,16.1% 46%,17.6% 34.3%,18.9% 24.1%,20.3% 14.2%,21.3% 6.4%)}}
+@keyframes dh-unroll-roller{from{transform:translateX(65%)}to{transform:translateX(0)}}
+.dh-manuscript .dh-ambient-light{z-index:-1;inset:-24% -8% 22%;background:radial-gradient(ellipse at 50% 50%,#ffd57838,transparent 64%);filter:blur(18px);animation:dh-light-breathe 7s ease-in-out infinite}
+.dh-manuscript .dh-light-rays{inset:-20% 5% 35%;overflow:hidden;opacity:.4;mask-image:linear-gradient(transparent,#000 30%,transparent);background:conic-gradient(from 150deg at 50% -10%,transparent 0deg,#ffe3a62b 8deg,transparent 15deg,#ffe3a61a 24deg,transparent 35deg,#ffe3a624 48deg,transparent 58deg);animation:dh-rays-drift 14s ease-in-out infinite alternate}
+.dh-manuscript .dh-paper-light{inset:0 0 40%;overflow:hidden;clip-path:polygon(20% 5%,83% 8%,91% 90%,10% 92%);mix-blend-mode:screen}
+.dh-paper-light::before{content:"";position:absolute;inset:-25% -30%;background:linear-gradient(105deg,transparent 40%,#e8a94a10 44%,#fff1bd75 50%,#f7cc7133 54%,transparent 60%);transform:translateX(-75%);animation:dh-scroll-sweep 9s ease-in-out infinite}
+.dh-paper-light::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at var(--dh-light-x) var(--dh-light-y),#fff1bf40,transparent 48%);opacity:0;transition:opacity .7s}
+.dh-manuscript:hover .dh-paper-light::after{opacity:1}
+.dh-manuscript .dh-table-trace{inset:0;width:100%;height:63%;overflow:visible;opacity:.65;filter:drop-shadow(0 0 4px #ffe1a2)}
+.dh-table-trace path{fill:none;stroke:#ffe6a7;stroke-width:1.3;stroke-dasharray:90 910;animation:dh-trace-travel 16s linear infinite}
+.dh-manuscript .dh-gold-dust{inset:-19% 3% 31%;overflow:hidden;mask-image:linear-gradient(transparent,#000 20%,#000 80%,transparent)}
+.dh-gold-dust i{position:absolute;left:var(--x);top:var(--y);width:var(--size);height:var(--size);border-radius:50%;background:#ffedbd;box-shadow:0 0 6px 1px #edbd6599;opacity:0;animation:dh-dust-rise var(--duration) var(--delay) ease-in-out infinite}
+.dh-gold-dust i:nth-child(6n){border-radius:0;clip-path:polygon(50% 0,60% 40%,100% 50%,60% 60%,50% 100%,40% 60%,0 50%,40% 40%);background:#fff6cf}
+.dunhuang-home .dh-motion-ready .dh-library-entry{z-index:2;isolation:isolate;overflow:hidden;animation:dh-entry-breathe 4.5s ease-in-out infinite;transition:box-shadow .3s,color .3s,background .3s,transform .3s}
+.dh-motion-ready .dh-library-entry::before{content:"";position:absolute;z-index:-1;inset:-50%;background:linear-gradient(110deg,transparent 37%,#fff0b880 49%,transparent 61%);transform:translateX(-90%);animation:dh-entry-sheen 6s 1s ease-in-out infinite;pointer-events:none}
+.dunhuang-home .dh-motion-ready .dh-library-entry:hover,.dunhuang-home .dh-motion-ready .dh-library-entry:focus-visible{color:#fffbed;background:#ffe7a91a;box-shadow:0 0 0 1px #ffe4a5,0 0 30px #ffc85c8c;transform:translateY(-2px)}
+
+.dh-manuscript.dh-motion-paused,.dh-manuscript.dh-motion-paused *,.dh-manuscript.dh-motion-paused *::before{animation-play-state:paused!important}
+.dh-manuscript.dh-motion-still{transform:none;transition:none}
+.dh-motion-still .dh-motion-art{visibility:hidden}
+.dh-motion-still.dh-scroll-ready .dh-scroll-board,.dh-motion-still.dh-scroll-ready .dh-scroll-sheet,.dh-motion-still.dh-scroll-ready .dh-scroll-roller,.dh-motion-still.dh-scroll-ready .dh-scroll-tuck{visibility:visible}
+.dh-motion-still .dh-library-entry::before{display:none}
+@keyframes dh-scroll-sweep{0%,12%{transform:translateX(-75%);opacity:0}22%{opacity:.85}63%{opacity:.65}78%,100%{transform:translateX(75%);opacity:0}}
+@keyframes dh-light-breathe{0%,100%{opacity:.5;transform:scale(.98)}50%{opacity:1;transform:scale(1.04)}}
+@keyframes dh-rays-drift{from{transform:translateX(-2%) rotate(-3deg);opacity:.25}to{transform:translateX(2%) rotate(3deg);opacity:.55}}
+@keyframes dh-trace-travel{to{stroke-dashoffset:-1000}}
+@keyframes dh-dust-rise{0%{opacity:0;transform:translate3d(0,30px,0) scale(.5)}25%{opacity:.7}70%{opacity:.5}100%{opacity:0;transform:translate3d(var(--drift),-70px,0) scale(.3)}}
+@keyframes dh-entry-breathe{0%,100%{box-shadow:0 0 6px #ffc85c22}50%{box-shadow:0 0 20px #ffc85c66,inset 0 0 10px #ffe5a91a}}
+@keyframes dh-entry-sheen{0%,45%{transform:translateX(-90%)}75%,100%{transform:translateX(90%)}}
+@keyframes dh-artwork-arrive{from{opacity:.25;transform:perspective(1200px) translateY(24px) rotateX(6deg) scale(.965);filter:brightness(.8)}to{opacity:1;transform:perspective(1200px) translateY(0) rotateX(0) scale(1);filter:brightness(1)}}
+@keyframes dh-plaque-arrive{from{opacity:0;transform:translateY(-14px)}to{opacity:1;transform:translateY(0)}}
+@keyframes dh-content-arrive{from{opacity:0;transform:translate(var(--dh-reveal-x),var(--dh-reveal-y))}to{opacity:1;transform:translate(0,0)}}
+@media(max-width:900px){.dh-manuscript .dh-light-rays{opacity:.25}.dh-gold-dust i:nth-child(n+19){display:none}}
+
+@media(prefers-reduced-motion:reduce){.dh-manuscript.dh-motion-ready{transform:none!important;transition:none!important}.dh-manuscript .dh-motion-art{display:none}.dh-motion-ready .dh-library-entry,.dh-motion-ready .dh-library-entry::before{animation:none!important}.dh-motion-ready .dh-library-entry::before{display:none}}
+@media(prefers-reduced-motion:reduce){.dh-presentation-ready .dh-reveal-element{opacity:1;transform:none}.dh-presentation-ready .dh-reveal-element,.dh-presentation-ready .dh-manuscript-image,.dh-presentation-ready .dh-collection-plaque{animation:none!important}.dh-presentation-ready .dh-stat-card:hover,.dh-presentation-ready .dh-stat-card:focus-within{translate:none}}
+@media(prefers-reduced-motion:reduce){.dh-scroll-opening .dh-scroll-sheet,.dh-scroll-opening .dh-scroll-roller{animation:none}}

@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>平台日志记录</title>
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3"></meta>
+    <meta http-equiv="description" content="this is my page"></meta>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"></meta>
+    <link rel="stylesheet" href="css/log.css" type="text/css"></link>
+    </head>
+  
+  <body>
+	
+  	<div class="header">
+      <h1>平台日志记录</h1>
+    </div>
+    
+  	<div class="navLine"></div>
+  	
+  	<!-- 
+    	logTime ： 记录时间
+    	logType ： 记录类型 （new-新增  fix-修复，注意对应的样式名也需要修改）
+    	logAuthor ： 记录人员
+    	logContent ： 记录内容 （如果每条内容有简单说明，直接在其后面加<br/>标签与<span>标签，并把描述内容放在<span>标签中）
+    	注意：
+    		1、新增时间记录时，直接将 tr 整行复制，修改其内容即可；
+    		2、新增内容记录时，直接将类名为 changelog 的标签内容复制，修改其内容即可；
+    		3、新增详细记录时，直接将 li 整行复制，修改其内容即可；
+    		4、新增简单描述记录时，直接将 span 整行复制，修改其内容即可；
+     -->
+     
+   	<div class="content">
+   		<table cellpadding="0" cellspacing="0" border="0" class="logtable">
+   			<tr>
+   				<!-- 时间记录 -->
+   				<td valign="top" class="td200"><h3 id="logTime">2016年07月22日</h3></td>
+   				<td>
+	   				<!-- 内容记录 -->
+   					<div class="changelog">
+	   					<b id="logType" class="logtype new">NEW</b><i id="logAuthor" class="author">zhangchao</i>
+	                    <ul id="logContent">
+		   					<!-- 详细记录 -->
+	                        <li>
+	                        	平台数据库检索正式升级为Lucene检索；<br/>
+				   				<!-- 简单描述记录 -->
+	                        	<span>检索速度在数据量大的情况下得到显著的提升；</span>
+	                        </li>
+	                        <li>
+	                        	二级页面布局调整；<br/>
+				   				<!-- 简单描述记录 -->
+	                        	<span>采用列表+部分字段展示，简洁大方；</span>
+	                        </li>
+	                    </ul>
+	                </div>
+   					<div class="changelog">
+	   					<b id="logType" class="logtype fix">FIX</b><i id="logAuthor" class="author">zhangchao</i>
+	                    <ul id="logContent">
+	                        <li>
+                  				当资源所关联的学科分类被删除后，进入资源界面报错（后台）；<br/>
+	                        	<span>在删除学科分类时，增加了分类下是否存在资源的验证判断，让用户自行选择是否删除分类下的关联资源；</span>
+	                        </li>
+	                        <li>
+                  				平台用户的资源下载量控制及验证；<br/>
+	                        	<span>后台-全局参数-系统参数设置-设置下载量</span>
+	                        </li>
+	                    </ul>
+	                </div>
+	                <div class="changelog">
+	   					<b id="logType" class="logtype new">NEW</b><i id="logAuthor" class="author">tianhaonan</i>
+	                    <ul id="logContent">
+	                        <li>
+                  			   升级了通用版的Lucene检索<br/>
+	                        	<span>增加了Lucene聚类分组功能,支持关键词全文检索或高级检索模式;
+	                        				点击特色库支持显示各种自定义分类且自动计算各自节点下的数据总数;
+	                        				增加多选功能,支持一次性选择多个数据进行二次查询;</span>
+	                        </li>
+	                    </ul>
+	                </div>
+	                <div class="changelog">
+	   					<b id="logType" class="logtype fix">FIX</b><i id="logAuthor" class="author">tianhaonan</i>
+	                    <ul id="logContent">
+	                        <li>
+                  				修改Lucene聚类分组可以进行条件过滤<br/>
+	                        	<span>可以通过不同的聚类分组组合条件,进行数据筛选查询</span>
+	                        </li>
+	                        <li>
+                  			   增加Lucene结果集中检索功能<br/>
+	                        	<span>可以通过关键词查询结果进行结果集中检索和聚类分组条件进行组合条件筛选</span>
+	                        </li>
+	                    </ul>
+	                </div>
+		    	</td>
+   			</tr> 
+   		</table>
+    </div>
+    
+  </body>
+</html>

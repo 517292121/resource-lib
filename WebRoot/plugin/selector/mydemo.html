@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+		<title>下拉选择示例</title>
+		<link rel="stylesheet" type="text/css" href="css/cs-select.css" />
+		<link rel="stylesheet" type="text/css" href="css/cs-skin-elastic.css" />
+		<script src="js/classie.js"></script>
+		<script src="js/selectFx.js"></script>
+	</head>
+	<body style="background: #00b6ad; padding: 100px;">
+		<section>
+			<select class="cs-select cs-skin-elastic">
+				<option value="" disabled selected>Select a Country</option>
+				<option value="france" data-class="flag-france">France</option>
+				<option value="brazil" data-class="flag-brazil">Brazil</option>
+				<option value="argentina" data-class="flag-argentina">Argentina</option>
+				<option value="south-africa" data-class="flag-safrica">South Africa</option>
+			</select>
+		</section>
+		
+		<script>
+			(function() {
+				[].slice.call( document.querySelectorAll( 'select.cs-select' ) ).forEach( function(el) {	
+					new SelectFx(el);
+				} );
+			})();
+		</script>
+	</body>
+</html>

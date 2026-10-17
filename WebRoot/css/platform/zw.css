@@ -1,0 +1,23 @@
+@CHARSET "UTF-8";
+*{font-family: hm; font-size: 16px;}
+.container .nav .title{width: 200px;}
+.container .nav #restype {width: 1000px;}
+.subject .title { width: 200px;}
+.counts .title {width: 300px;}
+.reslist #res .nav span {width: 230px;}
+.comments #title b {width: 120px;}
+.attfile ul li dl {width: 200px;}
+.attfile ul li span {width: 60px;}
+.listbox #box #res1 table .tm {width: 540px;}
+.listbox #box #res1 table .zrz {width: 130px;}
+.listbox #box #res1 table .rq {width: 150px;}
+.upfile1 {width:110px;}
+.tanInput {width: 280px;}
+.tanTable tr td{width: 250px;}
+.pBar a{padding: 0px 9px;} 
+
+.similar ul li {min-height: 95px;}
+.comments #comlist ul .lyxx .lynr{width: 100%;float: left;text-indent: 2em;}
+/***  pageSearch.jsp ***/
+.s-box {height: 80px;}
+.info-list-f {top: 165px;}

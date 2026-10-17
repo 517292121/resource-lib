@@ -1,0 +1,24 @@
+@CHARSET "UTF-8";
+.bcm,
+.choose li.active a,
+.choose-news li.active a,
+.w-top .search .search-group .search-icon, 
+.w-bottom-nav,
+.w_tab a.active,
+.pBar a{
+	background: #1EA4A6;
+}
+.long-nav .active,
+.container .nav span.active
+{
+	color: #1EA4A6; 
+}
+
+.w-top .logo-img{
+	background: url(../../images/platform/def/logo.png)no-repeat center;
+	background-size: contain;
+}
+
+#resBrowseHis li {
+	background: url("../../images/platform/def/list-icon.png") no-repeat 3px 10px;
+}

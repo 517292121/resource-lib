@@ -1,0 +1,38 @@
+@CHARSET "UTF-8";
+html,body{background: #EEEEEE;}
+.w_tab{margin: 10px; display: -webkit-box;  display: -webkit-flex;  display: -ms-flexbox; display: flex; padding-top: 10px;}
+.w_tab li {height: 40px; text-align: center; width: 100%;}
+.w_tab li a{background: #FFF; width: 50%; float: left; height: 38px; line-height: 38px; color: #333;}
+.w_tab a.active{color: #FFF;}
+
+
+.w_listbox{margin: 10px; position:relative; overflow:hidden;} /*定位一般设置为relative，overflow设置为hidden来隐藏外面的内容*/
+.w_listbox #box{position:absolute; width: 100%;} /*这个定位设置为absolute, 因为要操作这个的位置来切换内容*/
+.w_listbox #box ul{float:left; width:100%; min-height: 400px;}
+
+.w_res_list{padding: 15px 10px; margin: 5px 0px; border-bottom: 1px dashed #ccc;}
+.w_res_list .title{line-height: 24px;padding-bottom: 8px;}
+.w_res_list li{font-size: 14px; color: #666; line-height: 22px;}
+.w_res_list .title a{font-size: 18px; color: #222;}
+
+.w_res_table{width: 48.5%; height: 300px; float: left;  background: #FFF;margin-bottom:10px}
+.w_res_table.bj{margin-right: 0px;}
+.w_res_table li img{width: 100%; height: 225px;}
+.w_res_table .restitle{height: 36px; padding-top: 6px; text-indent: 10px;overflow:hidden;WHITE-SPACE: nowrap; TEXT-OVERFLOW: ellipsis;}
+.w_res_table li a{font-size: 14px; color: #333;}
+
+.w_listbox #box #res2{
+	display: -webkit-box;  
+	display: -webkit-flex;  
+	display: -ms-flexbox; 
+	display: flex; 
+	
+	-webkit-flex-wrap: wrap;
+-moz-flex-wrap: wrap;
+-ms-flex-wrap: wrap;
+-o-flex-wrap: wrap;
+flex-wrap:wrap;
+	-webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+   }

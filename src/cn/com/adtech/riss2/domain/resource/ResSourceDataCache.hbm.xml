@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="cn.com.adtech.riss2.domain.resource.ResSourceDataCache"
+		table="RES_SOURCE_DATA_CACHE" lazy="false" dynamic-update="true">
+		<id name="rsdcId" type="java.lang.Long">
+			<column name="RSDC_ID" />
+			<generator class="assigned"/>
+		</id>
+		<property name="rsdcTitle" type="java.lang.String">
+			<column name="RSDC_TITLE" />
+		</property>
+		<property name="rsdcCreator" type="java.lang.String">
+			<column name="RSDC_CREATOR" />
+		</property>
+		<property name="rsdcPublisher" type="java.lang.String">
+			<column name="RSDC_PUBLISHER" />
+		</property>
+		<property name="rsdcDescription" type="java.lang.String">
+			<column name="RSDC_DESCRIPTION" />
+		</property>
+		<property name="rsdcBuildDate" type="java.util.Date">
+			<column name="RSDC_BUILD_DATE" />
+		</property>
+		<property name="rsdcLookNum" type="java.lang.Long">
+			<column name="RSDC_LOOK_NUM" />
+		</property>
+		<property name="rsdcRcmd" type="java.lang.Long">
+			<column name="RSDC_RCMD" />
+		</property>		
+		<property name="rsdcReviewNum" type="java.lang.Long">
+			<column name="RSDC_REVIEW_NUM" />
+		</property>
+		<property name="rsdcRltyId" type="java.lang.Long">
+			<column name="RSDC_RLTY_ID" />
+		</property>		
+		<property name="rsdcRltyName" type="java.lang.String">
+			<column name="RSDC_RLTY_NAME" />
+		</property>
+		<property name="rsdcRltyType" type="java.lang.Integer">
+			<column name="RSDC_RLTY_TYPE" />
+		</property>		
+		<property name="rsdcIconType" type="java.lang.String">
+			<column name="RSDC_ICON_TYPE" />
+		</property>		
+		<property name="rsdcBigimgUrl" type="java.lang.String">
+			<column name="RSDC_BIGIMG_URL" />
+		</property>		
+		<property name="rsdcFileAddress" type="java.lang.String">
+			<column name="RSDC_FILE_ADDRESS" />
+		</property>		
+	</class>
+</hibernate-mapping>

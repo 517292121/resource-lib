@@ -1,0 +1,40 @@
+/**
+ * 会员登录，注册
+ * @author wanglin
+ * @date 2018-01
+ */
+@CHARSET "UTF-8";
+body{background: #FFF;}
+.login_subject{width: 100%; height: 60px; font-size: 24px; color: #FFF; line-height: 60px; text-align: center;}
+.login_panelbox{width: 440px; margin: 20px auto;}
+.zc{background-position: 23%; width: 400px;}
+.login_panelbox ul{margin: 5px 0px; height: 50px;}
+.login_panelbox .k-panel{border: 1px solid #E8E8E8;}
+.login_panelbox #usericon{width: 50px; height: 50px; float: left; background: url("../../images/platform/icon-login.png") no-repeat center 15px;}
+.login_panelbox #pwdicon{width: 50px; height: 50px; float: left; background: url("../../images/platform/icon-login.png") no-repeat center -73px;}
+.login_panelbox .k {width: 370px; height: 40px; margin: 5px; padding: 0px; border: none; font-size: 16px;}
+.login_panelbox p{font-size: 16px; color: #808080; margin-top: 15px;}
+.login_panelbox #anniu{width: 200px; height: 50px; background: #E15C1B; border: none; color: #FFF; margin-top: 10px; font-size: 18px;}
+.login_panelbox #zc{margin-left: 20px;}
+.login_panelbox #msg{padding-top: 25px; height: 20px;}
+
+
+/**注册**/
+.login_panelbox table tr{height: 60px;}
+.login_panelbox table input {box-sizing: border-box; background: none; border: 1px solid #ccc; text-indent: 10px;}
+.login_panelbox .td1{width: 200px; text-align: right;}
+.login_panelbox .zc_input{width: 310px; height: 40px;}
+
+.login_panelbox .codebox{width: 120px; height: 38px; border: 1px solid #ccc; text-align: center; float: left; text-indent: 0px;}
+.codebox.smsbtn{width: 122px; height: 40px;}
+.login_panelbox .yzm{width: 178px;vertical-align:middle; float: left; margin-right: 10px;}
+.login_panelbox a.codebox{line-height: 38px;}
+.login_panelbox .reg_btn{width: 178px; height: 40px; line-height: 40px; text-indent: 0px; color: #FFF; border: none; font-size: 16px;}
+.login_panelbox #regServer, .login_panelbox #e_regServer{vertical-align:middle; margin: 0px 5px 0px 0px;}
+.login_panelbox label{cursor: pointer; margin: 0; vertical-align: middle;}
+
+.regTips{height: 40px; border: 0px solid #ccc; margin: 40px auto; text-align: center;}
+.regTips span, .regTips img{display: inline-block; vertical-align: middle; font-size: 22px; margin: 6px; font-weight: bold;}
+.regTips span i{font-style: normal;font-size: 22px;}
+.incenter{text-align: center; font-size: 16px; margin: 0px 25px; line-height: 40px;}
+.incenter a{font-size: 16px;}

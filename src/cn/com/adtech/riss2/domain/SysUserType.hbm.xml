@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+    
+<hibernate-mapping>
+<!-- 
+    Created by the Middlegen Hibernate plugin 2.2
+
+    http://boss.bekk.no/boss/middlegen/
+    http://www.hibernate.org/
+-->
+
+<class 
+    name="cn.com.adtech.riss2.domain.SysUserType" 
+    table="SYS_USER_TYPE"
+    lazy="false" dynamic-update="true"
+>
+	<cache usage="read-write" />
+    <id
+        name="sutyId"
+        type="java.lang.Long"
+        column="SUTY_ID"
+    >
+    
+        <generator class="com.jbetter.hibernate.IdGenerator" />
+    </id>
+
+    <property
+        name="sutyName"
+        type="java.lang.String"
+        column="SUTY_NAME"
+        not-null="true"
+        length="128"
+    />
+    <property name="sutyDoc" type="java.lang.Short">
+       <column name="SUTY_DOC" />
+    </property>   
+    <property name="sutyPic" type="java.lang.Short">
+       <column name="SUTY_PIC"  />
+    </property> 
+    <property name="sutyVideo" type="java.lang.Short">
+       <column name="SUTY_VIDEO"  />
+    </property>   
+    <property name="sutyDefault" type="java.lang.Boolean">
+       <column name="SUTY_DEFAULT"  />
+    </property>   
+      
+    <!-- 改造后的权限设置，即将按资源载体类型分配合为统一分配权限 -->  
+    <property name="sutyPurview" type="java.lang.Integer">
+       <column name="SUTY_PURVIEW"  />
+    </property>     
+    <!-- 
+    <property
+        name="score"
+        type="java.lang.Integer"
+        column="SUTY_MARK"
+        not-null="true"
+        length="5"
+    />
+ -->
+    <!-- Associations -->
+  
+
+</class>
+</hibernate-mapping>

@@ -1,0 +1,173 @@
+@CHARSET "UTF-8";
+@font-face {
+   font-style:  normal;
+   font-weight: normal;
+   font-family: hm;
+   src: url(../../font/hm.eot);
+   src: local('Himalaya-A'),local('Himalaya-A'),url(../../font/Himalaya-A.ttf) format('truetype');
+}
+.hm{font-family: hm;}
+*{font-size: 14px;font-family: hm}
+body {margin: 0px;padding: 0px;color: #FFF; background: #000;transition: all 0.3s;}
+p,ul,li,dd,dl{margin: 0px; padding: 0px;}
+img{border: 0px;margin: 0px;}
+form{padding: 0px;margin: 0px;}
+*:focus { outline: none; }
+input {outline:none;}
+.clear{height:0;overflow:hidden;clear:both;font-size:0;}
+
+.s-body{
+	margin: 1px;
+	border: 1px solid #292929;
+}
+
+.header{
+	height: 40px;
+	line-height: 40px;
+	border-bottom: 1px solid #292929;
+}
+.header #js{
+	font-size: 16px; 
+	float: left; 
+	margin-left: 15px;
+}
+.header #gb{
+	float: right;
+}
+.header #gb a{
+	display: block;
+	width: 40px;
+	height: 40px; 
+	line-height: 40px;
+	text-align: center;
+	color: #AAAAAA; 
+	font-size: 18px; 
+	text-decoration: none;
+}
+.header #gb a:hover{
+	color: #FFF;
+}
+
+.no-search{
+	text-align: center;
+	padding: 30px;
+}
+.s-box{
+	padding: 6px 0px;
+	height: 55px;
+	border-bottom: 1px solid #292929;
+}
+.s-box #key{
+	height: 30px;
+	width: 200px;
+	padding: 0px 10px;
+	float: left;
+	border: none;
+	background: #2A2A2A;
+	margin-left: 10px;
+	transition: all 0.3s;
+}
+.s-box #s-btn{
+	height: 30px;
+	width: 50px;
+	padding: 0px 10px;
+	float: left;
+	margin-left: 10px;
+	background: #000;
+	border: 1px solid #888;
+	color: #eee;
+	transition: all 0.3s;
+}
+
+.s-box #s-btn:hover{
+	border: none;
+	background: #eee;
+	color: #000;
+}
+
+.s-result{
+	border-bottom: 1px solid #292929;
+	height: 30px;
+	line-height: 30px;
+	text-indent: 12px;
+}
+
+#reslist{
+	margin: 0px;
+}
+#reslist li{
+	padding: 10px 3px 15px 3px;
+	margin: 0px 10px;
+	border-bottom: 1px solid #292929;
+}
+#reslist li .ms{
+	color: #BEBEBE;
+	font-size: 12px;
+	padding-top: 5px;
+}
+#reslist li .ms em{
+	color: red;
+	font-style: normal;
+}
+
+#reslist li p a{
+	color: #fff;
+}
+
+
+
+
+
+
+
+
+
+
+html,body,.s-body{
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+}
+#reslist{
+	height: auto;
+}
+.keep-top{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height:120px;
+	z-index: 555;
+	background:#000;
+}
+.info-list-f{
+	position: fixed;
+    overflow-y: auto;
+    width: 100%;
+    top:140px;
+    left:0;
+}
+
+/*IE滚动条颜色设置*/
+.info-list-f {
+  	overflow-y: auto;
+    scrollbar-arrow-color:#f2f2f3;  /*上下箭头*/
+    scrollbar-track-color:#000000;  /*底层背景色*/
+    scrollbar-face-color:#1589ce;   /*滚动条前景色*/
+    scrollbar-Shadow-color:#1589ce; /*滚动条边线色*/
+
+}
+/*chrome滚动条颜色设置*/
+.info-list-f::-webkit-scrollbar {width:14px; height:10px; background-color:transparent;} /*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
+.info-list-f::-webkit-scrollbar-track {background-color:#2E2E2E; border-radius:10px; -webkit-box-shadow:inset 0 0 6px rgba(0,0,0,0.3);} /*定义滚动条轨道 内阴影+圆角*/
+.info-list-f::-webkit-scrollbar-thumb {background-color:#181818; border-radius:10px; -webkit-box-shadow:inset 0 0 6px rgba(0,0,0,.3);} /*定义滑块 内阴影+圆角*/
+
+
+
+
+
+
+
+
+
+

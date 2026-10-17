@@ -1,0 +1,22 @@
+@CHARSET "UTF-8";
+.reslist #loading{margin: 15px auto;}
+.luc-res .info li{padding-top: 3px;}
+.luc-res{margin: 0px 10px; padding: 15px 0px; border-bottom: 1px dashed #ccc; display: -webkit-box;  display: -webkit-flex;  display: -ms-flexbox; display: flex;}
+.luc-res .tit{line-height: 24px;}
+.luc-res .tit span{padding: 3px 10px; color: #FFF; margin-right: 5px;}
+.luc-res .tit a{font-size: 16px; color: #222;}
+.luc-res em{font-style: normal; color: red;}
+.luc-res li.des{font-size: 14px; color: #444; line-height: 24px; padding-top: 10px;
+    overflow : hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+ }
+
+.luc-res .cover{width: 90px; margin-right: 12px;}
+.luc-res .cover img{width: 100%;}
+.luc-res .info{-webkit-box-flex: 1;  -webkit-flex: 1;  -ms-flex: 1; flex: 1;}
+.luc-res #loading {margin: 25px auto;}
+
+.blank{padding: 15px; text-align: center; color: #666;}

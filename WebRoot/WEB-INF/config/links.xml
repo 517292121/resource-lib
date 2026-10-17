@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+	
+	<!-- 友情链接管理 -->
+	<bean name="/console/links/linkList.htm"
+		class="cn.com.adtech.riss2.controller.console.links.LinkController">
+		<property name="methodNameResolver" ref="methodNameResolver" />
+		<property name="linkInfoService" ref="linkInfoService" />
+		<property name="localUploadService" ref="localUploadService" />
+	</bean>
+
+	<!-- 友情链接管理——前台
+	<bean name="/company.htm" 
+		class="cn.com.adtech.riss2.controller.platform.CmaPlatformCompanyController">
+		<property name="methodNameResolver" ref="methodNameResolver" />
+		<property name="cmaCompanyInfoService" ref="cmaCompanyInfoService"></property>
+		<property name="cmaClassiftTypeService" ref="cmaClassifyTypeService" />
+		<property name="cmaCompanyTypeService" ref="cmaCompanyTypeService" />
+	</bean> -->
+	
+	<!-- Banner管理 -->
+	<bean name="/console/links/bannerList.htm"
+		class="cn.com.adtech.riss2.controller.console.ib.BannerController">
+		<property name="methodNameResolver" ref="methodNameResolver" />
+		<property name="bannerInfoService" ref="bannerInfoService" />
+		<property name="localUploadService" ref="localUploadService" />
+	</bean>
+</beans>

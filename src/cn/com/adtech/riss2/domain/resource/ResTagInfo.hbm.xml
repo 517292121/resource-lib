@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="cn.com.adtech.riss2.domain.resource.ResTagInfo"
+		table="RES_TAG_INFO" lazy="false" dynamic-update="true">
+		<id name="rtinId" type="java.lang.Long">
+			<column name="RTIN_ID"/>
+			<generator class="com.jbetter.hibernate.IdGenerator" />
+		</id>
+		<property name="rtinSuinId" type="java.lang.Long">
+			<column name="RTIN_SUIN_ID"/>
+		</property>
+		<property name="rtinTitle" type="java.lang.String">
+			<column name="RTIN_TITLE" not-null="true" />
+		</property>
+		<property name="rtinRsdaId" type="java.lang.Long">
+			<column name="RTIN_RSDA_ID"/>
+		</property>
+		<property name="rtinDate" type="java.util.Date">
+			<column name="RTIN_DATE" />
+		</property>
+		<property name="rtinHitNum" type="java.lang.Integer">
+			<column name="RTIN_HIT_NUM" default="0"/>
+		</property>
+		<many-to-one name="sysUserinfo"
+			class="cn.com.adtech.riss2.domain.SysUserinfo" insert="false"
+			update="false" fetch="select">
+			<column name="RTIN_SUIN_ID"></column>
+		</many-to-one>
+		<many-to-one name="resSourceData"
+			class="cn.com.adtech.riss2.domain.resource.ResSourceData"
+			insert="false" update="false" fetch="select">
+			<column name="RTIN_RSDA_ID"></column>
+		</many-to-one>
+	</class>
+</hibernate-mapping>

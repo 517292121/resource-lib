@@ -1,0 +1,91 @@
+@CHARSET "UTF-8";
+@font-face {
+   font-style:  normal;
+   font-weight: normal;
+   font-family: hm;
+   src: url(../../font/hm.eot);
+   src: local('Himalaya-A'),local('Himalaya-A'),url(../../font/Himalaya-A.ttf) format('truetype');
+}
+.hm{font-family: hm;}
+*{font-size: 16px;font-family: hm}
+body {margin: 0px;padding: 0px;color: #FFF; background: #0A3748;transition: all 0.3s;}
+
+.c-body{
+	margin: 1px;
+}
+.header{
+	height: 40px;
+	line-height: 30px;
+	margin: 5px 0px;
+	border-bottom: 1px solid #3a656b;
+}
+.header #js{
+	font-size: 16px; 
+	float: left; 
+	margin-left: 15px;
+}
+.header #gb{
+	float: right;
+}
+.header #gb a{
+	display: block;
+	width: 40px;
+	height: 40px; 
+	line-height: 40px;
+	text-align: center;
+	color: #AAAAAA; 
+	font-size: 18px; 
+	text-decoration: none;
+}
+.header #gb a:hover{
+	color: #FFF;
+}
+
+.list-div{
+	padding-bottom: 30px;
+}
+.list-div ul{
+	padding: 0px 10px;
+}
+.list-div ul li{
+	list-style: none;
+	height: 24px;
+	margin: 5px 0px;
+	overflow:hidden;WHITE-SPACE: nowrap; TEXT-OVERFLOW: ellipsis;
+}
+.list-div ul li a{
+	color: #94CDE2;
+	text-decoration: none;
+}
+.list-div ul li a:hover{
+	color: #fff;
+}
+.list-div ul li a em{
+	color: red;
+	font-style: normal;
+}
+
+
+
+/*IE滚动条颜色设置*/
+body {
+  	overflow-y: auto;
+    scrollbar-arrow-color:#2A6A82;  /*上下箭头*/
+    scrollbar-track-color:#05222D;  /*底层背景色*/
+    scrollbar-face-color:#2A6A82;   /*滚动条前景色*/
+
+}
+/*chrome滚动条颜色设置*/
+::-webkit-scrollbar {width:14px; height:10px; background-color:transparent;} /*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
+::-webkit-scrollbar-track {background-color:#05222D;} /*定义滚动条轨道 内阴影+圆角*/
+::-webkit-scrollbar-thumb {background-color:#2A6A82;} /*定义滑块 内阴影+圆角*/
+
+
+
+
+
+
+
+
+
+

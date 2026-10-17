@@ -1,0 +1,47 @@
+--为自定义分类添加藏文、英文名称两个字段
+ALTER TABLE RES_DYNAMIC_TYPE ADD (RDTY_ZW_NAME VARCHAR2(1024));
+ALTER TABLE RES_DYNAMIC_TYPE ADD (RDTY_EN_NAME VARCHAR2(512));
+
+--删除旧版目录树的相关表（目录信息表、图片信息表）
+DROP TABLE RES_SOURCE_CATALOGUE;
+DROP TABLE RES_SOURCE_PIC;
+
+--添加菜单目录
+insert into SYS_CATALOG(SCAT_ID,SCAT_PARENT_ID,SCAT_NAME,SCAT_DESC,SCAT_CODE)
+ 	values(407,401,"检索词管理","服务管理_检索词管理",600);
+ 	
+--添加菜单信息
+insert into SYS_FUNCTION(SFUN_ID,SFUN_SCAT_ID,SFUN_NAME,SFUN_DESC,SFUN_URL,SFUN_INDEX,SFUN_CODE,SFUN_IS_HIDDEN)
+ 	values(40071,407,"检索词管理","服务管理_检索词管理_检索词管理","/console/data/resIndexKey.htm?action=initKeyView",100,40071,1);
+ 	
+ 	
+ 	
+ 
+--删除用户表中用户名的非空约束
+--如果约束名称不对，可以通过“SELECT *  FROM USER_CONSTRAINTS WHERE table_name='SYS_USER_INFO' and constraint_type='C';”查询
+ALTER TABLE SYS_USER_INFO DROP CONSTRAINT SYS_C0065543;
+
+
+--删除资源表中已清除的字段
+ALTER TABLE RES_SOURCE_DATA DROP COLUMN RSDA_PAGE;
+ALTER TABLE RES_SOURCE_DATA DROP COLUMN RSDA_HTML_INDEXURL;
+ALTER TABLE RES_SOURCE_DATA DROP COLUMN RSDA_FILEVIEW_TYPE;
+ALTER TABLE RES_SOURCE_DATA DROP COLUMN RDTY_CLASSID;
+
+--添加api管理
+drop table SYS_API_DATA cascade constraints;
+create table SYS_API_DATA  (
+   SADA_ID              NUMBER(19,0)                    not null,
+   SADA_TYPE            VARCHAR2(128),
+   SADA_NAME            VARCHAR2(256),
+   SADA_REQ_URL         VARCHAR2(512),
+   SADA_DEMO_URL        VARCHAR2(512),
+   SADA_REQ_TYPE        VARCHAR2(64),
+   SADA_REQ_PARAMS      CLOB,
+   SADA_RESULT          CLOB,
+   SADA_REMARK          CLOB,
+   SADA_INDEX           NUMBER(9,0),
+   SADA_LAST_UPDATE     DATE,
+   SADA_UPDATE_REMARK   VARCHAR2(512),
+   constraint PK_SYS_API_DATA primary key (SADA_ID)
+);

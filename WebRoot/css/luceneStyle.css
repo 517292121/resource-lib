@@ -1,0 +1,176 @@
+@charset "utf-8";
+*{font-size: 14px; color:#333333; font-family: 'Microsoft YaHei UI', 'Microsoft YaHei', SimSun, 'Segoe UI',	Tahoma, Helvetica, Sans-Serif;}
+body{padding: 0px;margin: 0px;}
+*:focus { outline: none; }
+input {outline:none;}
+.radio-style{vertical-align: text-bottom; margin-bottom: 3px;  *margin-bottom: -3px;}
+a {text-decoration: none;color:#474747;cursor:pointer;}
+a:hover{text-decoration: underline;color: #C65139;}
+ul{margin: 0px;padding:0px;}
+li{list-style: none;}
+	
+	
+/**分页***/
+.p_page{line-height: 23px;margin-top:20px;}
+.p_page a {font-size: 14px;width: 30px;height: 25px;line-height: 25px; float:left;color:#333333;margin: 0px 2px;text-decoration: none;display: inline;border-bottom: 1px solid #C6C8C8;border-right: 1px solid #C6C8C8;text-align: center;font-family: 宋体;background-color: #FFF;}                       
+.p_page a:hover{color:#ffffff;text-decoration:none;background-color:#3A4F72;}
+span.totals {color:#373737;float:left;margin-left:5px;line-height: 30px;}
+a.p_num {margin-right: 1px;}
+a.p_curpages{color:#FFFFFF;text-decoration: none;background-color:#3A4F72;}
+.goPage{width: 40px;float: left;border: 1px solid #C1BA9E;height: 20px;margin-left: 5px;background: none;}
+.navigation{color: #4f4f4f;}
+.tiaozhuan{margin-left:3px;margin-top:-2px;padding:1px;}
+a.tiaozhuan{padding: 4px 5px;background-color:#B7AFA5;color: #ffffff;margin-left: 5px;}
+a.tiaozhuan:hover{background-color:#B7AFA5;color: #ffffff;}
+.p_page a.on{color: #02a2aa;font-weight: bold;}
+.p_page a.on:hover{color: #FFF;}
+a.p_curpage{background-color: #587b9c}
+a.firstPage{background-color: #02A2AA;width: 50px;border: none;color: #fff;height: 25px;font-size: 12px;line-height: 25px;border-bottom: 1px solid #3E878A;border-right: 1px solid #3E878A;}
+
+.main-top{border-bottom: 1px solid #dcdcdc;margin-top:0px; text-align: right;padding: 2px 20px 4px 0px;}
+/**检索框样式**/
+.mian-search{width: 100%;text-align: center;top: 30%; position: absolute;}
+.keyborder{height: 30px;width: 420px;border: 2px solid #167DD9;text-align: left;padding: 8px 0px 0px 5px;border-right: 0px; margin: 0px;}
+.s-form{padding: 10px 20px 0px; margin: 0px;}
+.s-form #key{width: 400px;border: 0px solid #c0c0c0;height: 20px; }
+.s-form #s-btn{cursor: pointer;background-color:#167DD9;color: #FFF;height: 42px;border: none;width: 100px;font-size: 18px;}
+.s-form #s-btn:hover{background-color: #3A4F72;}
+.s-logo{font-size: 3em;padding-bottom: 20px;color: #15726f;}
+
+/**页面样式**/
+.result-info{
+	position: relative;
+    margin: 10px 0px;
+    padding: 0;
+    border: 1px solid #a2b4ee;
+    border-left:none;
+    border-right:none;
+    background-position: 20px 11px !important;
+    background-repeat: no-repeat !important;
+    background: url('../images/luence/information.png') #dbe3ff;
+    width: 100%;
+    color: #585b66;
+}
+.result-info p{
+	font-size: 12px;
+	display: block;
+    font-style: normal;
+    padding-left:40px;
+    line-height: 100%;
+}
+.content{
+	padding:0px 20px;
+}
+.clear{
+	clear:both;
+}
+
+
+.content-group{
+    float:left;
+    width:18%;
+    border: 1px solid #ccc;
+    margin: 0 0 20px 0;
+    background: #fff;
+}
+.content-group-header {
+    background: url('../images/luence/bg-content-box.gif') top left repeat-x #e5e5e5;
+    height: 30px;
+    border-bottom:1px solid #ccc;
+}
+.content-group-header h3 {
+    margin: 0px;
+    height: 30px;
+    line-height: 30px;
+    padding-left: 5px;
+}
+.content-group-content{
+	padding-bottom: 10px;	
+}
+
+.content-group-rmst li{
+    background: url('../images/luence/list_dot.gif') no-repeat;
+    background-position: 10px 13px;
+    padding: 8px 10px 0px 22px;
+}
+.content-group-rmst li,.content-group-rmst li a,.content-group-com li,.content-group-com li a{
+   	font-size: 12px;
+   	text-align: left;
+}
+
+.content-group-com li{
+	padding:8px 10px 0px 10px;
+}
+.content-group-com li span.arrow-right{
+	font-family: sans-serif;
+}
+
+.content-box {
+    border: 1px solid #ccc;
+    margin: 0 0 20px 0;
+    background: #fff;
+}
+.content-box.right{
+    width:80%;
+    float:right;
+    border: none;
+}
+.content-box-nav {
+    background: url('../images/luence/bg-content-box.gif') top left repeat-x #e5e5e5;
+    height:30px;
+    border:1px solid #ccc;
+}
+.content-box-header {
+    background: url('../images/luence/bg-content-box.gif') top left repeat-x #e5e5e5;
+    height: 30px;
+    border-bottom:1px solid #ccc;
+}
+.content-box-header h3 {
+    margin: 0px;
+    height: 30px;
+    line-height: 30px;
+    padding-left: 5px;
+}
+
+.content-box-content{
+	padding-bottom: 10px;	
+}
+.rownum{
+	font-size: 14px;
+	text-align: right;
+	padding:15px 10px;
+	display: block;
+	color: #327EEF;
+}
+.list-table{
+	width:100%;
+}
+.list-table tr{
+	border-bottom: 1px dotted #C5C3C3;
+    width: 100%;
+    display: block;
+}
+
+.content-box-dl dt a{
+	font-size: 16px;
+	color: #327EEF;
+    text-decoration: underline;
+}
+.content-box-dl dt a span{font-size: 16px;}
+.content-box-dl dd{padding:0px;margin: 0px}
+.content-box-dl dd p{margin: 5px 0px;font-size:12px;}
+.content-box-dl dd p.dc{color:#666;}
+.content-box-dl dd p span{font-size:12px;}
+
+.cb-nav-sort{
+	margin:3px 0px 0px 10px;	
+}
+
+	
+.nodata{padding-left: 40px;color: #808080;font-size: 18px;padding-top: 10px;line-height: 35px;}
+.data-detail{line-height: 30px;padding: 10px 50px 50px 40px;}
+.copyright{padding-top: 150px;}
+.copyright li{font-size: 14px;color: #808080;line-height: 30px;}
+
+.tsco{color: #808080;}
+.nrco{color: #333333;}

@@ -1,0 +1,304 @@
+/*突出显示框颜色*/
+div.displayregion {
+    border: 1px solid #00ccff !important;
+    background-color: rgba(0, 204, 255, .22) !important;
+    cursor: move !important;
+}
+
+div.navigator {
+    border: 1px solid rgba(255, 255, 255, .8) !important;
+    background: rgba(0, 0, 0, .3) !important;
+}
+
+body,
+div,
+ul,
+li {
+    margin: 0;
+    padding: 0;
+}
+
+ul {
+    list-style: none;
+}
+
+img {
+    border: 0;
+}
+
+.container-nav {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    height: 73px;
+    padding: 10px 0;
+    background: rgba(0, 0, 0, .3)
+}
+
+.large_box {
+    margin-bottom: 10px;
+    width: 100%;
+    height: 350px;
+    overflow: hidden;
+}
+
+.large_box img {
+    display: block;
+}
+
+.small_box {
+    width: 100%;
+    height: 73px;
+    overflow: hidden;
+    position: relative;
+}
+
+.small_list {
+    position: relative;
+    width: 100%;
+    height: 73px;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.small_list ul {
+    height: 73px;
+    overflow: hidden;
+}
+
+.small_list ul li {
+    position: relative;
+    float: left;
+    margin-right: 10px;
+    width: 110px;
+}
+
+.small_list ul li img {
+    display: block;
+}
+
+.small_list ul li .bun_bg {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 110px;
+    height: 73px;
+    background: #000;
+    filter: alpha(opacity=60);
+    -moz-opacity: 0.6;
+    -khtml-opacity: 0.6;
+    opacity: 0.6;
+    cursor: pointer;
+}
+
+.small_list ul li.on .bun_bg {
+    display: none;
+}
+
+.btn {
+    display: block;
+    width: 20px;
+    height: 73px;
+    background-color: #777;
+    background-repeat: no-repeat;
+    background-position: center center;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #e7000e;
+}
+
+.left_btn {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 100;
+    margin-right: 10px;
+    background-image: url(../images/left_btn.png);
+}
+
+.right_btn {
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 100;
+    background-image: url(../images/right_btn.png);
+}
+
+/* 新增 */
+body {
+    background: #2D3E50;
+}
+.main{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+}
+.header{
+    position: relative;
+    min-width: 700px;
+    z-index: 10;
+    height: 60px;
+    top: 0px;
+    background: #071829;
+    /* box-shadow: 0 0 10px #000; */
+}
+#container {}
+.banquan{
+    position: relative;
+    width: 100%;
+    z-index: 10;
+    height: 40px;
+    background: #000;
+    color: #fff;
+    line-height: 40px;
+    text-align: center;
+    font-size: 12px;
+}
+.openseadragon-canvas+div{
+    opacity: 1 !important;
+    position: absolute !important;
+    width: 40px;
+    height: 120px;
+    right: 0 !important;
+    top: 5px !important;
+    left: 10px;
+    z-index: 55;
+    line-height: 40px;
+    padding: 13px 10px!important;
+}
+.openseadragon-canvas+div.IsFull{
+    top: 10px !important;
+}
+
+*{
+	padding: 0;
+	margin: 0;
+}
+
+.f-left{
+	float: left;
+}
+.f-right{
+	float: right;
+}
+.clearfix:after{
+	content: '';
+	display: block;
+	clear: both;
+}
+
+.img-title{
+    color: #fff;
+    font-size: 24px;
+    height: 60px;
+    line-height: 55px;
+    margin-left: 15px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.work-right{
+    margin-right: 10px;
+}
+
+.bdsharebuttonbox{
+    position: absolute;
+    padding: 10px;
+    width: 200px;
+    right: -100px;
+    bottom: -50px;
+    display: none;
+}
+.catalog-btn,
+.btn-prev-img,.btn-next-img,
+.btn-prev-page,.btn-next-page,
+.share,.search-btn,
+.btn-s,.btn-e{    
+    position: relative;
+    height: 60px;
+    width: 25px; 
+    background: url(./images/btn-img1.png) no-repeat;
+    cursor: pointer;
+    background-position-y: -2px;
+    -ms-background-position-y: -2px;
+    margin-right: 20px;
+}
+.btn-s,.btn-e{
+    width: 30px;
+}
+.share{
+    background-position-x:-392px;
+    -ms-background-position-x:-392px; 
+}
+.txt-win{
+    background-position-x:-681px;
+    -ms-background-position-x:-681px; 
+}
+.txt-rig{
+    background-position-x:-791px;
+    -ms-background-position-x:-791px; 
+}
+.txt-btm{
+    background-position-x:-737px;
+    -ms-background-position-x:-737px; 
+}
+.share:hover .bdsharebuttonbox{
+    display: block;
+}
+
+.catalog-btn{
+    background-position-x: -840px;
+    -ms-background-position-x: -840px;
+}
+.search-btn{
+    background-position-x: -5px;
+    -ms-background-position-x: -5px;
+}
+.btn-s{
+    background-position-x: -60px;
+    -ms-background-position-x:-60px;
+}
+.btn-e{
+    background-position-x: -332px;
+    -ms-background-position-x:-332px;
+}
+.btn-prev-page{
+    background-position-x: -115px;
+    -ms-background-position-x:-115px;
+}
+.btn-next-page{
+    background-position-x: -274px;
+    -ms-background-position-x:-274px;
+}
+.btn-prev-img{
+    background-position-x: -172px;
+    -ms-background-position-x:-172px;
+}
+.btn-next-img{
+    background-position-x: -223px;
+    -ms-background-position-x:-223px;
+}
+
+.catalog-btn:hover,.search-btn:hover,
+.btn-next-img:hover,.btn-prev-img:hover,
+.btn-prev-page:hover,.btn-next-page:hover,
+.share:hover,.btn-s:hover,.btn-e:hover,
+.txt-win:hover,
+.search-btn:hover{
+    background-position-y:-61px;
+    -ms-background-position-y:-61px;
+}
+
+
+.page-nav{
+	color: #838b98;
+    font-size: 18px;
+    height: 60px;
+    line-height: 57px;
+    margin-right: 18px;
+}

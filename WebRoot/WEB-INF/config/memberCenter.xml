@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+	<!-- 会员登录 -->
+	<bean name="/member/memberLogin.htm"
+		class="cn.com.adtech.riss2.controller.platform.member.MemberLoginController">
+		<property name="sysUserPlatformService" ref="sysUserPlatformService" />
+	</bean>
+	<bean name="/member/memberRegisterSubmit.htm"
+		class="cn.com.adtech.riss2.controller.platform.member.MemberRegisterSubmitController">
+		<property name="sysUserPlatformService" ref="sysUserPlatformService" />
+		<property name="mailService" ref="mailService" />
+		<property name="localUploadService" ref="localUploadService" />
+	</bean>
+	<!-- 消息推送订阅 -->
+	<bean name="/usercenter/infoSubscription.htm"
+		class="cn.com.adtech.riss2.controller.platform.member.infosubscription.InfoSubscriptionController">
+		<property name="methodNameResolver" ref="methodNameResolver" />
+		<property name="infoSubscriptionService" ref="infoSubscriptionService" />
+		<property name="resourceDataService" ref="resourcedataManager" />
+	</bean>
+	<!-- 会员中心RSS资源管理 -->
+	<bean name="/usercenter/rssUserData.htm"
+		class="cn.com.adtech.riss2.controller.platform.rss.rssuserdata.RssUserDataController">
+		<property name="methodNameResolver" ref="methodNameResolver" />
+		<property name="rssUserDataService" ref="rssUserDataService" />
+	</bean>
+	<!-- 会员中心RSS资源管理 -->
+	<bean name="/usercenter/rssFeedLink.htm"
+		class="cn.com.adtech.riss2.controller.platform.rss.rssuserdata.RssFeedLinkController">
+		<property name="rssUserDataService" ref="rssUserDataService" />
+	</bean>
+	<!-- 收藏 -->
+	<bean name="/user/favorite.htm"
+		class="cn.com.adtech.riss2.controller.platform.member.ScFavoritesController">
+		<property name="methodNameResolver" ref="methodNameResolver" />
+		<property name="favoritesService" ref="favoritesService" />
+	</bean>
+	<!-- 资源管理 -->
+	<bean name="/resource.htm"
+		class="cn.com.adtech.riss2.controller.platform.member.MemberResourceController">
+		<property name="methodNameResolver" ref="methodNameResolver" />
+		<property name="memberResourceService" ref="memberResourceService" />
+		<property name="elementPoolService" ref="metadataElementPool" />
+		<property name="resourceService" ref="resourcedataManager" />
+		<property name="dynamicTypeService" ref="dynamicService" />
+	</bean>
+	<!-- 复制一个后台的单个资源管理控制器，因为用户的资源管理同后台的资源录入基本一样 -->
+	<bean name="/sourceinput.htm"
+		class="cn.com.adtech.riss2.controller.console.resource.build.InputSingleController">
+		<property name="methodNameResolver" ref="methodNameResolver" />
+		<property name="elementPool" ref="metadataElementPool" />
+		<property name="resourceService" ref="resourcedataManager" />
+		<property name="sldao" ref="sourceLanguageList" />
+		<property name="missionService" ref="missionInfoManagementService"></property>
+		<property name="lanService" ref="LanguageTypeService" />
+		<property name="fileService" ref="fileSystemService" />
+		<property name="localUploadService" ref="localUploadService" /><!-- 本地文件上传服务 -->
+		<property name="remoteUploadService" ref="remoteUploadService" /><!-- 远程文件上传服务 -->
+		<property name="memberResourceService" ref="memberResourceService" />
+		<property name="dynamicTypeService" ref="dynamicService" />
+		<property name="resourceLuceneService" ref="resourceLuceneService" />
+	</bean>
+	<!-- 更新基本信息 -->
+	<bean name="/updateUserinfo.htm"
+		class="cn.com.adtech.riss2.controller.platform.member.UpdateUserinfoController">
+		<property name="commomService" ref="scServices" />
+		<property name="uploadService" ref="localUploadService" />
+		<property name="commandName" value="sysUserinfo" />
+		<property name="commandClass" value="cn.com.adtech.riss2.domain.SysUserinfo" />
+		<property name="formView" value="platform/usercenterIndex" />
+		<property name="successView" value="platform/usercenterIndex" />
+		<property name="sysUserPlatformService" ref="sysUserPlatformService" />
+	</bean>
+	<!-- 忘记密码 -->
+	<bean name="/forgetPassword.htm"
+		class="cn.com.adtech.riss2.controller.platform.member.UserForgetPasswordController">
+		<property name="methodNameResolver" ref="methodNameResolver" />
+		<property name="sysUserPlatformService" ref="sysUserPlatformService" />
+		<property name="mailService" ref="mailService" />
+		<property name="localUploadService" ref="localUploadService" />
+	</bean>
+	<!-- 校验URL -->
+	<bean name="/checkMailUrl.htm"
+		class="cn.com.adtech.riss2.controller.platform.member.CheckEmailUrlController">
+		<property name="sysUserPlatformService" ref="sysUserPlatformService" />
+		<property name="localUploadService" ref="localUploadService" />
+	</bean>
+	<!-- 激活URL -->
+	<bean name="/checkRegisterMailUrl.htm"
+		class="cn.com.adtech.riss2.controller.platform.member.CheckRegisterEmailUrlController">
+		<property name="sysUserPlatformService" ref="sysUserPlatformService" />
+		<property name="localUploadService" ref="localUploadService" />
+	</bean>
+</beans>

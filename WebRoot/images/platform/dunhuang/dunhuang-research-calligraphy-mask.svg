@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 2560" preserveAspectRatio="xMinYMin meet">
+  <defs>
+    <filter id="white-on-alpha" color-interpolation-filters="sRGB">
+      <feColorMatrix type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0.2126 0.7152 0.0722 0"/>
+    </filter>
+  </defs>
+  <image href="dunhuang-research-calligraphy.png" width="1920" height="2560" filter="url(#white-on-alpha)"/>
+</svg>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="gbk" ?> 
+<chart caption="资源增长情况统计" subcaption="(从 2010 至 2011)" lineThickness="1" showValues="0" formatNumberScale="0" anchorRadius="2" divLineAlpha="20" divLineColor="CC3300" divLineIsDashed="1" showAlternateHGridColor="1" alternateHGridAlpha="5" alternateHGridColor="CC3300" shadowAlpha="40" labelStep="2" numvdivlines="5" chartRightMargin="35" bgColor="FFFFFF,CC3300" bgAngle="270" bgAlpha="10,10">
+<categories>
+  <category label="2010" /> 
+  <category label="2011" /> 
+  </categories>
+<dataset seriesName="测试文献库" color="9364432.581286117" anchorBorderColor="9364432.581286117" anchorBgColor="9364432.581286117">
+  <set value="0" /> 
+  <set value="26" /> 
+  </dataset>
+<dataset seriesName="测试特色库" color="4381248.092698763" anchorBorderColor="4381248.092698763" anchorBgColor="4381248.092698763">
+  <set value="6" /> 
+  <set value="8" /> 
+  </dataset>
+<dataset seriesName="来自幺幺零" color="776858.0197967661" anchorBorderColor="776858.0197967661" anchorBgColor="776858.0197967661">
+  <set value="3" /> 
+  <set value="999997" /> 
+  </dataset>
+<dataset seriesName="重大文库" color="9283796.791777294" anchorBorderColor="9283796.791777294" anchorBgColor="9283796.791777294">
+  <set value="188" /> 
+  <set value="0" /> 
+  </dataset>
+<dataset seriesName="三峡数据图书馆" color="1.5305274503784401E7" anchorBorderColor="1.5305274503784401E7" anchorBgColor="1.5305274503784401E7">
+  <set value="0" /> 
+  <set value="12" /> 
+  </dataset>
+  </chart>

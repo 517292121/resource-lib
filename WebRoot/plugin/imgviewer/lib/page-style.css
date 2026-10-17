@@ -1,0 +1,114 @@
+@CHARSET "UTF-8";
+@font-face {
+	font-style: normal;
+	font-weight: normal;
+	font-family: hm;
+	src: url(../../../font/MenkQagan_S.eot);
+	src: local('MenkQagan_S'), local('MenkQagan_S'),
+		url(../../../font/MenkQagan_S.ttf) format('truetype');
+}
+* {
+	font-family: hm;
+}
+body {
+	overflow: hidden;
+}
+.page-catalog {
+	width: 24%; /**章节目录宽度，需与index.js中openTree的#container宽度保持对应**/
+	border-right: 1px solid #3a656b;
+	border-bottom: 1px solid #3a656b;
+	position: absolute;
+	left: -40%;
+	top: 60px;
+	z-index: 999999;
+	background: #0A3748;
+}
+.page-catalog .blank{
+	color: #FFF;
+	padding-top: 25px;
+	text-indent: 25px;
+}
+
+.page-search {
+	width: 300px;
+	border: 1px solid #292929;
+	position: absolute;
+	right: -300px;
+	top: 60px;
+	z-index: 999999;
+	background: #000;
+}
+.page-search .blank{
+	color: #FFF;
+	padding-top: 25px;
+	text-indent: 15px;
+}
+
+#txt-win {
+	display: none;
+	margin: 15px 20px;
+	font-size: 16px;
+	line-height: 28px;
+}
+
+#txt-right,#txt-bottom {
+	width: 100%;
+	display: none;
+	height: 0px;
+	background: #102a44;
+	overflow: hidden;
+	color: #c7a784;
+}
+
+#txt-right {
+	width: 0;
+	position: relative;
+	right: -5px;
+}
+
+#txt-bottom {
+	height: 0;
+	width: 100%;
+	margin-top: 5px
+}
+
+#txt-right .yuanern-txt,#txt-bottom .yuanern-txt {
+	width: 88%;
+	height: 90%;
+	padding: 0px 15px;
+	margin: 20px auto;
+	overflow-y: auto;
+	text-align: justify;
+	line-height: 2;
+	font-size: 18px;
+}
+
+.yuanern-txt .red-txt {
+	color: red;
+}
+
+
+/*IE滚动条颜色设置*/
+#txt-right .yuanern-txt,#txt-bottom .yuanern-txt {
+  	overflow-y: auto;
+	scrollbar-arrow-color: #25486A; /*三角箭头的颜色*/
+	scrollbar-face-color: #25486A; /*立体滚动条的颜色*/
+	scrollbar-3dlight-color: #25486A; /*立体滚动条亮边的颜色*/
+	scrollbar-highlight-color: #163655; /*滚动条空白部分的颜色*/
+	scrollbar-shadow-color: #25486A; /*立体滚动条阴影的颜色*/
+	scrollbar-darkshadow-color: #163655; /*立体滚动条强阴影的颜色*/
+	scrollbar-track-color: #163655; /*立体滚动条背景颜色*/
+	scrollbar-base-color:#25486A; /*滚动条的基本颜色*/
+
+}
+#txt-right .yuanern-txt::-webkit-scrollbar{width:14px;}
+#txt-right .yuanern-txt::-webkit-scrollbar-track{background-color:#25486A;}
+#txt-right .yuanern-txt::-webkit-scrollbar-thumb{background-color:#163655;}
+#txt-right .yuanern-txt::-webkit-scrollbar-thumb:hover {background-color:#163655}
+#txt-right .yuanern-txt::-webkit-scrollbar-thumb:active {background-color:#163655}
+
+#txt-bottom .yuanern-txt::-webkit-scrollbar{width:14px;}
+#txt-bottom .yuanern-txt::-webkit-scrollbar-track{background-color:#25486A;}
+#txt-bottom .yuanern-txt::-webkit-scrollbar-thumb{background-color:#163655;}
+#txt-bottom .yuanern-txt::-webkit-scrollbar-thumb:hover {background-color:#163655}
+#txt-bottom .yuanern-txt::-webkit-scrollbar-thumb:active {background-color:#163655}

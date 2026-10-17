@@ -1,0 +1,12 @@
+# IntelliJ IDEA / IDE metadata
+.idea/
+*.iml
+.classpath
+.project
+.myhibernatedata
+.mymetadata
+.myumldata
+
+# Build and temporary output
+target/
+tmp/

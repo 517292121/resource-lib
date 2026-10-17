@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+	<!-- 求助分类 -->
+	<bean name="/console/data/scIssueType.htm"
+		class="cn.com.adtech.riss2.controller.console.sc.ScIssueTypeController">
+		<property name="methodNameResolver" ref="methodNameResolver" />
+		<property name="scServices" ref="scServices" />
+	</bean>
+	<!-- 求助 -->
+	<bean name="/console/scIssue.htm"
+		class="cn.com.adtech.riss2.controller.console.sc.ScIssueController">
+		<property name="methodNameResolver" ref="methodNameResolver" />
+		<property name="scServices" ref="scServices" />
+	</bean>
+	<!-- 新建求助 -->
+	<bean name="/sc/createScIssue.htm"
+		class="cn.com.adtech.riss2.controller.console.sc.CreateScIssueController">
+		<property name="commomService" ref="scServices" />
+		<property name="commandName" value="scIssue" />
+		<property name="commandClass" value="cn.com.adtech.riss2.domain.sc.ScIssue" />
+		<property name="formView" value="platform/userCenter/usercenterCreateIssue" />
+		<property name="successView" value="platform/userCenter/usercenterMyIssue" />
+	</bean>
+	<!-- 新建求助回复 -->
+	<bean name="/sc/createScIssueReply.htm"
+		class="cn.com.adtech.riss2.controller.console.sc.CreateScIssueReplyController">
+		<property name="commomService" ref="scServices" />
+		<property name="uploadService" ref="localUploadService" />
+		<property name="commandName" value="scIssueReply" />
+		<property name="commandClass" value="cn.com.adtech.riss2.domain.sc.ScIssueReply" />
+		<property name="formView" value="platform/userCenter/usercenterIssueDetail" />
+		<property name="successView" value="platform/userCenter/usercenterIssueDetail" />
+	</bean>
+	<!-- 求助回复 -->
+	<bean name="/console/data/scIssueReply.htm"
+		class="cn.com.adtech.riss2.controller.console.sc.ScIssueReplyController">
+		<property name="methodNameResolver" ref="methodNameResolver" />
+		<property name="scServices" ref="scServices" />
+		<property name="uploadService" ref="localUploadService" />
+	</bean>
+	<!-- FAQ库分类 -->
+	<bean name="/console/data/scFaqType.htm"
+		class="cn.com.adtech.riss2.controller.console.sc.ScFaqTypeController">
+		<property name="methodNameResolver" ref="methodNameResolver" />
+		<property name="scServices" ref="scServices" />
+	</bean>
+	<!-- FAQ维护 -->
+	<bean name="/console/data/scFaqLibrary.htm"
+		class="cn.com.adtech.riss2.controller.console.sc.ScFaqLibraryController">
+		<property name="methodNameResolver" ref="methodNameResolver" />
+		<property name="scServices" ref="scServices" />
+	</bean>
+	<!-- 文献求助 前台页面 -->
+	<bean name="/platform/scIssue.htm"
+		class="cn.com.adtech.riss2.controller.console.sc.ScIssuePlatformController">
+		<property name="methodNameResolver" ref="methodNameResolver" />
+		<property name="scServices" ref="scServices" />
+		<property name="uploadService" ref="localUploadService" />
+	</bean>
+	<!-- FAQ 前台页面 -->
+	<bean name="/platform/faq.htm"
+		class="cn.com.adtech.riss2.controller.console.sc.FaqPlatformController">
+		<property name="methodNameResolver" ref="methodNameResolver" />
+		<property name="scServices" ref="scServices" />
+	</bean>
+	<!-- 参考咨询后台 -->
+	<bean name="/console/data/scConsultation.htm"
+		class="cn.com.adtech.riss2.controller.console.sc.ScConsultationController">
+		<property name="methodNameResolver" ref="methodNameResolver" />
+		<property name="scServices" ref="scServices" />
+	</bean>
+	<!-- 新建咨询 -->
+	<bean name="/sc/createScConsultation.htm"
+		class="cn.com.adtech.riss2.controller.console.sc.CreateScConsultationController">
+		<property name="commomService" ref="scServices" />
+		<property name="commandName" value="scConsultation" />
+		<property name="commandClass" value="cn.com.adtech.riss2.domain.sc.ScConsultation" />
+		<property name="formView" value="platform/userCenter/usercenterCreateConsultation" />
+		<property name="successView" value="platform/userCenter/usercenterMyConsultation" />
+	</bean>
+	<!-- 参考咨询 -->
+	<bean name="/platform/scConsultation.htm"
+		class="cn.com.adtech.riss2.controller.console.sc.ScConsultationPlatformController">
+		<property name="methodNameResolver" ref="methodNameResolver" />
+		<property name="scServices" ref="scServices" />
+	</bean>
+	
+	<!-- 文献传递服务 前台 -->
+	<bean name="/usercenter/docudelivery.htm"
+		class="cn.com.adtech.riss2.controller.console.sc.docu.DocuDeliveryController">
+		<property name="methodNameResolver" ref="methodNameResolver" />
+		<property name="docuServices" ref="docuServices" />
+		<property name="uploadService" ref="localUploadService" />
+	</bean>
+	<!-- 文献传递服务 后台 -->
+	<bean name="/console/data/docudelivery.htm"
+		class="cn.com.adtech.riss2.controller.console.sc.docu.DocuDeliveryConsoleController">
+		<property name="methodNameResolver" ref="methodNameResolver" />
+		<property name="docuServices" ref="docuServices" />
+	</bean>
+</beans>

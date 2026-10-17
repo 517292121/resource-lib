@@ -1,0 +1,180 @@
+@CHARSET "UTF-8";
+
+body {
+	margin: 0px;
+	padding: 0px;
+	color: #364f56; /* 设置对象中字体的颜色 */
+	line-height: 150%; /* 行间�?? */
+	background-color: #F7F9FC;
+	font-size: 12px; /* 网页字体大小 */
+	text-decoration: none; /* 设置对象中的文本的装�?? */ /* 滚动条样�?? */
+	scrollbar: false;
+	overflow:auto;
+	scrollbar-face-color: #f6f6f6; /* 立体滚动条凸出部分的颜色 */
+	scrollbar-highlight-color: #ffffff; /* 滚动条空白部分的颜色 */
+	scrollbar-shadow-color: #cccccc; /* 立体滚动条阴影的颜色 */
+	scrollbar-3dlight-color: #cccccc; /* 立体滚动条亮边的颜色（设置滚动条的颜色） */
+	scrollbar-arrow-color: #330000; /* 上下按钮上三角箭头的颜色 */
+	scrollbar-track-color: #f6f6f6; /* 滚动条的背景颜色 */
+	scrollbar-darkshadow-color: #ffffff; /* 立体滚动条强阴影的颜�?? */
+}
+
+*{
+	font-size: 14px;
+	/* font-family: 'Microsoft YaHei UI', 'Microsoft YaHei', SimSun, 'Segoe UI',Tahoma, Helvetica, Sans-Serif; */
+	margin:0;
+	padding:0;
+}
+
+p{
+	margin: 0px;
+}
+
+img{
+	border: 0px;
+	margin: 0px;
+}
+form{
+	padding: 0px;
+	margin: 0px;
+}
+
+.buttonM{
+	border: none;
+	padding: 3px 13px;
+	background-color: #145A68;
+	color: #ffffff;
+}
+.buttonM:hover{
+	background-color: #077E86;
+}
+
+/* .title {
+	background-image: url("../../images/console/tool_bg.gif");
+	height: 28px; 
+	padding-top: 6px;
+	padding-left:6px;
+	color: #15428B;
+	font-size: 12px;
+	width:100%;
+	
+	position:fixed!important;FF IE7
+	position:absolute;IE6
+	_top:expression(eval(document.compatMode &&
+	 document.compatMode=='CSS1Compat') ?
+	 documentElement.scrollTop :
+	 document.body.scrollTop);
+} */
+
+.page_content{
+    padding: 45px 10px 10px;
+}
+#color{
+	background-color: #F7F9FC;
+}
+.inputText {
+	height: 150px;
+	border: 1px solid #BDC7C9;
+	background-image: url("../images/input_bg.jpg");
+	margin: 1px;
+	width: 400px;
+}
+.inputFile {
+	height: 24px;
+	border: 1px solid #BDC7C9;
+	background-image: url("../images/input_bg.jpg");
+	background-repeat: repeat-x;
+	margin: 1px;
+	width: 400px;
+}
+
+
+.docuDiv {
+    display: inline;
+    margin-bottom:15px;
+    float: left;
+    width:100%;
+}
+.mgt{
+	margin-top: 15px;
+}
+.dd350{
+	width:350px;
+}
+ 
+.listTableInfo {
+    background-color: #fff;
+    border: 1px solid #cbd6df;
+    border-radius: 2px;
+    box-shadow: 0 0 2px #ccc;
+    width: 100%;
+}
+.listTableInfo tr {
+    float: left;
+    width: 100%;
+}
+.listTableInfo tr.thead {
+    background-color: #F8F8F8;
+	border-bottom: 1px solid #cbd6df;
+	box-shadow: 0 0 3px #ccc;
+	height: 50px;
+	line-height: 30px;
+}
+.listTableInfo tr.thead td {
+    color: #666;
+    font-size: 16px;
+}
+.listTableInfo tr td {
+    color: #364f56;
+    float: left;
+    font-size: 13px;
+    padding: 10px 2px;
+}
+.listTableInfo tr td.td150 {
+    width: 150px;
+}
+.listTableInfo tr td.td500 {
+    width: 500px;
+}
+
+
+/**用户中心 文献传递*/
+.docutitle{ 
+	float:left;
+	width:100%;
+	text-align: left;
+}
+.docutitle h5{ 
+	float:left; 
+}
+.docutitle div{ 
+	float: left;
+	margin-left: 10px;
+	line-height: 30px;
+}
+.docuInfo{ 
+	width: 100%;
+	float: left;
+	margin: 5px 0px 20px 0px;
+	border: 1px solid #5D95EA;
+}
+.docuInfo .sred{
+	margin: 5px 0px 0px 5px;
+}
+
+.docuInfo table tr input{
+	width: 350px;
+	line-height: 30px;
+	border-radius: 2px;
+	height: 30px;
+	border: 1px solid #bbb;
+	padding: 0px 2px;
+	background-color: #f9f9f9;
+	box-shadow: 0 1px 2px #ededed;
+	-moz-box-shadow: 0 1px 2px #ededed;
+	-webkit-box-shadow: 0 1px 2px #ededed;
+}
+.docuInfo table tr input.w220{
+	width: 220px;
+	color:#555;
+}

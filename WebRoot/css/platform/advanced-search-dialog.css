@@ -1,0 +1,22 @@
+@charset "UTF-8";
+body.dh-advanced-search-open { overflow: hidden; }
+.dh-advanced-dialog { position: fixed; inset: 0; width: min(720px, calc(100vw - 32px)); height: min(660px, calc(100vh - 32px)); height: min(660px, calc(100dvh - 32px)); max-width: none; max-height: none; margin: auto; padding: 0; border: 1px solid #b99a62; color: #523d29; background: #fff; box-shadow: 0 20px 70px #0006; font: 16px/1.5 "Microsoft YaHei", sans-serif; }
+.dh-advanced-dialog:not([open]) { display: none; }
+.dh-advanced-dialog[open] { display: flex; flex-direction: column; }
+.dh-advanced-dialog::backdrop { background: #08201c99; }
+.dh-advanced-dialog-header { display: flex; flex: 0 0 auto; align-items: center; justify-content: space-between; padding: 12px 18px; border-bottom: 1px solid #dacbb1; background: #f5ebd7; }
+.dh-advanced-dialog-title { margin: 0; font: inherit; font-weight: 700; }
+.dh-advanced-dialog-close { width: 34px; height: 34px; padding: 0; border: 0; color: #523d29; background: transparent; font: 28px/1 sans-serif; cursor: pointer; }
+.dh-advanced-dialog-close:focus-visible { outline: 2px solid #a86d33; outline-offset: 2px; }
+.dh-advanced-dialog iframe { display: block; flex: 1 1 auto; width: 100%; min-height: 0; border: 0; background: #fff; }
+.dh-advanced-dialog.is-fallback { z-index: 10001; }
+.dh-advanced-shade { position: fixed; z-index: 10000; inset: 0; background: #08201c99; }
+@media (max-width: 600px) {
+  .dh-advanced-form .conbox table, .dh-advanced-form .conbox tbody { display: block; width: 100%; }
+  .dh-advanced-form .conbox tr { display: grid; grid-template-columns: 62px minmax(0, 1fr) 66px; gap: 4px; margin-bottom: 12px; }
+  .dh-advanced-form .conbox td { display: block; width: auto; min-width: 0; padding: 0; }
+  .dh-advanced-form .conbox .tdlogic { grid-column: 1; grid-row: 1; }
+  .dh-advanced-form .conbox .tdele { grid-column: 2; grid-row: 1; }
+  .dh-advanced-form .conbox .tdlike { grid-column: 3; grid-row: 1; }
+  .dh-advanced-form .conbox td:nth-child(3) { grid-column: 1 / -1; grid-row: 2; }
+}

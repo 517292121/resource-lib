@@ -1,0 +1,6 @@
+1:将整个文件夹导入项目
+
+2:在要插入编辑器的地方建一个隐藏域,如:<input type="hidden" name="content">.再将html/editer.jsp通过iframe导入
+
+3:当要提交的时候通过如下js将编辑器的内容赋给隐藏域.因此提交的便是隐藏域的内容了
+  document.all.content.value = editor.HtmlEdit.document.body.innerHTML;

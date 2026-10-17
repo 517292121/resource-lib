@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+	<!-- 资源录入，作业选择 -->
+	<bean name="/console/data/missionSelect.htm"
+		class="cn.com.adtech.riss2.controller.console.resource.build.BuildController">
+		<property name="methodNameResolver" ref="methodNameResolver" />
+	</bean>
+	<!-- 资源数据 -->
+	<bean id="resourcedataManager" class="cn.com.adtech.riss2.bso.resource.ResourceDataServiceImp">
+		<property name="sessionFactory" ref="sessionFactory" />
+		<property name="localUploadService" ref="localUploadService" /><!-- 本地文件上传服务 -->
+		<property name="remoteUploadService" ref="remoteUploadService" /><!-- 远程文件上传服务 -->
+		<property name="infoSubscriptionService" ref="infoSubscriptionService" />
+	</bean>
+	<!-- 资源录入，单个资源录入页面 -->
+	<bean name="/console/data/inputSingle.htm"
+		class="cn.com.adtech.riss2.controller.console.resource.build.InputSingleController">
+		<property name="methodNameResolver" ref="methodNameResolver" />
+		<property name="elementPool" ref="metadataElementPool" />
+		<property name="resourceService" ref="resourcedataManager" />
+		<property name="sldao" ref="sourceLanguageList" />
+		<property name="missionService" ref="missionInfoManagementService"></property>
+		<property name="lanService" ref="LanguageTypeService" />
+		<property name="fileService" ref="fileSystemService" />
+		<property name="localUploadService" ref="localUploadService" /><!-- 本地文件上传服务 -->
+		<property name="remoteUploadService" ref="remoteUploadService" /><!-- 远程文件上传服务 -->
+		<property name="memberResourceService" ref="memberResourceService" />
+		<property name="resourceCheckedService" ref="resMissionInfoCheckService" />
+		<property name="dynamicTypeService" ref="dynamicService" />
+		<property name="resourceLuceneService" ref="resourceLuceneService" />
+		<property name="cacheService" ref="platformCacheService" />
+	</bean>
+	<!-- 语种 -->
+	<bean id="LanguageTypeService" class="cn.com.adtech.riss2.bso.resource.LanguageTypeServiceImp">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	
+	
+	
+	<!-- 获取Ext的基本数据 -->
+	<bean name="/console/data/extdata.htm" class="cn.com.adtech.riss2.controller.ExtdataUtil">
+		<property name="methodNameResolver" ref="methodNameResolver" />
+		<property name="lanService" ref="LanguageTypeService" />
+		<property name="missionService" ref="missionInfoManagementService" />
+	</bean>
+	<!-- 作业管理 -->
+	<bean name="/console/data/resource/missionInfoManagement.htm"
+		class="cn.com.adtech.riss2.controller.console.resource.build.MissionInfoManagementController">
+		<property name="methodNameResolver" ref="methodNameResolver" />
+		<property name="missionInfoManagementService" ref="missionInfoManagementService" />
+		<property name="deliverService" ref="missionDeliver" />
+		<property name="missionLanguageTemp" ref="missionLanguage" />
+		<property name="localUploadService" ref="localUploadService" />
+		<property name="remoteUploadService" ref="remoteUploadService" />
+		<property name="fileSystemService" ref="fileSystemService" />
+	</bean>
+	<!-- 资源建设（资源维护） -->
+	<bean name="/console/data/resource/resourceManager.htm"
+		class="cn.com.adtech.riss2.controller.console.resource.build.ResourceController">
+		<property name="methodNameResolver" ref="methodNameResolver" />
+		<property name="resourceService" ref="resourcedataManager" />
+		<property name="sourceLanguageService" ref="sourceLanguageList" />
+		<property name="elementPool" ref="metadataElementPool" />
+	</bean>
+	<!-- 资源预览 -->
+	<bean name="/viewer.htm"
+		class="cn.com.adtech.riss2.controller.console.resource.build.ResourceController">
+		<property name="methodNameResolver" ref="methodNameResolver" />
+		<property name="resourceService" ref="resourcedataManager" />
+		<property name="sourceLanguageService" ref="sourceLanguageList" />
+		<property name="elementPool" ref="metadataElementPool" />
+	</bean>
+	
+	<!-- 作业-语种 -->
+	<bean name="/console/data/resource/missionLanguage.htm"
+		class="cn.com.adtech.riss2.controller.console.resource.build.MissionLanguageController">
+		<property name="methodNameResolver" ref="methodNameResolver" />
+		<property name="missionLanguageTemp" ref="missionLanguage" />
+		<property name="missionInfoService" ref="missionInfoManagementService" />
+	</bean>
+	<!-- Excel批量导入处理 -->
+	<bean name="/console/data/resource/importExcel.htm"
+		class="cn.com.adtech.riss2.controller.console.resource.build.ImportExcelController">
+		<property name="methodNameResolver" ref="methodNameResolver" />
+		<property name="missionService" ref="missionInfoManagementService" />
+		<property name="uploadService" ref="localUploadService" />
+		<property name="importService" ref="importService" />
+		<property name="importHistoryService" ref="importHistoryService" />
+	</bean>
+	
+	<!-- 作业资源查重 -->
+	<bean name="/console/data/resource/checkRepeat.htm"
+		class="cn.com.adtech.riss2.controller.console.resource.build.ResourceCheckRepeatController">
+		<property name="methodNameResolver" ref="methodNameResolver" />
+		<property name="missionService" ref="missionInfoManagementService" />
+		<property name="repeatService" ref="resourceRepeatService" />
+		<property name="resourceService" ref="resourcedataManager" />
+		<property name="sldao" ref="sourceLanguageList" />
+	</bean>
+	
+	<!-- 作业资源查重 -->
+	<bean name="/console/data/resource/systemCheckRepeat.htm"
+		class="cn.com.adtech.riss2.controller.console.resource.manager.SystemCheckRepeatController">
+		<property name="methodNameResolver" ref="methodNameResolver" />
+		<property name="systemCheckRepeatService" ref="systemCheckRepeatService" />
+	</bean>
+</beans>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+	<!-- 站点访问量统计 -->
+	<bean name="/console/data/accessCounter.htm"
+		class="cn.com.adtech.riss2.controller.console.count.AccessCounterController">
+		<property name="countService" ref="countService" />
+		<property name="methodNameResolver" ref="methodNameResolver" />
+	</bean>
+	<!-- 资源分布统计 -->
+	<bean name="/console/data/distributingCounter.htm"
+		class="cn.com.adtech.riss2.controller.console.count.ResourceDistributingCountController">
+		<property name="countService" ref="countService" />
+		<property name="methodNameResolver" ref="methodNameResolver" />
+	</bean>
+	<!-- 会员上传资源统计 -->
+	<bean name="/console/count/uploadResources.htm"
+		class="cn.com.adtech.riss2.controller.console.count.UserUploadResourceCountController">
+		<property name="methodNameResolver" ref="methodNameResolver" />
+		<property name="sysCountService" ref="countService" />
+	</bean>
+	<!-- 资源使用情况统计 -->
+	<bean name="/console/count/resourcesUsed.htm"
+		class="cn.com.adtech.riss2.controller.console.count.ResourcesUsedCountController">
+		<property name="methodNameResolver" ref="methodNameResolver" />
+		<property name="sysCountService" ref="countService" />
+		<property name="sourcesTypeService" ref="sourceTypeServices" />
+	</bean>
+	<!-- 会员操作统计 -->
+	<bean name="/console/count/userAccess.htm"
+		class="cn.com.adtech.riss2.controller.console.count.UserAccessCountController">
+		<property name="methodNameResolver" ref="methodNameResolver" />
+		<property name="sysCountService" ref="countService" />
+	</bean>
+	<!-- 会员登录统计 -->
+	<bean name="/console/count/userLoginCount.htm"
+		class="cn.com.adtech.riss2.controller.console.count.UserLoginCountController">
+		<property name="methodNameResolver" ref="methodNameResolver" />
+		<property name="sysCountService" ref="countService" />
+	</bean>
+	<!-- 工作量统计 -->
+	<bean name="/console/count/resourceHandlerCount.htm"
+		class="cn.com.adtech.riss2.controller.console.count.ResourceHandlerCountController">
+		<property name="methodNameResolver" ref="methodNameResolver" />
+		<property name="countService" ref="countService" />
+	</bean>
+	<!-- 资源增长情况统计 -->
+	<bean name="/console/count/resourceAddInfo.htm"
+		class="cn.com.adtech.riss2.controller.console.count.ResourceAddInfoController">
+		<property name="methodNameResolver" ref="methodNameResolver" />
+		<property name="countService" ref="countService" />
+	</bean>
+	<!-- 特色库资源访问量统计 -->
+	<bean name="/console/count/resmetastore.htm"
+		class="cn.com.adtech.riss2.controller.console.count.ResMetaStoreController">
+		<property name="methodNameResolver" ref="methodNameResolver" />
+		<property name="sysCountService" ref="countService" />
+	</bean>
+	<!-- 系统积分统计 -->
+	<bean name="/console/count/pointcounter.htm" 
+		class="cn.com.adtech.riss2.controller.console.count.PointCounterController">
+		<property name="methodNameResolver" ref="methodNameResolver" />
+		<property name="sysCountService" ref="countService" />
+	</bean>
+</beans>

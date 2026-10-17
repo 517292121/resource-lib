@@ -1,0 +1,9 @@
+2026-10-17 18:35:40,308 ERROR [cn.com.adtech.riss2.controller.console.resource.metadata.DefineStoreController] - Could not commit Hibernate transaction; nested exception is org.hibernate.TransactionException: JDBC commit failed
+2026-10-17 18:36:25,852 ERROR [cn.com.adtech.riss2.controller.console.resource.metadata.DefineStoreController] - Could not commit Hibernate transaction; nested exception is org.hibernate.TransactionException: JDBC commit failed
+2026-10-17 18:40:01,605 ERROR [cn.com.adtech.riss2.controller.console.resource.metadata.DefineStoreController] - Could not commit Hibernate transaction; nested exception is org.hibernate.TransactionException: JDBC commit failed
+2026-10-17 18:40:07,589 ERROR [cn.com.adtech.riss2.controller.console.resource.metadata.DefineStoreController] - Could not commit Hibernate transaction; nested exception is org.hibernate.TransactionException: JDBC commit failed
+2026-10-17 18:40:13,612 ERROR [cn.com.adtech.riss2.controller.console.resource.metadata.DefineStoreController] - Could not commit Hibernate transaction; nested exception is org.hibernate.TransactionException: JDBC commit failed
+2026-10-17 18:40:19,091 ERROR [cn.com.adtech.riss2.controller.console.resource.metadata.DefineStoreController] - 特色库不存在！
+2026-10-17 18:40:24,498 ERROR [cn.com.adtech.riss2.controller.console.resource.metadata.DefineStoreController] - Could not commit Hibernate transaction; nested exception is org.hibernate.TransactionException: JDBC commit failed
+2026-10-17 18:40:28,982 ERROR [cn.com.adtech.riss2.controller.console.resource.metadata.DefineStoreController] - Could not commit Hibernate transaction; nested exception is org.hibernate.TransactionException: JDBC commit failed
+2026-10-17 18:40:35,462 ERROR [cn.com.adtech.riss2.controller.console.resource.metadata.DefineStoreController] - Could not commit Hibernate transaction; nested exception is org.hibernate.TransactionException: JDBC commit failed

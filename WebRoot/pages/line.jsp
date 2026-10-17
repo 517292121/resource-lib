@@ -1,0 +1,40 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%
+	String path = request.getContextPath();
+%>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+      <META http-equiv=Content-Type content="text/html; charset=gb2312">
+      <link rel="stylesheet" href="<%=path %>/css/form.css" type="text/css"></link>
+      
+      <script type="text/javascript">
+         var arrowpic1="<%=path %>/images/icon/frame_suo.gif";
+		 var arrowpic2="<%=path %>/images/icon/frame_zan.gif"
+		 
+         function changMenu(){
+            var s = document.all.states.value;
+            if(s == 1){
+                window.parent.frame1.cols = "0,7,*";
+                document.all.frame_icon.src = arrowpic2;
+                document.all.states.value = 0;
+            }else{
+                window.parent.frame1.cols = "420,7,*";
+                document.all.frame_icon.src = arrowpic1;
+                document.all.states.value = 1;
+            }
+         }
+      </script>
+  </head>
+  
+  <body style="border-right:1px solid #2D7AA4;background-color: #DFE8F6">
+    <input type="hidden" name="states" value="1">
+    <table height="100%" width="7px" cellPadding=0 cellSpacing=0 align="center">
+      <tr style="cursor: hand" onclick="changMenu();">
+        <td >
+          <img src="<%=path %>/images/icon/frame_suo.gif" id="frame_icon" name="frame_icon" width="6" alt="点击隐藏左边菜单栏"></img> 
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

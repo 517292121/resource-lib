@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="cn.com.adtech.riss2.domain.infosubscription.IsIgnoreResSource"
+		table="IS_IGNORE_RESSOURCE" lazy="false" dynamic-update="true">
+		<id name="isInRsId" type="java.lang.Long">
+			<column name="IS_IGNORE_ID" />
+			<generator class="com.jbetter.hibernate.IdGenerator" />
+		</id>
+		<property name="isInRsSourceId" type="java.lang.Long">
+			<column name="IS_IGNORE_RESOURCE_ID" />
+		</property>
+		<property name="isInRsDate" type="java.util.Date">
+			<column name="IS_IGNORE_DATE" />
+		</property>
+		<property name="isInRsUserId" type="java.lang.Long">
+			<column name="IS_IGNORE_USER_ID" />
+		</property>
+		<many-to-one name="isInRsUser"
+			class="cn.com.adtech.riss2.domain.SysUserinfo" fetch="select"
+			insert="false" update="false">
+			<column name="IS_IGNORE_USER_ID" />
+		</many-to-one>
+		<many-to-one name="isInRsSourceData"
+			class="cn.com.adtech.riss2.domain.resource.ResSourceData" fetch="select"
+			insert="false" update="false">
+			<column name="IS_IGNORE_RESOURCE_ID" />
+		</many-to-one>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+	<!-- 作业校验 -->
+	<bean name="/console/data/rmsMissionInfoCheck.htm"
+		class="cn.com.adtech.riss2.controller.console.resource.checkout.RmsMissionInfoCheckController">
+		<property name="methodNameResolver" ref="methodNameResolver" />
+		<property name="resMissionInfoCheckService" ref="resMissionInfoCheckService" />
+		<property name="missionInfoManagementService" ref="missionInfoManagementService" />
+		<property name="missionLanguageService" ref="missionLanguage" />
+		<property name="resourceLuceneService" ref="resourceLuceneService" />
+	</bean>
+	<bean name="/console/data/rmsMissionInfoDataCheck.htm"
+		class="cn.com.adtech.riss2.controller.console.resource.checkout.RmsMissionInfoDataCheckController">
+		<property name="methodNameResolver" ref="methodNameResolver" />
+		<property name="resMissionInfoCheckService" ref="resMissionInfoCheckService" />
+		<property name="resourceService" ref="resourcedataManager" />
+		<property name="sldao" ref="sourceLanguageList" />
+		<property name="lanService" ref="LanguageTypeService" />
+		<property name="elementPool" ref="metadataElementPool" />
+		<property name="fileService" ref="fileSystemService" />
+		<property name="localUploadService" ref="localUploadService" /><!-- 本地文件上传服务 -->
+		<property name="remoteUploadService" ref="remoteUploadService" /><!-- 远程文件上传服务 -->
+		<property name="dynamicTypeService" ref="dynamicService" />
+	</bean>
+	<!-- 资源批量审核 -->
+	<bean name="/console/data/rmsMissionInfoBatchCheck.htm"
+		class="cn.com.adtech.riss2.controller.console.resource.checkout.ResSourceDataBatchCheckController">
+		<property name="methodNameResolver" ref="methodNameResolver" />
+		<property name="resMissionInfoCheckService" ref="resMissionInfoCheckService" />
+		<property name="missionInfoManagementService" ref="missionInfoManagementService" />
+		<property name="missionLanguageService" ref="missionLanguage" />
+		<property name="resourceLuceneService" ref="resourceLuceneService" />
+	</bean>
+	<!-- 多语种审核 -->
+	<bean name="/console/data/otherLanguageMissionInfo.htm"
+		class="cn.com.adtech.riss2.controller.console.resource.checkout.OtherLanguageMissionInfoController">
+		<property name="methodNameResolver" ref="methodNameResolver" />
+		<property name="resMissionInfoCheckService" ref="resMissionInfoCheckService" />
+		<property name="missionInfoManagementService" ref="missionInfoManagementService" />
+		<property name="sldao" ref="sourceLanguageList" />
+	</bean>
+	<!-- 会员资源审核 -->
+	<bean name="/console/data/memberResource.htm"
+		class="cn.com.adtech.riss2.controller.console.resource.checkout.MemberResourceCheckController">
+		<property name="methodNameResolver" ref="methodNameResolver" />
+		<property name="memberResourceService" ref="memberResourceService" />
+		<property name="resourceService" ref="resourcedataManager" />
+		<property name="dynamicTypeService" ref="dynamicService" />
+		
+	</bean>
+	
+	<!-- 采集资源审核 -->
+	<bean name="/console/data/gatherResource.htm"
+		class="cn.com.adtech.riss2.controller.console.resource.checkout.GatherResourceCheckController">
+		<property name="methodNameResolver" ref="methodNameResolver" />
+		<property name="gatherResourceService" ref="gatherResourceService" />
+	</bean>
+</beans>

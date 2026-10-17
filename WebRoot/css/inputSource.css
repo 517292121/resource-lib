@@ -1,0 +1,65 @@
+html,body { height: 100%; }
+ 
+body {
+	line-height: 150%;
+	}
+ 
+body,input,select,button { font-family:"宋体" verdana,simsun,sans-serif; }
+ 
+body,select,input,textarea,button{ font-size: 12px; }
+ 
+body,ul,ol,li,form,img,blockquote {
+	margin: 0;
+	padding: 0;
+	border: 0; }
+ 
+input,button,textarea,img { line-height: normal; }
+ 
+ul,ol { list-style: none; }
+ 
+select,input,button,img, { vertical-align: middle; }
+ 
+a {
+	color:#000;
+	text-decoration: none;
+	 }
+ 
+	a:hover {
+		color:#FF0000;
+		text-decoration: underline;
+		border:none }
+ 
+div { margin: auto; }
+.content{ margin:0 auto}
+.clear{ clear:both}
+ 
+.nav{float:left;}
+.tool1 ul.nav li{float:left; list-style:none;margin-right:5px; font-size:12px; }
+.tool1 ul.nav li a {display: block; float:left;width:53px; height:22px; padding:1px 0 0 10px; text-decoration:none;color:#000;background:url(../images/extform/button_bga.png) no-repeat ;}
+.tool1 ul.nav li a:hover{ background:url(../images/extform/button_bg.png) no-repeat ; width:53px; height:22px; }
+.tool1 ul.nav li a:active{ background:url(../images/extform/button_bg.png) no-repeat ; }
+.lb_wk{border:1px #ccc solid; margin-left:1px;*margin-left:0px; font-size:12px;}
+.jl{ padding-left:22px;}
+.lbtable_tou{ background:url(../images/extform/image/bg_img.gif) repeat-x; font-size:12px; height:24px; line-height:24px;}
+.lbtable_tou ul{}
+.lbtable_tou ul li{ float:left;}
+.lbtable_tou ul li img{ margin:0 3px;}
+
+.icon-sm img{vertical-align:bottom; margin-right: 3px;}
+.tabbox{width:800px;margin:5px;background:#f0f0f0;height:auto; min-height:190px; _height:240px;overflow:hidden; }
+.tabbox .tab{overflow:hidden;background:#E8E8E8;} 
+.tabbox .tab a{display:block;padding:10px 20px;float:left;text-decoration:none;color:#333; transition:all 0.3s;}
+.tabbox .tab a:hover{background:#009688;color:#fff;text-decoration:none;}
+.tabbox .tab a.on{background:#009688;color:#fff;text-decoration:none;} 
+.tabbox .content{position:relative;width:800px;_height:150px;height:auto; min-height:150px;} 
+.tabbox .content ul{position:absolute;left:0;top:0;}
+.tabbox .content li{width:800px;height: 100%; float:left; padding-top: 15px;}
+.tabbox .content li table tr td{padding: 10px 0px;}
+.tabbox .content li .text{height: 26px; border: 1px solid #E0E0E0; padding: 0px 5px;}
+.tabbox .content li p{margin: 5px 20px;}
+.tabbox .content li p input{width: 500px;}
+.tabbox .content li .tips{color: #808080;}
+.tabbox .content li p a{color: #136ec2; text-decoration: underline;}
+.tabbox .content li p a:hover{color: #0082DF;}
+
+

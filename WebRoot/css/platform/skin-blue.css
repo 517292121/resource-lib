@@ -1,0 +1,89 @@
+@CHARSET "UTF-8";
+.cm {color: #2E84EB;}
+.cw {color: #C48D23;}
+.bcm{background-color: #2E84EB;}
+.bcw{background-color: #C48D23;}
+a:hover {color: #2E84EB;position: relative;}
+.banner #search .cs-skin-elastic > span:hover{background: #2E84EB;}
+
+/**登录页面皮肤***/
+.login_subject{background-color: #2E84EB;}
+.login_panelbox #anniu{background: #C48D23;}
+.login_panelbox #anniu:hover{background: #2E84EB;transition: all 0.3s;}
+.login_panelbox #zc a{color: #2E84EB;}
+
+/**首页皮肤***/
+.title-line{border-bottom: 1px solid #2E84EB;}
+.container .nav span.active{color:#C48D23;}
+.top1 #right a{background: #FFF url("../../images/platform/blue/fenxiang.png") center no-repeat;}
+.top1 #right a:hover{background-color: #C2DEFF;}
+.top2 #left a{background: url("../../images/platform/blue/logo.png");}
+.top2 #right a:hover{border-bottom: 3px solid #C48D23;}
+div.cs-skin-elastic {color: #2E84EB;}
+.banner #search table #cols span:hover{background: #2E84EB;}
+.banner #search #search_but{background-image: url("../../images/platform/blue/search.png");}
+.reslist #res .nav span.active{color:#2E84EB; border-bottom: 1px solid #000;}
+.reslist #res .list ul li{background: url("../../images/platform/blue/list-icon.png") 3px center no-repeat;}
+.reslist #keys .js a{border: 1px dashed #2E84EB; color: #2E84EB;}
+.reslist #keys li a:hover{border: 1px solid #2E84EB; color: #2E84EB;}
+
+/**列表页面皮肤***/
+.resclass p{background: #2E84EB;}
+.resclass #ku li:hover{background-position: 0px -16px;}
+.resclass #ku .curr{background-position: 0px -16px;}
+.resclass #ku .curr a{color: #2E84EB;}
+.listbox #box #res1 table #tou{background-color: #74AAEB;}
+.pBar a{border: 1px solid #74AAEB;}
+.pBar #curr{background-color: #74AAEB;}
+.pBar a:hover{background-color: #74AAEB; color: #FFF;}
+.pBar a.disable{border-color: #B4CCE8;}
+
+
+/**详细页面皮肤***/
+.metadata #cover dl a{background-color: #2E84EB;}
+.metadata #cover dl a:hover{background-color: #C48D23;}
+.metadata #baseinfo li p a{color: #2E84EB;}
+.related #tool b{border-bottom: 3px solid #2E84EB;}
+.related #tool .btn span{background:#2E84EB;} 
+.comments #title b{border-bottom: 3px solid #2E84EB;}
+.comments #savecom #savebtn{background: #2E84EB;}
+.comments #savecom #savebtn:hover{background: #E15C1B;transition: all 0.3s;}
+.audio_area .progress_bar_box .progress_bar {background: #2E84EB;}
+.attfile ul li{background: url("../../images/platform/blue/list-icon.png") 3px center no-repeat;}
+#resBrowseHis li {background: url("../../images/platform/blue/list-icon.png") 3px center no-repeat;}
+.r-panel ul li{background: url("../../images/platform/blue/list-icon.png") 3px center no-repeat;}
+
+/**信息资讯皮肤***/
+.class-top li a:hover{color: #2E84EB; border-bottom: 1px solid #2E84EB;}
+.class-top li a.curr{color: #2E84EB; border-bottom: 1px solid #2E84EB;}
+.list-full ul .col3 a{color: #2E84EB; border: 1px solid #2E84EB;}
+.list-full ul .col3 a:hover{background: #2E84EB; color: #FFF;}
+.infodetail #round a:hover{color: #2E84EB; border: 1px solid #2E84EB;}
+.infoclass p{background: #2E84EB;}
+.infoclass ul li:hover{background-position: 0px -17px;}
+.infoclass ul .curr{background-position: 0px -17px;}
+.infoclass ul .curr a{color: #2E84EB;}
+
+/**用户中心皮肤***/
+.uclia.hover,.uclia.selected{background: #2E84EB;}
+.tbtn {background-color: #C48D23;}
+.tbtn:hover {background-color: #2E84EB;}
+.ckzxss p a.selected,.navbtn.selected{background-color: #2E84EB;}
+.sbylist{color:#2E84EB;}
+.flxdh_2{border:1px solid #2E84EB;}
+.flxdh_2 span{background-color: #2E84EB;}
+.rltyname{background-color: #E5F4FE;color: #04BBD6;border: 1px solid #B7E9F8;}
+
+/**检索结果列表***/
+.luc-res .tit span{background: #2E84EB;}
+.tiaojian li{border: 1px solid #BDC8E3;}
+.tiaojian li:hover{border: 1px solid #2E84EB;}
+.tiaojian li a {background-color: #8AA9F8;}
+.tiaojian li a:hover {background-color: #2E84EB;}
+.luc-res .views a:hover{background: #2E84EB; border-color: #2E84EB;}
+
+/**高级检索***/
+
+/**注册***/
+.regTips span i{color: #2E84EB;}
+.incenter a{color: #2E84EB;}

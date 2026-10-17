@@ -1,0 +1,72 @@
+@CHARSET "UTF-8";
+/**页面左右排版**/
+.pleft{width: 330px; min-height: 200px; padding-bottom: 20px; float: left; margin-top: 20px;}
+.pright{width: 850px; float: right; margin-top: 20px;}
+
+.class-top{height: 65px; background: #FFF; border-bottom: 1px solid #DDD;}
+.class-top ul{justify-content: center; display: flex;-webkit-box-pack: center;}
+.class-top li {margin: 0px 15px; display: block; float: left;}
+.class-top li a{display: block; height: 100%; line-height: 64px; font-size: 16px;}
+
+.infoclass{width: 100%; background: #FFF; border: 1px solid #F0F0F0;}
+.infoclass p{height: 50px; line-height: 50px; text-indent: 20px; color: #FFF; font-size: 18px;}
+.infoclass ul{margin: 15px 25px;}
+.infoclass ul li{height: 16px; background: url("../../images/platform/ku-icon.png") 0px -1px no-repeat; text-indent: 25px; line-height: 16px; margin: 20px 0px;}
+.infoclass ul li a{display: block; width: 100%; height: 100%; font-size: 15px;}
+.infoclass ul li a:hover{font-weight: bold;}
+.infoclass ul .curr a{font-weight: bold;}
+
+.page{margin: 25px auto; background: #FFF;}
+.list-full ul{width: 1170px; padding: 30px 15px; border-bottom: 1px solid #E8E8E8;}
+.list-full ul li{float: left;}
+.list-full ul .col1{width: 240px; height: 160px; background: #E8E8E8; margin-right: 30px;}
+.list-full ul .col1 img{width: 100%; height: 100%;}
+.list-full ul .col2{width: 720px; margin-right: 10px;}
+.list-full ul .col3{width: 150px; float: right;}
+.list-full ul .col1 dt{width: 100%; height: 100%;}
+.list-full ul .col1 dt span{display: block;color: #aaa;text-align: center; font-size: 14px; margin-top: 10px; font-size: 18px;}
+.list-full ul .col1 dt .date{padding-top: 30px; font-size: 18px; font-size: 36px;}
+.list-full ul .col2 .tm a{font-size: 24px; font-weight: bold;}
+.list-full ul .col2 .ms{font-size: 16px; line-height: 28px; margin-top: 15px; color: #666;
+	overflow : hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;}
+.list-full ul .col2 .rq {margin-top: 10px; color: #808080; background: url("../../images/platform/perviewnum.png") 150px center no-repeat;}
+.list-full ul .col3 a{display: block; width: 140px; height: 34px; text-align:center; line-height: 34px; margin: auto;}
+
+.listbox{width: 800px; padding: 0px 25px; background: #FFF;}
+.listbox ul{width: 100%; padding: 30px 0px; border-bottom: 1px solid #E8E8E8;}
+.listbox ul li{float: left;}
+.listbox ul .col1{width: 160px; height: 110px; background: #E8E8E8; margin-right: 30px;}
+.listbox ul .col1 img{width: 100%; height: 100%;}
+.listbox ul .col2{width: 600px;}
+.listbox ul .col1 dt{width: 100%; height: 100%;}
+.listbox ul .col1 dt span{display: block;color: #aaa;text-align: center; font-size: 14px; margin-top: 10px; font-size: 18px;}
+.listbox ul .col1 dt .date{padding-top: 10px; font-size: 24px;}
+.listbox ul .col2 .tm a{font-size: 16px; font-weight: bold;}
+.listbox ul .col2 .ms{line-height: 24px; margin-top: 8px; color: #666;
+	overflow : hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;}
+.listbox ul .col2 .rq {margin-top: 10px; color: #808080; background: url("../../images/platform/perviewnum.png") 130px center no-repeat;}
+
+
+
+.infodetail{margin: 35px; padding-bottom: 30px;}
+.infodetail #title{font-size: 24px; font-weight: bold; padding-top: 30px;}
+.infodetail #base{width: 100%; height: 36px; line-height: 36px; padding: 15px 0px; border-bottom: 1px solid #EEE;}
+.infodetail #base span{font-size: 16px; color: #808080;}
+.infodetail #base span a{font-size: 16px;}
+.infodetail #base #time{float: left;}
+.infodetail #base #author{float: right;}
+.infodetail #content{padding-top: 20px; line-height: 26px; padding-bottom: 30px; font-size: 16px;}
+.infodetail #round {padding-top: 25px; border-top: 1px solid #EEE; height: 30px;}
+.infodetail #round a{padding: 5px 20px; border: 1px solid #E8E8E8; height: 24px; display: block; overflow: hidden; WHITE-SPACE: nowrap; TEXT-OVERFLOW: ellipsis;}
+.infodetail #round #pre{width: 49%; float: left;}
+.infodetail #round #next{width: 49%; float: right; text-align: right;}
+
+.nodata{text-align: center; font-size: 16px; color: #808080; padding: 100px 0px 200px 0px;}

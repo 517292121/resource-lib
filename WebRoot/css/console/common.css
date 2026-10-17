@@ -1,0 +1,102 @@
+@CHARSET "UTF-8";
+/*********************全局设置 ***************** **/
+@font-face {
+   font-style:  normal;
+   font-weight: normal;
+   font-family: hm;
+   src: url(../../font/hm.eot);
+   src: local('Himalaya-A'),local('Himalaya-A'),url(../../font/Himalaya-A.ttf) format('truetype');
+}
+body {margin: 0px;padding: 0px;color: #1F2121; background: #FFF;}
+*{font-size: 14px;font-family: hm, 'Microsoft YaHei UI', 'Microsoft YaHei', SimSun, 'Segoe UI',Tahoma, Helvetica, Sans-Serif;}
+p{margin: 0px;}
+img{border: 0px;margin: 0px;border-style: none;}
+form{padding: 0px;margin: 0px;}
+a:link { color: #1F2121; text-decoration: none; }
+a:visited { color: #1F2121; text-decoration: none; }
+a:active { color: #1F2121; text-decoration: none; }
+a:hover {color: #20AED4;position: relative;text-decoration: none;} /*top: 1px;left: 1px;*/
+.subText{overflow:hidden;WHITE-SPACE: nowrap; TEXT-OVERFLOW: ellipsis;}
+li{list-style: none;}
+*:focus { outline: none; }
+input {outline:none;}
+.clear{height:0;overflow:hidden;clear:both;font-size:0;}
+label, input, select {vertical-align: -webkit-baseline-middle;}
+input, select, textarea{border: 1px solid #E6E6E6;background: #FFF;}
+.p-btn{padding: 0px 20px; height: 32px; background: #009688; color: #FFF; border-color: #009688; letter-spacing:0px;}
+.p-btn:hover{background: #008478;}
+
+
+/***定义动画*****/
+@keyframes myfirst{
+	from {margin: 50px 10px 10px 10px;}
+	to {margin: 10px;}
+}
+@-moz-keyframes myfirst{ /* Firefox */
+	from {margin: 50px 10px 10px 10px;}
+	to {margin: 10px;}
+}
+
+@-webkit-keyframes myfirst{ /* Safari 和 Chrome */
+	from {margin: 50px 10px 10px 10px;}
+	to {margin: 10px;}
+}
+@-o-keyframes myfirst{ /* Opera */
+	from {margin: 50px 10px 10px 10px;}
+	to {margin: 10px;}
+}
+
+/*********************页面通用元素样式******************/
+.pagenav{background: #FFF; height: 35px; border-bottom: 1PX solid #E8E8E8; line-height: 36px; padding-left: 15px;}
+.desc{height:auto !important; height:20px; min-height:20px; border-left: 3px solid #009688; background: #F2F2F2; margin: 5px 0px; padding:15px; }
+.line{text-align: left; border: 0px; background-color: #E2E2E2;height: 1px; margin: 20px 0px;}
+.biaoti{font-size: 18px; padding: 8px 0px;}
+
+.pagetool {margin: 10px;background: #F2F2F2;border-left: 4px solid #009688;min-height: 40px;height: auto !important;height: 40px;padding-left: 12px;padding-top: 12px;}
+.pagetool .input-text {width: 100px;}
+.pagetool input {height: 26px;padding: 0px 5px;}
+.pagetool select {height: 28px;padding: 0px;}
+.pagetool .btn {height: 28px;padding: 0px 15px;}
+.pagetool .btn:hover {background: #009688;	border: 1px solid #009688;color: #FFF;}
+.pagetool span{float: right; color: #666; margin: 5px 15px 0px 0px;}
+
+/*********************表单通用样式 ***************** **/
+.form{border: 1px solid #EFEFEF;margin: 10px;padding: 0px 0px;background: #f6f6f6;
+animation: myfirst 0.3s;
+-moz-animation: myfirst 0.3s;	/* Firefox */
+-webkit-animation: myfirst 0.3s;	/* Safari 和 Chrome */
+-o-animation: myfirst 0.3s;	/* Opera */}
+.form table{width: 100%;table-layout: fixed;display: table; border-collapse: separate;}
+.form table td{padding: 10px 5px;}
+.form table td.btns{padding: 20px 5px;}
+.form .input-text{width: 200px; height: 32px; padding: 0px 8px;}
+.form .input-text.error{border:1px solid red;}
+.form .xz{width: 218px; height: 34px;}
+.form .must{color: red;}
+.td-button{text-align: center;} 
+.fileBtn{height: 32px;padding: 0px 20px;position: absolute;background-color: #1AA094; margin-top: -15px;color: #FFF;text-align: center;line-height: 32px;}
+.fileBtn .fileInput{height: 100%;position: absolute;right: 0; top: 0; opacity: 0;}
+.fileBtn:hover{background: #009688;}
+.file-item{border: 1px solid #eee; padding: 5px 10px; float: left; background: #dcdcdc;}
+.file-item i{float: right; display: block; width: 20px; height: 20px; line-height: 20px; background: #FF8000; color: #FFF;
+    text-align: center;
+    font-family: 宋体;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 12px;
+    cursor: pointer;
+    margin: 2px -3px 0px 20px;}
+
+.prompt-layer{width: 400px; height: 80px; display: none; background: #FFF; text-align: center;}
+.prompt-layer .progress { position:relative; width:300px; border: 1px solid #ddd; padding: 1px; border-radius: 3px; background: #FFF; margin: 15px auto; }
+.prompt-layer .progress .bar { background-color: #B4F5B4; width:0%; height:20px; border-radius: 3px; }
+.prompt-layer .progress .percent { position:absolute; display:inline-block; top:3px; left:48%; }
+
+
+
+
+
+
+
+
+

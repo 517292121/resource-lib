@@ -1,0 +1,344 @@
+@CHARSET "UTF-8";
+.f-left{
+	float: left;
+}
+.f-right{
+	float: right;
+}
+.clearfix:after{
+	content: '';
+	display: block;
+	clear: both;
+}
+th:after{
+    content: '';
+    display: block;
+    clear: both;
+}
+.xu-up{
+    background: url('images/more-up.png') no-repeat center center;
+    background-size: contain;
+    float: left;
+    height: 5px;
+    width: 10px
+}
+
+.xu-up.active,.xu-up:hover{
+    background: url('images/more-up-active.png') no-repeat center center;
+    background-size: contain;
+}
+.xu-dowm{
+    background: url('images/more-down.png') no-repeat center center;
+    background-size: contain;
+    float: left;
+    height: 5px;
+    width: 10px;
+    margin-top: 2px;
+    cursor: pointer;
+}
+.xu-dowm.active,.xu-dowm:hover{
+    background: url('images/more-down-active.png') no-repeat center center;
+    background-size: contain;
+}
+.xu-btn{
+    height: 20px;
+    width: 12px;
+    float: right;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 13px 0;
+    cursor: pointer;
+    margin-right: 8px;
+}
+
+/*********************表格通用样式 ***************** **/
+
+.table-box {
+	padding-bottom: 20px;
+	margin: 10px;
+	
+	animation: myfirst 0.3s;
+	-moz-animation: myfirst 0.3s;	/* Firefox */
+	-webkit-animation: myfirst 0.3s;	/* Safari 和 Chrome */
+	-o-animation: myfirst 0.3s;	/* Opera */
+}
+.table-body {
+	width: 100%;
+	table-layout: fixed;
+	display: table;
+	border-collapse: separate;
+	background: #E7E7E7;
+}
+.table-body th {
+	height: 38px;
+	text-align: left;
+	padding: 0px 8px;
+	background: #F0F0F0;
+    position: relative;
+}
+.table-body tr {
+	background: #FFF;
+}
+.table-body td {
+	padding: 8px;
+	text-align: left;
+	overflow: hidden;
+	WHITE-SPACE: nowrap;
+	TEXT-OVERFLOW: ellipsis;
+}
+.table-body .rownum {
+	width: 36px;
+	padding: 0px;
+	text-align: center;
+}
+.table-body .chbox {
+	width: 32px;
+	padding: 0px;
+	text-align: center;
+}
+.blank {
+	padding-top: 20px;
+	color: #808080;
+}
+
+/**分页——传统模式**/
+.p_page {
+	line-height: 34px;
+	margin-top: 20px;
+}
+
+.p_page a {
+	font-size: 14px;
+	height: 34px;
+	line-height: 34px;
+	padding: 0px 16px;
+	float: left;
+	color: #333333;
+	margin: 0px;
+	text-decoration: none;
+	display: inline;
+	text-align: center;
+	background-color: #FFF;
+}
+.p_page a.st {
+	font-family: 宋体;
+	font-size: 16px;
+}
+
+.p_page a {
+	border-bottom: 1px solid #E6E6E6;
+	border-right: 1px solid #E6E6E6;
+	border-top: 1px solid #E6E6E6;
+}
+
+.p_page a:hover {
+	color: #ffffff;
+	text-decoration: none;
+	background-color: #009688;
+	border-top: 1px solid #009688;
+	border-bottom: 1px solid #009688;
+	border-right: 1px solid #009688
+}
+
+.p_page a.p_curpages {
+	color: #FFFFFF;
+	text-decoration: none;
+	background-color: #009688;
+	border-top: 1px solid #009688;
+	border-bottom: 1px solid #009688;
+	border-right: 1px solid #009688;
+}
+
+.p_page a.bian {
+	width: 40px;
+	height: 34px;
+	line-height: 34px;
+	letter-spacing: 2px;
+}
+
+.p_page a.fir {
+	border-left: 1px solid #E6E6E6;
+}
+
+.p_page span.total {
+	color: #373737;
+	float: left;
+	margin-left: 10px;
+	line-height: 34px;
+}
+
+.p_page a.disable {
+	color: #C0C0C0;
+	border-color: #E5E5E5;
+}
+
+.p_page a.disable:hover {
+	color: #C0C0C0;
+	background: none;
+}
+/*分页——AJAX异步模式  （传统分页与异步采用两套标签组合，但样式风格需要保持一致）*/
+.pBar {
+	width: 100%;
+	height: 36px;
+	margin: 2px auto;
+	font-size: 13px;
+}
+
+.pBar span {
+	font-size: 14px;
+	height: 34px;
+	line-height: 34px;
+	display: block;
+	float: left;
+	padding: 0px 16px;
+	color: #333333;
+	margin: 0px;
+	cursor: pointer;
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	user-select: none;
+}
+
+.pBar span {
+	border-bottom: 1px solid #E6E6E6;
+	border-right: 1px solid #E6E6E6;
+	border-top: 1px solid #E6E6E6;
+}
+
+.pBar span:hover {
+	color: #ffffff;
+	background-color: #009688;
+	border-top: 1px solid #009688;
+	border-bottom: 1px solid #009688;
+	border-right: 1px solid #009688
+}
+
+.pBar span#curr {
+	background: #009688;
+	color: #fff;
+	border-top: 1px solid #009688;
+	border-bottom: 1px solid #009688;
+	border-right: 1px solid #009688;
+}
+
+.pBar span.bian {
+	width: 40px;
+	letter-spacing: 2px;
+	text-align: center;
+}
+
+.pBar span.fir {
+	border-left: 1px solid #E6E6E6;
+}
+
+.pBar span.disable {
+	color: #C0C0C0;
+	border-color: #E5E5E5;
+}
+
+.pBar span.disable:hover {
+	color: #C0C0C0;
+	background: none;
+}
+.pBar span.st{
+	font-family: 宋体;
+	font-size: 16px;
+}
+
+.pBar label {
+	line-height: 36px;
+	margin-left: 10px;
+}
+
+
+/*********************code 代码块通用样式 ***************** **/
+.table-body tbody tr:nth-child(even) {
+	background: rgb(251, 251, 251);
+}
+
+.table-body tbody tr:nth-child(odd) {
+	background: rgb(255, 255, 255);
+}
+
+.table-body tbody tr:hover {
+	background: rgb(240, 240, 240);
+}
+
+.table-body tbody tr.active {
+	background: rgb(240, 240, 240) !important;
+	/**background: rgb(26, 160, 148) !important;
+	color: #fff;**/
+}
+
+.tl-main-table {
+	min-height: 120px;
+	position: relative;
+	transition: height 0.3s;
+	
+	overflow-x: auto;
+	-moz-overflow-x: auto;
+	-webkit-overflow-x: auto;
+	-o-overflow-x: auto;
+	-webkit-overflow-scrolling: touch;
+}
+
+.tl-main-table .mask {
+	position: fixed;
+	font-size: 0px;
+	width: 170px;
+	height: 50px;
+	left: 50%;
+	top: 30%;
+	background: #FFF;
+	margin-left: -100px;
+	line-height: 50px;
+	border: 1px solid #C0C0C0;
+	transition: opacity 0.5s;
+}
+.tl-main-table .mask label{
+	float: left;
+	margin-left: 15px;
+}
+.tl-main-table .mask img{
+	float: left;
+	margin-left: 20px;
+	margin-top:13px;
+}
+
+th.choose-box,td.choose-box {
+	width: 32px;
+	padding: 0px;
+	text-align: center;
+}
+
+th.table-biaohao,td.table-biaohao {
+	width: 36px;
+	padding: 0px;
+	text-align: center;
+}
+
+
+
+.icon-input-normal {
+	display: block;
+	width: 12px;
+	height: 12px;
+	background: #fff;
+    border: 1px solid #D4D4D4;
+    margin: 0 auto;
+    transition: all 0.3s;
+}
+
+.table-body tbody tr:hover .icon-input-normal{
+    border: 1px solid #009688;
+}
+
+.icon-input-normal.active {
+    display: block;
+    border: 1px solid #009688;
+    width: 12px;
+    height: 12px;
+    background: url("images/active-checked1.png") no-repeat;
+    margin: 0 auto;
+}

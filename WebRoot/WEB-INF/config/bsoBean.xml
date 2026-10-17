@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd   
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd   
+	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+	<bean id="commonService" class="cn.com.adtech.riss2.bso.CommonServiceImp">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<aop:config>
+		<aop:advisor pointcut="execution(* cn.com.adtech.riss2.bso.*Service.*(..))"
+			advice-ref="txAdvice" />
+		<aop:advisor pointcut="execution(* cn.com.adtech.riss2.bso.*.*Service.*(..))"
+			advice-ref="txAdvice" />
+	</aop:config>
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="update*" />
+			<tx:method name="delete*" />
+			<tx:method name="save*" />
+			<tx:method name="get*" read-only="true" />
+		</tx:attributes>
+	</tx:advice>
+	<bean id="sysManagerService" class="cn.com.adtech.riss2.bso.SysManagerServiceImp">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="userinfoService" class="cn.com.adtech.riss2.bso.SysUserinfoServiceImp">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="userTypeService" class="cn.com.adtech.riss2.bso.SysUserTypeServiceImp">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="roleService" class="cn.com.adtech.riss2.bso.SysRoleServiceImp">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<!-- 从CommonServiceImp中提取出来的普通函数 -->
+	<bean id="commonCommonlyService" class="cn.com.adtech.riss2.bso.CommonServiceCommonlyImp">
+		<property name="sessionFactory" ref="sessionFactory" />
+		<property name="commonService" ref="commonService" />
+	</bean>
+	<!-- 元数据管理 -->
+	<bean id="metadataManagementService"
+		class="cn.com.adtech.riss2.bso.resource.MetadataManagementServiceImp">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<!-- 元数据模板管理 -->
+	<bean id="metadataTempletManagement"
+		class="cn.com.adtech.riss2.bso.resource.MetadataTempletManagementImp">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<!-- 元数据模板的Ajax相关操作 -->
+	<bean id="metadataTempletRpc" class="cn.com.adtech.riss2.jsonrpc.MetadataTempletRpc">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<!-- 资源的Ajax相关操作 -->
+	<bean id="resourceRpc" class="cn.com.adtech.riss2.jsonrpc.ResourceRpc">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<!-- 元素池 -->
+	<bean id="metadataElementPool" class="cn.com.adtech.riss2.bso.resource.MetadataElementPoolImp">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<!-- 作业管理 -->
+	<bean id="missionInfoManagementService"
+		class="cn.com.adtech.riss2.bso.resource.MissionInfoManagementServiceImp">
+		<property name="sessionFactory" ref="sessionFactory" />
+		<property name="missionLanguageService" ref="missionLanguage" />
+	</bean>
+	<!-- 资源类型 -->
+	<bean id="sourceTypeServices" class="cn.com.adtech.riss2.bso.resource.SourceTypeServiceImp">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<!-- 资源语言记录 -->
+	<bean id="sourceLanguageList" class="cn.com.adtech.riss2.bso.resource.SourceLanguageImp">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<!-- 语种 -->
+	<bean id="LanguageTypeService" class="cn.com.adtech.riss2.bso.resource.LanguageTypeServiceImp">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<!-- 作业-语种 -->
+	<bean id="missionLanguage" class="cn.com.adtech.riss2.bso.resource.MissionLanguageTempImp">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<!-- 任务转交管理 -->
+	<bean id="missionDeliver" class="cn.com.adtech.riss2.bso.resource.MissionDeliverServiceImp">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="resMissionInfoCheckService"
+		class="cn.com.adtech.riss2.bso.resource.ResMissionInfoCheckServiceImp">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<!-- 本地上传 -->
+	<bean id="localUploadService" class="cn.com.adtech.riss2.upload.LocalUploadService">
+	</bean>
+	<!-- FTP -->
+	<bean id="riss2Ftp" class="cn.com.adtech.riss2.core.Riss2Ftp" />
+	<!-- 远程上传 -->
+	<bean id="remoteUploadService" class="cn.com.adtech.riss2.upload.RemoteUploadService">
+		<property name="riss2Ftp" ref="riss2Ftp" />
+	</bean>
+	<!-- 前台检索及会员中心 -->
+	<bean id="sysUserPlatformService" class="cn.com.adtech.riss2.bso.SysUserPlatformServiceImp">
+		<property name="sessionFactory" ref="sessionFactory" />
+		<property name="commonService" ref="commonService" />
+		<property name="downloadPath" value="${fileUrlPath}" />
+	</bean>
+	<!-- 前台检索及会员中心服务DWR接口 -->
+	<bean id="sysUserPlatformFacade" class="cn.com.adtech.riss2.dwrFacade.SysUserPlatformFacadeImp">
+		<property name="sysUserPlatformService" ref="sysUserPlatformService" />
+		<property name="localUploadService" ref="localUploadService" />
+		<property name="infoSubscriptionService" ref="infoSubscriptionService" />
+	</bean>
+	<!-- 资源DWR接口 -->
+	<bean id="resourceFacade" class="cn.com.adtech.riss2.dwrFacade.ResourceFacadeImp">
+		<property name="metadataManagementService" ref="metadataManagementService" />
+	</bean>
+	<!-- 信息发布系统 -->
+	<bean id="idsServices" class="cn.com.adtech.riss2.bso.ids.IdsServiceImp">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<!-- FAQ库DWR接口 -->
+	<bean id="scFacade" class="cn.com.adtech.riss2.dwrFacade.ScFacadeImp">
+		<property name="scServices" ref="scServices" />
+		<property name="idsServices" ref="idsServices" />
+	</bean>
+	<!-- 信息发布系统 -->
+	<bean id="sysService" class="cn.com.adtech.riss2.bso.SysServiceServiceImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<!-- 服务管理  -->
+	<bean id="scServices" class="cn.com.adtech.riss2.bso.sc.ScServiceImp">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<!-- 文件服务系统 -->
+	<bean id="fileSystemService" class="cn.com.adtech.riss2.bso.sc.ResFilesystemServiceImp">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<!-- 批量导入模板设置 -->
+	<bean id="importTempletService"
+		class="cn.com.adtech.riss2.bso.resource.ImportTempletServiceImp">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<!-- 批量导入数据处理 -->
+	<bean id="importService"
+		class="cn.com.adtech.riss2.bso.resource.ImportExcelResourceServiceImp">
+		<property name="sessionFactory" ref="sessionFactory" />
+		<property name="importTempletService" ref="importTempletService" />
+		<property name="localUploadService" ref="localUploadService" />
+		<property name="remoteUploadService" ref="remoteUploadService" />
+		<property name="fileService" ref="fileSystemService" />
+	</bean>
+	<!-- 收藏 -->
+	<bean id="favoritesService" class="cn.com.adtech.riss2.bso.sc.FavoritesServiceImp">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<!-- 消息推送订阅 -->
+	<bean id="infoSubscriptionService"
+		class="cn.com.adtech.riss2.bso.infosubscription.InfoSubscriptionServiceImp">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<!-- 会员中心RSS资源管理 -->
+	<bean id="rssUserDataService" class="cn.com.adtech.riss2.bso.rss.RssUserDataServiceImp">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<!-- 个性Tag -->
+	<bean id="resTagInfoService" class="cn.com.adtech.riss2.bso.restaginfo.ResTagInfoServiceImp">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<!-- Excel批量导入记录 -->
+	<bean id="importHistoryService"
+		class="cn.com.adtech.riss2.bso.resource.ImportHistoryServiceImp">
+		<property name="sessionFactory" ref="sessionFactory" />
+		<property name="resourceService" ref="resourcedataManager" />
+	</bean>
+	<!-- 用户资源管理中心 -->
+	<bean id="memberResourceService"
+		class="cn.com.adtech.riss2.bso.resource.MemberResourceServiceImp">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<!-- 发送服务类 -->
+	<bean id="mailService" class="cn.com.adtech.riss2.mail.MailServiceImpl" />
+	<!-- 后台统计报表相关功能服务类 -->
+	<bean id="countService" class="cn.com.adtech.riss2.bso.count.SysCountServiceImp">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<!-- 系统管理-数据备份 -->
+	
+	<bean id="dataBakService" class="cn.com.adtech.riss2.bso.resource.DataBakServiceImp">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	
+	
+	<!-- 作业资源查重 -->
+	<bean id="resourceRepeatService" class="cn.com.adtech.riss2.bso.resource.ResourceRepeatServiceImp">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<!-- 资源数据 -->
+	<bean id="resourcedataManager" class="cn.com.adtech.riss2.bso.resource.ResourceDataServiceImp">
+		<property name="sessionFactory" ref="sessionFactory" />
+		<property name="localUploadService" ref="localUploadService" /><!-- 本地文件上传服务 -->
+		<property name="remoteUploadService" ref="remoteUploadService" /><!-- 远程文件上传服务 -->
+		<property name="infoSubscriptionService" ref="infoSubscriptionService" />
+	</bean>
+	
+	
+	<!-- 系统极资源查重 -->
+	<bean id="systemCheckRepeatService" class="cn.com.adtech.riss2.bso.resource.SystemCheckRepeatServiceImp">
+		<property name="sessionFactory" ref="sessionFactory" />
+		<property name="resourceService" ref="resourcedataManager" />
+	</bean>
+	
+	<!-- 后台采集资源审核 -->
+	<bean id="gatherResourceService" class="cn.com.adtech.riss2.bso.resource.GatherResourceServiceImp">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<!-- 自定义分类无限级数ajax操作 -->
+	<bean id="dynamicService" class="cn.com.adtech.riss2.bso.resource.DynamicTypeServiceImp">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<!-- 关于学科分类的相关处理 -->
+	<bean id="subjectTypeService" class="cn.com.adtech.riss2.bso.resource.SubjectTypeServiceImp">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<!-- 友情链接 -->
+	<bean id="linkInfoService" class="cn.com.adtech.riss2.bso.links.LinkInfoServiceImp">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<!-- banner管理 -->
+	<bean id="bannerInfoService" class="cn.com.adtech.riss2.bso.ib.BannerInfoServiceImp">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<!-- 资源的lucene处理 -->
+	<bean id="resourceLuceneService" class="cn.com.adtech.riss2.bso.resource.ResourceLuceneServiceImp">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<!-- 文献传递  -->
+	<bean id="docuServices" class="cn.com.adtech.riss2.bso.sc.docu.DocuDeliveryServiceImp">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean> 
+	
+	<!-- 定时任务 -->
+	<bean id="timingService" class="cn.com.adtech.riss2.bso.time.TimingServiceImp">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<!-- 资源导出模块 -->
+	<bean id="exportResourceService" class="cn.com.adtech.riss2.bso.resource.ExportResourceServiceImp">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<!-- 文档资源库服务 -->
+	<bean id="textLibraryService" class="cn.com.adtech.riss2.bso.text.TextLibraryServiceImp">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	<!-- 文档资源库分类服务 -->
+	<bean id="textLibClassfiyService" class="cn.com.adtech.riss2.bso.text.textLibClassfiyServiceImp">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	<!-- 文档资源库资源录入服务 -->
+	<bean id="resourceInputService" class="cn.com.adtech.riss2.bso.text.ResourceInputServiceImp">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	<!-- 文档资源库资源查询服务 -->
+	<bean id="textResourceService" class="cn.com.adtech.riss2.bso.text.TextResourceServiceImp">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<!-- 平台缓存数据查询管理 -->
+	<bean id="platformCacheService" class="cn.com.adtech.riss2.bso.cache.PlatformCacheServiceImp">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<!-- 前端首页数据查询管理 -->
+	<bean id="indexDataService" class="cn.com.adtech.riss2.bso.platform.IndexDataServiceImp">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<!-- 前端资源查询管理 -->
+	<bean id="resourceSearchService" class="cn.com.adtech.riss2.bso.platform.ResourceSearchServiceImp">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<!-- 前端资源评论管理 -->
+	<bean id="resourceCommentsService" class="cn.com.adtech.riss2.bso.platform.ResourceCommentsServiceImp">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<!-- 前端文本库资源管理 -->
+	<bean id="textResService" class="cn.com.adtech.riss2.bso.platform.TextResourceServiceImp">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<!-- 数据一键索引服务 -->
+	<bean id="alldataIndexService" class="cn.com.unionlib.lucene.dao.AllDataIndexServiceImp">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<!-- lucene检索服务对象 -->
+	<bean id="luceneSearchService" class="cn.com.unionlib.lucene.dao.LuceneSearchServiceImp"></bean>
+	
+	<!-- 检索词管理  -->
+	<bean id="keyServices" class="cn.com.adtech.riss2.bso.resource.key.ResourceIndexKeyServiceImp">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+</beans>

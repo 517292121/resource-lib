@@ -1,0 +1,156 @@
+body,p,form,input,textarea,ul,ol,li,h1,h2,h3,h4,dl,dt,dd,table,td,th,header
+	{
+	margin: 0;
+	padding: 0;
+}
+
+table,td,th {
+	border-collapse: collapse;
+}
+
+ul,li {
+	list-style: none;
+}
+
+h1,h2,h3,h4 {
+	font-size: 100%;
+}
+
+img,input,textarea {
+	vertical-align: middle;
+	border: 0;
+}
+
+a {
+	text-decoration: none;
+	color: #999;
+	outline: none;
+}
+
+a:hover {
+	text-decoration: none;
+}
+
+body {
+	font: 13px/ 1 "Microsoft YaHei", tahoma, Verdana, Geneva, sans-serif;
+	position: relative;
+	color: #666;
+	overflow-x: auto;
+	background-color: #f1f1f1;
+}
+
+.clearfix:before,.clearfix:after {
+	content: "";
+	display: table;
+}
+
+.clearfix:after {
+	clear: both;
+}
+
+.header {
+	border-bottom: 1px solid #d2d2d2;
+	height: 60px;
+	background-color: #fff;
+}
+
+.header h1 {
+	font-size: 24px;
+	font-weight: normal;
+	padding: 20px 30px;
+	color: #3e485c;
+}
+
+.changelog ul {
+	margin-top: 10px;
+	padding-left: 20px;
+}
+
+.changelog ul li {
+	line-height: 180%;
+	list-style-type: disc;
+	font-size: 14px;
+	color:#3e485c;
+}
+
+.changelog ul li span {
+	color: #888;
+	font-size: 12px;
+	display: inline-block;
+	width: 100%;
+}
+
+.logtable {
+	width: 100%;
+	padding: 0px 30px
+}
+
+.logtable tr {
+	margin-bottom: 15px;
+	width: 100%;
+	display: inline-block;
+}
+
+.logtable tr td.td200 {
+	width: 200px
+}
+
+.logtable h3 {
+	font-size: 16px;
+	color: #3e485c;
+	border: 1px solid #D2D2D2;
+	padding: 10px;
+	font-weight: normal;
+	letter-spacing: 1px;
+	display: inline-block;
+	background-color: #fff;
+	position: relative;
+	z-index: 1;
+	text-align: center;
+	width: 135px;
+}
+
+.logtype {
+	background-color: #5cb76f;
+	display: inline-block;
+	text-align: center;
+	padding: 2px 4px;
+	border-radius: 2px;
+	color: #fff;
+	font-size: 16px;
+	font-weight: normal;
+	margin-top: 10px;
+	width: 50px;
+}
+
+.logtype.new {
+	background-color: #5cb76f;
+}
+
+.logtype.fix {
+	background-color: #59b2e0;
+}
+
+.content {
+	padding: 20px 30px;
+}
+
+.navLine {
+	width: 1px;
+	height: 100%;
+	background-color: #d2d2d2;
+	position: absolute;
+	left: 105px;
+	top: 60px;
+	bottom: 0px;
+	z-index: 0;
+}
+
+.changelog {
+	margin-bottom: 10px;
+}
+
+.author {
+	color:#da4f4a;
+	padding-left: 10px;
+}

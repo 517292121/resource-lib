@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+	<!-- 信息发布 -->
+	<bean name="/console/data/idsInformation.htm"
+		class="cn.com.adtech.riss2.controller.console.ids.IdsInformationController">
+		<property name="methodNameResolver" ref="methodNameResolver" />
+		<property name="idsServices" ref="idsServices" />
+		<property name="localUploadService" ref="localUploadService" />
+	</bean>
+	<!-- 信息分类 -->
+	<bean name="/console/data/idsInformationType.htm"
+		class="cn.com.adtech.riss2.controller.console.ids.IdsInformationTypeController">
+		<property name="methodNameResolver" ref="methodNameResolver" />
+		<property name="idsServices" ref="idsServices" />
+	</bean>
+	<!-- 信息-批量导入 -->
+	<bean name="/console/data/idsImport.htm"
+		class="cn.com.adtech.riss2.controller.console.ids.IdsImportController">
+		<property name="methodNameResolver" ref="methodNameResolver" />
+		<property name="idsServices" ref="idsServices" />
+		<property name="localUploadService" ref="localUploadService" />
+	</bean>
+</beans>

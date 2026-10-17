@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="cn.com.adtech.riss2.domain.IdsInformation"
+		table="IDS_INFORMATION" lazy="false" dynamic-update="true">
+		<id name="idsiId" type="java.lang.Long">
+			<column name="IDSI_ID" />
+			<generator class="com.jbetter.hibernate.IdGenerator" />
+		</id>
+		<property name="idsiIdstId" type="java.lang.Long">
+			<column name="IDSI_IDST_ID" />
+		</property>
+		<property name="idsiSmanId" type="java.lang.Long">
+			<column name="IDSI_SMAN_ID" />
+		</property>
+		<property name="idsiTitle" type="java.lang.String">
+			<column name="IDSI_TITLE" />
+		</property>
+		<property name="idsiContent" type="java.lang.String">
+			<column name="IDSI_CONTENT" />
+		</property>
+		<property name="idsiDate" type="java.util.Date">
+			<column name="IDSI_DATE" />
+		</property>
+		<property name="idsiHitCount" type="java.lang.Integer">
+			<column name="IDSI_HITCOUNT" />
+		</property>
+		
+		<property name="idsiDescription" type="java.lang.String">
+			<column name="IDSI_DESCRIPTION" />
+		</property>
+		<property name="idsiImgUrl" type="java.lang.String">
+			<column name="IDSI_IMG_URL" />
+		</property>
+		
+		<many-to-one name="idsInformationType"
+			class="cn.com.adtech.riss2.domain.IdsInformationType" fetch="select"
+			insert="false" update="false" not-found="ignore">
+			<column name="IDSI_IDST_ID" />
+		</many-to-one>
+		<many-to-one name="sysManager"
+			class="cn.com.adtech.riss2.domain.SysManager" fetch="select"
+			insert="false" update="false" not-found="ignore">
+			<column name="IDSI_SMAN_ID" />
+		</many-to-one>
+		
+		<property name="idsiLanguage" type="java.lang.String">
+			<column name="IDSI_LANGUAGE" length="32" />
+		</property>
+	</class>
+</hibernate-mapping>

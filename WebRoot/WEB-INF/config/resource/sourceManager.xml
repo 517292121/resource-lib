@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+	<!-- 资源维护（资源维护） -->
+	<bean name="/console/data/resource/SourceManager.htm"
+		class="cn.com.adtech.riss2.controller.console.resource.manager.SourceManagerController">
+		<property name="methodNameResolver" ref="methodNameResolver" />
+		<property name="resourceService" ref="resourcedataManager" />
+		<property name="cacheService" ref="platformCacheService" />
+	</bean>
+	<bean name="/console/data/resource/ExportResToCalis.htm" 
+		class="cn.com.adtech.riss2.controller.console.resource.manager.ExportResToCalisController">
+		<property name="methodNameResolver" ref="methodNameResolver" />
+		<property name="resourceService" ref="resourcedataManager" />
+	</bean>
+	
+	<!-- 资源导出 -->
+	<bean name="/console/data/resource/exportResource.htm"  class="cn.com.adtech.riss2.controller.console.resource.manager.ExportResourceController">
+		<property name="methodNameResolver" ref="methodNameResolver" />
+		<property name="exportResourceService" ref="exportResourceService" />
+	</bean>
+</beans>

@@ -1,0 +1,90 @@
+@CHARSET "UTF-8";
+html,body{width: 100%; height: 100%;}
+div,p,a,span,li{font-size: 14px;font-family: 'Microsoft YaHei UI', 'Microsoft YaHei', SimSun, 'Segoe UI',Tahoma, Helvetica, Sans-Serif;}
+body {margin: 0px;padding: 0px;color: #1F2121; background: #FFF;}
+p,ul,li,dd,dl,form,img,h2,h3{margin: 0px; padding: 0px;}
+a:link {color: #484848;text-decoration: none;}
+a:visited {color: #484848;text-decoration: none;}
+a:active {color: #484848;text-decoration: none;}
+a:hover {transition: all 0.3s;}
+.subText{overflow:hidden;WHITE-SPACE: nowrap; TEXT-OVERFLOW: ellipsis;}
+*:focus { outline: none; }
+label, input, select {vertical-align: -webkit-baseline-middle;}
+.clearfix{height:0;overflow:hidden;clear:both;font-size:0;}
+.clearfix:after{content: '';display: block;clear: both;}
+li{list-style: none;}
+
+
+/**顶部样式****/
+.webhead{height: 36px; background: #026b7d; color: #FFF;position: fixed; width: 100%; left: 0; top: 0; z-index: 888;}
+.webhead #logoname{float: left; height: 100%; line-height: 36px; margin-left: 28px; font-size: 16px;}
+.mainframe{margin-top: 70px;}
+.blank{padding: 80px;text-align: center; font-size: 16px; color: #666;}
+
+/**接口文档正文****/
+.catalog {
+	width: 250px;
+	height: 850px;
+	border-right: 1px solid #ccc;
+	float: left;
+	min-height: 500px;
+	background: #fafafa;
+	padding: 34px 30px 30px 30px;
+	margin-right: -100%;
+	position: absolute;
+	display: block;
+	overflow: auto;
+	position: fixed;
+    left: 0;
+    top: 36px;
+    
+    box-shadow: 4px 0px 12px #ccc;
+}
+
+.catalog p {font-size: 16px; color: #026b7d; font-weight: bold;}
+.catalog ul{margin-bottom: 22px;}
+.catalog ul li{margin: 10px 0px 10px 18px; list-style-type: decimal;}
+.docinfo{min-height: 500px; width: 100%; float: left; }
+.contentInner {margin-left: 310px; padding-bottom: 100px; padding-top: 40px;}
+.apidetail{margin: 0px 40px; padding-top: 25px; position: relative;top: -80px;}
+.apidetail .apiname{font-size: 18px; padding: 15px 0px 5px 0px;}
+.apidetail table{background: #e2e2e2; border: 0px solid #EEE; width: 100%;}
+.apidetail table td{padding: 8px 10px; background: #FFF;}
+.apidetail table .lab{width: 120px; background: #f3f3f3; text-align: right;}
+.apidetail table td a{color: #066fd0; text-decoration: underline;}
+.endline{margin: -40px 40px 0px 40px;}
+
+
+/**新增编辑接口****/
+.apitable, .toolbar {margin: 30px;}
+.toolbar a{display: block; float: left; padding: 7px 20px; background: #eee; margin-right: 10px;}
+.toolbar a:hover{background: #026b7d; color: #FFF;}
+.apitable .apitype{font-size: 18px; font-weight: bold; padding-bottom: 5px;}
+.apitable table{background: #EEE; border: 1px solid #EEE; width: 100%;}
+.apitable table .apiname{width: 200px;}
+.apitable table td, .apitable table th{padding: 8px 10px; background: #FFF; text-align: left;}
+.apitable table td:first-child{text-align: center;}
+.apitable table .edit{width: 80px; text-align: center;}
+.apitable table .edit a{color: #066fd0;text-decoration: underline;}
+
+.editform{margin: 20px 30px 150px 30px; border: 1px solid #eee; padding: 30px 0px;}
+.editform table{width: 100%;}
+.editform table td{padding: 10px 0px;}
+.editform table td:first-child{width: 120px; text-align: right;}
+.editform table td .input-txt{border: 1px solid #ccc; padding: 5px 8px; width: 500px; height: 26px; line-height: 26px;}
+.editform table td .w200 {width: 200px}
+.editform table td .w400 {width: 400px}
+.editform table td .w600 {width: 600px}
+.editform table td .tips{color: #666;}
+.editform table td .btn{width: 120px; height: 44px; background: #088094; color: #FFF; border: none;}
+.editform table td .btn:hover{background: #026b7d;}
+
+
+
+
+
+
+
+
+
+

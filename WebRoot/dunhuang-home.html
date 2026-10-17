@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="藏汉敦煌文献研究数据库静态首页预览">
+  <title>藏汉敦煌文献研究数据库</title>
+  <link rel="stylesheet" href="css/platform/index.css">
+</head>
+<body class="dunhuang-home">
+  <main class="dh-page">
+    <header class="dh-header">
+      <a class="dh-brand" href="#top" aria-label="返回首页">
+        <span class="dh-brand-marks" aria-hidden="true">
+          <img src="images/platform/dunhuang/xizang-university.png" alt="">
+        </span>
+        <span class="dh-brand-copy">
+          <strong>敦煌文献研究数据库</strong>
+          <small class="hm">ཏུན་ཧོང་ཡིག་རྙིང་ཞིབ་འཇུག་གི་གཞི་གྲངས་མཛོད།</small>
+        </span>
+      </a>
+      <nav class="dh-nav" aria-label="主导航">
+        <a class="active" href="#top"><span>首页</span><small>གཙོ་ངོས།</small></a>
+        <a href="#featured-resources"><span>文献库</span><small>ཡིག་རྙིང་མཛོད།</small></a>
+        <a href="#featured-resources"><span>图片库</span><small>པར་རིས་མཛོད།</small></a>
+        <a href="#data-distribution"><span>数据分析</span><small>གཞི་གྲངས་དབྱེ་ཞིབ།</small></a>
+      </nav>
+      <div class="dh-account"><button type="button">登录</button><button type="button" class="primary">注册</button></div>
+    </header>
+
+    <section class="dh-hero" id="top" aria-labelledby="hero-title">
+      <img class="dh-hero-image" src="images/platform/dunhuang/hero-digital-cave.png" alt="敦煌风格数字洞窟艺术图">
+      <div class="dh-hero-overlay"></div>
+      <div class="dh-hero-grid" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+      <div class="dh-hero-glow" aria-hidden="true"></div>
+      <div class="dh-hero-scan" aria-hidden="true"></div>
+      <div class="dh-hero-copy">
+        <p class="dh-eyebrow"><span></span> 西藏大学文学院 · 数字人文平台</p>
+        <h1 id="hero-title">丝路遗珍<br><em>一库尽览</em></h1>
+        <p>汇聚藏汉敦煌文献、历史图像与研究数据，让散落千年的文字在数字世界重新相遇。</p>
+        <form class="dh-search" role="search" onsubmit="return staticSearch(event)">
+          <label for="dh-searchkey" class="sr-only">检索数据库</label>
+          <select aria-label="检索字段"><option>全部字段</option><option>题名</option><option>责任者</option><option>关键词</option></select>
+          <input id="dh-searchkey" type="search" placeholder="输入题名、责任者或关键词">
+          <button type="submit" aria-label="开始检索">检索 <span>→</span></button>
+        </form>
+        <div class="dh-quick-links"><span>热门检索</span><a href="#">敦煌</a><a href="#">藏文文献</a><a href="#">莫高窟</a><a href="#">高级检索</a></div>
+      </div>
+      <div class="dh-hero-study" aria-label="敦煌研究"><span class="dh-hero-study-cn"><img src="images/platform/dunhuang/dunhuang-research-title-white.png" alt="敦煌研究"></span><span class="dh-hero-study-en" aria-hidden="true">DUNHUANG RESEARCH DATABASE</span></div>
+    </section>
+
+    <section class="dh-featured" id="featured-resources" aria-labelledby="featured-title">
+      <div class="dh-section-head"><div><p class="dh-tibetan-label">ཁྱད་འཕགས་ཐོན་ཁུངས།</p><h2 id="featured-title">特色资源</h2></div><p class="dh-section-intro">跨越语言与载体，在古籍善本、研究文献和历史图像之间建立新的观看路径。</p></div>
+      <div class="dh-marquee-row"><div class="dh-row-label"><b>文献</b><span class="dh-tibetan-label">ཡིག་རྙིང་།</span></div><div class="dh-marquee"><div class="dh-marquee-track">
+        <a class="dh-resource-card" href="https://www.e-dunhuang.com/showmural/10.0001/0001/0001/0217/0001/0004/01" target="_blank" rel="noopener"><img src="images/platform/dunhuang/resource-cover-buddha.png" alt="莫高窟第217窟主室北壁"><span><b>莫高窟第217窟主室北壁</b><small>盛唐 · 阿弥陀经变</small></span></a>
+        <a class="dh-resource-card" href="https://www.e-dunhuang.com/showmural/10.0001/0001/0001/0320/0001/0002/01" target="_blank" rel="noopener"><img src="images/platform/dunhuang/resource-cover-bodhisattva.png" alt="莫高窟第320窟主室南壁"><span><b>莫高窟第320窟主室南壁</b><small>盛唐 · 飞天图像</small></span></a>
+        <a class="dh-resource-card" href="#"><img src="images/platform/dunhuang/resource-cover-buddha.png" alt=""><span><b>莫高窟壁画图像志</b><small>图像档案</small></span></a>
+        <a class="dh-resource-card" href="#"><img src="images/platform/dunhuang/resource-cover-bodhisattva.png" alt=""><span><b>丝绸之路文化研究</b><small>学术成果</small></span></a>
+        <a class="dh-resource-card" href="#"><img src="images/platform/dunhuang/resource-cover-buddha.png" alt=""><span><b>敦煌学研究资料</b><small>学术资源</small></span></a>
+        <a class="dh-resource-card" href="#"><img src="images/platform/dunhuang/resource-cover-bodhisattva.png" alt=""><span><b>古代西域文献选读</b><small>文献整理</small></span></a>
+      </div></div></div>
+      <div class="dh-marquee-row reverse"><div class="dh-row-label"><b>古籍</b><span class="dh-tibetan-label">གནའ་དཔེ།</span></div><div class="dh-marquee"><div class="dh-marquee-track">
+        <a class="dh-resource-card" href="#"><img src="images/platform/dunhuang/resource-cover-bodhisattva.png" alt=""><span><b>敦煌藏经洞遗书</b><small>写本与刻本</small></span></a>
+        <a class="dh-resource-card" href="#"><img src="images/platform/dunhuang/resource-cover-buddha.png" alt=""><span><b>古藏文文献选粹</b><small>藏汉对读</small></span></a>
+        <a class="dh-resource-card" href="#"><img src="images/platform/dunhuang/resource-cover-bodhisattva.png" alt=""><span><b>莫高窟题记整理</b><small>图像文献</small></span></a>
+        <a class="dh-resource-card" href="#"><img src="images/platform/dunhuang/resource-cover-buddha.png" alt=""><span><b>西域古籍数字化</b><small>典籍专题</small></span></a>
+        <a class="dh-resource-card" href="#"><img src="images/platform/dunhuang/resource-cover-bodhisattva.png" alt=""><span><b>藏汉佛典对读</b><small>古籍善本</small></span></a>
+        <a class="dh-resource-card" href="#"><img src="images/platform/dunhuang/resource-cover-buddha.png" alt=""><span><b>丝路写本目录</b><small>目录资料</small></span></a>
+      </div></div></div>
+    </section>
+
+    <section class="dh-data" id="data-distribution" aria-labelledby="data-title">
+      <div class="dh-data-title"><p class="dh-tibetan-label">གཞི་གྲངས་བཀྲམ་སྟངས།</p><h2 id="data-title">数据分布</h2><span>持续建设中的藏汉敦煌文献数字资源体系</span></div>
+      <div class="dh-metrics">
+        <article class="dh-metric"><span>01</span><strong>12,860</strong><p>文献数量（册）</p></article>
+        <article class="dh-metric"><span>02</span><strong>86,432</strong><p>文献数量（篇）</p></article>
+        <article class="dh-metric"><span>03</span><strong>398,641</strong><p>文献数量（页）</p></article>
+        <article class="dh-metric"><span>04</span><strong>1,268,950</strong><p>总访问量（次）</p></article>
+      </div>
+    </section>
+
+    <footer class="dh-footer"><div><b>敦煌文献研究数据库</b><span class="dh-footer-tibetan">ཏུན་ཧོང་ཡིག་རྙིང་ཞིབ་འཇུག་གི་གཞི་གྲངས་མཛོད།</span><span>西藏大学文学院 · 数字人文研究</span></div><p>敦煌壁画图像来源：维基共享资源 · 公共领域</p><p>© 西藏大学文学院</p></footer>
+  </main>
+  <script>
+    document.querySelectorAll('.dh-marquee-track').forEach(function(track) {
+      track.innerHTML += track.innerHTML;
+    });
+    function staticSearch(event) {
+      event.preventDefault();
+      var value = document.getElementById('dh-searchkey').value.trim();
+      alert(value ? '静态预览：将检索“' + value + '”' : '请输入检索内容');
+      return false;
+    }
+  </script>
+</body>
+</html>

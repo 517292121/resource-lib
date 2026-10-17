@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+	<!-- 元数据管理 -->
+	<bean name="/console/data/resource/defineStore.htm"
+		class="cn.com.adtech.riss2.controller.console.resource.metadata.DefineStoreController">
+		<property name="methodNameResolver" ref="methodNameResolver" />
+		<property name="metadataManagementService" ref="metadataManagementService" />
+		<property name="localUploadService" ref="localUploadService" />
+		<property name="remoteUploadService" ref="remoteUploadService" />
+		<property name="fileService" ref="fileSystemService" />
+		<property name="resourceService" ref="resourcedataManager" />
+		<property name="dynamicTypeService" ref="dynamicService" />
+		<property name="cacheService" ref="platformCacheService" />
+	</bean>
+	<!-- 模板设置 -->
+	<bean name="/console/data/templetManager.htm"
+		class="cn.com.adtech.riss2.controller.console.resource.metadata.MetadataTempletManager">
+		<property name="methodNameResolver" ref="methodNameResolver" />
+		<property name="itm" ref="metadataTempletManagement" />
+		<property name="elementPool" ref="metadataElementPool" />
+		<property name="commonService" ref="commonService" />
+	</bean>
+	<!-- 资源类型管理 -->
+	<bean name="/console/data/sourceType.htm"
+		class="cn.com.adtech.riss2.controller.console.resource.metadata.SourceTypeControll">
+		<property name="methodNameResolver" ref="methodNameResolver" />
+		<property name="sourceTypeService" ref="sourceTypeServices" />
+		<property name="elementPool" ref="metadataElementPool" />
+		<property name="commonService" ref="commonService" />
+	</bean>
+	<!-- 资源类型模板管理 -->
+	<!-- 去掉/data/是因为使用了window.showModalDialog访问该地址,无法获取referer值而被过滤器判定为非法访问 -->
+	<bean name="/console/sourceTemplet.htm"
+		class="cn.com.adtech.riss2.controller.console.resource.metadata.SourceTempletControll">
+		<property name="methodNameResolver" ref="methodNameResolver" />
+		<property name="elementPool" ref="metadataElementPool" />
+	</bean>
+	<!-- 特色库权限管理 -->
+	<bean name="/console/data/resMetaPermSetting.htm"
+		class="cn.com.adtech.riss2.controller.console.resource.metadata.ResMetaPermSettingController">
+		<property name="methodNameResolver" ref="methodNameResolver" />
+		<property name="metadataManagementService" ref="metadataManagementService" />
+	</bean>
+	<!-- 语言分类 -->
+	<bean name="/console/data/resLanguageType.htm"
+		class="cn.com.adtech.riss2.controller.console.resource.metadata.ResLanguageTypeController">
+		<property name="methodNameResolver" ref="methodNameResolver" />
+		<property name="metadataManagementService" ref="metadataManagementService" />
+	</bean>
+	<!-- 学科分类 -->
+	<bean name="/console/data/resSubjectType.htm"
+		class="cn.com.adtech.riss2.controller.console.resource.metadata.ResSubjectTypeController">
+		<property name="methodNameResolver" ref="methodNameResolver" />
+		<property name="subjectTypeService" ref="subjectTypeService" />
+	</bean>
+	<!-- 参数设置 -->
+	<bean name="/console/data/sysSetting.htm"
+		class="cn.com.adtech.riss2.controller.console.resource.setting.SysSettingsController">
+		<property name="methodNameResolver" ref="methodNameResolver" />
+		<property name="commonlyService" ref="commonCommonlyService" />
+	</bean>
+	<!-- 数据备份 -->
+	<bean name="/console/data/dataBak.htm"
+		class="cn.com.adtech.riss2.controller.console.resource.metadata.DataBakController">
+		<property name="methodNameResolver" ref="methodNameResolver" />
+		<property name="dataBakService" ref="dataBakService" />
+		<property name="localUploadService" ref="localUploadService" />
+	</bean>
+	<!-- Excel模板管理 -->
+	<bean name="/console/data/excel.htm"
+		class="cn.com.adtech.riss2.controller.console.resource.metadata.ExcelController">
+		<property name="methodNameResolver" ref="methodNameResolver" />
+		<property name="metadataTempletService" ref="metadataTempletManagement" />
+		<property name="elementPool" ref="metadataElementPool" />
+		<property name="importTempletService" ref="importTempletService" />
+	</bean>
+	<!-- 导入模板管理 -->
+	<bean name="/console/data/importTemplet.htm"
+		class="cn.com.adtech.riss2.controller.console.resource.metadata.ImportTempletController">
+		<property name="methodNameResolver" ref="methodNameResolver" />
+		<property name="elementPool" ref="metadataElementPool" />
+		<property name="importTempletService" ref="importTempletService" />
+	</bean>
+	<!-- 特色库IP配置 -->
+	<bean name="/console/data/IPDeploy.htm"
+		class="cn.com.adtech.riss2.controller.console.resource.metadata.IpDeployController">
+		<property name="methodNameResolver" ref="methodNameResolver" />
+		<property name="metadataManagementService" ref="metadataManagementService" />
+	</bean>
+	<!-- 馆藏位置设置 -->
+	<bean name="/console/data/sysCollectionPositionSet.htm"
+		class="cn.com.adtech.riss2.controller.console.resource.setting.SysCollectionPositionSetController">
+		<property name="methodNameResolver" ref="methodNameResolver" />
+		<property name="commonlyService" ref="commonCommonlyService" />
+	</bean>
+	<!-- 敏感词设置 -->
+	<bean name="/console/data/sysSensitiveWordSet.htm"
+		class="cn.com.adtech.riss2.controller.console.resource.setting.SysSensitiveWordSetController">
+		<property name="methodNameResolver" ref="methodNameResolver" />
+		<property name="commonlyService" ref="commonCommonlyService" />
+	</bean>
+	
+	
+	<!-- 自定义分类导入导出 -->
+	<bean name="/console/data/dynamic.htm"
+		class="cn.com.adtech.riss2.controller.console.resource.metadata.DynamicTypeController">
+		<property name="methodNameResolver" ref="methodNameResolver" />
+		<property name="dynamicService" ref="dynamicService" />
+		<property name="uploadService" ref="localUploadService" />
+	</bean>
+	
+	<!-- 图片资源cover.jpg压缩管理 -->
+	<bean name="/console/source/cover/compress.htm" 
+		class="cn.com.adtech.riss2.controller.console.resource.manager.SourceCoverCompressController">
+		<property name="methodNameResolver" ref="methodNameResolver" />
+		<property name="resourceService" ref="resourcedataManager" />
+	</bean>
+</beans>

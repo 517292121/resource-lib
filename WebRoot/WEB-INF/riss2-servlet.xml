@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+	<bean id="beanNameUrlMapping" class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping">
+		<property name="order" value="1" />
+	</bean>
+	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basename" value="messages" />
+		<property name="useCodeAsDefaultMessage" value="true" />
+	</bean>
+	<!-- 配置国际化 begin -->
+	<!-- 1.0 国际化拦截器必需配置，可以和其它国际化方式通用。这个配置是不论请求级别的国际化，还是Cookie级别的国际化，再或者Session级别的国际化，都必需有配置这个拦截器，否则会不能使用。 -->
+	<bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" />
+	<!-- 2.0 配好上面的拦截器之后，就将拦截器注入到你的UrlHandlerMapping中。 -->
+	<bean id="defaultUrlMapping" class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping">
+		<property name="interceptors" ref="localeChangeInterceptor" />
+		<property name="order" value="1" />
+	</bean>
+	<!-- 3.0 这个时候，但凡有了符合UrlMapping的请求，就会被拦截，并且开始配置国际化参数。 -->
+	<bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver" />
+	<!-- 配置国际化 end -->
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix" value="/WEB-INF/views/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+	<bean id="methodNameResolver" class="org.springframework.web.servlet.mvc.multiaction.ParameterMethodNameResolver">
+		<property name="paramName" value="action" />
+	</bean>
+	
+	<!-- 系统后台 -->
+	<bean name="/console/index.htm" class="cn.com.adtech.riss2.controller.console.ConsoleController"></bean>
+	<bean name="/console/createTree.htm" class="cn.com.adtech.riss2.controller.console.CreateTreeController">
+		<property name="methodNameResolver" ref="methodNameResolver" />
+	</bean>
+	<bean name="/console/logout.htm" class="cn.com.adtech.riss2.controller.console.LogoutConsoleController"></bean>
+	<bean name="/console/changePassword.htm" class="cn.com.adtech.riss2.controller.ChangePasswordController">
+		<property name="methodNameResolver" ref="methodNameResolver" />
+		<property name="commonService" ref="commonService" />
+	</bean>
+	<bean name="/login.htm" class="cn.com.adtech.riss2.controller.LoginController">
+		<property name="commonlyService" ref="commonCommonlyService" />
+		<property name="methodNameResolver" ref="methodNameResolver" />
+	</bean>
+	<!-- 管理员管理 -->
+	<bean name="/usercenter/adminManage.htm" class="cn.com.adtech.riss2.controller.console.usercenter.AdminManageController">
+		<property name="methodNameResolver" ref="methodNameResolver" />
+		<property name="sysManagerService" ref="sysManagerService" />
+	</bean>
+	<!-- 会员管理 -->
+	<bean name="/usercenter/userManage.htm" class="cn.com.adtech.riss2.controller.console.usercenter.UserManageController">
+		<property name="methodNameResolver" ref="methodNameResolver" />
+		<property name="userinfoService" ref="userinfoService" />
+		<property name="userTypeService" ref="userTypeService" />
+	</bean>
+	<!-- 会员类型管理 -->
+	<bean name="/usercenter/userTypeManage.htm" class="cn.com.adtech.riss2.controller.console.usercenter.UserTypeManageController">
+		<property name="methodNameResolver" ref="methodNameResolver" />
+		<property name="userTypeService" ref="userTypeService" />
+	</bean>
+	<!-- 角色管理 -->
+	<bean name="/usercenter/roleManage.htm" class="cn.com.adtech.riss2.controller.console.usercenter.RoleManageController">
+		<property name="methodNameResolver" ref="methodNameResolver" />
+		<property name="roleService" ref="roleService" />
+	</bean>
+	<!-- 角色权限管理 -->
+	<bean name="/usercenter/roleFunManage.htm" class="cn.com.adtech.riss2.controller.console.usercenter.RoleFunctionManageController">
+		<property name="methodNameResolver" ref="methodNameResolver" />
+		<property name="commonService" ref="commonService" />
+		<property name="roleService" ref="roleService" />
+	</bean>
+	<!-- 后台索引管理面板 -->
+	<bean name="/console/indexManager.htm" class="cn.com.adtech.riss2.controller.console.IndexManagerController">
+		<property name="methodNameResolver" ref="methodNameResolver" />
+		<property name="dataIndexService" ref="alldataIndexService" />
+		<property name="luceneSearchService" ref="luceneSearchService" />
+	</bean>
+	<!-- 国际化配置 -->
+	<bean name="/locale.htm" class="cn.com.adtech.riss2.controller.platform.local.LocaleController" />
+	
+	<!-- 导入资源模板配置文件 -->
+	<import resource="memberCenter.xml" />
+	<import resource="resource/metadata.xml" />
+	<import resource="resource/source_build.xml" />
+	<import resource="resource/checkout.xml" />
+	<import resource="resource/sourceManager.xml" />
+	<import resource="ids.xml" />
+	<import resource="sysService.xml" />
+	<import resource="sc.xml" />
+	<import resource="count.xml" />
+	<import resource="resource/key.xml" />
+	
+	<!-- 加入友情链接相关配置 -->
+	<import resource="links.xml" />
+	
+	<!-- 加入文档资源库相关配置20171017-->
+	<import resource="textLib.xml" />
+</beans>

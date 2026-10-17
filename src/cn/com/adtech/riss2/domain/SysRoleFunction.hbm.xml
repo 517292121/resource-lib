@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+	<!-- 
+		Created by the Middlegen Hibernate plugin 2.2
+		
+		http://boss.bekk.no/boss/middlegen/
+		http://www.hibernate.org/
+	-->
+
+	<class name="cn.com.adtech.riss2.domain.SysRoleFunction"
+		table="SYS_ROLE_FUNCTION" lazy="false" dynamic-update="true">
+
+		<id name="srfuId" type="java.lang.Long" column="SRFU_ID">
+
+			<generator class="com.jbetter.hibernate.IdGenerator" />
+		</id>
+
+
+		<!-- Associations -->
+
+		<!-- 
+		<property name="srfuSrolId" column="SRFU_SROL_ID"
+			type="java.lang.Long" length="19" not-null="true" />
+
+		<property name="srfuSfunId" column="SRFU_SFUN_ID"
+			type="java.lang.Long" not-null="true" />
+ -->
+		<!-- uni-directional many-to-one association to SysFunction -->
+		<many-to-one name="sysFunction"
+			class="cn.com.adtech.riss2.domain.SysFunction" insert="true"
+			update="true">
+			<column name="SRFU_SFUN_ID" />
+		</many-to-one>
+
+		<many-to-one name="sysRole"
+			class="cn.com.adtech.riss2.domain.SysRole" insert="true"
+			update="true">
+			<column name="SRFU_SROL_ID" />
+		</many-to-one>
+	</class>
+</hibernate-mapping>

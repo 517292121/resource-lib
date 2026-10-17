@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+	<!-- 资源库设置 -->
+	<bean name="/console/data/text/textLibrary.htm"
+		class="cn.com.adtech.riss2.controller.console.text.TextLibraryController">
+		<property name="methodNameResolver" ref="methodNameResolver" />
+		<property name="textLibraryService" ref="textLibraryService" />
+	</bean>
+	<!-- 资源库分类设置 -->
+	<bean name="/console/data/text/textLibClassfiy.htm"
+		class="cn.com.adtech.riss2.controller.console.text.TextLibraryClassfiyController">
+		<property name="methodNameResolver" ref="methodNameResolver" />
+		<property name="textLibClassfiyService" ref="textLibClassfiyService" />
+	</bean>
+	<!-- 资源录入 -->
+	<bean name="/console/data/text/textResource.htm"
+		class="cn.com.adtech.riss2.controller.console.text.TextResourceController">
+		<property name="methodNameResolver" ref="methodNameResolver" />
+		<property name="textResourceService" ref="textResourceService" />
+		<property name="resourceInputService" ref="resourceInputService" />
+		<property name="textLibClassfiyService" ref="textLibClassfiyService" />
+	</bean>
+	<!-- 资源导入 -->
+	<bean name="/console/data/text/textResourceImport.htm"
+		class="cn.com.adtech.riss2.controller.console.text.TextResourceImportController">
+		<property name="methodNameResolver" ref="methodNameResolver" />
+		<property name="resourceInputService" ref="resourceInputService" />
+		<property name="textLibClassfiyService" ref="textLibClassfiyService" />
+	</bean>
+	<!-- 资源维护-->
+	<bean name="/console/data/text/textResourceManager.htm"
+		class="cn.com.adtech.riss2.controller.console.text.TextResourceManagerControlloer">
+		<property name="methodNameResolver" ref="methodNameResolver" />
+		<property name="textResourceService" ref="textResourceService" />
+	</bean>
+</beans>

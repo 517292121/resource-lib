@@ -1,0 +1,62 @@
+/*--------------------------------------------------|
+| dTree 2.05 | www.destroydrop.com/javascript/tree/ |
+|---------------------------------------------------|
+| Copyright (c) 2002-2003 Geir Landr�               |
+|--------------------------------------------------*/
+
+.dtree {
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #666;
+	white-space: nowrap;
+}
+.dtree img {
+	border: 0px;
+	vertical-align: middle;
+}
+.dtree a {
+	color: #333;
+	text-decoration: none;
+}
+.dtree a.node, .dtree a.nodeSel {
+	white-space: nowrap;
+	padding: 1px 2px 1px 2px;
+	vertical-align:middle;
+}
+.dtree a.node:hover, .dtree a.nodeSel:hover {
+	color: #333;
+	text-decoration: none;
+}
+.dtree a.nodeSel {
+	background-color: #c0d2ec;
+	vertical-align:middle;
+}
+
+
+.dTreeNode{
+	border: 0px solid #000;
+}
+
+
+/****以下为展示树的面板样式，与树本身无关；可根据实际情况调整*********/
+.typeclass{
+	width: 200px;
+	background: #EFEFEF;
+	margin: 10px auto;
+}
+.typeclass h3{
+	width: 100%;
+	height: 40px;
+	line-height: 45px;
+	text-indent: 28px;
+	font-size: 16px;
+	padding: 0px;
+	margin: 0px;
+	color: #fff;
+	background: #339999;
+}
+.typeclass ul{
+	width: 80%;
+	padding: 0px;
+	margin: 5px 10% 15px 10%;
+}

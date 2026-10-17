@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+    
+<hibernate-mapping>
+<!-- 
+    Created by the Middlegen Hibernate plugin 2.2
+
+    http://boss.bekk.no/boss/middlegen/
+    http://www.hibernate.org/
+-->
+
+<class 
+    name="cn.com.adtech.riss2.domain.MmSetting" 
+    table="SYS_SETTINGS"
+    lazy="false" dynamic-update="true"
+>
+	<cache usage="read-write" />
+    <id
+        name="msetId"
+        type="java.lang.Long"
+        column="SSET_ID"
+    >
+    
+        <generator class="com.jbetter.hibernate.IdGenerator" />
+    </id>
+    <property
+        name="msetName"
+        type="java.lang.String"
+        column="SSET_NAME"
+        length="512"
+    />
+    <property
+        name="msetTitle"
+        type="java.lang.String"
+        column="SSET_KEY"
+        length="128"
+    />
+    <property
+        name="msetValue"
+        type="java.lang.String"
+        column="SSET_VALUE"
+        not-null="true"
+        length="1024"
+    />
+    <property
+        name="msetType"
+        type="java.lang.Short"
+        column="SSET_TYPE"
+        not-null="true"
+        length="5"
+    />
+
+    <!-- Associations -->
+  
+
+</class>
+</hibernate-mapping>

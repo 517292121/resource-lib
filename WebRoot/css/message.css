@@ -1,0 +1,63 @@
+.WaitMessage {
+    position:fixed!important;/* FF IE7*/
+	position:absolute;/*IE6*/
+	top:50%;
+	left:50%;
+	margin:-25px 0 0 -126px;
+    width:258px;
+    height: 50px;
+    padding-left: 20px;
+    font-size:14px;
+    color: #606060;
+    vertical-align: middle;
+    display: none;
+   	background-image: url("../images/message/waitMessage.gif");
+   	background-repeat: no-repeat;
+   	z-index: 101;
+}
+
+
+.SuccessMessageBox{
+    position:fixed!important;/* FF IE7*/
+	position:absolute;/*IE6*/
+	top:50%;
+	left:50%;
+	margin:-24px 0 0 -66px;
+    width:134px;
+    height: 48px;
+    font-size:14px;
+    color: #606060;
+    vertical-align: middle;
+    display: none;
+   	background-image: url("../images/message/success_message.gif");
+   	background-repeat: no-repeat;
+   	z-index: 101;
+}
+
+.successMessage{
+    margin-left: 55px;
+    margin-top: 16px;
+}
+
+.MessageBox {
+    position:fixed!important;/* FF IE7*/
+	position:absolute;/*IE6*/
+	top:50%;
+	left:50%;
+	margin:-25px 0 0 -126px;
+    font-size:14px;
+    color: #606060;
+    vertical-align: middle;
+    display: none;
+    z-index: 101;
+}
+
+.displayDiv {
+	filter:alpha(opacity=10); 
+	top:0px;
+	left:0px;
+	position:absolute;
+	background-color:black;
+	z-index: 100;
+	opacity: .1;
+}

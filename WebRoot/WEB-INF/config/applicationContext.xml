@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+		
+	<!-- Transaction -->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<!-- SessionFactory -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<!-- Pattern resources work both in an external WAR and an executable Boot WAR. -->
+		<property name="mappingLocations">
+			<list>
+				<value>classpath*:cn/com/adtech/riss2/domain/**/*.hbm.xml</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">${jdbc.database.dialect}</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.format_sql">true</prop>
+				<prop key="cglib.use_reflection_optimizer">false</prop>
+				<!-- OSCache 2.x exposes this provider under its own package. -->
+				<prop key="hibernate.cache.provider_class">com.opensymphony.oscache.hibernate.OSCacheProvider</prop>
+				<prop key="hibernate.cache.use_query_cache">true</prop>
+				<prop key="hibernate.max_fetch_depth">2</prop>
+				<!-- <prop key="hibernate.default_batch_fetch_size">30</prop> -->
+				<prop key="hibernate.jdbc.batch_size">50</prop>
+			</props>
+		</property>
+		<property name="lobHandler">
+			<bean id="lobHandler" class="org.springframework.jdbc.support.lob.DefaultLobHandler" lazy-init="true" />
+		</property>
+	</bean>
+	
+	<!-- DataSource -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${jdbc.driverClassName}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+	</bean>
+	<!-- Property -->
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:config.properties</value>
+				<value>file:config/config.properties</value>
+				<value>file:MCProject/config/config.properties</value>
+			</list>
+		</property>
+		<property name="ignoreResourceNotFound" value="true" />
+	</bean>
+	<!-- Bean -->
+	<bean id="serviceLocator" class="cn.com.adtech.riss2.core.ServiceLocator" scope="singleton" />
+	<!-- WebService -->
+	<bean id="fileConvertService" class="cn.com.adtech.riss2.wsClient.FileConvertServiceClient" />
+	<!-- 定时任务：begin -->
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref bean="saveDataBak"/>
+			</list>
+		</property>
+	</bean>
+	<!-- File Upload -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxInMemorySize">
+			<value>50000000</value>
+		</property>
+	</bean>
+	<!-- 定时器：每天零晨两点执行更新_备份数据库-->
+	<bean id="saveDataBak" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="saveDataBakQuartz" />
+		</property>
+		<property name="cronExpression">
+			<value>0 0 2 * * ?</value>
+		</property>
+	</bean>
+	<bean id="saveDataBakQuartz"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="timingService"/>
+		<property name="targetMethod" value="saveDataBak" />
+	</bean>
+	<!-- 定时任务：end -->
+	
+	<!-- 配置注解扫描包 -->
+	<context:component-scan base-package="cn.com.adtech.riss2.controller" />
+	<!--取消静态资源拦截 -->
+	<mvc:annotation-driven></mvc:annotation-driven>
+	<mvc:view-controller path="/database" view-name="platform/pc/database" />
+	<mvc:view-controller path="/literature" view-name="platform/pc/literature" />
+	<mvc:resources location="/css/" mapping="/css/**" />
+	<mvc:resources location="/ext/" mapping="/ext/**" />
+	<mvc:resources location="/flashview/" mapping="/flashview/**" />
+	<mvc:resources location="/font/" mapping="/font/**" />
+	<mvc:resources location="/html/" mapping="/html/**" />
+	<mvc:resources location="/images/" mapping="/images/**" />
+	<mvc:resources location="/js/" mapping="/js/**" />
+	<mvc:resources location="/kindeditor/" mapping="/kindeditor/**" />
+	<mvc:resources location="/pages/" mapping="/pages/**" />
+	<mvc:resources location="/plugin/" mapping="/plugin/**" />
+	<mvc:resources location="/resdemo/" mapping="/plugin/**" />
+	<mvc:resources location="/tinymce/" mapping="/tinymce/**" />
+	<mvc:resources location="/views/" mapping="/views/**" />
+	<mvc:resources location="/viewsjs/" mapping="/viewsjs/**" />
+	<mvc:resources location="/WEB-INF/" mapping="/WEB-INF/**" />
+	<mvc:resources location="/layer/" mapping="/layer/**" />
+	<mvc:resources location="/wtree/" mapping="/wtree/**" />
+	<mvc:resources location="/uploadfile/" mapping="/uploadfile/**" />
+</beans>

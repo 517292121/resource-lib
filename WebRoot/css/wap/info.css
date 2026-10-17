@@ -1,0 +1,14 @@
+@CHARSET "UTF-8";
+.infodetail{margin: 10px; padding-bottom: 20px;}
+.infodetail #title{font-size: 24px; font-weight: bold; padding-top: 30px;}
+.infodetail #base{width: 100%; height: 36px; line-height: 36px; padding: 15px 0px; border-bottom: 1px solid #EEE;}
+.infodetail #base span{font-size: 16px; color: #808080;}
+.infodetail #base span a{font-size: 16px; color: #2f82ff;}
+.infodetail #base #time{float: left;}
+.infodetail #base #author{float: right;}
+.infodetail #content{padding-top: 20px; line-height: 26px; padding-bottom: 30px; font-size: 16px;}
+.infodetail #round {padding-top: 25px; border-top: 1px solid #EEE;}
+.infodetail #round li{height: auto;}
+.infodetail #round a{padding: 8px 10px; border: 1px solid #E8E8E8; color: #2f82ff; display: block; margin-bottom: 8px;}
+.infodetail #round #pre{width: 100%;}
+.infodetail #round #next{width: 100%;}

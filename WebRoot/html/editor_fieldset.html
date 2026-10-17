@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<HTML>
+<HEAD>
+<title>����8Ŀ��</title>
+<META content="text/html; charset=utf-8" http-equiv=Content-Type/>
+<link rel="stylesheet" type="text/css" href="editor_dialog.css"/>
+<script language="JavaScript">
+function OK(){
+    var str1="";
+    str1="<FIELDSET align='"+align1.value+"' style='"
+    if(color.value!='')str1=str1+"color:"+color.value+";"
+    if(backcolor.value!='')str1=str1+"background-color:"+backcolor.value+";"
+    str1=str1+"'><Legend"
+    str1=str1+" align="+align2.value+">"+LegendTitle.value+"</Legend>������������8Ŀ�������</FIELDSET>"
+    window.returnValue = str1;
+    window.close();
+}
+</script>
+</head>
+<body bgcolor=menu topmargin=15 leftmargin=15 >
+<table width=100% border="0" cellpadding="0" cellspacing="2">
+  <tr><td height="115">
+<FIELDSET align=left>
+      <LEGEND align=left><strong>����8Ŀ��</strong></LEGEND>
+      <table border="0" align="center" cellpadding="0" cellspacing="3">
+        <tr>
+          <td align="right">8Ŀ����뷽ʽ��</td>
+          <td><select name="align1" id=align1>
+              <option value="left" selected>�����
+              <option value="center">����
+              <option value="right">�Ҷ���
+          </select></td>
+        </tr>
+        <tr> 
+          <td align="right">8Ŀ���⣺            </td>
+          <td><input name="LegendTitle" type="text" id="LegendTitle" size="20"></td>
+        </tr>
+        <tr>
+          <td align="right">������뷽ʽ��          </td>
+          <td><select name="align2" id=select3>
+            <option value="left" selected>�����
+            <option value="center">����
+            <option value="right">�Ҷ���
+          </select></td>
+        </tr>
+        <tr> 
+          <td align="right">�߿���ɫ��          </td>
+          <td><input name="color" id=color2 onClick='p=showModalDialog("editor_color.aspx",window,"center:yes;dialogHeight:320px;dialogWidth:300px;help:no;status:no");if(p!=null){this.value=p.split("*")[0]}else{this.value=""}' size="20" maxlength="20" readonly></td>
+        </tr>
+        <tr>
+          <td align="right">������ɫ��          </td>
+          <td><input name="backcolor" id=backcolor2 onClick='p=showModalDialog("editor_color.aspx",window,"center:yes;dialogHeight:320px;dialogWidth:300px;help:no;status:no");if(p!=null){this.value=p.split("*")[0]}else{this.value=""}' size="20" maxlength="20" readonly></td>
+        </tr>
+      </table>
+</FIELDSET>
+</td><td width=80 align="center"><input name="cmdOK" type="button" id="cmdOK" value="  ȷ��  " onClick="OK();"/>
+<br/>
+<br><input name="cmdCancel" type=button id="cmdCancel" onclick="window.close();" value='  ȡ��  '></td></tr></table>
+</body>
+</html>

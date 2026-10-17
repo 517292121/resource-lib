@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+	<!--
+		Created by the Middlegen Hibernate plugin 2.2
+		http://boss.bekk.no/boss/middlegen/ http://www.hibernate.org/
+	-->
+	<class name="cn.com.adtech.riss2.domain.SysFunction" table="SYS_FUNCTION"
+		lazy="false" dynamic-update="true">
+		<cache usage="read-write" />
+		<id name="sfunId" type="java.lang.Long" column="SFUN_ID">
+			<generator class="com.jbetter.hibernate.IdGenerator" />
+		</id>
+		<property name="sfunName" type="java.lang.String" column="SFUN_NAME"
+			not-null="true" length="128" />
+		<property name="sfunDesc" type="java.lang.String" column="SFUN_DESC"
+			length="512" />
+		<property name="sfunUrl" type="java.lang.String" column="SFUN_URL"
+			length="512" />
+		<property name="sfunIndex" column="SFUN_INDEX" type="java.lang.Short" />
+		<property name="sfunCode" type="java.lang.String" column="SFUN_CODE"
+			length="64" />
+		<property name="sfunIsHidden" type="java.lang.Boolean"
+			column="SFUN_IS_HIDDEN" />
+		<many-to-one name="parentCatalog" class="cn.com.adtech.riss2.domain.SysCatalog">
+			<column name="SFUN_SCAT_ID" />
+		</many-to-one>
+	</class>
+</hibernate-mapping>

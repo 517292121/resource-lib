@@ -1,0 +1,22 @@
+@CHARSET "UTF-8";
+/**页面左右排版**/
+.pleft{width: 850px; min-height: 200px; padding-bottom: 20px; float: left; margin-top: 20px;}
+.pright{width: 330px; float: right; margin-top: 20px;}
+
+/**基本信息及元数据**/
+.metadata{width: 800px; min-height: 303px; padding: 25px; background: #FFF; box-shadow:1px 1px 2px #E1E1E1;}
+.metadata table{width: 100%;}
+.metadata #base{padding-bottom: 20px; color: #808080;}
+.metadata #title{padding-bottom: 10px;}
+.metadata #title span{height: 30px; padding: 3px 10px; color: #FFF; font-size: 18px;}
+.metadata #title #rsdaTitle{font-size: 24px; font-weight: bold; color: #323232;}
+.metadata table td {vertical-align: text-top; font-size: 15px; line-height: 28px; color: #444; padding-bottom: 7px;}
+.metadata table .lab{width: 100px; font-weight: bold; text-align: left;}
+.w2{letter-spacing:15px;}  
+.w3{letter-spacing:5px;}
+
+/**页面右侧板块**/
+.r-panel{width: 100%; min-height: 80px; background: #FFF; box-shadow:1px 1px 2px #E1E1E1; margin-bottom: 10px;}
+.r-panel h2{display: block; width: 100%; height: 46px; line-height: 46px; text-indent: 15px; color: #FFF; font-size: 16px; margin: 0px; font-weight: normal;}
+.r-panel ul{width: 300px; margin: 15px auto; padding-bottom: 12px;}
+.r-panel li{margin: 15px 0px; text-indent: 24px; overflow:hidden;WHITE-SPACE: nowrap; TEXT-OVERFLOW: ellipsis;}

@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<HTML><HEAD><TITLE>������Ƶ�ļ�</TITLE>
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
+<META HTTP-EQUIV="Expires" CONTENT="0">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="editor_dialog.css">
+<script language="JavaScript">
+function OK(){
+  var str1="";
+  var strurl=document.form1.url.value;
+  if (strurl==""||strurl=="http://")
+  {
+  	alert("����������Ƶ�ļ���ַ�������ϴ���Ƶ�ļ���");
+	document.form1.url.focus();
+	return false;
+  }
+  else
+  {
+    str1="<embed src="+document.form1.url.value+" width="+document.form1.width.value+" height="+document.form1.height.value+"></embed>"
+    window.returnValue = str1+"$$$"+document.form1.UpFileName.value;
+    window.close();
+  }
+}
+function IsDigit()
+{
+  return ((event.keyCode >= 48) && (event.keyCode <= 57));
+}
+</script>
+</head>
+<BODY bgColor=menu topmargin=15 leftmargin=15 >
+<form name="form1" method="post" action="">
+<table width=100% border="0" cellpadding="0" cellspacing="2">
+  <tr><td>
+<FIELDSET align=left>
+<LEGEND align=left>��Ƶ�ļ�����</LEGEND>
+<TABLE border="0" cellpadding="0" cellspacing="3">
+<TR><TD >��ַ��<INPUT name="url" id=url  value="http://" size=40>
+	</td></TR>
+<TR><TD >��ȣ�<INPUT name="width" id=width  ONKEYPRESS="event.returnValue=IsDigit();" value=352 size=7 maxlength="4"> 
+&nbsp;&nbsp;�߶ȣ�<INPUT id=height ONKEYPRESS="event.returnValue=IsDigit();" value=288 size=7 maxlength="4"></TD></TR>
+<TR><TD align=center>֧�ָ�ʽΪ��avi��wmv��mpg��asf</TD></TR>
+ </TABLE></fieldset></td><td width=80 align="center"><input name="cmdOK" type="button" id="cmdOK" value="  ȷ��  " onClick="OK();">
+   <br>
+   <br>   <input name="cmdCancel" type=button id="cmdCancel" onclick="window.close();" value='  ȡ��  '></td></tr>
+   <tr>
+    <td>
+<FIELDSET align=left>
+<LEGEND align=left>�ϴ�������Ƶ�ļ�</LEGEND>
+<iframe class="TBGen" style="top:2px" ID="UploadFiles" src="uploadfile.jsp" frameborder=0 scrolling=no width="350" height="25"></iframe>
+</fieldset>
+	</td>
+    <td width=80 align="center"><input name="UpFileName" type="hidden" id="UpFileName" value="None"></td>
+   </tr>
+</table>
+</form>
+</body>
+</html>

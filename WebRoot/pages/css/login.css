@@ -1,0 +1,125 @@
+* {
+	padding: 0;
+	margin: 0;
+	font-size: 14px;font-family: 'Microsoft YaHei UI', 'Microsoft YaHei', SimSun, 'Segoe UI',Tahoma, Helvetica, Sans-Serif;
+}
+
+.login-main {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	background: #0683B1;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+.login-main h1 {
+	color: #fff;
+	margin-bottom: 50px;
+	margin-top: -100px;
+}
+
+.login-main .login-content { /*width: 380px;
+				height: 130px;*/
+	background: #fff;
+	border-radius: 5px;
+	border-bottom: 4px solid #99BF48;
+	box-shadow: 0 0 10px #888;
+	display: flex;
+	flex-direction: column;
+	padding: 40px 60px;
+}
+
+.login-main .login-content .form-group {
+	flex: 1;
+	display: flex;
+	height: 50px;
+	margin: 15px 0;
+	width: 350px;
+	padding-left: 50px;
+	position: relative;
+}
+
+.login-main .login-content .form-group:last-child {
+	padding-left: 0;
+}
+
+.login-main .login-content .form-group:after {
+	content: '';
+	display: block;
+	position: absolute;
+	width: 50px;
+	height: 100%;
+	left: 0;
+	top: 0;
+}
+
+.login-main .login-content .form-group.user-name:after  {
+	background: url(../images/user1.png)#F4F8F9 no-repeat center;
+	background-size: 50%;
+}
+
+.login-main .login-content .form-group.pwd-text:after {
+	background: url(../images/lock.png)#F4F8F9 no-repeat center;
+	background-size: 50%;
+}
+
+.login-main .login-content .form-group .input-list {
+	flex: 1;
+	outline: none;
+	border: none;
+	background: #F4F8F9;
+	line-height: 50px;
+	font-size: 13px;
+}
+
+.login-main .login-content .form-group:last-child {
+	justify-content: space-between;
+	width: 350px;
+	height: 50px;
+}
+
+.login-main .login-content .form-group .btn {
+	flex: 1;
+	color: #fff;
+	background: #0683B1;
+	border: none;
+	border-radius: 2px;
+	outline: none;
+	font-size: 18px;
+	font-weight: bold;
+	transition: all .5s;
+}
+
+.login-main .login-content .form-group .btn:hover {
+	background: #0673b1;
+}
+
+.login-main>p {
+	position: absolute;
+	bottom: 60px;
+	text-align: center;
+	color: #f1f1f1;
+}
+
+.ts {
+	position: absolute;
+	left: 0px;
+	bottom: -30px;
+	width: 300px;
+	color: red;
+	height: 30px;
+	line-height: 30px;
+	padding: 0 10px;
+	border-radius: 2px;
+	font-size: 14px;
+}
+
+.error{
+	text-align: center;
+	line-height: 36px;
+	margin: 0 auto;
+	color: red;
+}

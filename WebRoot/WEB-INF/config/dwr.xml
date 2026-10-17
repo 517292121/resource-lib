@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dwr PUBLIC "-//GetAhead Limited//DTD Direct Web Remoting 1.0//EN" " http://www.getahead.ltd.uk/dwr/dwr10.dtd ">
+<dwr>
+	<allow>
+		<create javascript="sysUserPlatformFacade" creator="spring">
+			<param name="beanName" value="sysUserPlatformFacade" />
+			<include method="getResSourceComtList" />
+			<include method="saveResSourceReview" />
+			<include method="saveResSourceReviewReply" />
+			<include method="getResSourceReviewReplyList" />
+			<include method="cutoverLanguageForResourcesById" />
+			<include method="getSourceDataListForIndex" />
+			<include method="getSourceBrowseHistory" />
+			<include method="checkUserNameIsExit" />
+			<include method="saveSelfTag" />
+			<include method="checkEmailIsUse" />
+			<include method="getRandomSourceDataList" />
+			<include method="saveSysUserStyle" />
+			<include method="getCorrelationSourceDataList" />
+			<include method="getSubjectHotSourceDataList" />
+			<include method="getResourceTagInfoList" />
+			<include method="delTagInfo" />
+			<include method="saveResSourceGrade" />
+			<include method="getKeyWordsInfoList" />
+			<include method="delKeyWordsInfo" />
+			<include method="addKeyWordsInfo" />
+		</create>
+		<create javascript="resourceFacade" creator="spring">
+			<param name="beanName" value="resourceFacade" />
+			<include method="addResSubjectType" />
+			<include method="deleteResSubjectType" />
+			<include method="updateResSubjectType" />
+			<include method="handlerResSubjectTypeIndex" />
+			<include method="addResdynamicType" />
+			<include method="updateResDynamicType" />
+			<include method="deleteResDynamicType" />
+			<include method="handlerResDynamicTypeIndex" />
+		</create>
+		<create javascript="scFacade" creator="spring">
+			<param name="beanName" value="scFacade" />
+			<include method="addScFaqType" />
+			<include method="deleteScFaqType" />
+			<include method="updateScFaqType" />
+			<include method="handlerScFaqTypeIndex" />
+			<include method="addScIssueType" />
+			<include method="deleteScIssueType" />
+			<include method="updateScIssueType" />
+			<include method="handlerScIssueTypeIndex" />
+			<include method="addScConsultationType" />
+			<include method="deleteScConsultationType" />
+			<include method="updateScConsultationType" />
+			<include method="handlerScConsultationTypeIndex" />
+			<include method="addInformationType" />
+			<include method="deleteInformationType" />
+			<include method="updateInformationType" />
+			<include method="handlerInformationTypeIndex" />
+			<include method="getIssueReplyList" />
+		</create>
+		<create javascript="memberResource" creator="spring" scope="application">
+			<param name="beanName" value="memberResourceService" />
+			<include method="getListOptionByStore" />
+		</create>
+		
+		<convert match="com.jbetter.framework.session.Pagination" converter="bean" />
+	</allow>
+</dwr>
