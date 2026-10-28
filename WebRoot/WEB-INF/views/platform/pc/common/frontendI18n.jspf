@@ -1,0 +1,8 @@
+<%@ page pageEncoding="UTF-8" %>
+<% cn.com.adtech.riss2.core.i18n.FrontendMessages.prepare(request);
+   if (request.getAttribute("frontendI18nIncluded") == null && !Boolean.TRUE.equals(request.getAttribute("annotationAdmin"))) {
+       request.setAttribute("frontendI18nIncluded", Boolean.TRUE); %>
+<script>window.frontendI18nData=<%=cn.com.adtech.riss2.core.i18n.FrontendMessages.clientData(request)%>;</script>
+<script src="<%=request.getContextPath()%>/js/platform/frontend-i18n.js?v=zh-zw-20261025-1"></script>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/platform/frontend-i18n.css?v=zh-zw-20261025-1">
+<% } %>

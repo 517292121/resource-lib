@@ -1,6 +1,7 @@
 package cn.com.adtech.riss2.cache;
 
 import cn.com.adtech.riss2.core.CommonUtil;
+import cn.com.adtech.riss2.fileservice.FileServiceSettings;
 
 /**
  * 
@@ -35,6 +36,13 @@ public class SysConfigInfo {
 	/**
 	 * 初始化基本配置参数，随项目启动时执行
 	 */
+	private static String contextPath = "";
+
+	public static void initConfig(String servletContextPath) {
+		contextPath = servletContextPath == null ? "" : servletContextPath;
+		initConfig();
+	}
+
 	public static void initConfig(){
 		JDBC_DRIVER = CommonUtil.getProperties("/config.properties", "jdbc.driverClassName");
 		JDBC_URL = CommonUtil.getProperties("/config.properties", "jdbc.url");
@@ -43,8 +51,13 @@ public class SysConfigInfo {
 		DATABASE_DIALECT = CommonUtil.getProperties("/config.properties", "jdbc.database.dialect");
 		WEBSERVICE_PATH = CommonUtil.getProperties("/config.properties", "webServicePath");
 		FILE_URL_PATH = CommonUtil.getProperties("/config.properties", "fileUrlPath");
+		if (FileServiceSettings.embedded()) {
+			// Same-origin URLs follow the main application's port/domain and context path.
+			WEBSERVICE_PATH = contextPath + "/fileService";
+			FILE_URL_PATH = contextPath + "/fileService";
+		}
 		
-		FILE_ROOT_DIR = CommonUtil.getProperties("/config.properties", "file.dir");
+		FILE_ROOT_DIR = FileServiceSettings.property("file.dir", "");
 		String lastChar = FILE_ROOT_DIR.substring(FILE_ROOT_DIR.length() - 1);
 		if(!lastChar.equals("/") && !lastChar.equals("\\")){
 			FILE_ROOT_DIR += "/";

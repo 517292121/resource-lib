@@ -1,0 +1,49 @@
+/* Match the existing Ext 3 console. Keep every override inside the admin iframe. */
+body.annotation-records-page.annotation-console{margin:0;padding:4px;min-height:100vh;box-sizing:border-box;background:#dfe8f6;color:#000;font:12px/1.5 Tahoma,Arial,SimSun,sans-serif}
+.annotation-console *{box-sizing:border-box}
+.annotation-console .annotation-records-layout{display:block;width:100%;max-width:none;margin:0}
+.annotation-console .annotation-records-main{display:flex;flex-direction:column;min-height:calc(100vh - 8px);padding:0;border:1px solid #99bbe8;background:#fff}
+.annotation-console .annotation-records-heading{gap:10px;min-height:27px;margin:0;padding:5px 8px;border-bottom:1px solid #99bbe8;background:#d0def0 url("../../ext/resources/images/default/panel/white-top-bottom.gif") repeat-x 0 -1px}
+.annotation-console .annotation-records-heading h1{margin:0;color:#15428b;font:bold 12px/1.4 Tahoma,Arial,SimSun,sans-serif}
+.annotation-console .annotation-records-heading span{color:#465e81;font-size:12px}
+.annotation-console .annotation-record-search{align-items:center;gap:12px;margin:0;padding:5px 8px;border-bottom:1px solid #a9bfd3;background:#d0def0 url("../../ext/resources/images/default/toolbar/bg.gif") repeat-x 0 0}
+.annotation-console .annotation-record-search label{gap:6px;color:#000;font:inherit}
+.annotation-console .annotation-record-search input,.annotation-console .annotation-record-search select{width:240px;min-width:0;min-height:0;height:22px;max-width:100%;padding:1px 4px;border:1px solid #b5b8c8;border-radius:0;background:#fff url("../../ext/resources/images/default/form/text-bg.gif") repeat-x 0 0;color:#000;font:inherit}
+.annotation-console .annotation-record-search select{width:105px}
+.annotation-console input:focus-visible,.annotation-console select:focus-visible,.annotation-console textarea:focus-visible{outline:1px solid #7eadd9;outline-offset:1px}
+.annotation-console .annotation-review-hint{margin:0;padding:6px 10px;border-bottom:1px solid #d8e2ef;background:#f7f9fc;color:#555;font-size:12px}
+.annotation-console .annotation-status:not(:empty){margin:0;padding:7px 10px;color:#b3261e;font-size:12px}
+.annotation-console .annotation-list{padding:0;scrollbar-color:#b8cbe5 #f0f3f8}
+.annotation-console .annotation-empty{margin:20px;color:#666;font-size:12px;opacity:1}
+.annotation-console .annotation-record{padding:10px 12px;border:0;border-bottom:1px solid #ededed;background:#fff}
+.annotation-console .annotation-record:nth-child(even){background:#fafafa}
+.annotation-console .annotation-record-heading{gap:6px 10px}
+.annotation-console .annotation-record h2{font:bold 13px/1.6 Tahoma,Arial,SimSun,sans-serif}
+.annotation-console .annotation-record h2 a{color:#15428b}
+.annotation-console .annotation-record h2 a:hover{text-decoration:underline}
+.annotation-console .annotation-record .annotation-meta,.annotation-console .annotation-audit-time{color:#555;font-size:12px}
+.annotation-console .annotation-audit-badge{padding:1px 6px;border-color:#b9cce5;background:#f0f5fc;color:#526c92;font:11px/1.7 Tahoma,Arial,SimSun,sans-serif}
+.annotation-console .annotation-audit-badge.is-approved{border-color:#b8cdb0;background:#edf5e9;color:#4e6d42}
+.annotation-console .annotation-audit-badge.is-rejected{border-color:#d8b8b8;background:#f9eded;color:#a04040}
+.annotation-console .annotation-record-quote{margin:8px 0;padding:6px 10px;border-left:2px solid #b9cde9;background:#f5f7fa;color:#555;font:12px/1.7 Tahoma,Arial,SimSun,sans-serif;scrollbar-color:#b8cbe5 #f0f3f8}
+.annotation-console .annotation-body{margin:6px 0;color:#333;font:12px/1.7 Tahoma,Arial,SimSun,sans-serif}
+.annotation-console .annotation-review-remark{margin:6px 0;padding:6px 10px;border-left:2px solid #99bbe8;background:#f2f7ff;color:#526b88;font-size:12px}
+.annotation-console .annotation-review-actions{gap:8px;margin-top:8px}
+.annotation-console .annotation-record-pagination{justify-content:flex-start;gap:10px;min-height:32px;margin:0;margin-top:auto;padding:4px 8px;border-top:1px solid #99bbe8;background:#d0def0 url("../../ext/resources/images/default/toolbar/bg.gif") repeat-x 0 0;color:#333;font-size:12px}
+.annotation-console .annotation-record-search button,.annotation-console .annotation-review-actions button,.annotation-console .annotation-review-actions .annotation-review-reject,.annotation-console .annotation-review-actions .annotation-delete,.annotation-console .annotation-record-pagination button,.annotation-console .annotation-dialog-actions button{min-height:24px;padding:3px 12px;border:1px solid #b5b8c8;border-radius:3px;background:#e8e8e8 linear-gradient(#fff,#d6d6d6);box-shadow:inset 0 1px 0 #fff;color:#222;font:12px/16px Tahoma,Arial,SimSun,sans-serif;white-space:nowrap;cursor:pointer}
+.annotation-console .annotation-record-search button:hover,.annotation-console .annotation-review-actions button:hover,.annotation-console .annotation-record-pagination button:not(:disabled):hover,.annotation-console .annotation-dialog-actions button:not(:disabled):hover{border-color:#7eadd9;background:#eaf2ff}
+.annotation-console button:focus-visible{outline:2px solid #7eadd9;outline-offset:1px}
+.annotation-console button:disabled{opacity:.45;cursor:default}
+.annotation-console .annotation-dialog{width:min(500px,calc(100vw - 24px));padding:0;border:1px solid #99bbe8;border-radius:3px;background:#dfe8f6;color:#000;box-shadow:2px 3px 12px #0004;font:12px/1.6 Tahoma,Arial,SimSun,sans-serif}
+.annotation-console .annotation-dialog::backdrop{background:#0004}
+.annotation-console .annotation-dialog-heading,.annotation-console .annotation-message>h2{gap:10px;margin:0;padding:5px 8px;border-bottom:1px solid #99bbe8;background:#d0def0 url("../../ext/resources/images/default/panel/white-top-bottom.gif") repeat-x 0 -1px}
+.annotation-console .annotation-dialog h2{margin:0;color:#15428b;font:bold 12px/1.5 Tahoma,Arial,SimSun,sans-serif;letter-spacing:0}
+.annotation-console .annotation-dialog-heading>button{color:#15428b;font-size:20px}
+.annotation-console .annotation-dialog form{margin:0}
+.annotation-console .annotation-dialog>p,.annotation-console .annotation-dialog form>p{margin:8px 10px}
+.annotation-console .annotation-dialog label{margin:8px 10px 4px;color:#333}
+.annotation-console .annotation-dialog textarea{display:block;width:calc(100% - 20px);min-height:90px;margin:0 10px 8px;padding:5px;border:1px solid #b5b8c8;border-radius:0;background:#fff;color:#000;font:12px/1.6 Tahoma,Arial,SimSun,sans-serif}
+.annotation-console .annotation-dialog blockquote{margin:8px 10px;padding:6px 10px;border-color:#b9cde9;background:#f5f7fa;color:#555;font-size:12px}
+.annotation-console .annotation-editor-count{margin:0 10px;color:#666}
+.annotation-console .annotation-dialog-actions{gap:8px;margin:0;padding:7px 10px;border-top:1px solid #99bbe8;background:#d0def0}
+@media(max-width:760px){.annotation-console .annotation-record-search{align-items:center}.annotation-console .annotation-record-search label{display:flex;flex-wrap:wrap}.annotation-console .annotation-record-search input{width:min(240px,65vw)}.annotation-console .annotation-record-search select{width:105px}.annotation-console .annotation-records-main{padding:0}.annotation-console .annotation-record h2{font-size:13px}}

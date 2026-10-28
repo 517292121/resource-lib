@@ -1,6 +1,7 @@
 package cn.com.adtech.riss2.controller.console.resource.build;
 
 import java.io.IOException;
+import java.io.File;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.io.Serializable;
@@ -21,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import cn.com.adtech.riss2.bso.cache.IPlatformCacheService;
 import cn.com.adtech.riss2.bso.resource.IResourceLuceneService;
+import cn.com.adtech.riss2.bso.resource.ISubjectTypeService;
 import cn.com.adtech.riss2.cache.SysConfigInfo;
 import cn.com.adtech.riss2.controller.MyRequestUtil;
 import cn.com.adtech.riss2.controller.platform.ResCommonController;
@@ -42,11 +44,52 @@ import cn.com.adtech.riss2.exception.ErrorMessageException;
 import cn.com.adtech.riss2.jdbcms.ToolUnit;
 import cn.com.adtech.riss2.jsonrpc.ResourceRpc;
 import cn.com.adtech.riss2.upload.IUploadService;
+import cn.com.adtech.riss2.upload.ResourceDirectoryUpload;
 import cn.com.adtech.riss2.wsClient.FileConvertServiceUtil;
 
 import com.jbetter.framework.session.Pagination;
 
 public class InputSingleController extends ResourceFileLoad {
+	private cn.com.adtech.riss2.bso.resource.ResourceMaintenanceService maintenanceService;
+	public void setMaintenanceService(cn.com.adtech.riss2.bso.resource.ResourceMaintenanceService value) { maintenanceService=value; }
+	private long requireMaintenanceAdmin(HttpServletRequest request) {
+		Object value=request.getSession().getAttribute("userSession");
+		if (!(value instanceof cn.com.adtech.riss2.core.CurrentUserSession)) throw new SecurityException("请先登录后台");
+		cn.com.adtech.riss2.core.CurrentUserSession session=(cn.com.adtech.riss2.core.CurrentUserSession)value;
+		if (!session.isManager() || session.getCurrentUser()==null || session.getCurrentUser().getSmanId()==null || session.getCurrentUser().getSmanId()<1)
+			throw new SecurityException("没有资源维护权限");
+		return session.getCurrentUser().getSmanId();
+	}
+	public ModelAndView initMaintenance(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		try { requireMaintenanceAdmin(request); }
+		catch (SecurityException e) { response.sendError(403); return null; }
+		request.setAttribute("creationTypes",maintenanceService.getCreationTypes());
+		return new ModelAndView("resource/build/maintenanceCreate");
+	}
+	public void maintenanceOptions(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		Map<String,Object> result=new HashMap<String,Object>();
+		try {
+			long admin=requireMaintenanceAdmin(request);
+			Pagination page=new Pagination(); page.setPageResults(20);
+			page.setCurrentPage(Math.max(0,Math.min(10000,ServletRequestUtils.getIntParameter(request,"pn",0))));
+			String key=ServletRequestUtils.getStringParameter(request,"q","");
+			boolean missions="mission".equals(request.getParameter("option"));
+			List<Object[]> rows=missions ? maintenanceService.getMissions(admin,ServletRequestUtils.getLongParameter(request,"type",0),key,page)
+					: maintenanceService.getTargets(admin,ServletRequestUtils.getLongParameter(request,"self",0),key,page);
+			List<Map<String,Object>> items=new java.util.ArrayList<Map<String,Object>>();
+			for(Object[] row:rows) {
+				Map<String,Object> item=new HashMap<String,Object>(); item.put("id",String.valueOf(row[0])); item.put("title",row[1]);
+				item.put("description",missions ? String.valueOf(row[3])+" · "+(row[2]==null?"":row[2]) : row[2]); items.add(item);
+			}
+			result.put("success",true); result.put("items",items); result.put("total",page.getTotalResults()); result.put("pages",page.getTotalPages());
+		} catch (SecurityException e) { response.setStatus(403); result.put("success",false); result.put("msg",e.getMessage()); }
+		catch (IllegalArgumentException e) { response.setStatus(400); result.put("success",false); result.put("msg",e.getMessage()); }
+		response.setContentType("application/json;charset=UTF-8"); response.getWriter().print(JSONObject.fromObject(result));
+	}
+	private ISubjectTypeService subjectTypeService;
+	public void setSubjectTypeService(ISubjectTypeService subjectTypeService) {
+		this.subjectTypeService = subjectTypeService;
+	}
 	// ///////////////////////////////////////////////////资源录入相关
 	
 	private IResourceLuceneService resourceLuceneService = null;
@@ -74,14 +117,21 @@ public class InputSingleController extends ResourceFileLoad {
 		long sourceType = MyRequestUtil.getLongParameter(request, "stype");
 		long rmin_id = MyRequestUtil.getLongParameter(request, "rmin_id");
 		ResMissionInfo mission = missionService.getResMissionInfoById(rmin_id);
+		if ("1".equals(request.getParameter("maintenance"))) {
+			mission=maintenanceService.getCreationMission(requireMaintenanceAdmin(request),rmin_id,sourceType);
+			store=mission.getRminRmstId();
+			request.setAttribute("maintenance",true);
+		}
+		if (mission==null) throw new IllegalArgumentException("请先选择所属作业");
 		if(sourceType == 0 && store == 0) { // 如果没有传资源类型ID和特色库ID过来，则根据作业再去查询一次
 			store = mission.getRminRmstId();
 			sourceType = mission.getRminRltyId();
 		}
 		List<ResElementPool> elementList = elementPool.getElementByTemplet(store, sourceType);
+		if (elementList==null || elementList.isEmpty()) throw new IllegalArgumentException("此特色库尚未配置该资源类型的元数据模板，请先在文献库设置中配置");
+		prepareResearchForm(request,sourceType,null);
 		ResLanguageType language = lanService.getResLanguage(mission.getRminLanugage());
 		String missName = missionService.getMissionNameById(rmin_id);
-		String subjectOptions = resourceService.getSubjectOptions(-1L, 0L, "1"); // 学科选项
 //		String dynamicTypeOptions = resourceService.getDynamicTypeOptions(store, -1, 1); //自定义分类一
 //		String dynamicTypeOptions2 = resourceService.getDynamicTypeOptions(store, -1, 2); //自定义分类一
 //		String dynamicTypeOptions3 = resourceService.getDynamicTypeOptions(store, -1, 3); //自定义分类一
@@ -115,7 +165,7 @@ public class InputSingleController extends ResourceFileLoad {
 		request.setAttribute("stype", sourceType);
 		request.setAttribute("rmin_id", rmin_id);
 		request.setAttribute("language", language);
-		request.setAttribute("subjectOptions", subjectOptions);
+		request.setAttribute("subjectList", subjectTypeService.getSubjectList());
 		request.setAttribute("dynamicTypeOptions", dynamicTypeOptions);
 		request.setAttribute("dynamicTypeOptions2", dynamicTypeOptions2);
 		request.setAttribute("dynamicTypeOptions3", dynamicTypeOptions3);
@@ -242,8 +292,16 @@ public class InputSingleController extends ResourceFileLoad {
 		int reqType = MyRequestUtil.getIntParameter(request, "req");
 		long memberId = ServletRequestUtils.getLongParameter(request, "memberId", 0L); //会员ID
 		Long rsdaRssuId = ServletRequestUtils.getLongParameter(request, "rsdaRssuId",0L);
+		boolean maintenanceCreation = "1".equals(request.getParameter("maintenance"));
 		try {
 			ResMissionInfo mission = missionService.getResMissionInfoById(rminId);
+			if (maintenanceCreation) {
+				mission=maintenanceService.getCreationMission(requireMaintenanceAdmin(request),rminId,sourceType);
+				if (!mission.getRminRmstId().equals(store)) throw new IllegalArgumentException("所属作业与资源库不一致");
+			}
+			if (cn.com.adtech.riss2.core.ResourceResearchLinks.submitted(request)) {
+				maintenanceService.getValidatedLinks(requireMaintenanceAdmin(request),null,sourceType,request);
+			}
 			ResMetaStore rmst = null;
 			if(mission == null){
 				mission = new ResMissionInfo();
@@ -291,7 +349,7 @@ public class InputSingleController extends ResourceFileLoad {
 					// 封装基本信息
 					ResSourceData resource = new ResSourceData();
 					resource = ParseResourceInfo(request, resource);
-					resource.setRsdaStatus(2L); // 状态，默认为2
+					resource.setRsdaStatus(maintenanceCreation ? ResSourceData.STATUS_PASS : ResSourceData.STATUS_CHECK);
 					resource.setRsdaGrade(3L); // 评分，默认为3
 					resource.setRsdaCmtstus(rmst.getRmstCmtstus()); // 新建资源时，资源评论开关与特色库保持一致；
 					resource.setRsdaRcmd(0L); // 是否为推荐资源，默认为0(不是)
@@ -394,11 +452,7 @@ public class InputSingleController extends ResourceFileLoad {
 							}
 						}
 					}else if(fileType == 1){
-						String imgDir = ServletRequestUtils.getStringParameter(request, "imgDir", "");
-						resource.setRsdaFileUrl(imgDir);
-
-						//对目录中的图片创建缩略图和切片
-						MyFileUtil.imgSplit(imgDir);
+						saveDirectoryResource(resource, request);
 					}else if(fileType == 2){
 						String htmlDir = ServletRequestUtils.getStringParameter(request, "htmlDir", "");
 						resource.setRsdaFileUrl(htmlDir);
@@ -408,6 +462,19 @@ public class InputSingleController extends ResourceFileLoad {
 					if(sourceid > 0) {
 						map.put("success", true);
 						map.put("msg", "保存成功");
+						if (maintenanceCreation) {
+							// Re-read after the save transaction commits so type/library associations are available to the indexer.
+							try {
+								ResSourceData published=resourceService.getResourceMetaInfo(sourceid);
+								resourceLuceneService.updateResourceToIndex(ResCommonController.parseResCover(request,published));
+								cacheService.updateResCount();
+								cacheService.updateResforType();
+							} catch (Exception syncFailure) {
+								org.apache.log4j.Logger.getLogger(InputSingleController.class).error("资源已保存并通过审核，但检索索引或统计同步失败",syncFailure);
+								map.put("msg","资源已保存并通过审核，但检索索引或统计同步失败，请更新索引和缓存");
+								map.put("syncWarning",true);
+							}
+						}
 					}else {
 						map.put("success", false);
 						map.put("msg", "保存失败");
@@ -505,13 +572,12 @@ public class InputSingleController extends ResourceFileLoad {
 		int reqType = MyRequestUtil.getIntParameter(request, "reqType");
 		// 获取资源基本信息
 		ResSourceData source = resourceService.getResourceMetaInfo(sourceId);
+		if (reqType!=5) prepareResearchForm(request,source.getRsdaRltyId(),sourceId);
 		// 获取所有的元素信息
 		List<ResElementPool> EleDataList = resourceService.getResourceAllData(source.getRsdaRmstId(), source.getRsdaRltyId(), languageId,
 				sourceId);
 		// 获取语种
 		ResLanguageType language = lanService.getResLanguage(languageId);
-		// 获取学科下拉options选项列表
-		String subjectOptions = resourceService.getSubjectOptions(ToolUnit.NullTo0(source.getRsdaRstyId()), 0, "1"); // 学科选项
 		// 获取自定义分类下拉options选项列表
 		String dynamicTypeOptions = resourceService.getDynamicTypeOptions(source.getRsdaRmstId(), source.getRsdaRdtyId() == null ? 0
 				: source.getRsdaRdtyId(), 1);  //分类一
@@ -556,7 +622,7 @@ public class InputSingleController extends ResourceFileLoad {
 		request.setAttribute("sourceSubjectOptions", sourceSubjectOptions);
 		request.setAttribute("languageId", languageId);
 		request.setAttribute("language", language);
-		request.setAttribute("subjectOptions", subjectOptions);
+		request.setAttribute("subjectList", subjectTypeService.getSubjectList());
 		request.setAttribute("dynamicTypeOptions", dynamicTypeOptions);
 		request.setAttribute("dynamicTypeOptions2", dynamicTypeOptions2);
 		request.setAttribute("dynamicTypeOptions3", dynamicTypeOptions3);
@@ -605,6 +671,9 @@ public class InputSingleController extends ResourceFileLoad {
 		
 		try {
 			int reqType = MyRequestUtil.getIntParameter(request, "reqType");
+			if (cn.com.adtech.riss2.core.ResourceResearchLinks.submitted(request)) {
+				maintenanceService.getValidatedLinks(requireMaintenanceAdmin(request),sourceId,sourceType,request);
+			}
 			List<ResElementPool> elementList = elementPool.getElementByTemplet(store, sourceType);
 			if(reqType == 3) { // 资源预览
 //				long rsty_id = ServletRequestUtils.getLongParameter(request, "rsty_id", 0L); // 学科分类
@@ -717,8 +786,7 @@ public class InputSingleController extends ResourceFileLoad {
 						checkFile(tmpResource, resource, request); // 检查之前和现在的文件变化情况
 						tmpResource = null;
 					}else if(fileType == 1){
-						String imgDir = ServletRequestUtils.getStringParameter(request, "imgDir", "");
-						resource.setRsdaFileUrl(imgDir);
+						saveDirectoryResource(resource, request);
 					}else if(fileType == 2){
 						String htmlDir = ServletRequestUtils.getStringParameter(request, "htmlDir", "");
 						resource.setRsdaFileUrl(htmlDir);
@@ -1193,6 +1261,13 @@ public class InputSingleController extends ResourceFileLoad {
 	}
 
 	// ////////////////////////////////////////////////////////资源的基本封装和操作
+	private void prepareResearchForm(HttpServletRequest request,Long type,Long self) {
+		cn.com.adtech.riss2.domain.resource.ResLiterType value=(cn.com.adtech.riss2.domain.resource.ResLiterType)resourceService.get(cn.com.adtech.riss2.domain.resource.ResLiterType.class,type);
+		String kind=cn.com.adtech.riss2.core.ResourceResearchLinks.kind(value==null?null:value.getRltyName());
+		request.setAttribute("researchLinkEnabled","paper".equals(kind)||"monograph".equals(kind));
+		request.setAttribute("resourceTypeName",value==null?"":value.getRltyName());
+		request.setAttribute("researchTargets",self==null?java.util.Collections.emptyList():maintenanceService.getSelectedTargets(self));
+	}
 	// 封装资源。但不包括：状态、评分、评论开关状态、是否为推荐资源、点击量、审核评论
 	public ResSourceData ParseResourceInfo(HttpServletRequest request, ResSourceData resource) {
 		long store = MyRequestUtil.getLongParameter(request, "store"); // 特色库ID
@@ -1223,6 +1298,9 @@ public class InputSingleController extends ResourceFileLoad {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
+		if(request.getParameter("rsty_name") != null) {
+			rsty_id = subjectTypeService.saveSubjectName(request.getParameter("rsty_name"), rsty_id);
+		}
 		resource.setRsdaRltyId(sourceType);
 		resource.setRsdaRmstId(store);
 		resource.setRsdaRminId(rmin_id < 1 ? null : rmin_id);
@@ -1241,6 +1319,7 @@ public class InputSingleController extends ResourceFileLoad {
 		ResElementPool element = null;
 		String eleid = "";
 		String elename = "";
+		boolean languageSubmitted = false;
 		// Date date = null;
 		for(int i = 0, s = elelist.size(); i < s; i++) {
 			element = elelist.get(i);
@@ -1285,7 +1364,10 @@ public class InputSingleController extends ResourceFileLoad {
 				resource.setRsdaSource(MyRequestUtil.getStringParameter(request, eleid));
 			}
 			if(elename.equals("language")) {
-				resource.setRsdaLanguage(MyRequestUtil.getStringParameter(request, eleid));
+				if(request.getParameter(eleid) != null) {
+					resource.setRsdaLanguage(MyRequestUtil.getStringParameter(request, eleid));
+					languageSubmitted = true;
+				}
 			}
 			if(elename.equals("relation")) {
 				resource.setRsdaRelation(MyRequestUtil.getStringParameter(request, eleid));
@@ -1301,8 +1383,8 @@ public class InputSingleController extends ResourceFileLoad {
 			}
 		}
 		
-		//根据资源库的语种设备资源所属语种
-		if(CommonUtil.isNotNull(lan)){
+		// The library language is a default; an explicitly entered language takes priority.
+		if(!languageSubmitted && !CommonUtil.isNotNull(resource.getRsdaLanguage()) && CommonUtil.isNotNull(lan)){
 			String lanTxt = LanguageUtil.codeToTxt(lan);
 			resource.setRsdaLanguage(lanTxt);
 		}
@@ -1351,7 +1433,7 @@ public class InputSingleController extends ResourceFileLoad {
 		int fileType = ServletRequestUtils.getIntParameter(request, "resFileType", 0);
 		//只有源文为文件模式才做文件验证
 		if(fileType > 0){
-			return true;
+			return result;
 		}
 		
 		// 验证上传文件
@@ -1362,9 +1444,10 @@ public class InputSingleController extends ResourceFileLoad {
 		int photoceSize = Integer.parseInt(ConstantsObj.getSysProperty(ConstantsObj.SysSettingKey.RESOURCE_UPLOAD_PHOTOFILE_MAXSIZE));
 		if(file != null && file.getSize() > 1024 * 1024 * sourceSize) {
 			errorMsg += "<li>源文件大小不能超过" + sourceSize + "M</li>";
+			result = false;
 		}
 		file = multiRequest.getFile("bigimg");
-		if(file != null) {
+		if(file != null && !file.isEmpty()) {
 			String extName = file.getOriginalFilename();
 			extName = extName.substring(extName.lastIndexOf(".") + 1).toLowerCase();
 			if(extName != null && extName.length() > 0 && !extName.equals("jpg") && !extName.equals("bmp")
@@ -1435,6 +1518,18 @@ public class InputSingleController extends ResourceFileLoad {
 			}
 		}
 		return result;
+	}
+
+	private void saveDirectoryResource(ResSourceData resource, HttpServletRequest request) throws IOException {
+		long sourceLimit = Long.parseLong(ConstantsObj.getSysProperty(ConstantsObj.SysSettingKey.RESOURCE_UPLOAD_SOURCEFILE_MAXSIZE)) * 1024L * 1024;
+		long coverLimit = Long.parseLong(ConstantsObj.getSysProperty(ConstantsObj.SysSettingKey.RESOURCE_UPLOAD_PHOTOFILE_MAXSIZE)) * 1024L * 1024;
+		ResourceDirectoryUpload directoryUpload = new ResourceDirectoryUpload(new File(SysConfigInfo.FILE_ROOT_DIR, SysConfigInfo.RES_DIR), sourceLimit, coverLimit);
+		File directory = directoryUpload.save((MultipartHttpServletRequest) request);
+		resource.setRsdaFileUrl(directory.getAbsolutePath().replace('\\', '/'));
+		// Text chapters do not require image slicing. Existing image resources retain it.
+		if (cn.com.adtech.riss2.core.file.ResourceDirectoryFiles.hasImagePages(directory.getPath())) {
+			MyFileUtil.imgSplit(directory.getPath());
+		}
 	}
 
 	public IUploadService getUploadServiceById(Long rfilId) {

@@ -17,6 +17,27 @@ import cn.com.adtech.riss2.exception.ErrorMessageException;
 public class FavoritesServiceImp extends CommonServiceCommonlyImp implements IFavoritesService {
 
 	@Override
+	public boolean getFavoriteState(Long userId, Long sourceId) {
+		List counts = getHibernateTemplate().find(
+				"select count(scf.scfId) from ScFavorites scf where scf.scfUserId=? and scf.scfSourceDataId=?",
+				new Object[] { userId, sourceId });
+		return !counts.isEmpty() && ((Number)counts.get(0)).longValue() > 0;
+	}
+
+	/** Set an explicit state rather than toggling, so retrying a request cannot undo it. */
+	@Override
+	public void updateFavoriteState(Long userId, Long sourceId, boolean favorited) {
+		if (userId == null || userId < 1L || sourceId == null || sourceId < 1L) {
+			throw new IllegalArgumentException("Invalid favorite owner or resource");
+		}
+		if (favorited) {
+			if (!getFavoriteState(userId, sourceId)) save(new ScFavorites(userId, sourceId, new Date()));
+		} else {
+			deleteFavorite(userId, sourceId);
+		}
+	}
+
+	@Override
 	public void addFavorite(Long userId, Long sourceId) {
 		if (getFavoriteByUserIdAndSourceId(userId, sourceId) != null) {
 			throw new ErrorMessageException("您已收藏该资源，不需要再进行收藏!!!");

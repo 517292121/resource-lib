@@ -19,7 +19,8 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>资源检索</title>
+<%@ include file="/WEB-INF/views/platform/pc/common/frontendI18n.jspf" %>
+    <title><%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "资源检索") %></title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -29,8 +30,8 @@
   	<script type="text/javascript" src="<%=basePath %>layer/layer.js"></script>
   	<script type="text/javascript">var basePath = "<%=basePath %>";</script>
   	 	<script src="<%=basePath %>js/platform/lankey/<%=language %>.js"></script>
-  	<script type="text/javascript" src="<%=basePath %>js/platform/pagenumFormat.js"></script>
-  	<script type="text/javascript" src="<%=basePath %>js/platform/res-browse-search.js"></script>
+    <script type="text/javascript" src="<%=basePath %>js/platform/pagenumFormat.js?ui=zh-zw-20261025-1"></script>
+    <script type="text/javascript" src="<%=basePath %>js/platform/res-browse-search.js?ui=zh-zw-20261025-1"></script>
   	<script>
 		$(function(){
 			$("#gb").click(function(){

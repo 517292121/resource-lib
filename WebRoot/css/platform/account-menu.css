@@ -1,0 +1,9 @@
+/* Shared signed-in user menu for the homepage and public page headers. */
+.platform-account-menu { position: relative; flex-shrink: 0; }
+.platform-account-dropdown { position: absolute; top: 100%; right: 0; z-index: 30; box-sizing: border-box; min-width: max(100%,132px); padding: 5px; border: 1px solid #b79a5e; border-radius: 0 0 3px 3px; color: #f3d79a; background: #173b35; box-shadow: 0 8px 22px #0003; font: 14px/1.5 "Microsoft YaHei",sans-serif; }
+.platform-account-dropdown[hidden],.platform-account-error[hidden] { display: none !important; }
+.platform-account-dropdown [data-account-logout] { display: block; box-sizing: border-box; width: 100%; min-height: 38px; margin: 0; padding: 8px 12px; border: 0; border-radius: 1px; color: #f3d79a; background: transparent; font: inherit; text-align: center; white-space: nowrap; cursor: pointer; }
+.platform-account-dropdown [data-account-logout]:hover,
+.platform-account-dropdown [data-account-logout]:focus-visible { color: #fff1d1; background: #2b5145; outline: 1px solid #b79a5e; outline-offset: -1px; }
+.platform-account-dropdown [data-account-logout]:disabled { opacity: .65; cursor: wait; }
+.platform-account-error { max-width: 230px; margin: 5px; color: #ffe4bb; font-size: 12px; white-space: normal; overflow-wrap: anywhere; }

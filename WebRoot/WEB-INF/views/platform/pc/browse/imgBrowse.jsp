@@ -8,6 +8,7 @@
 <html>
 
 <head>
+<%@ include file="/WEB-INF/views/platform/pc/common/frontendI18n.jspf" %>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=640, initial-scale=0.5, user-scalable=no" />
     <title>${resource.rsdaTitle }</title>
@@ -35,7 +36,7 @@
             	<div class="f-left xlk" data-type="0">
 			        <span class="lang-icon"></span>
 			        <ul class="choose-list">
-			            <li onclick="javaScript:switch_lang('zh_CN');">中文</li>
+			            <li onclick="javaScript:switch_lang('zh_CN');"><%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "中文") %></li>
 			            <li onclick="javaScript:switch_lang('zw_XZ');" style="font-size: 16px; line-height: 27px;border-top: none;border-bottom: 1px solid #838b98;font-family: hm;">བོད་ཡིག </li>
 			            <%-- <li onclick="javaScript:switch_lang('en_US');">English</li> --%>
 			        </ul>
@@ -45,22 +46,22 @@
 		            	<span class="icon-pdf-browse f-left" onclick="pdfBrowse();"></span>
 			    	</div>
 			    </c:if>
-            	<div class="catalog-btn f-left" title="目录"></div>
-                <div class="search-btn f-left" title="搜索该资源内容"></div>
-                <div class="btn-s f-left" title="转到第一页"></div>
-                <div class="btn-prev-page f-left" title="上一页"></div>
-                <div class="btn-prev-img f-left" title="上一张"></div>
+                <div class="catalog-btn f-left" title="<%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "目录") %>"></div>
+                <div class="search-btn f-left" title="<%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "搜索该资源内容") %>"></div>
+                <div class="btn-s f-left" title="<%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "转到第一页") %>"></div>
+                <div class="btn-prev-page f-left" title="<%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "上一页") %>"></div>
+                <div class="btn-prev-img f-left" title="<%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "上一张") %>"></div>
                 <div class="page-num-box f-left">
                 	<input type="text" name="page-num" id="page-num" maxlength="4" ONKEYPRESS="event.returnValue=IsDigit();" />
                 </div>
                 <div class="page-nav f-left">/0</div>
-                <div class="btn-next-img f-left" title="下一张"></div>
-                <div class="btn-next-page f-left" title="下一页"></div>
-                <div class="btn-e f-left" title="转到最后一页"></div>
+                <div class="btn-next-img f-left" title="<%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "下一张") %>"></div>
+                <div class="btn-next-page f-left" title="<%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "下一页") %>"></div>
+                <div class="btn-e f-left" title="<%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "转到最后一页") %>"></div>
                 <!-- <div class="share f-right" title="分享"></div> -->                
-                <div class="txt-rig n3 share f-right" title="原文放右边"></div> 
-                <div class="txt-btm n2 share f-right" title="原文放下面"></div> 
-                <div class="txt-win n1 share f-right" title="弹出原文"></div> 
+                <div class="txt-rig n3 share f-right" title="<%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "原文放右边") %>"></div>
+                <div class="txt-btm n2 share f-right" title="<%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "原文放下面") %>"></div>
+                <div class="txt-win n1 share f-right" title="<%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "弹出原文") %>"></div>
             </div>
         </div>
         <div class="clearfix" id="imgbox">

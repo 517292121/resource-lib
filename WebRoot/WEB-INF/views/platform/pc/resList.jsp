@@ -2,8 +2,8 @@
 <%@ include file="common/header.jsp" %>
 <link rel="stylesheet" href="<%=basePath %>css/platform/reslist.css" type="text/css"></link>
 <script type="text/javascript" src="<%=basePath %>js/jquery.cookie.js"></script>
-<script type="text/javascript" src="<%=basePath %>js/platform/myPager.js"></script>
-<script type="text/javascript" src="<%=basePath %>js/platform/reslist.js"></script>
+<script type="text/javascript" src="<%=basePath %>js/platform/myPager.js?ui=zh-zw-20261025-1"></script>
+<script type="text/javascript" src="<%=basePath %>js/platform/reslist.js?ui=zh-zw-20261025-1"></script>
 <link rel="stylesheet" href="<%=basePath %>/wtree/dtree.css" type="text/css"></link>
 <script type="text/javascript" src="<%=basePath %>/wtree/dtree.js"></script>
 <!-- jQuery滚动执行动画插件FadeThis -->

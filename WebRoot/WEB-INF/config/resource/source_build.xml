@@ -15,8 +15,12 @@
 		<property name="infoSubscriptionService" ref="infoSubscriptionService" />
 	</bean>
 	<!-- 资源录入，单个资源录入页面 -->
+	<bean id="resourceMaintenanceService" class="cn.com.adtech.riss2.bso.resource.ResourceMaintenanceService">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
 	<bean name="/console/data/inputSingle.htm"
 		class="cn.com.adtech.riss2.controller.console.resource.build.InputSingleController">
+		<property name="subjectTypeService" ref="subjectTypeService" />
 		<property name="methodNameResolver" ref="methodNameResolver" />
 		<property name="elementPool" ref="metadataElementPool" />
 		<property name="resourceService" ref="resourcedataManager" />
@@ -31,6 +35,7 @@
 		<property name="dynamicTypeService" ref="dynamicService" />
 		<property name="resourceLuceneService" ref="resourceLuceneService" />
 		<property name="cacheService" ref="platformCacheService" />
+		<property name="maintenanceService" ref="resourceMaintenanceService" />
 	</bean>
 	<!-- 语种 -->
 	<bean id="LanguageTypeService" class="cn.com.adtech.riss2.bso.resource.LanguageTypeServiceImp">

@@ -81,7 +81,7 @@
 			    return;
 			}
 		</script>	    
-		<script type="text/javascript" src="<%=path %>/js/platform/ResourceData.js"></script>
+		<script type="text/javascript" src="<%=path %>/js/platform/ResourceData.js?ui=zh-zw-20261025-1"></script>
 	<style type="text/css">
 		.icon{float: none;}
 	</style>

@@ -8,9 +8,10 @@
 <html>
 
 <head>
+<%@ include file="/WEB-INF/views/platform/pc/common/frontendI18n.jspf" %>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-    <title>${resource.rsdaTitle }在线预览</title>
+    <title>${resource.rsdaTitle }<%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "在线预览") %></title>
     <style type="text/css">
     	@font-face {
 			font-style: normal;

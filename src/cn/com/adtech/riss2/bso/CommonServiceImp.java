@@ -56,6 +56,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.orm.hibernate3.HibernateCallback;
 
@@ -440,46 +441,10 @@ public class CommonServiceImp extends HibernateDao implements ICommonService {
 	}
 	
 	/**
-	 * 该方法是封装jdbc中的execute，但可以同时执行多条sql,已开启事物管理
+	 * 批量执行 SQL；加入已有事务，无外层事务时整批提交。
 	 */
 	public boolean executeMultiSql(final String[] sqlArr){
-		if(null == sqlArr || sqlArr.length < 1){
-			return false;
-		}
-		Object b = getHibernateTemplate().execute(new HibernateCallback(){
-			public Object doInHibernate(Session session) throws HibernateException, SQLException {
-				try {
-					conn = session.connection();
-					conn.setAutoCommit(false);
-					stmt = conn.createStatement();
-					for(int i=0; i<sqlArr.length; i++){
-						if(sqlArr[i] != null && sqlArr[i].length() > 1){
-							stmt.execute(sqlArr[i]);
-							if(i%200 == 0)conn.commit();// Add by YangJunping 2010-12-31
-						}
-					}
-					conn.commit();
-					return true;
-				} catch (SQLException e) {
-					logger.error("executeMultiSql执行失败，异常:"+e.getMessage());
-					try {
-						conn.rollback();
-					} catch (SQLException e1) {
-						e1.printStackTrace();
-					}
-					e.printStackTrace();
-					return false;
-				} finally{
-					try {
-						if(rs != null) rs.close();
-						if(stmt != null) stmt.close();
-					} catch (SQLException e) {
-						e.printStackTrace();
-					}
-				}
-			}
-		});
-		return (Boolean) b;
+		return executeSqlStatements(sqlArr, false);
 	}
 	
 	/**
@@ -495,46 +460,53 @@ public class CommonServiceImp extends HibernateDao implements ICommonService {
 	}
 	
 	/**
-	 * 该方法是封装jdbc中的executeUpdate，但可以同时执行多条sql,已开启事物管理
+	 * 批量执行更新 SQL，遵循与 executeMultiSql 相同的事务边界。
 	 */
 	public boolean executeUpdateMultiSql(final String[] sqlArr){
-		if(null == sqlArr || sqlArr.length < 1){
+		return executeSqlStatements(sqlArr, true);
+	}
+
+	private boolean executeSqlStatements(final String[] sqlArr, final boolean updateOnly){
+		if(sqlArr == null || sqlArr.length < 1){
 			return false;
 		}
-		Object b = getHibernateTemplate().execute(new HibernateCallback(){
-			public Object doInHibernate(Session session) throws HibernateException, SQLException {
+		return getHibernateTemplate().execute(new HibernateCallback<Boolean>(){
+			public Boolean doInHibernate(Session session) throws HibernateException, SQLException {
+				Transaction transaction = session.getTransaction();
+				boolean ownsTransaction = !transaction.isActive();
+				if(ownsTransaction){
+					transaction.begin();
+				}
 				try {
-					conn = session.connection();
-					conn.setAutoCommit(false);
-					stmt = conn.createStatement();
-					for(int i=0; i<sqlArr.length; i++){
-						if(sqlArr[i] != null && sqlArr[i].length() > 1){
-							stmt.executeUpdate(sqlArr[i]);
+					// JDBC objects belong to this invocation, not the singleton service.
+					try(Statement statement = session.connection().createStatement()){
+						for(String sql : sqlArr){
+							if(sql != null && sql.trim().length() > 1){
+								if(updateOnly){
+									statement.executeUpdate(sql);
+								}else{
+									statement.execute(sql);
+								}
+							}
 						}
 					}
-					conn.commit();
+					if(ownsTransaction){
+						transaction.commit();
+					}
 					return true;
-				} catch (SQLException e) {
-					logger.error("executeMultiSql执行失败，异常:"+e.getMessage());
-					try {
-						conn.rollback();
-					} catch (SQLException e1) {
-						e1.printStackTrace();
+				} catch (SQLException | RuntimeException e) {
+					if(ownsTransaction && transaction.isActive()){
+						try {
+							transaction.rollback();
+						}catch(RuntimeException rollbackFailure){
+							e.addSuppressed(rollbackFailure);
+						}
 					}
-					e.printStackTrace();
-					return false;
-				} finally{
-					try {
-						if(rs != null) rs.close();
-						if(stmt != null) stmt.close();
-						conn.setAutoCommit(true);
-					} catch (SQLException e) {
-						e.printStackTrace();
-					}
+					// Propagate failures so Spring rolls back the enclosing operation.
+					throw e;
 				}
 			}
 		});
-		return (Boolean) b;
 	}
 	
 

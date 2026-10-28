@@ -63,8 +63,9 @@
 	</bean>
 	<!-- Bean -->
 	<bean id="serviceLocator" class="cn.com.adtech.riss2.core.ServiceLocator" scope="singleton" />
-	<!-- WebService -->
-	<bean id="fileConvertService" class="cn.com.adtech.riss2.wsClient.FileConvertServiceClient" />
+	<!-- Embedded conversion is the default; instantiate the legacy SOAP client only in remote mode. -->
+	<bean id="localFileConvertService" class="cn.com.adtech.riss2.fileservice.LocalFileConvertService" destroy-method="close" />
+	<bean id="fileConvertService" class="cn.com.adtech.riss2.wsClient.FileConvertServiceClient" lazy-init="true" />
 	<!-- 定时任务：begin -->
 	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
 		<property name="triggers">

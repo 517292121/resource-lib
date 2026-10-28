@@ -26,6 +26,7 @@ import cn.com.adtech.riss2.bso.platform.IResourceSearchService;
 import cn.com.adtech.riss2.core.CommonUtil;
 import cn.com.adtech.riss2.core.ConstantsObj;
 import cn.com.adtech.riss2.core.MmSettingConstant;
+import cn.com.adtech.riss2.core.i18n.FrontendMessages;
 import cn.com.adtech.riss2.domain.resource.ResMetaStore;
 import cn.com.unionlib.lucene.bean.PageBean;
 import cn.com.unionlib.lucene.bean.ResMainBean;
@@ -102,6 +103,14 @@ public class DataSearchController {
 				if (store == null) throw new IllegalArgumentException("Resource library does not exist");
 				params.put("resLib", store.getRmstName());
 			}
+			Long categoryId = ServletRequestUtils.getLongParameter(request, "rdtyAId", 0L);
+			if (categoryId > 0L) {
+				StringBuilder ids = new StringBuilder();
+				for (Long id : resourceSearchService.getLiteratureResourceIds(categoryId, storeId)) {
+					if (ids.length() > 0) ids.append(','); ids.append(id.longValue());
+				}
+				params.put("resourceIds", ids.toString());
+			}
 			long[] counts = luceneSearchService.getSearchResultCounts(params);
 			int totalPages = (int) Math.min(Integer.MAX_VALUE,
 					(counts[0] + SEARCH_RESULT_PAGE_SIZE - 1L) / SEARCH_RESULT_PAGE_SIZE);
@@ -157,6 +166,8 @@ public class DataSearchController {
 		if (storeId > 0) query.put("rmstId", storeId);
 		Long typeId = ServletRequestUtils.getLongParameter(request, "rltyId", 0L);
 		if (typeId > 0) query.put("rltyId", typeId);
+		Long categoryId = ServletRequestUtils.getLongParameter(request, "rdtyAId", 0L);
+		if (categoryId > 0) query.put("literatureCategoryId", categoryId);
 		Pagination pagination = new Pagination();
 		pagination.setPageResults(SEARCH_RESULT_PAGE_SIZE);
 		pagination.setCurrentPage(requestedPage - 1);
@@ -394,134 +405,109 @@ public class DataSearchController {
 	public String inResAdvancedSearch(HttpServletRequest request, Model model) {
 		Long storeId = ServletRequestUtils.getLongParameter(request, "rmstId", 0L);
 		if (storeId > 0L) model.addAttribute("advancedLibraryId", CommonUtil.idToString(String.valueOf(storeId)));
-		model.addAttribute("advancedTypes", resourceSearchService.getLiteratureTypes(storeId));
+		List<Object[]> types = new ArrayList<Object[]>();
+		for (Object[] row : resourceSearchService.getLiteratureTypes(storeId)) {
+			Object[] item = row.clone();
+			item[1] = FrontendMessages.backendName(request, (String)row[1], (String)row[4]);
+			types.add(item);
+		}
+		model.addAttribute("advancedTypes", types);
 		return "platform/pc/resAdvSearch";
 	}
 	
 	
 	
-	//进入高级检索
+	// Advanced and ordinary results share one frontend template.
 	@RequestMapping(value="/resAdvs")
 	public String resAdvancedSearch(Model model, HttpServletRequest request) {
-		Map<String, Object> map = new LinkedHashMap<String, Object>();
-		Map<String, Object> params = new HashMap<String, Object>();
-		
-		//分页设置
-		int currentPage = ServletRequestUtils.getIntParameter(request, "currentPage", 0);
-		Pagination pagination = new Pagination();
-		int size = Integer.parseInt(ConstantsObj.getSysProperty(MmSettingConstant.getDefaultPageSize()));
-		int begin = 0;//当前页开始数
-		int end = 0;//当前页结束数
-		pagination.setPageResults(size);
-		pagination.setCurrentPage(currentPage);
-		String key1 = ServletRequestUtils.getStringParameter(request, "KEY1", "");
-		String key2 = ServletRequestUtils.getStringParameter(request, "KEY2", "");
-		String key3 = ServletRequestUtils.getStringParameter(request, "KEY3", "");
-		String key4 = ServletRequestUtils.getStringParameter(request, "KEY4", "");
-		String[] rmstIdArr = ServletRequestUtils.getStringParameters(request, "libId");
-		String[] rltyIdArr = ServletRequestUtils.getStringParameters(request, "typeId");
-		String sort = ServletRequestUtils.getStringParameter(request, "SORT", "rsdaBuilddate");
-		
-		String pageUrl = "resAdvs?SORT="+sort;//分页跳转地址
-		
-		if(CommonUtil.isNotNull(key1)){
-			String col1 = ServletRequestUtils.getStringParameter(request, "COL1", "rsdaTitle");
-			String like1 = ServletRequestUtils.getStringParameter(request, "LIKE1", "LIKE");
-			params.put("key1", key1);
-			params.put("col1", col1);
-			params.put("like1", like1);
-			
-			map.put("col1", col1);
-			map.put("key1", key1);
-			
-			map.put("key", key1);	//简单检索时使用
-			map.put("attr", col1);
-			map.put("redkey", "<span style='color:red'>"+key1+"</span>");
-			pageUrl += "&KEY1="+key1+"&COL1="+col1+"&LIKE1="+like1;
+		model.addAttribute("advancedSearch", true);
+		for (int i = 1; i <= 4; i++) {
+			String key = ServletRequestUtils.getStringParameter(request, "KEY" + i, "").trim();
+			if (!key.isEmpty()) { model.addAttribute("key", key); break; }
 		}
-		if(CommonUtil.isNotNull(key2)){
-			String con2 = ServletRequestUtils.getStringParameter(request, "CON2", "AND");
-			String col2 = ServletRequestUtils.getStringParameter(request, "COL2", "rsdaTitle");
-			String like2 = ServletRequestUtils.getStringParameter(request, "LIKE2", "LIKE");
-			params.put("key2", key2);
-			params.put("con2", con2);
-			params.put("col2", col2);
-			params.put("like2", like2);
-			
-			map.put("col2", col2);
-			map.put("key2", key2);
-			pageUrl += "&KEY4="+key4+"&CON4="+con2+"&COL4="+col2+"&LIKE4="+like2;
-		}
-		if(CommonUtil.isNotNull(key3)){
-			String con3 = ServletRequestUtils.getStringParameter(request, "CON3", "AND");
-			String col3 = ServletRequestUtils.getStringParameter(request, "COL3", "rsdaTitle");
-			String like3 = ServletRequestUtils.getStringParameter(request, "LIKE3", "LIKE");
-			params.put("key3", key3);
-			params.put("con3", con3);
-			params.put("col3", col3);
-			params.put("like3", like3);
-			
-			map.put("col3", col3);
-			map.put("key3", key3);
-			pageUrl += "&KEY4="+key4+"&CON4="+con3+"&COL4="+col3+"&LIKE4="+like3;
-		}
-		if(CommonUtil.isNotNull(key4)){
-			String con4 = ServletRequestUtils.getStringParameter(request, "CON4", "AND");
-			String col4 = ServletRequestUtils.getStringParameter(request, "COL4", "rsdaTitle");
-			String like4 = ServletRequestUtils.getStringParameter(request, "LIKE4", "LIKE");
-			params.put("key4", key4);
-			params.put("con4", con4);
-			params.put("col4", col4);
-			params.put("like4", like4);
-			
-			map.put("col4", col4);
-			map.put("key4", key4);
-			pageUrl += "&KEY4="+key4+"&CON4="+con4+"&COL4="+col4+"&LIKE4="+like4;
-		}
-		
-		String rmstIdStr = "";
-		if(rmstIdArr != null && rmstIdArr.length > 0){
-			for(String id : rmstIdArr){
-				rmstIdStr += CommonUtil.strToId(id) + ",";
-			}
-			rmstIdStr = rmstIdStr.substring(0, rmstIdStr.length() - 1);
-			//params.put("rmstIds", rmstIdStr);
-			
-			pageUrl += "&libId="+rmstIdStr;
-		}
-		String rltyIdStr = "";
-		if(rltyIdArr != null && rltyIdArr.length > 0){
-			for(String id : rltyIdArr){
-				rltyIdStr += id + ",";
-			}
-			rltyIdStr = rltyIdStr.substring(0, rltyIdStr.length() - 1);
-			//params.put("rltyIds", rltyIdStr);
-			
-			pageUrl += "&typeId="+rltyIdStr;
-		}
-		
-		List<Object[]> dataList = this.resourceSearchService.getResAdvSearch(pagination, params, rmstIdStr, rltyIdStr, sort);
+		return "platform/pc/searchResults";
+	}
+
+	@RequestMapping(value="/search/advanced-results")
+	public void advancedSearchResultsJson(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		response.setContentType("application/json;charset=UTF-8");
+		response.setHeader("Cache-Control", "no-store");
+		Map<String, Object> result = new LinkedHashMap<String, Object>();
 		try {
-			ResCommonController.parseCoverList(request, dataList, 7, 11, 10);
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
+			Map<String, Object> criteria = new LinkedHashMap<String, Object>();
+			for (int i = 1; i <= 4; i++) {
+				String key = ServletRequestUtils.getStringParameter(request, "KEY" + i, "").trim();
+				if (key.isEmpty()) continue;
+				criteria.put("key" + i, key);
+				criteria.put("col" + i, cn.com.adtech.riss2.bso.platform.AdvancedSearchQuery.field(
+						ServletRequestUtils.getStringParameter(request, "COL" + i, "rsdaTitle")));
+				criteria.put("like" + i, ServletRequestUtils.getStringParameter(request, "LIKE" + i, "LIKE"));
+				criteria.put("con" + i, ServletRequestUtils.getStringParameter(request, "CON" + i, "AND"));
+			}
+			// Validate field names/operators before passing anything into HQL.
+			cn.com.adtech.riss2.bso.platform.AdvancedSearchQuery.conditions(criteria, new ArrayList<Object>());
+			criteria.put("advancedResultFields", true);
+			String libraries = advancedFilterIds(request.getParameterValues("libId"), true);
+			String types = advancedFilterIds(request.getParameterValues("typeId"), false);
+			int requestedPage = Math.max(1, Math.min(100000,
+					ServletRequestUtils.getIntParameter(request, "pn", 1)));
+			Pagination pagination = new Pagination();
+			pagination.setPageResults(SEARCH_RESULT_PAGE_SIZE);
+			pagination.setCurrentPage(requestedPage - 1);
+			List<Object[]> rows = resourceSearchService.getResAdvSearch(pagination, criteria, libraries, types, "rsdaBuilddate");
+			if (pagination.getTotalPages() > 0 && pagination.getCurrentPage() >= pagination.getTotalPages()) {
+				pagination.setCurrentPage(pagination.getTotalPages() - 1);
+				rows = resourceSearchService.getResAdvSearch(pagination, criteria, libraries, types, "rsdaBuilddate");
+			}
+			List<Map<String, Object>> items = new ArrayList<Map<String, Object>>();
+			if (rows != null) for (Object[] row : rows) {
+				Map<String, Object> item = new LinkedHashMap<String, Object>();
+				item.put("id", CommonUtil.idToString(String.valueOf(row[0])));
+				item.put("title", row[1]); item.put("creator", row[2]); item.put("publisher", row[3]);
+				item.put("content", row[5]); item.put("dataType", "资源");
+				item.put("passages", new ArrayList<Object>());
+				Map<String, Object> fields = new LinkedHashMap<String, Object>();
+				fields.put("rsdaTitle", row[1]); fields.put("rsdaCreator", row[2]);
+				fields.put("rsdaPublisher", row[3]); fields.put("rsdaDescription", row[5]);
+				fields.put("rsdaKeyword", row[6]); fields.put("rsdaSubject", row[12]);
+				fields.put("rsdaIdentifier", row[13]);
+				item.put("fields", fields);
+				items.add(item);
+			}
+			result.put("success", true); result.put("items", items);
+			result.put("bookCount", pagination.getTotalResults());
+			result.put("recordCount", resourceSearchService.getResAdvSearchHitCount(criteria, libraries, types));
+			result.put("totalLine", pagination.getTotalResults()); result.put("totalPage", pagination.getTotalPages());
+			result.put("currentPage", pagination.getCurrentPage() + 1); result.put("pageSize", SEARCH_RESULT_PAGE_SIZE);
+		} catch (IllegalArgumentException e) {
+			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+			result.put("success", false); result.put("msg", "高级检索条件无效，请重新选择。");
+		} catch (Exception e) {
+			org.apache.log4j.Logger.getLogger(DataSearchController.class).error("高级检索结果加载失败", e);
+			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+			result.put("success", false); result.put("msg", "高级检索结果加载失败，请稍后重试。");
 		}
-		begin = size*currentPage+1;
-		end = (currentPage+1)*size;
-		if(begin>pagination.getTotalResults()){
-			begin = pagination.getTotalResults();
+		response.getWriter().write(JSONObject.fromObject(result).toString());
+	}
+
+	private String advancedFilterIds(String[] values, boolean encoded) {
+		java.util.Set<Long> ids = new java.util.LinkedHashSet<Long>();
+		if (values != null) for (String value : values) for (String token : value.split(",")) {
+			StringBuilder decoded = new StringBuilder();
+			for (char c : token.trim().toCharArray()) {
+				int digit = "zKUOJMwAsE".indexOf(c);
+				if (encoded && digit >= 0) decoded.append(digit);
+				else if (c >= '0' && c <= '9') decoded.append(c);
+				else throw new IllegalArgumentException("Invalid resource filter");
+			}
+			if (decoded.length() == 0) continue;
+			long id = Long.parseLong(decoded.toString());
+			if (id < 1L) throw new IllegalArgumentException("Invalid resource filter");
+			ids.add(id);
 		}
-		if(end>pagination.getTotalResults()){
-			end = pagination.getTotalResults();
-		}
-		
-		map.put("dataList", dataList);
-		map.put("pagination",pagination);
-		map.put("pageUrl", pageUrl);
-		map.put("begin", begin);
-		map.put("end", end);
-		model.addAllAttributes(map);
-		return "platform/pc/resAdvSearchResult";
+		StringBuilder result = new StringBuilder();
+		for (Long id : ids) { if (result.length() > 0) result.append(','); result.append(id); }
+		return result.toString();
 	}
 }
 

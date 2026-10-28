@@ -1,0 +1,172 @@
+/* Frontend member login only; the console and registration retain their own themes. */
+.member-login-page,
+.member-login-page * { box-sizing: border-box; }
+.member-login-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 24px;
+    color: #573f26;
+    background: #eee7d6;
+    font: 15px/1.5 "Microsoft YaHei", "Noto Sans Tibetan", sans-serif;
+}
+.member-login-card { width: 100%; max-width: 540px; overflow: hidden; border: 1px solid #bda375; background: #f6f0e3; box-shadow: 0 12px 45px #31261626; }
+.member-login-heading { padding: 22px 38px 20px; border-bottom: 3px solid #b79a5e; color: #f3d79a; text-align: center; background-color: #123638; background-image: url("../../images/platform/psb/home/header-texture.png"); background-position: center; background-size: cover; background-repeat: no-repeat; }
+.member-login-brand { display: block; width: 100%; max-width: 400px; height: auto; margin: 0 auto; }
+.member-login-heading h1 { display: flex; align-items: center; justify-content: center; gap: 18px; margin: 14px 0 0; font: 26px/1.4 "SimSun", "Noto Serif Tibetan", serif; letter-spacing: .16em; }
+.member-login-heading h1::before,
+.member-login-heading h1::after { width: 42px; height: 1px; background: #b79a5e; content: ""; }
+.member-login-form { padding: 26px 42px; }
+.member-login-field + .member-login-field { margin-top: 18px; }
+.member-login-field label { display: block; margin-bottom: 7px; color: #705637; }
+.member-login-input { display: flex; align-items: center; height: 46px; border: 1px solid #ccb98f; background: #fffcf4; transition: border-color .15s, box-shadow .15s; }
+.member-login-input:focus-within { border-color: #aa8745; box-shadow: 0 0 0 2px #b99a5a26; }
+.member-login-input svg { flex: 0 0 20px; width: 20px; height: 20px; margin: 0 14px; fill: none; stroke: #9b8255; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.member-login-input input { width: 100%; min-width: 0; height: 100%; padding: 0 14px 0 0; border: 0; border-radius: 0; outline: none; color: #40331f; background: transparent; font: inherit; }
+.member-login-submit { display: block; width: 100%; min-height: 46px; margin-top: 24px; padding: 9px 18px; border: 1px solid #b79a5e; border-radius: 2px; color: #f3d79a; background: #123638; font: 18px/1.5 "Microsoft YaHei", "Noto Sans Tibetan", sans-serif; letter-spacing: .18em; cursor: pointer; transition: background .15s; }
+.member-login-submit:hover { background: #20494a; }
+.member-login-register { margin: 18px 0 0; color: #8b775b; text-align: center; font-size: 14px; }
+.member-login-register a { color: #8c652e; text-decoration: none; border-bottom: 1px solid #c9ae7b; }
+.member-login-register a:hover { color: #123638; border-color: #123638; }
+.member-login-submit:focus-visible,
+.member-login-register a:focus-visible { outline: 2px solid #b79a5e; outline-offset: 3px; }
+.member-login-form #msg:empty { display: none; }
+.member-login-form #msg { margin-top: 12px; color: #a3432c; }
+.is-embedded .member-login-page { min-height: 100vh; padding: 0; align-items: flex-start; background: #f6f0e3; }
+.is-embedded .member-login-card { max-width: none; border: 0; box-shadow: none; }
+
+/* Both header implementations load this file so their iframe shells match. */
+.platform-login-dialog { box-sizing: border-box; position: fixed; width: min(540px,94vw); max-width: none; max-height: 92vh; margin: auto; padding: 32px 0 0; overflow: hidden; border: 1px solid #b79a5e; border-radius: 3px; background: #123638; box-shadow: 0 18px 65px #0006; }
+.platform-login-dialog::backdrop { background: #142724b3; }
+.platform-login-dialog iframe { display: block; width: 100%; height: min(500px,calc(92vh - 34px)); border: 0; background: #f6f0e3; }
+.platform-login-dialog.platform-register-dialog iframe { height: min(720px,calc(92vh - 34px)); }
+.platform-login-close { position: absolute; top: 0; right: 5px; width: 32px; height: 32px; padding: 0; border: 0; color: #f3d79a; background: transparent; font: 25px/1 sans-serif; cursor: pointer; }
+.platform-login-close:hover { color: #fff5d8; }
+.platform-login-close:focus-visible { outline: 1px solid #f3d79a; outline-offset: -4px; }
+.layui-layer.platform-member-login-layer { overflow: hidden; border: 1px solid #b79a5e; border-radius: 3px; background: #f6f0e3; box-shadow: 0 18px 65px #0006; }
+.platform-member-login-layer .layui-layer-content { background: #f6f0e3; }
+.platform-member-login-layer .layui-layer-setwin { top: 12px; right: 12px; }
+.platform-member-login-layer .layui-layer-setwin .layui-layer-close2 { top: -5px; right: -5px; width: 28px; height: 28px; border: 0; background: none; color: #f3d79a; text-decoration: none; }
+.platform-member-login-layer .layui-layer-close2::before { display: block; content: "×"; text-align: center; font: 25px/28px sans-serif; }
+
+/* Registration shares the member login window's Dunhuang visual language. */
+.member-register-page,
+.member-register-page * { box-sizing: border-box; }
+.member-register-page {
+    margin: 0;
+    padding: 0;
+    color: #573f26;
+    background: #f6f0e3;
+    font: 15px/1.5 "Microsoft YaHei", "Noto Sans Tibetan", sans-serif;
+}
+.member-register-card { max-width: 540px; min-height: 0; border: 0; box-shadow: none; }
+.member-register-heading { padding: 22px 38px 20px; }
+.member-register-heading h1 { margin-top: 12px; }
+.member-register-container { width: 100%; margin: 0; padding: 22px 42px 28px; }
+.member-register-tabs {
+    display: flex;
+    width: 100%;
+    height: 44px;
+    margin: 0 0 16px;
+    border-bottom: 1px solid #ccb98f;
+}
+.member-register-tabs span {
+    position: relative;
+    flex: 1;
+    height: 44px;
+    color: #8b775b;
+    text-align: center;
+    font-size: 16px;
+    line-height: 42px;
+    cursor: default;
+}
+.member-register-tabs span.active { color: #8c652e; }
+.member-register-tabs span.active::after {
+    position: absolute;
+    right: 24%;
+    bottom: -1px;
+    left: 24%;
+    height: 2px;
+    background: #b79a5e;
+    content: "";
+}
+.member-register-content { height: auto; min-height: 0; margin: 0; }
+.member-register-content .box { width: 100%; }
+.member-register-content ul { display: none; width: 100%; margin: 0; padding: 0; list-style: none; }
+.member-register-content ul.is-active { display: block; }
+.member-register-panel { width: 100%; margin: 0; }
+.member-register-panel table { width: 100%; table-layout: fixed; border-collapse: separate; border-spacing: 0 10px; }
+.member-register-panel table tr { height: auto; }
+.member-register-panel table td { padding: 0; }
+.member-register-panel table input { box-sizing: border-box; }
+.member-register-panel .zc_input {
+    width: 100%;
+    height: 46px;
+    padding: 0 14px;
+    border: 1px solid #ccb98f;
+    color: #40331f;
+    background: #fffcf4;
+    font: inherit;
+    transition: border-color .15s, box-shadow .15s;
+}
+.member-register-panel .zc_input:focus { border-color: #aa8745; box-shadow: 0 0 0 2px #b99a5a26; }
+.member-register-panel .member-register-code-row { display: flex; align-items: stretch; gap: 10px; }
+.member-register-panel .zc_input.yzm { flex: 1 1 auto; width: 0; min-width: 0; margin: 0; float: none; }
+.member-register-panel .codebox { flex: 0 0 130px; width: 130px; height: 46px; border: 1px solid #ccb98f; background: #fffcf4; }
+.member-register-panel .codebox img { display: block; width: 100%; height: 44px; object-fit: contain; }
+.member-register-panel .smsbtn { flex: 0 0 130px; width: 130px; padding: 0 6px; color: #8c652e; font: inherit; cursor: pointer; }
+.member-register-panel .smsbtn:disabled { color: #b6a88f; cursor: wait; }
+.member-register-panel label { color: #705637; font-size: 13px; cursor: pointer; }
+.member-register-panel #regServer,
+.member-register-panel #e_regServer { width: 15px; height: 15px; margin: 0 6px 0 0; vertical-align: -2px; accent-color: #8c652e; }
+.member-register-panel .reg_btn {
+    display: block;
+    width: 100%;
+    height: 46px;
+    margin: 4px 0 0;
+    border: 1px solid #b79a5e;
+    border-radius: 2px;
+    color: #f3d79a;
+    background: #123638;
+    font: 17px/44px "Microsoft YaHei", "Noto Sans Tibetan", sans-serif;
+    letter-spacing: .16em;
+    cursor: pointer;
+    transition: background .15s;
+}
+.member-register-panel .reg_btn:hover { background: #20494a; }
+.member-register-panel table tr:last-child td { padding-top: 2px; color: #8b775b; }
+.member-register-panel table tr:last-child a { color: #8c652e; border-bottom: 1px solid #c9ae7b; }
+.member-register-success { padding: 74px 20px 40px; text-align: center; }
+.member-register-success .regTips { height: auto; margin: 0; }
+.member-register-success .regTips img { width: 42px; height: 42px; margin: 0 0 18px; border-radius: 50%; }
+.member-register-success .regTips span { display: block; margin: 0; color: #705637; font-size: 20px; font-weight: normal; }
+.member-register-success .regTips span i { color: #8c652e; font-size: 20px; font-style: normal; }
+.member-register-success .incenter { margin: 24px 0 0; color: #8b775b; font-size: 15px; line-height: 2; }
+.member-register-success .incenter a { color: #8c652e; border-bottom: 1px solid #c9ae7b; font-size: inherit; }
+.member-register-success .incenter a:hover { color: #123638; border-color: #123638; }
+.member-terms-dialog {
+    box-sizing: border-box;
+    width: min(760px, calc(100vw - 32px));
+    height: min(720px, calc(100vh - 48px));
+    max-width: none;
+    max-height: none;
+    padding: 34px 0 0;
+    border: 1px solid #c9ae7b;
+    background: #f6f0e2;
+    box-shadow: 0 14px 50px #0006;
+}
+.member-terms-dialog::backdrop { background: #0009; }
+.member-terms-dialog iframe { display: block; width: 100%; height: 100%; border: 0; background: #fff; }
+.member-terms-close { position: absolute; top: 2px; right: 9px; border: 0; padding: 0 5px; background: transparent; color: #705637; font-size: 26px; line-height: 28px; cursor: pointer; }
+@media (max-width: 480px) {
+    .member-register-container { padding: 20px 24px 28px; }
+    .member-register-heading { padding: 22px 24px 18px; }
+}
+@media (max-width: 480px) {
+    .member-login-page { padding: 12px; }
+    .member-login-heading { padding: 22px 24px 18px; }
+    .member-login-heading h1 { font-size: 24px; }
+    .member-login-form { padding: 24px; }
+}

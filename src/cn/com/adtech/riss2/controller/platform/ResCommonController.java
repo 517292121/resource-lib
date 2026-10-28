@@ -218,6 +218,22 @@ public class ResCommonController {
 			map.put("filemsg", "您没有资源的阅读权限！");
 			return map;
 		}
+		// TXT is displayed as escaped text; no SWF conversion or download permission is required.
+		if(userRight >= SysUserType.PURIVEW_BROWSE_SOURCE && cn.com.adtech.riss2.core.file.TextFilePreview.supports(resource)
+				&& CommonUtil.isNotNull(resource.getRsdaFileLocalName())) {
+			map.put("browseUrl",resource.getRsdaFileUrl());
+			map.put("isTextPreview",true);
+			map.put("downloadUrl",userRight >= SysUserType.PURIVEW_DOWNLOAD ? resource.getRsdaFileUrl() : "");
+			return map;
+		}
+		// Excel is rendered directly from the source, without a legacy Flash conversion.
+		if(userRight >= SysUserType.PURIVEW_BROWSE_SOURCE && cn.com.adtech.riss2.core.file.SpreadsheetPreview.supports(resource)
+				&& CommonUtil.isNotNull(resource.getRsdaFileLocalName())) {
+			map.put("browseUrl",resource.getRsdaFileUrl());
+			map.put("isExcelPreview",true);
+			map.put("downloadUrl",userRight >= SysUserType.PURIVEW_DOWNLOAD ? resource.getRsdaFileUrl() : "");
+			return map;
+		}
 		if(userRight == SysUserType.PURIVEW_BROWSE_SOURCE){
 			map.put("browseUrl", fileSwfUrl);
 			map.put("downloadUrl", "");
@@ -305,8 +321,8 @@ public class ResCommonController {
 			}
 
 			String dirpath = res[dirIndex].toString();
-			File coverFile = new File(dirpath, "cover.jpg");
-			if(coverFile.exists()){
+			File coverFile = cn.com.adtech.riss2.core.file.ResourceDirectoryFiles.cover(dirpath);
+			if(coverFile != null){
 				//多线程情况下，主线程结束后,HttpServletRequest中的数据可能会被释放，子线程数据将不能正常访问，path为空时不存访问前缀
 				res[imgIndex] = path == null ? "" : basePath + "file/access/" + CommonUtil.encode(coverFile.getAbsolutePath());
 			}else{
@@ -335,8 +351,8 @@ public class ResCommonController {
 		}
 
 		String dirpath = resource.getRsdaFileUrl();
-		File coverFile = new File(dirpath, "cover.jpg");
-		if(coverFile.exists()){
+		File coverFile = cn.com.adtech.riss2.core.file.ResourceDirectoryFiles.cover(dirpath);
+		if(coverFile != null){
 			resource.setRsdaBigimgUrl(basePath + "file/access/" + CommonUtil.encode(coverFile.getAbsolutePath()));
 		}else{
 			resource.setRsdaBigimgUrl("");

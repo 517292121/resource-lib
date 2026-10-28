@@ -28,6 +28,13 @@ public class CreateTreeController extends MultiActionController{
 			long catalogId = ServletRequestUtils.getLongParameter(request, "id", 0);
 			CurrentUserSession userSession = CurrentUserSession.findUserSession(request);
 			String json = userSession.getJsonFunctionTree(catalogId);
+			if(userSession.isManager() && json != null && !json.trim().isEmpty()) {
+				try {
+					net.sf.json.JSONArray nodes=net.sf.json.JSONArray.fromObject(json);
+					appendAnnotationMenu(nodes);
+					json=nodes.toString();
+				} catch(Exception error) { logger.warn("无法补充批注管理菜单",error); }
+			}
 			
 			if(logger.isDebugEnabled())
 				logger.debug(json);
@@ -42,6 +49,23 @@ public class CreateTreeController extends MultiActionController{
 			} catch (IOException e) {
 				logger.error("获得输出对象失败！",e);				
 			}
+		}
+	}
+
+	/** Reuse the administrator's existing resource-maintenance folder without changing role assignments. */
+	private void appendAnnotationMenu(net.sf.json.JSONArray nodes) {
+		for(Object value:nodes) {
+			net.sf.json.JSONObject node=(net.sf.json.JSONObject)value;
+			if(!node.containsKey("children"))continue;
+			net.sf.json.JSONArray children=node.getJSONArray("children");
+			if("资源维护".equals(node.optString("text"))||"cat306".equals(node.optString("id"))) {
+				boolean exists=false;
+				for(Object child:children) if("/console/annotations".equals(((net.sf.json.JSONObject)child).optString("url")))exists=true;
+				if(!exists) {
+					net.sf.json.JSONObject annotation=new net.sf.json.JSONObject();
+					annotation.put("id","textAnnotations");annotation.put("text","批注管理");annotation.put("leaf",true);annotation.put("url","/console/annotations");children.add(annotation);
+				}
+			} else appendAnnotationMenu(children);
 		}
 	}
 }

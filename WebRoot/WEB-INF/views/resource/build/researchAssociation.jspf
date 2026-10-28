@@ -1,0 +1,16 @@
+<%@ page pageEncoding="UTF-8" %>
+<c:if test="${researchLinkEnabled}">
+<tr bgcolor="#FAFAFA"><td width="250" align="right"><strong>关联(Relation)：</strong></td><td>
+  <div class="resource-selector" data-resource-selector="true" data-multiple="true" data-self="${empty resource.rsdaId ? 0 : resource.rsdaId}" data-url="<%=path%>/console/data/inputSingle.htm?action=maintenanceOptions">
+    <input type="hidden" name="researchLinksPresent" value="1" />
+    <input type="search" autocomplete="off" placeholder="输入资源题名搜索，可关联多条资源" aria-label="搜索关联资源题名" />
+    <button class="resource-selector-toggle" type="button" aria-label="展开关联资源">▼</button>
+    <input type="hidden" name="relatedResourceIds" />
+    <div class="resource-selector-popup" hidden="hidden"></div>
+    <div class="resource-selector-selected">
+      <c:forEach items="${researchTargets}" var="researchTarget"><span data-selected-id="${researchTarget[0]}"><c:out value="${researchTarget[1]}" /></span></c:forEach>
+    </div>
+    <p class="resource-selector-hint"><c:choose><c:when test="${maintenance}">保存后默认审核通过，并显示在关联资源详情的“相关研究”中。</c:when><c:otherwise>保存并审核通过后，将显示在关联资源详情的“相关研究”中。</c:otherwise></c:choose></p>
+  </div>
+</td></tr>
+</c:if>

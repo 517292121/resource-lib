@@ -7,8 +7,9 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
+<%@ include file="/WEB-INF/views/platform/pc/common/frontendI18n.jspf" %>
     <meta charset="UTF-8">
-    <title>${resource.rsdaTitle }-在线预览</title>
+    <title>${resource.rsdaTitle }<%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "-在线预览") %></title>
     <style type="text/css">
         *{padding: 0;margin: 0;}
         iframe{position: fixed;width: 100%;height: 100%;left: 0;top: 0;border: 0;}

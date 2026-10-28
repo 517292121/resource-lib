@@ -1,0 +1,48 @@
+.member-center-page *{box-sizing:border-box}
+.member-center-page .annotation-records-footer{background:#722305;color:#d9b39e}
+.member-center-page .platform-header-tools{color:#fff1d1}
+.member-center-page .platform-account,.member-center-page .platform-language select{color:#fff1d1;background:#17352f;border-color:#ac9871}
+.member-center-page .platform-account:hover,.member-center-page .platform-account:focus-visible{color:#fff8e4;background:#24463e;border-color:#e5c991}
+/* The shared annotation header's logo image rule must not enlarge the account icon. */
+.member-center-page .platform-account img{width:19px;height:19px;object-fit:contain}
+.member-center-page .annotation-member-nav{position:sticky;top:24px}
+.member-center-page .annotation-member-nav a:hover{background:#f0e7d4;color:#75422c}
+.member-center-page .annotation-member-nav a:focus-visible{outline:2px solid #ae8d5a;outline-offset:2px}
+.member-center-page .annotation-records-main{min-height:410px}
+.member-center-page .annotation-records-heading{padding-bottom:20px;border-bottom:1px solid #dfd4be}
+.member-center-page .annotation-record-search{margin-bottom:18px}
+.member-settings-form{max-width:760px}
+.member-settings-form fieldset{border:0;padding:0;margin:0 0 28px;min-width:0}
+.member-settings-form legend{width:100%;padding:0 0 12px;margin:0 0 18px;border-bottom:1px solid #e7ddc8;font-size:16px;color:#735739}
+.member-field{display:grid;grid-template-columns:108px minmax(0,1fr);align-items:start;gap:12px;margin:18px 0}
+.member-field>label,.member-field-label{padding:8px 0;color:#826a4c;font-size:13px}
+.member-field-control{min-width:0;max-width:500px}
+.member-field-control>input:not([type=radio]):not([type=hidden]):not([type=file]){width:100%;max-width:360px;border:1px solid #cbb994;border-radius:0;padding:8px 11px;background:#fffaf0;color:#51412d;font:14px/1.6 "Microsoft YaHei",sans-serif}
+.member-field-control>input:focus{outline:2px solid #b2956355;outline-offset:1px}
+.member-field-control>input[type=file]{max-width:100%;padding:0;border:1px solid #cbb994;background:#fffaf0;color:#8b7657;font:12px/1.6 "Microsoft YaHei",sans-serif}
+.member-field-control>input[type=file]::file-selector-button{border:0;border-right:1px solid #cbb994;padding:8px 12px;margin-right:10px;background:#e9dec7;color:#735c3e;font:inherit;cursor:pointer}
+.member-readonly{display:block;padding:8px 0;color:#51412d}
+.member-radio-options{display:flex;gap:26px;padding:8px 0}
+.member-radio-options label{display:inline-flex;align-items:center;gap:7px;cursor:pointer}
+.member-radio-options input{accent-color:#7a5337;margin:0}
+.member-form-hint{display:block;font-size:11px;color:#a18b68;margin:6px 0 0;line-height:1.8}
+.member-form-error{display:block;color:#a34b30;font-size:12px;margin-top:5px}
+.member-form-error:empty{display:none}
+.member-required{color:#a3603b;margin-left:4px}
+.member-avatar{width:74px;height:74px;object-fit:cover;border:1px solid #cbb994;padding:3px;background:#fffaf0;margin-bottom:12px}
+.member-save,.member-text-button,.userinfo_update_down,.userinfo_update_up{font:inherit;cursor:pointer}
+.member-save{border:1px solid #ac8c5d;border-radius:2px;background:#7a5337;color:#fff3d9;padding:9px 28px}
+.member-save:hover{background:#936742}
+.userinfo_update_down,.userinfo_update_up{border:0;border-bottom:1px solid #bb9c7188;padding:6px 0;background:transparent;color:#886044;text-decoration:none;font-size:13px}
+.member-password-fields{padding:1px 18px 5px;background:#eee4d333;border-left:2px solid #c8b187;margin:14px 0 0}
+.member-form-actions{padding:5px 0 0 120px}
+.member-favorite-title{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.member-resource-type{font:11px/1.5 "Microsoft YaHei",sans-serif;padding:2px 8px;background:#eee3cc;color:#8a7049;border:1px solid #d3bf97}
+.member-favorite-actions{display:flex;align-items:center;gap:18px;margin-top:14px}
+.member-favorite-actions form{display:inline-flex;margin:0}
+.member-text-button{border:0;border-bottom:1px solid #bb9c7188;background:none;color:#886044;padding:0;font-size:12px;line-height:1.5}
+.member-center-page .annotation-record-pagination a,.member-center-page .annotation-record-pagination>button{display:inline-block;padding:7px 16px;border:1px solid #ac8c5d;border-radius:2px;background:#7a5337;color:#fff3d9;font:inherit;text-decoration:none}
+.member-center-page .annotation-record-pagination a:hover{background:#936742}
+@media(max-width:1000px){.member-center-page .annotation-page-header{gap:14px}.member-center-page .annotation-page-header>nav{gap:16px}.member-center-page .annotation-records-layout{gap:18px}.member-center-page .annotation-member-nav{width:145px}.member-center-page .annotation-records-main{padding:24px}}
+@media(max-width:760px){.member-center-page .annotation-member-nav{position:static;width:auto}.member-center-page .annotation-records-main{padding:22px 18px}.member-center-page .annotation-records-heading{padding-bottom:16px}.member-field{grid-template-columns:82px minmax(0,1fr);gap:8px;margin:16px 0}.member-field>label,.member-field-label{font-size:12px}.member-form-actions{padding-left:90px}.member-password-fields{padding-left:10px;padding-right:10px}.member-center-page .annotation-record-search{flex-wrap:wrap}.member-center-page .annotation-record-search label{flex:1}.member-center-page .annotation-page-header{gap:10px}.member-center-page .platform-account img{width:15px;height:15px}}
+@media(max-width:390px){.member-field{grid-template-columns:1fr;gap:0}.member-field>label,.member-field-label{padding-bottom:5px}.member-form-actions{padding-left:0}.member-settings-form legend{font-size:15px}.member-radio-options{padding:3px 0}.member-password-fields{padding:5px 10px}}

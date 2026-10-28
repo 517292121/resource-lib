@@ -1,3 +1,6 @@
+
+  var uiText=window.platformText||function(value,parameters){return String(value).replace(/\{([a-zA-Z0-9_]+)\}/g,function(match,name){return parameters&&Object.prototype.hasOwnProperty.call(parameters,name)?String(parameters[name]):match;});};
+  var uiMarkup=window.platformMarkup||function(value){return value;};
 /***************************************************************************************
  	*	 
  	* 资源录入和编辑的相关验证和操作处理
@@ -270,7 +273,7 @@ function checkImageFileType(fileItem){
          }
     }
     if(result == false){
-		document.getElementById("imageFileArea").innerHTML = "<input type='file' name='bigimg' class='file text' onchange='checkImageFileType(this);'>&nbsp;<span style='color: #808080'>格式:jpg、jpeg、bmp、png、gif</span>";
+		document.getElementById("imageFileArea").innerHTML = uiMarkup("<input type='file' name='bigimg' class='file text' onchange='checkImageFileType(this);'>&nbsp;<span style='color: #808080'>格式:jpg、jpeg、bmp、png、gif</span>");
 		alert(poput_img_cover_format+"！");
     }
 }

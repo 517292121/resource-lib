@@ -1,98 +1,34 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-	<!-- 会员中心首页头部  -->
-	<%@ include file="../pc/common/header.jsp"%>
-	<script type="text/javascript">
-		function submit(val){
-			var form1 = document.getElementById(val);
-			if(form1)
-				form1.submit();
-		}
-		function literTypeLink(id) {
-			document.getElementById("rltyId").value = id;
-			document.getElementById("rltyLinkaaaSearchForm").submit();
-		}
-	</script>
-	<form method="post" id="rltyLinkaaaSearchForm" target="_blank" action="<%=path %>/search.htm">
-		<input id="sortField" name="sortField" type="hidden" value="title">
-		<input id="reverse" name="reverse" type="hidden" value="false">
-		<input id="showModel" name="showModel" type="hidden" value="1">
-		<input id="searchType" name="searchType" type="hidden" value="simple">
-		<input id="rltyId" name="rltyId" type="hidden" >
-		<input id="rltyLink" name="rltyLink" type="hidden" value="rltyLink" >
-	</form>		
-		<!-- 会员中心中间 ============== 开始 ============== -->
-		<div class="p-cnt ucdiv shadow">
-		   <div class="index_left">
-		   	<%@ include file="usercenterLeft.jsp"%>	
-		   </div>
-	 		<div class="index_right">
-		  		<div class="word_dqwz">
-		  			<b><fmt:message key='edit.current.location'/>：
-		  			<a href="<%=path %>/index.htm" class="navigation"><fmt:message key='home.page'/></a> >> 
-		  			<a href="<%=path %>/usercenter/infoSubscription.htm?action=showUpdate&display=block" class="navigation"><fmt:message key='addPage.membership.space'/></a> >> 
-		  			<fmt:message key='left.my.collection'/>
-		  			</b>
-		  			<div class="uc_search_wrap" style="margin: 8px 0px 0px 0px;">
-	  					<form action="<%=path %>/user/favorite.htm?action=initScFavoriteView" method="post" id="form1">
-		  					<input class="uc_search_input" name="search" value="${search }" type="text"/>
-		  					<input class="uc_search_btn" type="submit" title="<fmt:message key='comt.search'/>"/>
-			            </form>
-  					</div>
-	  			</div>
-				
-				<div class="my_sp">
-         			<ul class="sp_all">
-				  	<c:choose>
-	       			<c:when test="${!empty favoriteList}"> 
-	       				<c:forEach var="fav" items="${favoriteList}" varStatus="state">
-			  				  <!--开始-->
-							  <li class="jsxq_lb">
-						   		  <ul class="js_content">
-						         	<li>
-						         		<b class="js_book">
-						         			<span class="rltyname">${fav[4] }</span>
-					         			</b>
-					         			<a style="float:none" class="title" target="_blank" href='<%=basePath %>res/${fav[1] }'>${fav[2] }</a>
-			         				</li>
-						            <li  style="padding-top: 5px">
-						            	<b class="js_of">
-						            		<fmt:message key='faq.collection.time'/>：
-					            		</b>
-					            		<b class="js_time"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${fav[3] }"/></b>
-				            		</li>
-						            <li></li>
-						   		 </ul>
-					             <p class="del">
-					             	<a class="isbtn right" href="<%=path %>/user/favorite.htm?action=delScFavorite&scfId=${fav[0]}" onclick="return confirm(<fmt:message key='faq.determine.delete.collection'/>);">
-					             	<fmt:message key='faq.deleting.the.collection'/>
-					             	</a>
-					             </p>
-				    		</li>
-				    		<!--结束-->
-			  			</c:forEach>
-			  			</ul>
-			  			<!-- 分页 -->
-						<div class="pages">
-					       <c:if test="${pagination.totalPages>0}">
-					    	<div style="float:right;padding-top: 20px;">
-					    		<%@include file="/WEB-INF/views/platform/pc/common/turnPage.jsp" %>
-					    	</div>
-						   </c:if>
-					    </div>
-	       			</c:when>
-	       			<c:otherwise> 
-	       				<span class="noList">
-			    			<span><fmt:message key='faq.no.related.collection'/></span>
-		    			</span>
-	       			</c:otherwise>
-	       			</c:choose>
-	          </div>
-			</div> 
-							<div class="clear"></div>
-		</div>
-		<!-- 会员中心中间 ============== 结束 ============== -->
-		<!-- 会员中心首页脚部 -->
-
- 		<!--底部开始-->
-		<div class="clear"></div>
-		<%@ include file="../pc/common/footer.jsp"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ include file="/WEB-INF/views/common/taglibInclude.jsp" %>
+<c:set var="memberSection" value="favorites" />
+<%@ include file="memberCenterStart.jspf" %>
+<main class="annotation-records-layout">
+    <%@ include file="memberCenterNav.jspf" %>
+    <section class="annotation-records-main">
+        <div class="annotation-records-heading"><h1><%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "我的收藏") %></h1><span><%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "共") %> ${pagination.totalResults} <%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "条收藏") %></span></div>
+        <form class="annotation-record-search" action="<%=basePath%>user/favorite.htm" method="get">
+            <input type="hidden" name="action" value="initScFavoriteView" /><input type="hidden" name="resourceType" value="${resourceType}" />
+            <label for="member-favorite-search"><%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "检索收藏") %><input id="member-favorite-search" name="search" type="search" maxlength="100" value="<c:out value='${search}'/>" placeholder="<%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "资源题名") %>" /></label><button type="submit"><%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "检索") %></button>
+        </form>
+        <div class="annotation-list" aria-label="<%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "收藏记录") %>">
+            <c:choose><c:when test="${not empty favoriteList}"><c:forEach var="fav" items="${favoriteList}">
+                <c:url value="/res/${fav[1]}" var="favoriteResourceUrl" />
+                <article class="annotation-record">
+                    <div class="member-favorite-title"><h2><a href="<c:out value='${favoriteResourceUrl}'/>"><c:out value="${fav[2]}" /></a></h2><c:if test="${not empty fav[4]}"><span class="member-resource-type"><c:out value="${fav[4]}" /></span></c:if></div>
+                    <p class="annotation-meta"><%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "收藏时间：") %><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${fav[3]}" /></p>
+                    <div class="member-favorite-actions"><a class="annotation-view" href="<c:out value='${favoriteResourceUrl}'/>"><%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "查看资源") %></a>
+                        <form action="<%=basePath%>user/favorite.htm?action=delScFavorite" method="post" data-confirm="<%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "确定取消收藏该资源吗？") %>" onsubmit="return confirm(this.dataset.confirm);"><input type="hidden" name="scfId" value="${fav[0]}" /><button class="member-text-button" type="submit"><%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "取消收藏") %></button></form>
+                    </div>
+                </article>
+            </c:forEach></c:when><c:otherwise><p class="annotation-empty">${empty search ? frontendText['暂无收藏记录'] : frontendText['没有找到相关收藏']}</p></c:otherwise></c:choose>
+        </div>
+        <c:url value="/user/favorite.htm" var="favoritePrevious"><c:param name="action" value="initScFavoriteView" /><c:param name="resourceType" value="${resourceType}" /><c:param name="search" value="${search}" /><c:param name="currentPage" value="${pagination.currentPage-1}" /></c:url>
+        <c:url value="/user/favorite.htm" var="favoriteNext"><c:param name="action" value="initScFavoriteView" /><c:param name="resourceType" value="${resourceType}" /><c:param name="search" value="${search}" /><c:param name="currentPage" value="${pagination.currentPage+1}" /></c:url>
+        <nav class="annotation-record-pagination" aria-label="<%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "收藏记录分页") %>">
+            <c:choose><c:when test="${pagination.currentPage gt 0}"><a href="<c:out value='${favoritePrevious}'/>"><%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "上一页") %></a></c:when><c:otherwise><button type="button" disabled><%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "上一页") %></button></c:otherwise></c:choose>
+            <span>${pagination.totalPages gt 0 ? pagination.currentPage+1 : 1} / ${pagination.totalPages gt 0 ? pagination.totalPages : 1}</span>
+            <c:choose><c:when test="${pagination.currentPage+1 lt pagination.totalPages}"><a href="<c:out value='${favoriteNext}'/>"><%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "下一页") %></a></c:when><c:otherwise><button type="button" disabled><%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "下一页") %></button></c:otherwise></c:choose>
+        </nav>
+    </section>
+</main>
+<%@ include file="memberCenterEnd.jspf" %>

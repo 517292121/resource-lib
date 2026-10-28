@@ -16,6 +16,7 @@ import cn.com.adtech.riss2.cache.SysConfigInfo;
 import cn.com.adtech.riss2.core.CommonUtil;
 import cn.com.adtech.riss2.core.MyFileCatalogUtil;
 import cn.com.adtech.riss2.core.file.MyFileUtil;
+import cn.com.adtech.riss2.core.file.ResourceDirectoryFiles;
 import cn.com.adtech.riss2.domain.IdsInformation;
 import cn.com.adtech.riss2.domain.text.ResTextResource;
 import cn.com.unionlib.lucene.base.IoCommonUtil;
@@ -168,14 +169,8 @@ public class IndexCommonService extends CommonServiceImp{
 			bean.setPageList(pageList);
 			bean.setSrcPath(srcDir);
 			
-			File srctxtFile = MyFileUtil.getSrctxtFileByDirname(srcDir);
-			if(srctxtFile != null){
-				String srcVal = IoCommonUtil.readTxt(srctxtFile.getAbsolutePath());
-				sourceTxt += srcVal;
-			}else{
-				//全文合并分页的内容
-				sourceTxt += pageTxtMerge(pageList);
-			}
+			// Scan all text chapters, including those without a matching page image.
+			sourceTxt += "\n" + pageTxtMerge(pageList);
 		}
 		
 		//viewType == 2： html格式和图片预览格式不做索引处理
@@ -223,29 +218,28 @@ public class IndexCommonService extends CommonServiceImp{
 		File f = null;
 		
 		//根据每页的全文创建索引
-		List<File> txtList = MyFileUtil.getDirTxtFile(srcDir);
+		List<File> txtList = ResourceDirectoryFiles.textFiles(srcDir);
 		
 		//获取所有页面名称
 		List<String> pageNameList = MyFileUtil.getPageNameList(srcDir);
+		if (pageNameList == null) pageNameList = new ArrayList<String>();
+		int unmatchedPage = pageNameList.size();
 		
 		if(txtList != null && txtList.size() > 0){
 			for(int i=0,s=txtList.size(); i<s; i++){
 				f = txtList.get(i);
-				String fname = f.getName();
-				fname = fname.substring(0, fname.lastIndexOf("."));
-				if(pageNameList.contains(fname) == false){
-					continue;
-				}
-				
-				String txt = IoCommonUtil.readTxt(f.getAbsolutePath());
+				String fname = ResourceDirectoryFiles.relativeTitle(new File(srcDir), f);
+				String txt;
+				try { txt = ResourceDirectoryFiles.readText(f); }
+				catch (IOException e) { throw new IllegalStateException("无法读取资源章节：" + f.getPath(), e); }
 				if(!CommonUtil.isNotNull(txt)){
 					continue;
 				}
 				
 				//根据该文件在所有页面中出现的顺序作为页码
-				int pagenum = pageNameList.indexOf(fname);
-				
-				txt = Jsoup.parse(txt).text();
+				int pagenum = pageNameList.indexOf(fname) + 1;
+				if (pagenum == 0) pagenum = ++unmatchedPage;
+				else txt = Jsoup.parse(txt).text();
 				
 				//封装子页
 				page = new ResPageBean();
@@ -253,7 +247,7 @@ public class IndexCommonService extends CommonServiceImp{
 				page.setResId(rsdaId);
 				page.setContent(txt);
 				page.setTitle(fname);
-				page.setPageNum(pagenum+1);
+				page.setPageNum(pagenum);
 				page.setPageType(2);
 				pageList.add(page);
 			}
@@ -308,7 +302,7 @@ public class IndexCommonService extends CommonServiceImp{
 		}
 		StringBuffer sb = new StringBuffer();
 		for(ResPageBean page : pageList){
-			sb.append(page.getContent());
+			sb.append(page.getContent()).append('\n');
 		}
 		String txt = sb.toString();
 		sb = null;

@@ -17,53 +17,44 @@
 	}
 %>
 
+<!DOCTYPE html>
 <html>
 <head>
-	<title>用户注册</title>
+<%@ include file="/WEB-INF/views/platform/pc/common/frontendI18n.jspf" %>
+	<title><%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "用户注册") %></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">   
 	<meta name=renderer content=webkit> <!-- 默认采用极速模式 -->
-  	<link rel="stylesheet" href="<%=basePath %>css/platform/common.css" type="text/css"></link>
-  	<link rel="stylesheet" href="<%=basePath %>css/platform/regLogin.css" type="text/css"></link>
-  	<link rel="stylesheet" href="<%=basePath %>css/platform/skin-<%=ConstantsObj.getSkinCode() %>.css" type="text/css"></link>
+	<link rel="stylesheet" href="<%=basePath%>css/platform/member-login.css?v=member-terms-20261025-5">
   	<script type="text/javascript">var basePath = "<%=basePath %>"; var skin = "<%=ConstantsObj.getSkinCode() %>";</script>
   	<script type="text/javascript" src="<%=basePath %>js/jquery.min.js"></script>
   	<script type="text/javascript" src="<%=basePath %>layer/layer.js"></script>
   	<script src="<%=path %>/viewsjs/common/sha1.js" type="text/javascript"></script> 
-	<script type="text/javascript" src="<%=basePath %>js/platform/register.js"></script>
+	<script type="text/javascript" src="<%=basePath %>js/platform/register.js?v=member-terms-20261025-5&amp;ui=zh-zw-20261025-1"></script>
 	
 	<!-- JS语言包 -->
   	<script src="<%=basePath %>js/platform/lankey/<%=language %>.js"></script>
 
-	<style>
-		.container{width:400px;	margin:10px auto;}
-		.container .nav{width:310px;border-bottom:1px solid #ccc; margin: 0 auto;}
-		.container .nav span{display: block; width:120px; border:0px solid #ccc; text-align:center; line-height:40px; color:#666; float:left; cursor:pointer;}
-		.container .nav span:first-child{border:0px}
-		.content{ margin-top:20px;position:relative; overflow:hidden;height:400px;} /*定位一般设置为relative，overflow设置为hidden来隐藏外面的内容*/
-		.content .box{position:absolute; height:500px;} /*这个定位设置为absolute, 因为要操作这个的位置来切换内容*/
-		.content ul{float:left; width:400px;}
-  		@media screen and (max-width:1200px){
-			body{min-width:100%;}
-		}
-	</style>
-
 </head>
-<body>
-<div class="login_subject zc"><fmt:message key="pc.registration.platform"/></div>
+<body class="member-register-page">
+<main class="member-login-card member-register-card" aria-labelledby="member-register-title">
+	<header class="member-login-heading member-register-heading">
+		<img class="member-login-brand" src="<%=basePath%>images/platform/psb/home/brand-logo.png" width="537" height="74" alt="<%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "西藏大学敦煌文献智能数据库") %>">
+		<h1 id="member-register-title"><fmt:message key="pc.registration.platform"/></h1>
+	</header>
 
-<div class="container">
-	<div class="nav">
+	<div class="container member-register-container">
+	<div class="nav member-register-tabs">
         <span class="active"><fmt:message key="pc.mailbox.registration"/></span>
-        <span><fmt:message key="pc.phone.registration"/></span>
         <div class="clear"></div>
     </div>
-    <div class="content">
+    <div class="content member-register-content">
         <div class="box">
         	<!-- 邮箱注册 -->
-            <ul>
-                <div class="login_panelbox" style="width: 310px; margin: 0px auto;">
+            <ul class="is-active">
+				<div class="login_panelbox member-register-panel">
 				<table cellpadding="0" cellspacing="0">
 					<tr>
 						<td>
@@ -81,16 +72,16 @@
 					    </td>
 					</tr>
 					<tr>
-					    <td class="td2" id="reg_mobileTelephone_td">
+					    <td class="td2" id="reg_mobileTelephone_td"><div class="member-register-code-row">
 					    	<input class="zc_input yzm" type="text" id="e_imgCode" name="e_imgCode" value="${imgCode }" placeholder="<fmt:message key='pc.picture.code'/>" maxlength="4">
 					    	<div class="codebox"><img src="<%=basePath %>yzm.jsp" id="imgcode1" width="100" height="38" align="absmiddle" title="<fmt:message key='pc.refresh.code'/>" onclick="refcode();"></div>
-					    </td>
+					    </div></td>
 					</tr>
 					<tr style="height: 22px">
 						<td>
 
 							<input type="checkbox" name="regServer" id="regServer" checked="checked"><label for="regServer"><fmt:message key='pc.read.and.agree'/>
-							<a href="javascript:openserver();">“<fmt:message key='pc.service.law.statement'/>”</a></label>
+							<a href="<%=basePath%>reg/server" target="_blank" rel="noopener" onclick="return openserver();">“<fmt:message key='pc.service.law.statement'/>”</a></label>
 						</td>
 					</tr>
 					<tr>
@@ -107,53 +98,9 @@
 		    	</div>
             </ul>
             
-            <!-- 手机注册 -->
-            <ul>
-               <div class="login_panelbox" style="width: 310px; margin: 0px auto;">
-				<table cellpadding="0" cellspacing="0">
-					<tr>
-						<td>
-							<input class="zc_input" type="text" name="mobileTel" id="mobileTel" maxlength="11" value="${loginName }" placeholder="<fmt:message key='pc.correct.phone'/>">
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<input class="zc_input" type="password" id="loginPwd" name="loginPwd" value="${password }" placeholder="<fmt:message key='pc.login.password.characters'/>"></input>
-						</td>
-					</tr>
-					<tr>
-					    <td class="td2" id="reg_mobileTelephone_td">
-					    	<input class="zc_input yzm" type="text" id="imgCode" name="imgCode" value="${imgCode }" placeholder="<fmt:message key='pc.picture.code'/>" maxlength="4">
-					    	<div class="codebox"><img src="<%=basePath %>yzm.jsp" id="imgcode2" width="100" height="38" align="absmiddle" title="<fmt:message key='pc.refresh.code'/>" onclick="refcode();"></div>
-					    </td>
-					</tr>
-					<tr>
-					    <td class="td2" id="reg_mobileTelephone_td">
-					    	<input class="zc_input yzm" type="text" id="smsCode" name="smsCode" value="${smsCode }" placeholder="<fmt:message key='pc.sms.code'/>" maxlength="6">
-					    	<input type="button" class="codebox smsbtn" id="smsbtn" onclick="getMobileCode();" value="<fmt:message key='pc.obtain.sms.code'/>">
-					    </td>
-					</tr>
-					<tr style="height: 22px">
-						<td>
-							<input type="checkbox" name="e_regServer" id="e_regServer" checked="checked"><label for="regServer"><fmt:message key='pc.read.and.agree'/>
-							<a href="javascript:openserver();">“<fmt:message key='pc.service.law.statement'/>”</a></label>
-						</td>
-					</tr>
-					<tr>
-						<td style="padding-top: 20px;">
-							<button class="reg_btn bcm" onclick="mobileRegSubmit();"> <fmt:message key='pc.free.registration'/> </button>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<fmt:message key='pc.i.have.registered'/><a href="javascript:inLogin();" style="color: #2f82ff;"><fmt:message key='pc.login'/></a>
-						</td>
-					</tr>
-				</table>
-		    </div>
-            </ul>
         </div>
     </div>  	
 </div>
+</main>
 </body>
 </html>

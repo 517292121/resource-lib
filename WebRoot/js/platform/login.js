@@ -1,13 +1,16 @@
+
+  var uiText=window.platformText||function(value,parameters){return String(value).replace(/\{([a-zA-Z0-9_]+)\}/g,function(match,name){return parameters&&Object.prototype.hasOwnProperty.call(parameters,name)?String(parameters[name]):match;});};
+  var uiMarkup=window.platformMarkup||function(value){return value;};
 function onLogin(src){
 		$("#msg").html("");
 		var loginName = $("#loginname").val();
 		if(!loginName || loginName.trim().length < 1) {
-			layer.msg("请输入登录名！");
+			layer.msg(uiText("请输入登录名！"));
 			return false;
 		}
 		var password = $("#loginpwd").val();
 		if(!password || password.trim().length < 1) {
-			layer.msg("请输入登录密码！");
+			layer.msg(uiText("请输入登录密码！"));
 			return false;
 		}
 		//密码加密
@@ -35,7 +38,7 @@ function onLogin(src){
 		    			layer.msg(val.msg);
 		    		}
 			   	}catch(e){
-			   		layer.msg("错误：" + e.message, {icon:2});
+					layer.msg(uiText("错误：") + e.message, {icon:2});
 			   	}
 		    }
 		});

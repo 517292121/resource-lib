@@ -215,6 +215,7 @@
 			}
 			
 			var tbar2 = new Ext.Toolbar([
+				{ text:'新增资源', iconCls:'input_single', handler:function(){ window.location.href='<%=path%>/console/data/inputSingle.htm?action=initMaintenance'; } }, '-',
 				{ 
 					text: '&nbsp;编&nbsp;辑&nbsp;', 
 					enableToggle: false, 

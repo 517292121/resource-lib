@@ -36,15 +36,17 @@ body.dh-search-results { --sr-px: calc(100vw / 1920); display: flex; flex-direct
 .sr-tools { position: absolute; top: calc(203 * var(--sr-px)); left: calc(109 * var(--sr-px)); right: calc(109 * var(--sr-px)); display: flex; align-items: center; justify-content: flex-end; gap: 20px; color: #918774; font-size: max(11px, calc(13 * var(--sr-px))); }
 .sr-filter-note { margin-right: auto; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .sr-results { margin-top: calc(38 * var(--sr-px)); }
-.sr-result { position: relative; padding: 0 0 calc(12 * var(--sr-px)); margin-bottom: calc(12 * var(--sr-px)); border-bottom: 1px dashed #c9c2ac; }
+.sr-result { position: relative; display: grid; grid-template-columns: minmax(0,1fr) calc(122 * var(--sr-px)); column-gap: calc(24 * var(--sr-px)); padding: 0 0 calc(12 * var(--sr-px)); margin-bottom: calc(12 * var(--sr-px)); border-bottom: 1px dashed #c9c2ac; }
 .sr-result:last-child { margin-bottom: 0; }
-.sr-result-header { display: flex; justify-content: space-between; align-items: flex-start; gap: calc(24 * var(--sr-px)); min-height: calc(39 * var(--sr-px)); }
+.sr-result-header { display: contents; }
+.sr-result-header h2 { grid-column: 1; grid-row: 1; }
+.sr-result-actions { grid-column: 2; grid-row: 1 / span 2; display: flex; flex-direction: column; gap: calc(8 * var(--sr-px)); }
 .sr-result h2 { position: relative; min-width: 0; margin: 0; padding: 0 0 0 calc(35 * var(--sr-px)); color: #bd753f; font-size: calc(20 * var(--sr-px)); font-weight: 400; line-height: calc(28 * var(--sr-px)); overflow-wrap: anywhere; }
 .sr-result h2::before { position: absolute; top: calc(3 * var(--sr-px)); left: 0; width: calc(16 * var(--sr-px)); height: calc(16 * var(--sr-px)); border-radius: 50%; background: #b8815c; content: ""; }
 .sr-result h2 a:hover { text-decoration: underline; }
-.sr-detail { display: flex; flex: 0 0 calc(122 * var(--sr-px)); min-height: calc(37 * var(--sr-px)); align-items: center; justify-content: center; color: #fff8e8 !important; background: #b6805c; font-size: calc(16 * var(--sr-px)); letter-spacing: .3em; }
-.sr-detail:hover { background: #9e6849; }
-.sr-snippets { margin: calc(5 * var(--sr-px)) 0 0; padding-left: calc(35 * var(--sr-px)); list-style: none; counter-reset: passages; }
+.sr-detail, .sr-preview { display: flex; width: 100%; min-height: calc(37 * var(--sr-px)); align-items: center; justify-content: center; color: #fff8e8 !important; background: #b6805c; font-size: calc(16 * var(--sr-px)); letter-spacing: .3em; }
+.sr-detail:hover, .sr-preview:hover { background: #9e6849; }
+.sr-snippets { grid-column: 1; margin: calc(5 * var(--sr-px)) 0 0; padding-left: calc(35 * var(--sr-px)); list-style: none; counter-reset: passages; }
 .sr-snippets li { position: relative; margin: 0 0 calc(8 * var(--sr-px)); padding-left: calc(26 * var(--sr-px)); color: #5c5a51; font-size: calc(16 * var(--sr-px)); line-height: calc(24 * var(--sr-px)); overflow-wrap: anywhere; counter-increment: passages; }
 .sr-snippets li:last-child { margin-bottom: 0; }
 .sr-snippets li::before { position: absolute; left: 0; content: counter(passages) "、"; }
@@ -85,7 +87,7 @@ body.dh-search-results { --sr-px: calc(100vw / 1920); display: flex; flex-direct
   .sr-results { margin-top: 38px; }
   .sr-result { margin-bottom: 12px; padding-bottom: 12px; }
   .sr-result h2 { font-size: 16px; line-height: 24px; }
-  .sr-detail { min-height: 28px; font-size: 12px; }
+  .sr-detail, .sr-preview { min-height: 28px; font-size: 12px; }
   .sr-snippets li { font-size: 13px; line-height: 23px; margin-bottom: 8px; }
   .sr-pagination { font-size: 12px; }
   .sr-pagination button { height: 28px; min-width: 28px; }
@@ -111,8 +113,8 @@ body.dh-search-results { --sr-px: calc(100vw / 1920); display: flex; flex-direct
   .sr-results { margin-top: 43px; }
   .sr-result h2 { font-size: 15px; padding-left: 18px; }
   .sr-result h2::before { width: 9px; height: 9px; top: 6px; }
-  .sr-result-header { gap: 10px; }
-  .sr-detail { flex-basis: 52px; min-height: 27px; letter-spacing: .12em; }
+  .sr-result { grid-template-columns: minmax(0,1fr) 58px; column-gap: 10px; }
+  .sr-detail, .sr-preview { min-height: 27px; letter-spacing: .12em; }
   .sr-snippets { padding-left: 15px; margin-top: 12px; }
   .sr-snippets li { padding-left: 20px; font-size: 12px; line-height: 22px; }
   .sr-pagination { gap: 4px; margin-left: 0; }

@@ -1,3 +1,6 @@
+
+  var uiText=window.platformText||function(value,parameters){return String(value).replace(/\{([a-zA-Z0-9_]+)\}/g,function(match,name){return parameters&&Object.prototype.hasOwnProperty.call(parameters,name)?String(parameters[name]):match;});};
+  var uiMarkup=window.platformMarkup||function(value){return value;};
 /**
  *	资源列表页前端处理
  *  wanglin
@@ -129,7 +132,7 @@ function resQuery(){
 	    	initlist(data);
 	    },
 	    fail: function (err, status) {
-	    	$(".listbox").html("数据加载失败:" + err);
+		$(".listbox").html(uiText("数据加载失败:") + err);
 	    }
 	});
 }

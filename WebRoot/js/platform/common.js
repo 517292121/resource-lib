@@ -1,3 +1,6 @@
+
+  var uiText=window.platformText||function(value,parameters){return String(value).replace(/\{([a-zA-Z0-9_]+)\}/g,function(match,name){return parameters&&Object.prototype.hasOwnProperty.call(parameters,name)?String(parameters[name]):match;});};
+  var uiMarkup=window.platformMarkup||function(value){return value;};
 $(function(){
 	$('#search_but').click(function(){
 		complateSearch();
@@ -75,7 +78,8 @@ function openLogin(){
 	loginWin = layer.open({
 	  type: 2,
 	  title: false,
-	  area: ['540px', '400px'],
+      skin: 'platform-member-login-layer',
+      area: [Math.min(540, document.documentElement.clientWidth - 24) + 'px', Math.min(500, window.innerHeight - 32) + 'px'],
 	  shade: 0.8,
 	  closeBtn: 1,
 	  anim : 1,
@@ -121,14 +125,23 @@ function openReg(){
 	regWin = layer.open({
 	  type: 2,
 	  title: false,
-	  area: ['400px', '560px'],
+	  skin: 'platform-member-login-layer',
+	  area: [Math.min(540, document.documentElement.clientWidth - 24) + 'px', Math.min(720, window.innerHeight - 32) + 'px'],
 	  shade: 0.8,
 	  closeBtn: 1,
-	  anim : 0,
-	  shadeClose: false,
+	  anim : 1,
+	  shadeClose: true,
 	  content: basePath + "register"
 	});
 }
+window.addEventListener('message', function(event){
+	if(event.origin !== window.location.origin || !event.data || event.data.type !== 'platform-member-resize' || regWin == null) return;
+	var frame = document.querySelector('#layui-layer' + regWin + ' iframe');
+	if(!frame || event.source !== frame.contentWindow) return;
+	var maxHeight = Math.max(180, Math.min(window.innerHeight - 64, Math.floor(window.innerHeight * 0.92) - 34));
+	var height = Math.min(Math.max(180, Number(event.data.height) || 0), maxHeight);
+	layer.style(regWin, {height: height + 'px'});
+});
 //弹出服务协议 
 function openRegServer(){
 	layer.open({
@@ -226,7 +239,7 @@ function AntiScriptValid(text) {
     var temp = true;
     if (re.test(text)) {
         temp = false;
-        layer.msg("请您不要在参数中输入特殊字符和SQL关键字！"); //注意中文乱码
+        layer.msg(uiText("请您不要在参数中输入特殊字符和SQL关键字！")); //注意中文乱码
     }
     return temp;
 }			
@@ -240,4 +253,3 @@ function isEmpty(v){
 	}
 	return false;
 }
-		

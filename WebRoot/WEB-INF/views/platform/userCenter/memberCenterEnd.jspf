@@ -1,0 +1,3 @@
+<%@ page pageEncoding="UTF-8" %>
+<footer class="annotation-records-footer"><%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "Copyright © 西藏大学文学院版权所有") %></footer>
+</body></html>

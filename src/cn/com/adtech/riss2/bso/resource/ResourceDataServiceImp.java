@@ -329,6 +329,7 @@ public class ResourceDataServiceImp extends CommonServiceImp implements IResourc
 	 */
 	public boolean updateResource(ResSourceData resource, List<ResElementPool> elementList, HttpServletRequest request) {
 		try {
+			cn.com.adtech.riss2.core.ResourceResearchLinks.validate(getHibernateTemplate(), resource.getRsdaId(), resource.getRsdaRltyId(), request);
 			getHibernateTemplate().update(resource);
 			String sql = "", eleid = "", data = "";
 			long languageId = MyRequestUtil.getLongParameter(request, "lanId");
@@ -347,9 +348,11 @@ public class ResourceDataServiceImp extends CommonServiceImp implements IResourc
 				sqlList.add(sql);
 			}
 			executeMultiSql(sqlList);
+			cn.com.adtech.riss2.core.ResourceResearchLinks.replace(getHibernateTemplate(), resource, request);
 			return true;
 		}catch(Exception e) {
 			e.printStackTrace();
+			if (cn.com.adtech.riss2.core.ResourceResearchLinks.submitted(request)) throw new IllegalStateException(e.getMessage(), e);
 			return false;
 		}
 	}
@@ -380,6 +383,7 @@ public class ResourceDataServiceImp extends CommonServiceImp implements IResourc
 //		sql[2] = "delete from RES_SOURCE_REMARK where RSRE_RSDA_ID=" + resourceId;
 		ResSourceData source = null;
 		if(lans < 2) {
+			sqllist.add("delete from RES_RESEARCH_LINK where RESEARCH_ID="+resourceId+" or RESOURCE_ID="+resourceId);
 			//sql[3] = "delete from RES_SOURCE_DATA where RSDA_ID = " + resourceId;
 			sqllist.add("delete from RES_SOURCE_DATA where RSDA_ID = " + resourceId);
 			sqllist.add("delete from RES_SOURCE_COMT where RSCO_RSDA_ID=" + resourceId);
@@ -470,10 +474,11 @@ public class ResourceDataServiceImp extends CommonServiceImp implements IResourc
 	 * @return
 	 */
 	public boolean deleteResource(long resourceId, HttpServletRequest request) {
-		String[] sql = new String[3];
+		String[] sql = new String[4];
 		sql[0] = "delete from RES_EXTEND_DATA where REDA_RSDA_ID=" + resourceId;
 		sql[1] = "delete from RES_SOURCE_LANGUAGE where RSLA_RSDA_ID=" + resourceId;
 		sql[2] = "delete from RES_SOURCE_DATA where RSDA_ID = " + resourceId;
+		sql[3] = "delete from RES_RESEARCH_LINK where RESEARCH_ID="+resourceId+" or RESOURCE_ID="+resourceId;
 		
 		List<String> sqllist = new ArrayList<String>();
 		sqllist.add("delete from RES_EXTEND_DATA where REDA_RSDA_ID=" + resourceId);

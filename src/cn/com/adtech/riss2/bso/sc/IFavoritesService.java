@@ -15,6 +15,8 @@ import cn.com.adtech.riss2.domain.sc.ScFavorites;
 public interface IFavoritesService extends ICommonService {
 	
 	void addFavorite(Long userId, Long sourceId);
+	boolean getFavoriteState(Long userId, Long sourceId);
+	void updateFavoriteState(Long userId, Long sourceId, boolean favorited);
 	
 	void deleteFavorite(Long userId, Long sourceId);
 	

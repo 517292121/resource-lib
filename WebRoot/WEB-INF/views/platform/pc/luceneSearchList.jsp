@@ -3,9 +3,9 @@
 <link rel="stylesheet" href="<%=basePath %>css/platform/reslist.css" type="text/css"></link>
 <link rel="stylesheet" href="<%=basePath %>css/platform/luceneList.css" type="text/css"></link>
 <script type="text/javascript" src="<%=basePath %>js/jquery.cookie.js"></script>
-<script type="text/javascript" src="<%=basePath %>js/platform/myPager.js"></script>
-<script type="text/javascript" src="<%=basePath %>js/platform/pagenumFormat.js"></script>
-<script type="text/javascript" src="<%=basePath %>js/platform/luceneSearch.js"></script>
+<script type="text/javascript" src="<%=basePath %>js/platform/myPager.js?ui=zh-zw-20261025-1"></script>
+<script type="text/javascript" src="<%=basePath %>js/platform/pagenumFormat.js?ui=zh-zw-20261025-1"></script>
+<script type="text/javascript" src="<%=basePath %>js/platform/luceneSearch.js?ui=zh-zw-20261025-1"></script>
 
 <p id="cntline"></p>
 <div class="main booklist">

@@ -498,6 +498,7 @@ public class MissionInfoManagementServiceImp extends CommonServiceImp implements
 
 	public long saveResource(ResSourceData resource, List<ResElementPool> elementList, HttpServletRequest request) {
 		try {
+			cn.com.adtech.riss2.core.ResourceResearchLinks.validate(getHibernateTemplate(), null, resource.getRsdaRltyId(), request);
 			//同步资源题名的首字母
 			String en = PinYin2Abbreviation.cn2py(resource.getRsdaTitle());
 			resource.setRsdaTitleEn(en);
@@ -513,7 +514,14 @@ public class MissionInfoManagementServiceImp extends CommonServiceImp implements
 			rsl.setResLanguageId(languageId);
 			rsl.setResSourceId(sourceId);
 			rsl.setRslaDate(new Date().toLocaleString());
-			rsl.setRslaStatus(2L);
+			rsl.setRslaStatus(ResSourceData.STATUS_PASS.equals(resource.getRsdaStatus()) ? ResSourceLanguage.STATUS_PAST : ResSourceData.STATUS_CHECK);
+			if (ResSourceData.STATUS_PASS.equals(resource.getRsdaStatus())) {
+				cn.com.adtech.riss2.domain.SysManager reviewer=cn.com.adtech.riss2.core.ServiceUtil.getCurrentUser(request);
+				if (reviewer!=null) {
+					rsl.setRslCheckLoginname(reviewer.getSmanLoginName());
+					rsl.setRslCheckSuinname(reviewer.getSmanName());
+				}
+			}
 			rsl.setRslaUserId(MyRequestUtil.getLoginUserId(request));
 			rsl.setRslaUsername(MyRequestUtil.getLoginUserName(request));
 			rsl.setRslaAuthorName(MyRequestUtil.getSmanName(request));
@@ -539,10 +547,12 @@ public class MissionInfoManagementServiceImp extends CommonServiceImp implements
 				String hql = "update ResMissionInfo rmin set rmin.rminResCount=rmin.rminResCount+1 where rmin.rminId=?";
 				getHibernateTemplate().bulkUpdate(hql, resource.getRsdaRminId());
 			}
+			cn.com.adtech.riss2.core.ResourceResearchLinks.replace(getHibernateTemplate(), resource, request);
 			return sourceId;
 		} catch (Exception e) {
 			logger.error("保存资源发生异常：" + e.getMessage());
 			e.printStackTrace();
+			if (cn.com.adtech.riss2.core.ResourceResearchLinks.submitted(request) || "1".equals(request.getParameter("maintenance"))) throw new IllegalStateException(e.getMessage(), e);
 			return 0;
 		}
 		

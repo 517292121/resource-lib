@@ -1,3 +1,6 @@
+
+  var uiText=window.platformText||function(value,parameters){return String(value).replace(/\{([a-zA-Z0-9_]+)\}/g,function(match,name){return parameters&&Object.prototype.hasOwnProperty.call(parameters,name)?String(parameters[name]):match;});};
+  var uiMarkup=window.platformMarkup||function(value){return value;};
 //图片资源预览时，弹出的数据检索子页面处理
 var comLoading = null; //数据查询加载弹出对象
 var imgDir = "";
@@ -81,7 +84,7 @@ function datasearch(key){
 	 			blankdata(data.msg);
 	 		}
 	 	},error:function(e){
-	 		blankdata("请求错误！");
+			blankdata(uiText("请求错误！"));
 	 	}
  	});	
 }

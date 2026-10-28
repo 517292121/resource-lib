@@ -39,7 +39,7 @@
 		<script type='text/javascript' src="<c:url value='/dwr/util.js'/>"> </script>
 		<script type="text/javascript" src="<%=path %>/js/jsonrpc.js"></script>
 		<script type='text/javascript' src="<c:url value='/dwr/interface/memberResource.js'/>"></script>
-		<script type="text/javascript" src="<%=path %>/js/platform/ResourceData.js"></script>
+		<script type="text/javascript" src="<%=path %>/js/platform/ResourceData.js?ui=zh-zw-20261025-1"></script>
 		<script type="text/javascript">
 		    var path = '<%=request.getContextPath() %>';
 		    function getPath(){
@@ -131,7 +131,7 @@
 								                   <img src="<%=path %>/images/icon/youzhebibei.png" title="<fmt:message key='edit.there.is.a.necessity'/>"></img>
 								                </c:if>
 								                <c:if test="${v.repoRestrict == 'O' }">
-								                   <img src="<%=path %>/images/icon/kexuan.png" title="可选(O)"></img>
+								                   <img src="<%=path %>/images/icon/kexuan.png" title="<%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "可选(O)") %>"></img>
 								                </c:if>
 							                 </a>
 					             		</c:when>
@@ -155,7 +155,7 @@
 							                   <img src="<%=path %>/images/icon/youzhebibei.png" title="<fmt:message key='edit.there.is.a.necessity'/>" class="icon"></img>
 							                </c:if>
 							                <c:if test="${v.repoRestrict == 'O' }">
-							                   <img src="<%=path %>/images/icon/kexuan.png" title="可选(O)" class="icon"></img>
+							                   <img src="<%=path %>/images/icon/kexuan.png" title="<%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "可选(O)") %>" class="icon"></img>
 							                </c:if>
 						                </a>
 				             		</c:when>
@@ -178,7 +178,7 @@
 							                   <img src="<%=path %>/images/icon/youzhebibei.png" title="<fmt:message key='edit.there.is.a.necessity'/>" class="icon"></img>
 							                </c:if>
 							                <c:if test="${v.repoRestrict == 'O' }">
-							                   <img src="<%=path %>/images/icon/kexuan.png" title="可选(O)" class="icon"></img>
+							                   <img src="<%=path %>/images/icon/kexuan.png" title="<%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "可选(O)") %>" class="icon"></img>
 							                </c:if>
 						                </a>
 						            </c:otherwise>           
@@ -216,7 +216,7 @@
 							                     <img src="<%=path %>/images/icon/youzhebibei.png" title="<fmt:message key='edit.there.is.a.necessity'/>" class="icon"></img>
 							                 </c:if>
 							                 <c:if test="${vc.repoRestrict == 'O' }">
-							                     <img src="<%=path %>/images/icon/kexuan.png" title="可选(O)" class="icon"></img>
+							                     <img src="<%=path %>/images/icon/kexuan.png" title="<%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "可选(O)") %>" class="icon"></img>
 							                 </c:if>
 							            </a>     
 				             		</c:when>

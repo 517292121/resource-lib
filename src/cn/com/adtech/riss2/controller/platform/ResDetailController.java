@@ -73,13 +73,14 @@ public class ResDetailController extends ResCommonController{
 			//return "platform/pc/resDetail-com";
 		}
 	}
-	/** Six real, published research records per page; no design placeholder content. */
+	/** Six published subject-related records per page, separated into papers and monographs. */
 	@RequestMapping(value="/res/research/{rsdaId}", method=org.springframework.web.bind.annotation.RequestMethod.GET)
 	public void relatedResearch(@PathVariable Long rsdaId, HttpServletRequest request, HttpServletResponse response) throws IOException {
 		response.setContentType("application/json;charset=UTF-8");
 		response.setHeader("Cache-Control", "no-store");
 		Map<String, Object> result = new LinkedHashMap<String, Object>();
-		if (rsdaId < 1L) {
+		String kind = ServletRequestUtils.getStringParameter(request, "kind", "paper");
+		if (rsdaId < 1L || !("paper".equals(kind) || "book".equals(kind))) {
 			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 			result.put("success", false);
 			response.getWriter().write(JSONObject.fromObject(result).toString());
@@ -89,7 +90,7 @@ public class ResDetailController extends ResCommonController{
 		pagination.setCurrentPage(Math.max(0, Math.min(10000, ServletRequestUtils.getIntParameter(request, "pn", 0))));
 		pagination.setPageResults(6);
 		try {
-			List<Object[]> rows = resourceSearchService.getRelatedResearch(pagination, rsdaId);
+			List<Object[]> rows = resourceSearchService.getRelatedResearch(pagination, rsdaId, kind);
 			List<Map<String, Object>> items = new ArrayList<Map<String, Object>>();
 			for (Object[] row : rows) {
 				Map<String, Object> item = new LinkedHashMap<String, Object>();
@@ -97,6 +98,7 @@ public class ResDetailController extends ResCommonController{
 				item.put("title", row[1]);
 				item.put("creator", row[2]);
 				item.put("date", row[3]);
+				item.put("source", row[4]);
 				items.add(item);
 			}
 			result.put("success", true);
@@ -154,6 +156,64 @@ public class ResDetailController extends ResCommonController{
 		out.close();
 	}
 	
+	/** Read only the signed-in member's state. Never accept a member ID from the client. */
+	@RequestMapping(value="/res/favorite/state", method=org.springframework.web.bind.annotation.RequestMethod.GET)
+	public void favoriteState(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		response.setContentType("application/json;charset=UTF-8");
+		response.setHeader("Cache-Control", "no-store");
+		Map<String, Object> result = new LinkedHashMap<String, Object>();
+		SysUserinfo user = (SysUserinfo)request.getSession().getAttribute("sysUserinfo");
+		boolean authenticated = user != null && user.getSuinId() != null && user.getSuinId() > 0L;
+		result.put("authenticated", authenticated);
+		try {
+			Long sourceId = ServletRequestUtils.getLongParameter(request, "rsdaId", 0L);
+			if (sourceId < 1L) {
+				response.setStatus(400); result.put("success", false);
+			} else {
+				result.put("favorited", authenticated && favoritesService.getFavoriteState(user.getSuinId(), sourceId));
+				result.put("success", true);
+			}
+		} catch (Exception ex) {
+			org.apache.log4j.Logger.getLogger(ResDetailController.class).error("Unable to read favorite state", ex);
+			response.setStatus(500); result.put("success", false);
+		}
+		response.getWriter().write(JSONObject.fromObject(result).toString());
+	}
+
+	@RequestMapping(value="/res/favorite/state", method=org.springframework.web.bind.annotation.RequestMethod.POST)
+	public void updateFavoriteState(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		response.setContentType("application/json;charset=UTF-8");
+		response.setHeader("Cache-Control", "no-store");
+		Map<String, Object> result = new LinkedHashMap<String, Object>();
+		SysUserinfo user = (SysUserinfo)request.getSession().getAttribute("sysUserinfo");
+		if (user == null || user.getSuinId() == null || user.getSuinId() < 1L) {
+			response.setStatus(401); result.put("success", false); result.put("loginRequired", true);
+			result.put("errmsg", "您尚未登录或登录已过期，请先登录。");
+		} else {
+			try {
+				Long sourceId = ServletRequestUtils.getLongParameter(request, "rsdaId", 0L);
+				String value = ServletRequestUtils.getStringParameter(request, "favorited", "");
+				if (sourceId < 1L || !("true".equals(value) || "false".equals(value))) {
+					response.setStatus(400); result.put("success", false); result.put("errmsg", "收藏参数错误，请刷新后重试。");
+				} else {
+					boolean favorited = "true".equals(value);
+					ResSourceData source = favorited ? (ResSourceData)resourceSearchService.get(ResSourceData.class, sourceId) : null;
+					if (favorited && (source == null || !ResSourceData.STATUS_PASS.equals(source.getRsdaStatus())
+							|| !ResSourceData.ISUSE_USEABLENESS.equals(source.getRsdaIsuse()) || !Long.valueOf(1L).equals(source.getRsdaRmstStatus()))) {
+						response.setStatus(404); result.put("success", false); result.put("errmsg", "该资源已不可用，无法加入收藏。");
+					} else {
+						favoritesService.updateFavoriteState(user.getSuinId(), sourceId, favorited);
+						result.put("success", true); result.put("favorited", favoritesService.getFavoriteState(user.getSuinId(), sourceId));
+					}
+				}
+			} catch (Exception ex) {
+				org.apache.log4j.Logger.getLogger(ResDetailController.class).error("Unable to update favorite state", ex);
+				response.setStatus(500); result.put("success", false); result.put("errmsg", "收藏操作失败，请稍后重试。");
+			}
+		}
+		response.getWriter().write(JSONObject.fromObject(result).toString());
+	}
+
 	/**
 	 * 加入收藏
 	 * @param rsdaId

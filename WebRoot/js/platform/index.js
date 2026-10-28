@@ -1,5 +1,8 @@
 (function () {
     "use strict";
+  var uiText=window.platformText||function(value,parameters){return String(value).replace(/\{([a-zA-Z0-9_]+)\}/g,function(match,name){return parameters&&Object.prototype.hasOwnProperty.call(parameters,name)?String(parameters[name]):match;});};
+  var uiMarkup=window.platformMarkup||function(value){return value;};
+
     function ready() {
         // Keep the artwork effect separate from navigation and data dialogs.
         if (document.querySelector(".dh-manuscript")) {
@@ -17,7 +20,7 @@
             var link = document.createElement("a");
             link.className = button.className;
             link.href = libraryEntry.href;
-            link.setAttribute("aria-label", (button.getAttribute("aria-label") || "查看") + "，进入文献库");
+            link.setAttribute("aria-label", (button.getAttribute("aria-label") || uiText("查看")) + uiText("，进入文献库"));
             link.textContent = button.textContent;
             button.parentNode.replaceChild(link, button);
         });

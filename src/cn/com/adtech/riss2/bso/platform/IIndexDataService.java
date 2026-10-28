@@ -1,6 +1,7 @@
 package cn.com.adtech.riss2.bso.platform;
 
 import java.util.List;
+import java.util.Map;
 
 import cn.com.adtech.riss2.bean.ResourceForTypeBean;
 import cn.com.adtech.riss2.bso.ICommonService;
@@ -14,6 +15,10 @@ import cn.com.adtech.riss2.bso.ICommonService;
  * @date：Jan 8, 2018
  */
 public interface IIndexDataService extends ICommonService{
+	/** Published documents and recorded site visits across all languages and all years. */
+	public Map<String, Object> getHomeStatistics();
+	/** Live public catalogue totals and monthly access counts, using console report definitions. */
+	public Map<String, Object> getDatabaseStatistics(int year);
 	
 	/**
 	 * 根据资源类型获取推荐资源

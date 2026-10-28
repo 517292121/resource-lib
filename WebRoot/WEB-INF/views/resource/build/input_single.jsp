@@ -40,9 +40,11 @@
     <script type="text/javascript" src="<%=path %>/js/jquery-1.8.3.min.js"></script>
 	<script type="text/javascript" src="<%=path %>/plugin/layer/layer.js"></script>
 	<script type="text/javascript" src="<%=path %>/viewsjs/resource/build/ResourceData.js"></script>
+	<link rel="stylesheet" href="<%=path%>/css/console/resource-association.css?v=20261025-1" />
+	<script defer="defer" src="<%=path%>/viewsjs/resource/build/resource-association.js?v=20261025-1"></script>
 	
 	<script type="text/javascript" src="<%=path %>/js/jquery.form.js"></script>
-	<script type="text/javascript" src="<%=path %>/js/progressform.js"></script>
+	<script type="text/javascript" src="<%=path %>/js/progressform.js?v=maintenance-return-20261025-2"></script>
 	
 	<style type="text/css">
 	   *{
@@ -68,6 +70,7 @@
        var addOffset = null;
        
        function goback(){
+		   if (${maintenance == true}) { window.location.href='<%=path%>/console/data/resource/SourceManager.htm?action=managerResourceList'; return; }
 		   var id = $("input[name='rmin_id']").val();
 		   window.location.href = "<%=path %>/console/data/inputSingle.htm?action=missionResourceList&rmin_id="+id;
 	   }
@@ -78,7 +81,7 @@
 
 <body>
 	 <c:if test="<%=userid>0 %>">
-	 <form action="<%=path %>/console/data/inputSingle.htm?action=saveResourceData" name="sourceform" id="sourceform" enctype="multipart/form-data" method="post" onsubmit="return checkform();"> 
+	 <form action="<%=path %>/console/data/inputSingle.htm?action=saveResourceData" name="sourceform" id="sourceform" data-save-return="${maintenance ? 'maintenance' : ''}" enctype="multipart/form-data" method="post" onsubmit="return checkform();"> 
 	 <input type="hidden" name="store" value="${requestScope.store }"></input>
 	 <input type="hidden" name="stype" value="${requestScope.stype }"></input>
 	 <input type="hidden" name="rmin_id" value="${requestScope.rmin_id }"></input>
@@ -86,10 +89,13 @@
 	 <input type="hidden" name="rstyId" id="rstyId" value="${rstyId }"></input>
 	 <input type="hidden" name="userid" value="<%=userid %>"></input>
 	 <input type="hidden" name="inputType" value="<%=ResSourceData.AUTHORTYPE_ADMIN_INPUT %>"></input>
+	 <c:if test="${maintenance}"><input type="hidden" name="maintenance" value="1" /></c:if>
 	 
 	 <!-- 循环文档开始 -->
 	 <div class="title" style="margin-top: 0;height: 26px">录入资源内容, 作业：【<a href="<%=path %>/console/data/inputSingle.htm?action=missionResourceList&rmin_id=${param.rmin_id }" style="font-weight: normal">${requestScope.missName }</a>】</div>
 	 <table cellpadding="0" width="100%" border="0" cellspacing="1" bgcolor="#ECECEC" >
+	     <tr bgcolor="#FAFAFA"><td width="250" align="right">资源类型：</td><td><c:out value="${resourceTypeName}" /> <c:if test="${maintenance}">（<a href="<%=path%>/console/data/inputSingle.htm?action=initMaintenance">重新选择资源类型 / 所属作业</a>）</c:if></td></tr>
+	     <%@ include file="researchAssociation.jspf" %>
 	 
 	    <%
 	       int i=1;
@@ -105,7 +111,7 @@
 	           }
 	        %>
 	         <!-- 循环核心元素 -->
-	         <tr height="25px;" bgcolor="<%=bgc %>">
+	         <tr height="25px;" bgcolor="<%=bgc %>" data-research-relation="${fn:toLowerCase(v.repoName) == 'relation'}">
 	             <td width="250px" align="right">
 	               <img src="<%=path %>/images/extform/bullet_add_2.png"></img> 
 	               <strong> ${v.repoTitle }(${v.repoName })：</strong> 
@@ -124,14 +130,21 @@
 			                       onkeydown="setTextAreaHeight(this);">${v.repoDefaultdata }</textarea>
 	             		</c:when>
 	             		
-	             		<c:when test="${!empty libLan and fn:toLowerCase(v.repoName) == 'language' }">
+					<c:when test="${fn:toLowerCase(v.repoName) == 'language' }">
 	             		  <input name="${v.repoId }" 
-			                       class="source_text disabled" 
+			                       type="text" class="source_text"
 			                       restrict="${v.repoRestrict }" 
 			                       sourceElement="true" 
-			                       readonly="readonly"
-			                       value="${libLan }"
-			                       title="${v.repoTitle }">
+			                       list="resource-language-${v.repoId}"
+			                       value="${fn:escapeXml(empty libLan ? v.repoDefaultdata : libLan)}"
+			                       title="${fn:escapeXml(v.repoTitle)}">
+			              <datalist id="resource-language-${v.repoId}">
+			                  <option value="中文"></option><option value="藏文"></option>
+			                  <option value="蒙文"></option><option value="英文"></option>
+			                  <c:forEach items="${fn:split(v.repoDataOptions, ',')}" var="languageOption">
+			                      <option value="${fn:escapeXml(languageOption)}"></option>
+			                  </c:forEach>
+			              </datalist>
 	             		</c:when>
 	             		
 		                <c:otherwise>
@@ -252,9 +265,14 @@
 	              学科分类：
 	          </td>
 	          <td>
-	              <select name="rsty_id" id="rsty_id" style="width: 300px;margin-left: 2px;height: 22px;"> 
-		              ${requestScope.subjectOptions }
-		          </select>
+	              <input type="hidden" name="rsty_id" id="rsty_id" value="">
+	              <input type="text" name="rsty_name" id="rsty_name" list="resource-subject-options"
+	                     class="text" style="width: 300px;margin-left: 2px;height: 22px;" aria-label="学科分类">
+	              <datalist id="resource-subject-options">
+	                  <c:forEach items="${requestScope.subjectList}" var="subjectOption">
+	                      <option value="${fn:escapeXml(subjectOption.rstyName)}"></option>
+	                  </c:forEach>
+	              </datalist>
 		          
 		          
 		      </td>    
@@ -331,7 +349,7 @@
 	  <div class="tabbox">
 		<div class="tab">
 	    	<a href="javascript:;" class="on" data-type='0'>文件格式</a>
-	        <a href="javascript:;" data-type='1'>图片格式</a>
+	        <a href="javascript:;" data-type='1'>目录资源（图片／文本）</a>
 	        <a href="javascript:;" data-type='2'>HTML格式</a>
 	    </div>
 	    <div class="content">
@@ -373,12 +391,7 @@
 				     </table>
 	        	</li>
 	            <li>
-	            	<p>请输入资源文件在服务器中的目录地址：</p>
-	            	<p><input type="text" name="imgDir" class="text" maxlength="512" onchange="urlpath(this);" /></p>
-	            	<p class="tips">如：D:/RissResourceFile/imgbook/b003/</p>
-	            	<p>
-	            		<a href="<%=path %>/res/demo/img">资源示例下载</a>
-	            	</p>
+	            	<%@ include file="directoryUpload.jspf" %>
 	            </li>
 	            <li>
 	            	<p>请输入html文件的访问地址：</p>
@@ -403,6 +416,9 @@
 		                    <!-- <li><a href="javascript:sourceView('req');" style="padding-top: 3px;">预 览</a></li> --> <!-- 进度条代码使用改变了原有方法，预览功能咱不可使用 -->
 		                    <input type="submit" class="p-btn" style="cursor: pointer;display:none;" value="提交" />
 		                    <c:choose>
+		                    	<c:when test="${maintenance}">
+									<li><a href="<%=path%>/console/data/resource/SourceManager.htm?action=managerResourceList" style="padding-top: 3px;"> 返 回 </a></li>
+		                    	</c:when>
 		                    	<c:when test="${req == 7 }">
 									<li><a href="<%=path %>/console/data/inputSingle.htm?action=initSubject&rmin_id=${rmin_id }" style="padding-top: 3px;"> 返 回 </a></li>
 		                    	</c:when>

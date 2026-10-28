@@ -47,7 +47,7 @@
     <script type="text/javascript" src="<%=path %>/layer/layer.js"></script>
     
     <script type="text/javascript" src="<%=path %>/js/jquery.form.js"></script>
-	<script type="text/javascript" src="<%=path %>/js/progressform.js"></script>
+	<script type="text/javascript" src="<%=path %>/js/progressform.js?v=maintenance-return-20261025-2"></script>
 	
 	<style type="text/css">
 	   *{
@@ -95,6 +95,8 @@
 	   }
     </script>
 	<script type="text/javascript" src="<%=path %>/viewsjs/resource/build/ResourceData.js"></script>
+	<link rel="stylesheet" href="<%=path%>/css/console/resource-association.css?v=20261025-1" />
+	<script defer="defer" src="<%=path%>/viewsjs/resource/build/resource-association.js?v=20261025-1"></script>
   </head>
   
  
@@ -112,7 +114,7 @@
 	 <input type="hidden" id="rltyId" name="rltyId" value="${searchRltyId}"/>
 	</form>
 	  
-	 <form action="<%=path %>/console/data/inputSingle.htm?action=updateResourceData" name="sourceform" enctype="multipart/form-data" id="sourceform" method="post"> 
+	 <form action="<%=path %>/console/data/inputSingle.htm?action=updateResourceData" name="sourceform" enctype="multipart/form-data" id="sourceform" data-save-return="${requestScope.reqType == 2 ? 'maintenance' : ''}" method="post"> 
 	 <input type="hidden" name="store" value="<%=resource.getRsdaRmstId() %>"></input>
 	 <input type="hidden" name="stype" value="<%=resource.getRsdaRltyId() %>"></input>
 	 <input type="hidden" name="rmin_id" value="<%=resource.getRsdaRminId() %>"></input>
@@ -136,6 +138,7 @@
 	 <%} %>
 	 </div>
 	 <table cellpadding="0" width="100%" border="0" cellspacing="1" bgcolor="#ECECEC">
+	     <%@ include file="researchAssociation.jspf" %>
 	 
 	     <%
 	       int i=1;
@@ -152,7 +155,7 @@
 	        %>
 	       
 	         <!-- 循环核心元素 -->
-	         <tr height="25px;" bgcolor="<%=bgc %>">
+	         <tr height="25px;" bgcolor="<%=bgc %>" data-research-relation="${fn:toLowerCase(v.repoName) == 'relation'}">
 	             <td width="250px" align="right">
 	               <img src="<%=path %>/images/extform/bullet_add_2.png"></img>  
 	               <strong>${v.repoTitle }(${v.repoName })：</strong> 
@@ -171,14 +174,21 @@
 				                   sourceElement="true">${v.repoData }</textarea>
 	             		</c:when>
 	             		
-	             		<c:when test="${!empty resLan and fn:toLowerCase(v.repoName) == 'language' }">
+					<c:when test="${fn:toLowerCase(v.repoName) == 'language' }">
 	             		  <input name="${v.repoId }" 
-			                       class="source_text disabled" 
+			                       type="text" class="source_text"
 			                       restrict="${v.repoRestrict }" 
 			                       sourceElement="true" 
-			                       readonly="readonly"
-			                       value="${resLan }"
-			                       title="${v.repoTitle }">
+			                       list="resource-language-${v.repoId}"
+			                       value="${fn:escapeXml(empty resLan ? v.repoData : resLan)}"
+			                       title="${fn:escapeXml(v.repoTitle)}">
+			              <datalist id="resource-language-${v.repoId}">
+			                  <option value="中文"></option><option value="藏文"></option>
+			                  <option value="蒙文"></option><option value="英文"></option>
+			                  <c:forEach items="${fn:split(v.repoDataOptions, ',')}" var="languageOption">
+			                      <option value="${fn:escapeXml(languageOption)}"></option>
+			                  </c:forEach>
+			              </datalist>
 	             		</c:when>
 	             		
 	             		<c:otherwise>
@@ -281,9 +291,15 @@
 	              学科分类：
 	          </td>
 	          <td>
-	              <select name="rsty_id" id="rsty_id" style="width: 300px;margin-left: 2px;height: 22px;"> 
-		              ${requestScope.subjectOptions }
-		          </select>
+	              <input type="hidden" name="rsty_id" id="rsty_id" value="${resource.rsdaRstyId}">
+	              <input type="text" name="rsty_name" id="rsty_name" list="resource-subject-options"
+	                     value="${fn:escapeXml(resource.resSubjectType.rstyName)}"
+	                     class="text" style="width: 300px;margin-left: 2px;height: 22px;" aria-label="学科分类">
+	              <datalist id="resource-subject-options">
+	                  <c:forEach items="${requestScope.subjectList}" var="subjectOption">
+	                      <option value="${fn:escapeXml(subjectOption.rstyName)}"></option>
+	                  </c:forEach>
+	              </datalist>
 		          
 		          
 		      </td>    
@@ -362,7 +378,7 @@
 		  <div class="tabbox">
 			<div class="tab">
 		    	<a href="javascript:;" <c:if test="${empty resource.rsdaSourceType or resource.rsdaSourceType == 0 }">class="on"</c:if> data-type='0'>文件格式</a>
-		        <a href="javascript:;" <c:if test="${resource.rsdaSourceType == 1 }">class="on"</c:if> data-type='1'>图片格式</a>
+		        <a href="javascript:;" <c:if test="${resource.rsdaSourceType == 1 }">class="on"</c:if> data-type='1'>目录资源（图片／文本）</a>
 		        <a href="javascript:;" <c:if test="${resource.rsdaSourceType == 2 }">class="on"</c:if> data-type='2'>HTML格式</a>
 		    </div>
 		    <div class="content">
@@ -400,13 +416,7 @@
 					                  <div id="loadfileArea">
 						                  <%=ToolUnit.getFileName(ToolUnit.NullToBlank(resource.getRsdaFileName())) %>
 						                  
-						                  <%if(CommonUtil.isNotNull(resource.getRsdaFileSwfUrl()) || 
-						                		   (CommonUtil.isNotNull(resource.getRsdaFileType()) && resource.getRsdaFileType().toLowerCase().equals("pdf")) ||
-						                		   (CommonUtil.isNotNull(resource.getRsdaFileType()) && resource.getRsdaFileType().toLowerCase().equals("doc")) ||
-						                		   (CommonUtil.isNotNull(resource.getRsdaFileType()) && resource.getRsdaFileType().toLowerCase().equals("docx"))
-						                		  ){ %>
-						                  <%-- <a href="<%=path %>/console/data/resource/resourceManager.htm?action=sourceView&sourceId=<%=resource.getRsdaId() %>&type=3" target="_blank">预览</a> --%>
-						                  <%} %>
+						                  <a href="<%=path%>/console/data/resource/resourceManager.htm?action=sourceView&amp;sourceId=<%=resource.getRsdaId()%>&amp;type=3" target="_blank" rel="noopener noreferrer">预览</a>
 						                  <a href="javascript:deleLoadFile();">删除</a>
 					                  </div>
 					                  
@@ -423,13 +433,8 @@
 					     </table>
 		        	</li>
 		            <li>
-		            	<p>请输入资源文件在服务器中的目录地址：</p>
-		            	<p><input type="text" name="imgDir" class="text" <c:if test="${resource.rsdaSourceType == 1 }">value="${resource.rsdaFileUrl }"</c:if> maxlength="512" onchange="urlpath(this);" /></p>
-		            	<p class="tips">如：D:/RissResourceFile/imgbook/b003/</p>
-		            	<p>
-		            		<a href="<%=path %>/res/demo/img">资源示例下载</a>
-		            	</p>
-		            </li>
+		            	<%@ include file="directoryUpload.jspf" %>
+	            </li>
 		            <li>
 		            	<p>请输入html文件的访问地址：</p>
 		            	<p><input type="text" name="htmlDir" class="text" <c:if test="${resource.rsdaSourceType == 2 }">value="${resource.rsdaFileUrl }"</c:if> maxlength="512" /></p>

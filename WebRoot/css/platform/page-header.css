@@ -1,0 +1,38 @@
+@import url("member-login.css?v=frontend-login-20261025-1");
+@import url("account-menu.css?v=logout-20261024-1");
+.platform-page-header { align-items: center; height: auto; min-height: 100px; gap: 24px; padding: 18px clamp(20px,4.3vw,84px); }
+.platform-page-header { position: relative; z-index: 10; overflow: visible; }
+.platform-page-header > a { flex-shrink: 0; width: min(28vw,500px); }
+.platform-page-header > nav { align-self: center; gap: clamp(16px,2.4vw,46px); min-height: 40px; margin: 0 0 0 auto; }
+.platform-page-header > nav a { min-width: 0; padding: 0; font-size: clamp(14px,1.25vw,24px); white-space: nowrap; }
+.platform-header-tools { --platform-tool-width: clamp(78px,6.09375vw,117px); --platform-tool-height: clamp(30px,1.97916667vw,38px); display: flex; flex-shrink: 0; align-items: center; gap: 16px; color: #fff; font: 14px/1.5 "Microsoft YaHei",sans-serif; }
+.platform-language { position: relative; display: block; flex-shrink: 0; width: var(--platform-tool-width); height: var(--platform-tool-height); padding: 0; border: 0; }
+.platform-language::after { position: absolute; right: 12px; top: 42%; width: 4px; height: 4px; border: solid #eef2ee; border-width: 0 1px 1px 0; transform: rotate(45deg); pointer-events: none; content: ""; }
+.platform-language select { display: block; width: 100%; height: 100%; max-width: 100%; appearance: none; padding: 0 27px 0 12px; border: 1px solid #71878b; border-radius: 0; color: inherit; background: rgba(18,39,47,.42); font: inherit; cursor: pointer; transition: border-color .2s; }
+.platform-language option { color: #463725; background: #f4edde; }
+.platform-account { display: inline-flex; flex-shrink: 0; align-items: center; justify-content: center; gap: 7px; width: var(--platform-tool-width); height: var(--platform-tool-height); min-height: 0; max-width: 135px; padding: 0 6px; border: 1px solid #71878b; border-radius: 0; color: inherit; background: rgba(18,39,47,.42); font: inherit; text-decoration: none; cursor: pointer; transition: border-color .2s,color .2s; }
+.platform-account img { flex-shrink: 0; width: clamp(15px,.98958333vw,19px); height: clamp(15px,.98958333vw,19px); object-fit: contain; }
+.platform-account span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.platform-account:hover,.platform-account:focus-visible { border-color: #eed39c; color: #ffe2a6; }
+.platform-language:hover select,.platform-language:focus-within select { border-color: #eed39c; }
+.platform-language select:focus-visible,.platform-account:focus-visible { outline: 2px solid #dfbd72; outline-offset: 4px; }
+.platform-sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+@media(max-width:1000px) {
+ .platform-page-header { flex-wrap: wrap; justify-content: space-between; gap: 12px 18px; padding: 16px 4%; }
+ .platform-page-header > a { width: min(42vw,380px); }
+ .platform-page-header > nav { gap: 18px; }
+ .platform-header-tools { --platform-tool-width: 80px; --platform-tool-height: 30px; gap: 10px; font-size: 13px; }
+}
+@media(max-width:700px) {
+ .platform-page-header { flex-direction: row; min-height: 135px; gap: 10px; }
+ .platform-page-header > a { flex-basis: 100%; width: 100%; }
+ .platform-page-header > a img { width: min(100%,380px); margin: 0 auto; }
+ .platform-page-header > nav { width: auto; margin: 0; gap: 16px; min-height: 36px; }
+ .platform-page-header > nav a { flex: none; font-size: 14px; }
+ .platform-header-tools { --platform-tool-width: 70px; margin-left: auto; gap: 7px; }
+ .platform-language select { padding: 0 19px 0 8px; }
+ .platform-language::after { right: 8px; }
+ .platform-account { max-width: 92px; gap: 4px; }
+ .platform-account img { width: 15px; height: 15px; }
+ .dh-resource-detail .rd-masthead { height: auto; min-height: 260px; padding-bottom: 22px; }
+}

@@ -1,4 +1,5 @@
 @charset "UTF-8";
+@import url("account-menu.css?v=logout-20261024-1");
 @font-face{font-family:DunhuangTibetan;src:url("../../font/Himalaya-A.ttf") format("truetype");font-weight:400;font-style:normal;font-display:swap}
 /* 1首页.psb: 1920 × 1053. Artwork is exported by tools/export_home_slices.jsx. */
 body.dunhuang-home{--dh-green:#123638;--dh-gold:#f3d79a;--dh-ink:#57370e;--dh-serif:"FZDaBiaoSong-B06S","STZhongsong","SimSun",serif;--dh-header-height:6.04166667vw;--dh-footer-height:2.13541667vw;min-width:0;margin:0;color:var(--dh-ink);background:#722305;font-family:"Microsoft YaHei","PingFang SC",sans-serif}
@@ -38,7 +39,7 @@ body.dunhuang-home{--dh-green:#123638;--dh-gold:#f3d79a;--dh-ink:#57370e;--dh-se
 .dh-manuscript-image{display:block;width:100%;height:100%}
 .dunhuang-home .dh-library-entry{position:absolute;left:40.16393443%;top:68.41004184%;display:flex;align-items:center;justify-content:center;width:22.33606557%;height:10.46025105%;border-radius:999px;color:#f6ead0;font-family:var(--dh-serif);font-size:1.45833333vw;line-height:1;text-shadow:1px 2px 2px #6d3e17;transition:box-shadow .2s,background .2s}
 .dunhuang-home .dh-library-entry:hover{color:#fff6dc;box-shadow:0 0 24px rgba(255,221,148,.55);background:rgba(255,220,149,.1)}
-.dh-statistics{position:absolute;z-index:3;left:20.72916667%;top:65.84821429%;width:59.27083333%;height:13.61607143%;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1.04166667vw}
+.dh-statistics{position:absolute;z-index:3;left:20.72916667%;top:70.5%;width:59.27083333%;height:13.61607143%;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1.04166667vw;transform:scale(.81);transform-origin:center top}
 .dh-stat-card{position:relative;min-width:0;height:100%;background:url("../../images/platform/psb/home/stat-frame.png") center/100% 100% no-repeat;filter:drop-shadow(0 3px 4px rgba(98,54,7,.32))}
 .dunhuang-home .dh-stat-card h2{position:absolute;left:8.6%;top:17.5%;margin:0;color:#57370e;font-family:var(--dh-serif);font-size:1.14583333vw;line-height:1.2;font-weight:900;letter-spacing:.06em}
 .dh-stat-icon{position:absolute;right:11.2%;top:19%;width:.98958333vw;height:1.09375vw;object-fit:contain}

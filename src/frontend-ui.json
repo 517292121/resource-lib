@@ -1,0 +1,2694 @@
+[
+  {
+    "text": "预览",
+    "key": "frontend.search.preview"
+  },
+  {
+    "text": "资源章节目录",
+    "key": "frontend.0b384f271576"
+  },
+  {
+    "text": "章节目录",
+    "key": "frontend.06b50033c6e1"
+  },
+  {
+    "text": "该资源没有章节目录",
+    "key": "resource.preview.not.directory"
+  },
+  {
+    "text": "在线预览",
+    "key": "file.online.preview"
+  },
+  {
+    "text": "-在线预览",
+    "key": "frontend.1c66fe4fae59"
+  },
+  {
+    "text": "中文",
+    "key": "frontend.7be2d2d20c10"
+  },
+  {
+    "text": "目录",
+    "key": "resource.preview.directory"
+  },
+  {
+    "text": "搜索该资源内容",
+    "key": "resource.preview.search"
+  },
+  {
+    "text": "转到第一页",
+    "key": "resource.preview.home"
+  },
+  {
+    "text": "上一页",
+    "key": "previous.page"
+  },
+  {
+    "text": "上一张",
+    "key": "resource.preview.prev.chapter"
+  },
+  {
+    "text": "下一张",
+    "key": "resource.preview.next.chapter"
+  },
+  {
+    "text": "下一页",
+    "key": "next.page"
+  },
+  {
+    "text": "转到最后一页",
+    "key": "resource.preview.end"
+  },
+  {
+    "text": "原文放右边",
+    "key": "frontend.e34d6bcde88e"
+  },
+  {
+    "text": "原文放下面",
+    "key": "resource.preview.align.bottom"
+  },
+  {
+    "text": "弹出原文",
+    "key": "resource.preview.align.popup"
+  },
+  {
+    "text": "源文正在加工中，暂不支持检索！",
+    "key": "resource.preview.processing"
+  },
+  {
+    "text": "copyright@成都联图科技有限责任公司版权所有:",
+    "key": "software.copyright"
+  },
+  {
+    "text": "资源检索",
+    "key": "frontend.5dfc6d463f21"
+  },
+  {
+    "text": "检索",
+    "key": "main.simplesearch"
+  },
+  {
+    "text": "模糊匹配",
+    "key": "advanced.fuzzy.matching"
+  },
+  {
+    "text": "精确匹配",
+    "key": "advanced.precise.search"
+  },
+  {
+    "text": "半精确匹配",
+    "key": "advanced.banjingque.matching"
+  },
+  {
+    "text": "共找到页数:",
+    "key": "resource.preview.total.page"
+  },
+  {
+    "text": "页",
+    "key": "bar.record"
+  },
+  {
+    "text": "该资源没有全文，不能进行检索!",
+    "key": "resource.preview.not.search"
+  },
+  {
+    "text": "- Excel 在线预览",
+    "key": "frontend.481c5cc54a83"
+  },
+  {
+    "text": "西藏大学敦煌文献智能数据库",
+    "key": "frontend.cd69841336cc"
+  },
+  {
+    "text": "主导航",
+    "key": "frontend.fb1c7dc70a99"
+  },
+  {
+    "text": "首页",
+    "key": "home.page"
+  },
+  {
+    "text": "文献库",
+    "key": "frontend.138c1f8e8896"
+  },
+  {
+    "text": "数据库",
+    "key": "frontend.f4dbbc63a555"
+  },
+  {
+    "text": "只读预览",
+    "key": "frontend.597140dd9f3d"
+  },
+  {
+    "text": "返回资源详情",
+    "key": "frontend.c048309c98c6"
+  },
+  {
+    "text": "共",
+    "key": "common"
+  },
+  {
+    "text": "行 ·",
+    "key": "frontend.6bdeec9ac001"
+  },
+  {
+    "text": "列",
+    "key": "frontend.ad3ee64830f4"
+  },
+  {
+    "text": "表格分页",
+    "key": "frontend.811066bb688a"
+  },
+  {
+    "text": "第",
+    "key": "frontend.dae828fe4fb7"
+  },
+  {
+    "text": "当前表格页码",
+    "key": "frontend.10d4dca90d8c"
+  },
+  {
+    "text": "跳转",
+    "key": "frontend.28cd2efd8fa8"
+  },
+  {
+    "text": "Excel 表格，可横向和纵向滚动",
+    "key": "frontend.f6bb77989737"
+  },
+  {
+    "text": "此工作表为空。",
+    "key": "frontend.0bb7e6e8f5ea"
+  },
+  {
+    "text": "行号",
+    "key": "frontend.f81e575f4cef"
+  },
+  {
+    "text": "工作表切换",
+    "key": "frontend.6cf853611a05"
+  },
+  {
+    "text": "显示第",
+    "key": "frontend.78715e49e91c"
+  },
+  {
+    "text": "行，每页最多 100 行",
+    "key": "frontend.bcc81047478c"
+  },
+  {
+    "text": "前一组列",
+    "key": "frontend.886ede8e72a7"
+  },
+  {
+    "text": "列组",
+    "key": "frontend.3a4fa6097994"
+  },
+  {
+    "text": "后一组列",
+    "key": "frontend.99a9b74b67c7"
+  },
+  {
+    "text": "Copyright © 西藏大学文学院版权所有",
+    "key": "frontend.57e53aafe3a3"
+  },
+  {
+    "text": "- 在线阅读",
+    "key": "frontend.15a138e79591"
+  },
+  {
+    "text": "跳至正文",
+    "key": "frontend.fe3d5abe42e6"
+  },
+  {
+    "text": "左页",
+    "key": "frontend.3c6cb362e016"
+  },
+  {
+    "text": "右页",
+    "key": "frontend.29c3c69620bb"
+  },
+  {
+    "text": "阅读工具",
+    "key": "frontend.b0dfdeacae8a"
+  },
+  {
+    "text": "返 回",
+    "key": "edit.return"
+  },
+  {
+    "text": "跳转阅读页",
+    "key": "frontend.feb4716a7db2"
+  },
+  {
+    "text": "当前阅读页",
+    "key": "frontend.6ffa4dbc2ef4"
+  },
+  {
+    "text": "正文字号",
+    "key": "frontend.76cbea4d0471"
+  },
+  {
+    "text": "像素",
+    "key": "frontend.3edaf9c3ffdf"
+  },
+  {
+    "text": "放大字号",
+    "key": "frontend.b60958c3b08d"
+  },
+  {
+    "text": "缩小字号",
+    "key": "frontend.0a1432d771e3"
+  },
+  {
+    "text": "文献批注",
+    "key": "frontend.8d7a4e3c8617"
+  },
+  {
+    "text": "选文批注",
+    "key": "frontend.53dd568dc758"
+  },
+  {
+    "text": "整页批注",
+    "key": "frontend.8e4de705a2c1"
+  },
+  {
+    "text": "我的批注",
+    "key": "frontend.893ac8f640f8"
+  },
+  {
+    "text": "批注加载中…",
+    "key": "frontend.4c0691c48c7c"
+  },
+  {
+    "text": "当前文献全部批注",
+    "key": "frontend.afea8e9c6ea9"
+  },
+  {
+    "text": "关闭章节目录",
+    "key": "frontend.7cb7aefff421"
+  },
+  {
+    "text": "地址：拉萨市藏大东路10号",
+    "key": "frontend.591fe4cd54fc"
+  },
+  {
+    "text": "网站举报电话：0891-6405074",
+    "key": "frontend.36ae0e53f3de"
+  },
+  {
+    "text": "网站举报邮箱：zdwljb@xzu.edu.cn",
+    "key": "frontend.a129149725c6"
+  },
+  {
+    "text": "新增批注",
+    "key": "frontend.a075225d6232"
+  },
+  {
+    "text": "关闭批注编辑",
+    "key": "frontend.cdc6284fe01f"
+  },
+  {
+    "text": "批注内容",
+    "key": "frontend.38d2a398a23a"
+  },
+  {
+    "text": "填写对这段原文的理解或研究说明",
+    "key": "frontend.d4d533cfc34d"
+  },
+  {
+    "text": "取消",
+    "key": "frontend.4d0b4688c787"
+  },
+  {
+    "text": "保存批注",
+    "key": "frontend.9793ecc06212"
+  },
+  {
+    "text": "提示",
+    "key": "frontend.ab3656a956f5"
+  },
+  {
+    "text": "确定",
+    "key": "frontend.f526c89937e1"
+  },
+  {
+    "text": "版权所有",
+    "key": "frontend.d25d72d78f87"
+  },
+  {
+    "text": "西藏大学文学院",
+    "key": "frontend.96bc5a53eac0"
+  },
+  {
+    "text": "藏汉敦煌文献研究数据库，汇聚敦煌文献、历史图像与数字人文研究资源。",
+    "key": "frontend.46904be5c1e1"
+  },
+  {
+    "text": "藏汉敦煌文献研究数据库",
+    "key": "frontend.e1e758bc7b2f"
+  },
+  {
+    "text": "汇聚藏汉敦煌文献、历史图像与研究数据。",
+    "key": "frontend.fe60ac866726"
+  },
+  {
+    "text": "西藏大学敦煌文献智能数据库首页",
+    "key": "frontend.15cc2702e169"
+  },
+  {
+    "text": "首 页",
+    "key": "home.page"
+  },
+  {
+    "text": "切换语言",
+    "key": "frontend.87c2be267cff"
+  },
+  {
+    "text": "汉 语",
+    "key": "frontend.ae341b1780ff"
+  },
+  {
+    "text": "进入个人中心",
+    "key": "frontend.a47d02340b50"
+  },
+  {
+    "text": "登 录",
+    "key": "pc.login"
+  },
+  {
+    "text": "RISS2 资源服务平台",
+    "key": "main.title"
+  },
+  {
+    "text": "全部",
+    "key": "repeat.all"
+  },
+  {
+    "text": "题名",
+    "key": "search.title"
+  },
+  {
+    "text": "责任者",
+    "key": "repeat.responsible.person"
+  },
+  {
+    "text": "出版者",
+    "key": "repeat.publisher"
+  },
+  {
+    "text": "关键词",
+    "key": "repeat.detail.keyword"
+  },
+  {
+    "text": "汉语",
+    "key": "frontend.ae341b1780ff"
+  },
+  {
+    "text": "用户操作",
+    "key": "frontend.baa298fbe1f1"
+  },
+  {
+    "text": "退出登录",
+    "key": "pc.exit"
+  },
+  {
+    "text": "登录",
+    "key": "pc.login"
+  },
+  {
+    "text": "尾页",
+    "key": "shadowe"
+  },
+  {
+    "text": "共有",
+    "key": "share"
+  },
+  {
+    "text": "西藏大学敦煌文献智能数据库 · 敦煌文献智慧墙",
+    "key": "frontend.fee7854d0877"
+  },
+  {
+    "text": "敦煌文献智慧墙 - 西藏大学敦煌文献智能数据库",
+    "key": "frontend.28d56396ea57"
+  },
+  {
+    "text": "返回",
+    "key": "edit.return"
+  },
+  {
+    "text": "刷新",
+    "key": "frontend.38108eaa1d32"
+  },
+  {
+    "text": "数据实时更新",
+    "key": "frontend.0260d4d0ae63"
+  },
+  {
+    "text": "敦煌文献智慧墙",
+    "key": "frontend.cd172d8a3798"
+  },
+  {
+    "text": "当前时间",
+    "key": "frontend.626e5b542ea1"
+  },
+  {
+    "text": "核心指标统计",
+    "key": "frontend.db149c52aaf8"
+  },
+  {
+    "text": "文献总量",
+    "key": "frontend.6e8b0780acd4"
+  },
+  {
+    "text": "本",
+    "key": "frontend.d3cc0cab9c63"
+  },
+  {
+    "text": "正在读取…",
+    "key": "frontend.fcabadb2a772"
+  },
+  {
+    "text": "总页码量",
+    "key": "frontend.db5e6c1c0afe"
+  },
+  {
+    "text": "实时统计",
+    "key": "frontend.c71ea62f4437"
+  },
+  {
+    "text": "近30天新增",
+    "key": "frontend.1871224bb9de"
+  },
+  {
+    "text": "本月访问量",
+    "key": "frontend.945ec330cd65"
+  },
+  {
+    "text": "访问数据",
+    "key": "frontend.eb81e78e3523"
+  },
+  {
+    "text": "次",
+    "key": "frontend.5e5b8169eee6"
+  },
+  {
+    "text": "热词追踪",
+    "key": "frontend.18a17ec0a51c"
+  },
+  {
+    "text": "热门检索词",
+    "key": "frontend.5c063bbba6be"
+  },
+  {
+    "text": "正在读取热门检索词…",
+    "key": "frontend.16aa9673ba2c"
+  },
+  {
+    "text": "文献增长趋势",
+    "key": "frontend.a6ede1b19594"
+  },
+  {
+    "text": "按入库年份统计的已发布文献数量",
+    "key": "frontend.36fed4a25921"
+  },
+  {
+    "text": "正在读取文献数据…",
+    "key": "frontend.c19ad6fd2496"
+  },
+  {
+    "text": "访问数据分析",
+    "key": "frontend.dec2b21a80fc"
+  },
+  {
+    "text": "导出数据",
+    "key": "frontend.437d69f3e30b"
+  },
+  {
+    "text": "月度访问量",
+    "key": "frontend.e15173c2349b"
+  },
+  {
+    "text": "最新动态",
+    "key": "frontend.44eadf7c48a1"
+  },
+  {
+    "text": "正在读取最新动态…",
+    "key": "frontend.c7806424d9ef"
+  },
+  {
+    "text": "正在读取实时统计…",
+    "key": "frontend.f482be83a732"
+  },
+  {
+    "text": "文件预览—敦煌研究数据库",
+    "key": "frontend.9897c59bc4e3"
+  },
+  {
+    "text": "西藏大学敦煌文献智能数据库，典藏敦煌古藏文文献，呈现汉藏交融的千年往事。",
+    "key": "frontend.39f13a34dce9"
+  },
+  {
+    "text": "跳至主要内容",
+    "key": "frontend.0bcfb3922852"
+  },
+  {
+    "text": "西藏大学敦煌文献智能数据库：西藏大学与敦煌研究机构徽标、中藏英文字标",
+    "key": "frontend.cc31dbbc45be"
+  },
+  {
+    "text": "敦煌文献典藏",
+    "key": "frontend.df29a41b3534"
+  },
+  {
+    "text": "木质展台上铺展的敦煌古藏文卷轴",
+    "key": "frontend.bd88d42c0f72"
+  },
+  {
+    "text": "进入文献库",
+    "key": "frontend.65c2520d0960"
+  },
+  {
+    "text": "资源数据概览",
+    "key": "frontend.96c6e4661771"
+  },
+  {
+    "text": "总文献量",
+    "key": "frontend.233350d54ab1"
+  },
+  {
+    "text": "敦煌文献资源总量",
+    "key": "frontend.d45b07eb0882"
+  },
+  {
+    "text": "篇",
+    "key": "frontend.69007df2b773"
+  },
+  {
+    "text": "查看总文献量，进入文献库",
+    "key": "frontend.2ee40cf525ce"
+  },
+  {
+    "text": "查 看",
+    "key": "list.see"
+  },
+  {
+    "text": "文献数字化页面总量",
+    "key": "frontend.5c1f7b682b6d"
+  },
+  {
+    "text": "查看总页码量，进入文献库",
+    "key": "frontend.4c290f3cd95d"
+  },
+  {
+    "text": "总访问量",
+    "key": "frontend.841175d3b7c3"
+  },
+  {
+    "text": "数据库累计访问量",
+    "key": "frontend.7ca3ef952794"
+  },
+  {
+    "text": "查看总访问量，进入文献库",
+    "key": "frontend.e81c7e6d7fb8"
+  },
+  {
+    "text": "知识标注",
+    "key": "frontend.da0dde947f17"
+  },
+  {
+    "text": "文献知识标注总量",
+    "key": "frontend.49fe500272ed"
+  },
+  {
+    "text": "条",
+    "key": "frontend.bce2ef61514a"
+  },
+  {
+    "text": "查看知识标注，进入文献库",
+    "key": "frontend.8cef2341dbd8"
+  },
+  {
+    "text": "来自沙海的藏语长歌",
+    "key": "frontend.6ad170681c47"
+  },
+  {
+    "text": "敦煌古藏文文献",
+    "key": "frontend.a86aad1d428f"
+  },
+  {
+    "text": "纸本墨书，古藏文字随笔尖舒展。纸虽脆，字犹存，斑驳残卷之上，一笔一画，承载雪域文明，诉说汉藏",
+    "key": "frontend.731c80cd98d8"
+  },
+  {
+    "text": "交融的千年往事，让青藏高原与中原的对话，重见人间！",
+    "key": "frontend.27500de1c773"
+  },
+  {
+    "text": "阅读",
+    "key": "info.read"
+  },
+  {
+    "text": "发布者",
+    "key": "info.publisher"
+  },
+  {
+    "text": "上一篇",
+    "key": "info.last.one"
+  },
+  {
+    "text": "下一篇",
+    "key": "info.next"
+  },
+  {
+    "text": "查看详情",
+    "key": "info.view.the.details"
+  },
+  {
+    "text": "暂无相关信息",
+    "key": "info.unrelated.information"
+  },
+  {
+    "text": "分类导航",
+    "key": "info.classified.navigation"
+  },
+  {
+    "text": "西藏大学敦煌文献智能数据库文献典藏",
+    "key": "frontend.9c7eb7c8e88b"
+  },
+  {
+    "text": "文献库 - 西藏大学敦煌文献智能数据库",
+    "key": "frontend.6648c2ce840a"
+  },
+  {
+    "text": "跳至文献资源",
+    "key": "frontend.517ac090a508"
+  },
+  {
+    "text": "返回首页",
+    "key": "frontend.8befab0dd723"
+  },
+  {
+    "text": "文献检索",
+    "key": "frontend.36bed9d05ed2"
+  },
+  {
+    "text": "检索字段",
+    "key": "frontend.cc34067d03bf"
+  },
+  {
+    "text": "全 部",
+    "key": "repeat.all"
+  },
+  {
+    "text": "卷 名",
+    "key": "frontend.77c3e31cf68d"
+  },
+  {
+    "text": "卷 号",
+    "key": "frontend.057b38c50617"
+  },
+  {
+    "text": "请输入检索内容",
+    "key": "input.retrieval.content"
+  },
+  {
+    "text": "请输入您的内容…",
+    "key": "frontend.0288912dfd58"
+  },
+  {
+    "text": "检 索",
+    "key": "main.simplesearch"
+  },
+  {
+    "text": "高级检索",
+    "key": "main.detailsearch"
+  },
+  {
+    "text": "文献类型",
+    "key": "repeat.literature.type"
+  },
+  {
+    "text": "资源显示方式",
+    "key": "frontend.1e9357d22eb5"
+  },
+  {
+    "text": "网格视图",
+    "key": "frontend.63a3454ede3c"
+  },
+  {
+    "text": "列表视图",
+    "key": "frontend.1fd2104d08a1"
+  },
+  {
+    "text": "文献类型筛选",
+    "key": "frontend.cbedd957dea9"
+  },
+  {
+    "text": "全部文献",
+    "key": "frontend.2d1e231afad9"
+  },
+  {
+    "text": "正在读取文献资源…",
+    "key": "frontend.853070492d5a"
+  },
+  {
+    "text": "资源分页",
+    "key": "frontend.a6b437427184"
+  },
+  {
+    "text": "末页",
+    "key": "frontend.ef44f69478fc"
+  },
+  {
+    "text": "正在加载资源…",
+    "key": "frontend.99cb2b13cb2f"
+  },
+  {
+    "text": "登录名",
+    "key": "pc.login.name"
+  },
+  {
+    "text": "登录密码",
+    "key": "pc.login.passwd"
+  },
+  {
+    "text": "没有账号?",
+    "key": "pc.no.account.number"
+  },
+  {
+    "text": "立即注册",
+    "key": "pc.immediaate.registration"
+  },
+  {
+    "text": "数据类型",
+    "key": "repeat.data.type"
+  },
+  {
+    "text": "特色库",
+    "key": "repeat.characteristic.library"
+  },
+  {
+    "text": "检索条件",
+    "key": "repeat.retrieval.condition"
+  },
+  {
+    "text": "条 记 录，以下是",
+    "key": "repeat.bar.record"
+  },
+  {
+    "text": "详细模式",
+    "key": "repeat.detailed.pattern"
+  },
+  {
+    "text": "表格模式",
+    "key": "repeat.table.mode"
+  },
+  {
+    "text": "用户注册",
+    "key": "user.registration"
+  },
+  {
+    "text": "注册RISS2平台",
+    "key": "pc.registration.platform"
+  },
+  {
+    "text": "邮箱注册",
+    "key": "pc.mailbox.registration"
+  },
+  {
+    "text": "阅读并同意",
+    "key": "pc.read.and.agree"
+  },
+  {
+    "text": "服务条款及法律声明",
+    "key": "pc.service.law.statement"
+  },
+  {
+    "text": "免费注册",
+    "key": "pc.free.registration"
+  },
+  {
+    "text": "我已经注册，直接",
+    "key": "pc.i.have.registered"
+  },
+  {
+    "text": "RISS2资源管理平台—高级检索",
+    "key": "adv.advanced.search"
+  },
+  {
+    "text": "模糊",
+    "key": "adv.vague"
+  },
+  {
+    "text": "精确",
+    "key": "adv.accurate"
+  },
+  {
+    "text": "并且",
+    "key": "adv.also"
+  },
+  {
+    "text": "或者",
+    "key": "adv.perhaps"
+  },
+  {
+    "text": "资源库",
+    "key": "repeat.resource.library"
+  },
+  {
+    "text": "资源类型",
+    "key": "repeat.resource.type"
+  },
+  {
+    "text": "列表模式",
+    "key": "repeat.list.mode"
+  },
+  {
+    "text": "没有数据",
+    "key": "repeat.no.data"
+  },
+  {
+    "text": "题目",
+    "key": "repeat.title"
+  },
+  {
+    "text": "创建日期",
+    "key": "repeat.creation.date"
+  },
+  {
+    "text": "描 述",
+    "key": "repeat.description"
+  },
+  {
+    "text": "日期",
+    "key": "repeat.date"
+  },
+  {
+    "text": "访问量",
+    "key": "repeat.amount.of.access"
+  },
+  {
+    "text": "热门关键词",
+    "key": "repeat.hot.key.words"
+  },
+  {
+    "text": "未找到该资源的预览文件！",
+    "key": "bro.not.found.file"
+  },
+  {
+    "text": "源文较大，建议下载预览",
+    "key": "frontend.ebc7d5d90054"
+  },
+  {
+    "text": "下载资源",
+    "key": "det.download.resource"
+  },
+  {
+    "text": "加入收藏",
+    "key": "det.join.the.collection"
+  },
+  {
+    "text": "学  &nbsp;  科",
+    "key": "det.discipline"
+  },
+  {
+    "text": "格式",
+    "key": "edit.format"
+  },
+  {
+    "text": "源文大小",
+    "key": "file.size"
+  },
+  {
+    "text": "录入时间",
+    "key": "repeat.entry.time"
+  },
+  {
+    "text": "我要评论",
+    "key": "det.i.commented"
+  },
+  {
+    "text": "文明上网理性发言，请遵守新闻评论服务协议",
+    "key": "det.agreement"
+  },
+  {
+    "text": "还剩下",
+    "key": "det.still.left"
+  },
+  {
+    "text": "字",
+    "key": "det.word"
+  },
+  {
+    "text": "全部评论",
+    "key": "det.all.comments"
+  },
+  {
+    "text": "条评论",
+    "key": "det.strip.comments"
+  },
+  {
+    "text": "更多评论",
+    "key": "det.more.comments"
+  },
+  {
+    "text": "你已浏览过",
+    "key": "repeat.browse"
+  },
+  {
+    "text": "- 西藏大学敦煌文献智能数据库",
+    "key": "frontend.b25056ae6136"
+  },
+  {
+    "text": "跳至资源详情",
+    "key": "frontend.cd6adfd20dec"
+  },
+  {
+    "text": "资源封面和操作",
+    "key": "frontend.ec9af8e5ba10"
+  },
+  {
+    "text": "在线阅读",
+    "key": "frontend.1006fdb40a84"
+  },
+  {
+    "text": "进入文献阅读页面",
+    "key": "frontend.f29938c2af26"
+  },
+  {
+    "text": "图片链接入口暂未开放",
+    "key": "frontend.0bed9a9fcb2b"
+  },
+  {
+    "text": "图片链接",
+    "key": "frontend.02e11f66d000"
+  },
+  {
+    "text": "语 种",
+    "key": "frontend.48dd4b42745a"
+  },
+  {
+    "text": "学 科",
+    "key": "frontend.962898f611a2"
+  },
+  {
+    "text": "内 容",
+    "key": "frontend.163aec9194a1"
+  },
+  {
+    "text": "日 期",
+    "key": "repeat.date"
+  },
+  {
+    "text": "PDF阅读",
+    "key": "frontend.8dccdc3d11ab"
+  },
+  {
+    "text": "上一页相关研究",
+    "key": "frontend.0e2b1868dbbb"
+  },
+  {
+    "text": "相关研究",
+    "key": "frontend.17761cd17940"
+  },
+  {
+    "text": "下一页相关研究",
+    "key": "frontend.106586380a84"
+  },
+  {
+    "text": "相关研究类型",
+    "key": "frontend.b771cbfdd588"
+  },
+  {
+    "text": "论 文",
+    "key": "frontend.236c3bdfce21"
+  },
+  {
+    "text": "专 著",
+    "key": "frontend.76edd3e5007b"
+  },
+  {
+    "text": "正在读取相关研究…",
+    "key": "frontend.75278e2f285d"
+  },
+  {
+    "text": "更 多",
+    "key": "frontend.9b0c6c7858bf"
+  },
+  {
+    "text": "当前账号暂无阅读权限",
+    "key": "frontend.86e9d65a39f1"
+  },
+  {
+    "text": "该资源暂无可阅读文件",
+    "key": "frontend.918c621516e3"
+  },
+  {
+    "text": "RISS2特色资源库—附件详情",
+    "key": "file.enclosure.details"
+  },
+  {
+    "text": "资源附件详情",
+    "key": "file.resourec.enclosure.details"
+  },
+  {
+    "text": "资源名称",
+    "key": "file.resource.name"
+  },
+  {
+    "text": "文件描述",
+    "key": "file.file.description"
+  },
+  {
+    "text": "源文下载",
+    "key": "file.source.text.download"
+  },
+  {
+    "text": "该文件源文已被删除！",
+    "key": "file.resource.be.deleted"
+  },
+  {
+    "text": "暂无源文",
+    "key": "file.no.source.text"
+  },
+  {
+    "text": "排序方式",
+    "key": "search.sequencemode"
+  },
+  {
+    "text": "访问次数",
+    "key": "repeat.number.of.visits"
+  },
+  {
+    "text": "检索结果 - 西藏大学敦煌文献智能数据库",
+    "key": "frontend.432455861174"
+  },
+  {
+    "text": "跳至检索结果",
+    "key": "frontend.5e43db59874e"
+  },
+  {
+    "text": "题 名",
+    "key": "search.title"
+  },
+  {
+    "text": "文献检索结果",
+    "key": "frontend.0fbf052f6505"
+  },
+  {
+    "text": "在 {count} 本文献中出现",
+    "key": "frontend.97d79eb25f89"
+  },
+  {
+    "text": "在",
+    "key": "frontend.686b703f41f3"
+  },
+  {
+    "text": "本文献中出现",
+    "key": "frontend.357875c83417"
+  },
+  {
+    "text": "按当前检索字段和匹配方式累计检索词的实际命中次数，不按文献数或子页数计数",
+    "key": "frontend.2c7b72d4e1a4"
+  },
+  {
+    "text": "共计有 {count} 条记录",
+    "key": "frontend.907c08a75f35"
+  },
+  {
+    "text": "共计有",
+    "key": "frontend.e442a20498ba"
+  },
+  {
+    "text": "条记录",
+    "key": "frontend.69d28aa1b0a6"
+  },
+  {
+    "text": "正在检索文献…",
+    "key": "frontend.73cd68415f1c"
+  },
+  {
+    "text": "检索结果分页",
+    "key": "frontend.a8435c460dce"
+  },
+  {
+    "text": "正在加载…",
+    "key": "frontend.1d08846f05c5"
+  },
+  {
+    "text": "热门资源",
+    "key": "repeat.hot.resources"
+  },
+  {
+    "text": "最新资源",
+    "key": "repeat.latest.resources"
+  },
+  {
+    "text": "全部分类",
+    "key": "repeat.all.classification"
+  },
+  {
+    "text": "个人中心",
+    "key": "frontend.1d23b8a4bd99"
+  },
+  {
+    "text": "个人设置",
+    "key": "left.personal.settings"
+  },
+  {
+    "text": "- 敦煌文献智能数据库",
+    "key": "frontend.59b376c821d3"
+  },
+  {
+    "text": "我的收藏",
+    "key": "left.my.collection"
+  },
+  {
+    "text": "可选(O)",
+    "key": "edit.optional"
+  },
+  {
+    "text": "当前位置",
+    "key": "edit.current.location"
+  },
+  {
+    "text": "个人作品资源",
+    "key": "edit.personal.works.resources"
+  },
+  {
+    "text": "修改资源",
+    "key": "edit.revise.resources"
+  },
+  {
+    "text": "出于永久保存、归档及精确检索资源的需要，请尽量完整填写上传资源的基本元数据信息。审核不通过的上传资源是不能发布的，请多配合。",
+    "key": "edit.permanent.preservation"
+  },
+  {
+    "text": "编辑资源内容",
+    "key": "edit.the.content.of.resources"
+  },
+  {
+    "text": "可下载",
+    "key": "edit.downloadable"
+  },
+  {
+    "text": "可浏览源文",
+    "key": "edit.browse.the.source.text"
+  },
+  {
+    "text": "可浏览预览版",
+    "key": "edit.browse.preview"
+  },
+  {
+    "text": "不可预览",
+    "key": "edit.not.preview"
+  },
+  {
+    "text": "不可访问",
+    "key": "edit.not.accessible"
+  },
+  {
+    "text": "请选择...",
+    "key": "edit.please.choose"
+  },
+  {
+    "text": "选择分类",
+    "key": "edit.selection.classification"
+  },
+  {
+    "text": "学科分类",
+    "key": "repeat.classification.of.subjects"
+  },
+  {
+    "text": "文件上传",
+    "key": "edit.file.upload"
+  },
+  {
+    "text": "封面",
+    "key": "edit.cover"
+  },
+  {
+    "text": "删除",
+    "key": "edit.delete"
+  },
+  {
+    "text": "源文件",
+    "key": "edit.source.file"
+  },
+  {
+    "text": "保存",
+    "key": "edit.preservation"
+  },
+  {
+    "text": "必备(M)",
+    "key": "edit.necessary"
+  },
+  {
+    "text": "有则必备(MA)",
+    "key": "edit.there.is.a.necessity"
+  },
+  {
+    "text": "强烈推荐(R)",
+    "key": "edit.strong.recommendation"
+  },
+  {
+    "text": "请登录...",
+    "key": "edit.please.log.in"
+  },
+  {
+    "text": "会员空间",
+    "key": "addPage.membership.space"
+  },
+  {
+    "text": "个人资源",
+    "key": "addPage.personal.resources"
+  },
+  {
+    "text": "新建录入",
+    "key": "addPage.new.entry"
+  },
+  {
+    "text": "录入资源内容",
+    "key": "addPage.input.resources.centent"
+  },
+  {
+    "text": "中图法分类",
+    "key": "addPage.classification.medium.graph"
+  },
+  {
+    "text": "预览文件",
+    "key": "addPage.preview.area"
+  },
+  {
+    "text": "新建资源",
+    "key": "addType.new.resources"
+  },
+  {
+    "text": "选择特色库",
+    "key": "addType.select.library"
+  },
+  {
+    "text": "下一步",
+    "key": "addType.next.step"
+  },
+  {
+    "text": "检索批注",
+    "key": "frontend.98eb144638c3"
+  },
+  {
+    "text": "资源题名、章节或批注内容",
+    "key": "frontend.d66359baf374"
+  },
+  {
+    "text": "审核状态",
+    "key": "frontend.a62215e69744"
+  },
+  {
+    "text": "全部状态",
+    "key": "frontend.1a4c26d92d7d"
+  },
+  {
+    "text": "待审核",
+    "key": "comt.to.be.audited"
+  },
+  {
+    "text": "已通过",
+    "key": "frontend.4b3c9650f8e7"
+  },
+  {
+    "text": "未通过",
+    "key": "frontend.349c9e63a29b"
+  },
+  {
+    "text": "批注记录",
+    "key": "frontend.ca94a8f8b11b"
+  },
+  {
+    "text": "批注记录分页",
+    "key": "frontend.68de2c52327d"
+  },
+  {
+    "text": "审核批注",
+    "key": "frontend.966c36a2a5cc"
+  },
+  {
+    "text": "关闭审核弹窗",
+    "key": "frontend.82ef655dfee5"
+  },
+  {
+    "text": "审核说明（选填）",
+    "key": "frontend.1fbce768401d"
+  },
+  {
+    "text": "审核说明会在用户的“我的批注”中显示",
+    "key": "frontend.14d877b1afde"
+  },
+  {
+    "text": "确认审核",
+    "key": "frontend.9a370ce5017e"
+  },
+  {
+    "text": "批注管理",
+    "key": "frontend.3dcd6c61a291"
+  },
+  {
+    "text": "批注审核通过后才会在文献页显示；修改批注内容后需要重新审核。",
+    "key": "frontend.b56ed063beed"
+  },
+  {
+    "text": "新批注及修改后的批注默认待审核，审核通过后会显示在文献页。",
+    "key": "frontend.faa66f938ac2"
+  },
+  {
+    "text": "我的评论",
+    "key": "comt.my.comments"
+  },
+  {
+    "text": "我",
+    "key": "comt.my"
+  },
+  {
+    "text": "已屏蔽",
+    "key": "comt.shielded"
+  },
+  {
+    "text": "正常",
+    "key": "comt.normal"
+  },
+  {
+    "text": "评论时间",
+    "key": "comt.review.time"
+  },
+  {
+    "text": "很抱歉，暂无相关评论!",
+    "key": "comt.comment.null"
+  },
+  {
+    "text": "参考咨询",
+    "key": "left.reference.consultation"
+  },
+  {
+    "text": "咨询搜索",
+    "key": "consul.consulting.search"
+  },
+  {
+    "text": "我要咨询",
+    "key": "consul.my.consult"
+  },
+  {
+    "text": "我的咨询",
+    "key": "consul.my.advice"
+  },
+  {
+    "text": "未回复",
+    "key": "consul.unanswered"
+  },
+  {
+    "text": "已回复",
+    "key": "consul.replies"
+  },
+  {
+    "text": "未找到相关记录",
+    "key": "consul.not.found.records"
+  },
+  {
+    "text": "咨询时间",
+    "key": "detail.consulting.time"
+  },
+  {
+    "text": "回复内容",
+    "key": "detail.reply.content"
+  },
+  {
+    "text": "回复时间",
+    "key": "detail.recovery.time"
+  },
+  {
+    "text": "咨询分类",
+    "key": "group.consultancy.classification"
+  },
+  {
+    "text": "请选择咨询分类",
+    "key": "consul.choose.consultation.classification"
+  },
+  {
+    "text": "描述",
+    "key": "repeat.description"
+  },
+  {
+    "text": "错误",
+    "key": "usercenter.zixun.erro"
+  },
+  {
+    "text": "提交",
+    "key": "consul.submit"
+  },
+  {
+    "text": "重置",
+    "key": "consul.reset"
+  },
+  {
+    "text": "文献求助",
+    "key": "left.literature.seek.help"
+  },
+  {
+    "text": "我要求助",
+    "key": "create.my.help"
+  },
+  {
+    "text": "搜索求助",
+    "key": "create.search.help"
+  },
+  {
+    "text": "我的求助",
+    "key": "create.my.ask.for.help"
+  },
+  {
+    "text": "我参与的",
+    "key": "create.my.am.involved"
+  },
+  {
+    "text": "发布文献求助信息",
+    "key": "create.release.help.information"
+  },
+  {
+    "text": "请选择求助分类",
+    "key": "create.choose.help.classification"
+  },
+  {
+    "text": "补充内容",
+    "key": "create.supplementary.content"
+  },
+  {
+    "text": "文献传递",
+    "key": "left.document.delivery"
+  },
+  {
+    "text": "填写申请表单",
+    "key": "docu.fill.in.form"
+  },
+  {
+    "text": "没有相关数据...",
+    "key": "docu.no.relevant.data"
+  },
+  {
+    "text": "文献申请表单",
+    "key": "create.document.application.form"
+  },
+  {
+    "text": "申请人信息",
+    "key": "create.application.information"
+  },
+  {
+    "text": "注：申请人信息需填写完整！",
+    "key": "create.notes.fill.it.out"
+  },
+  {
+    "text": "带",
+    "key": "create.belt"
+  },
+  {
+    "text": "号为必填项。",
+    "key": "create.number,is.required"
+  },
+  {
+    "text": "姓",
+    "key": "create.surname"
+  },
+  {
+    "text": "名",
+    "key": "create.name"
+  },
+  {
+    "text": "邮",
+    "key": "create.post"
+  },
+  {
+    "text": "箱",
+    "key": "create.box"
+  },
+  {
+    "text": "电",
+    "key": "create.electric"
+  },
+  {
+    "text": "话",
+    "key": "create.word"
+  },
+  {
+    "text": "文献信息",
+    "key": "create.literature.information"
+  },
+  {
+    "text": "注",
+    "key": "create.notes"
+  },
+  {
+    "text": "作者",
+    "key": "create.author"
+  },
+  {
+    "text": "时间选择",
+    "key": "create.time.selection"
+  },
+  {
+    "text": "年",
+    "key": "create.year"
+  },
+  {
+    "text": "卷",
+    "key": "create.volume"
+  },
+  {
+    "text": "期",
+    "key": "create.stage"
+  },
+  {
+    "text": "页码选择",
+    "key": "create.page.selection"
+  },
+  {
+    "text": "起始页",
+    "key": "create.home.page"
+  },
+  {
+    "text": "终止页",
+    "key": "create.terminate.page"
+  },
+  {
+    "text": "需求说明",
+    "key": "create.requirement.description"
+  },
+  {
+    "text": "文献申请信息",
+    "key": "detail.document.application.information"
+  },
+  {
+    "text": "提交时间",
+    "key": "detail.time.of.submission"
+  },
+  {
+    "text": "回复信息",
+    "key": "detail.reply.information"
+  },
+  {
+    "text": "原文链接",
+    "key": "detail.text.link"
+  },
+  {
+    "text": "点击下载",
+    "key": "detail.click.downloads"
+  },
+  {
+    "text": "回复馆员",
+    "key": "detail.reply.librarian"
+  },
+  {
+    "text": "很抱歉，馆员工作繁忙，还未及时回复。",
+    "key": "detail.not.timely.reply"
+  },
+  {
+    "text": "FAQ知识库",
+    "key": "left.knowledge.base"
+  },
+  {
+    "text": "很抱歉，暂无相关知识!",
+    "key": "faq.no.related.knowledge"
+  },
+  {
+    "text": "条收藏",
+    "key": "frontend.9c15fb8d693f"
+  },
+  {
+    "text": "检索收藏",
+    "key": "frontend.995d860f6c62"
+  },
+  {
+    "text": "资源题名",
+    "key": "frontend.fd7c042be0fc"
+  },
+  {
+    "text": "收藏记录",
+    "key": "frontend.632bd3947d0f"
+  },
+  {
+    "text": "收藏时间：",
+    "key": "frontend.673cf9b6e2c1"
+  },
+  {
+    "text": "查看资源",
+    "key": "frontend.4beba0e25fa1"
+  },
+  {
+    "text": "确定取消收藏该资源吗？",
+    "key": "frontend.477cd78400b8"
+  },
+  {
+    "text": "取消收藏",
+    "key": "frontend.26acae04cf87"
+  },
+  {
+    "text": "收藏记录分页",
+    "key": "frontend.533db00210a6"
+  },
+  {
+    "text": "暂无收藏记录",
+    "key": "frontend.08a7f939f9f3"
+  },
+  {
+    "text": "没有找到相关收藏",
+    "key": "frontend.c38fc4e202d6"
+  },
+  {
+    "text": "头像",
+    "key": "frontend.4ceeeb31a55a"
+  },
+  {
+    "text": "个人头像",
+    "key": "frontend.17f18b4150f2"
+  },
+  {
+    "text": "性别",
+    "key": "user.gender"
+  },
+  {
+    "text": "男",
+    "key": "frontend.51625d909cf3"
+  },
+  {
+    "text": "女",
+    "key": "frontend.26bc84961cad"
+  },
+  {
+    "text": "帐号信息",
+    "key": "user.account.information"
+  },
+  {
+    "text": "用户名",
+    "key": "user.name"
+  },
+  {
+    "text": "密码",
+    "key": "user.password"
+  },
+  {
+    "text": "更改密码",
+    "key": "user.change.the.password"
+  },
+  {
+    "text": "旧密码",
+    "key": "user.oid.cipher"
+  },
+  {
+    "text": "新密码",
+    "key": "user.new.password"
+  },
+  {
+    "text": "密码长度6～16个字符，字母区分大小写！",
+    "key": "user.pass.number"
+  },
+  {
+    "text": "确认密码",
+    "key": "user.confirm.the.password"
+  },
+  {
+    "text": "我的头像",
+    "key": "user.my.head"
+  },
+  {
+    "text": "建议上传120*120的头像，效果最佳。",
+    "key": "user.suggest.uploading"
+  },
+  {
+    "text": "允许的文件上传类型",
+    "key": "user.allowed.upload.type"
+  },
+  {
+    "text": ",文件大小不能超过",
+    "key": "user.cannot.exceed"
+  },
+  {
+    "text": "基本信息",
+    "key": "user.essential.information"
+  },
+  {
+    "text": "真实姓名",
+    "key": "user.real.name"
+  },
+  {
+    "text": "邮箱",
+    "key": "user.mailbox"
+  },
+  {
+    "text": "出生日期",
+    "key": "user.birthday"
+  },
+  {
+    "text": "联系方式",
+    "key": "user.contact.information"
+  },
+  {
+    "text": "上次登录时间",
+    "key": "user.last.login.time"
+  },
+  {
+    "text": "用户中心",
+    "key": "user.conter"
+  },
+  {
+    "text": "忽略资源管理",
+    "key": "user.lgnoring.resource.management"
+  },
+  {
+    "text": "订阅资源",
+    "key": "user.subscribe.resources"
+  },
+  {
+    "text": "你好，暂无相关忽略资源！",
+    "key": "user.no.lgnore.resources"
+  },
+  {
+    "text": "恢复",
+    "key": "user.recovery"
+  },
+  {
+    "text": "收藏",
+    "key": "user.collection"
+  },
+  {
+    "text": "关键字管理",
+    "key": "user.keyword.management"
+  },
+  {
+    "text": "请输入你要添加的关键字,多个关键词请用[,]号隔开",
+    "key": "user.key.word.separate"
+  },
+  {
+    "text": "关键字",
+    "key": "user.keyword"
+  },
+  {
+    "text": "添加时间",
+    "key": "user.add.time"
+  },
+  {
+    "text": "操作",
+    "key": "user.operation"
+  },
+  {
+    "text": "删除选中",
+    "key": "user.deleting"
+  },
+  {
+    "text": "资源订阅",
+    "key": "left.resource.subscription"
+  },
+  {
+    "text": "已订阅",
+    "key": "user.subscribe"
+  },
+  {
+    "text": "订阅项",
+    "key": "user.subscribe.item"
+  },
+  {
+    "text": "最多可订阅15项",
+    "key": "user.most.subscribe"
+  },
+  {
+    "text": "你好，暂无相关订阅，请重新订阅！",
+    "key": "user.re.subscribe"
+  },
+  {
+    "text": "忽略",
+    "key": "user.ignore"
+  },
+  {
+    "text": "待解决",
+    "key": "issue.to.be.solved"
+  },
+  {
+    "text": "已解决",
+    "key": "issue.resolved"
+  },
+  {
+    "text": "已关闭",
+    "key": "issue.closed"
+  },
+  {
+    "text": "关闭问题",
+    "key": "detail.closing.the.problem"
+  },
+  {
+    "text": "最后更新",
+    "key": "detail.last.update"
+  },
+  {
+    "text": "时间",
+    "key": "search.time"
+  },
+  {
+    "text": "最佳回复",
+    "key": "detail.best.reply"
+  },
+  {
+    "text": "回复者",
+    "key": "detail.respondent"
+  },
+  {
+    "text": "满意度",
+    "key": "detail.satisfaction"
+  },
+  {
+    "text": "附件",
+    "key": "detail.enclosure"
+  },
+  {
+    "text": "下载",
+    "key": "detail.download"
+  },
+  {
+    "text": "该回复已经被管理员屏蔽！",
+    "key": "detail.reply.administrator.shield"
+  },
+  {
+    "text": "提问者对于回复的评价",
+    "key": "detail.questionerreply.evaluation"
+  },
+  {
+    "text": "其他回复",
+    "key": "detail.other.responses"
+  },
+  {
+    "text": "推荐回复",
+    "key": "detail.recommended.reply"
+  },
+  {
+    "text": "设为最佳答案",
+    "key": "detail.set.best.answer"
+  },
+  {
+    "text": "回复",
+    "key": "detail.reply"
+  },
+  {
+    "text": "回复不能超过8000个字",
+    "key": "detail.reply.max"
+  },
+  {
+    "text": "求助分类",
+    "key": "group.help.classification"
+  },
+  {
+    "text": "我求助于",
+    "key": "issue.ask.for.help"
+  },
+  {
+    "text": "未解决",
+    "key": "issue.unsolved"
+  },
+  {
+    "text": "资源管理",
+    "key": "left.resource.management"
+  },
+  {
+    "text": "资源列表",
+    "key": "list.resource"
+  },
+  {
+    "text": "新增资源",
+    "key": "list.new.resources"
+  },
+  {
+    "text": "你好，暂无相关资源！",
+    "key": "list.resources.not"
+  },
+  {
+    "text": "修改",
+    "key": "list.modify"
+  },
+  {
+    "text": "查看",
+    "key": "list.see"
+  },
+  {
+    "text": "类型",
+    "key": "list.type"
+  },
+  {
+    "text": "审核中",
+    "key": "list.audit"
+  },
+  {
+    "text": "审核通过",
+    "key": "list.examine.adopt"
+  },
+  {
+    "text": "审核未通过",
+    "key": "list.examine.not.through"
+  },
+  {
+    "text": "RSS 订阅",
+    "key": "left.subscribe"
+  },
+  {
+    "text": "请输入RSS源地址",
+    "key": "manage.source.address"
+  },
+  {
+    "text": "名称",
+    "key": "manage.name"
+  },
+  {
+    "text": "显示条数",
+    "key": "manage.display.list.size"
+  },
+  {
+    "text": "排序序号",
+    "key": "manage.sort.number"
+  },
+  {
+    "text": "添加",
+    "key": "manage.add.to"
+  },
+  {
+    "text": "RSS订阅",
+    "key": "left.subscribe"
+  },
+  {
+    "text": "显示列表",
+    "key": "manage.display.list"
+  },
+  {
+    "text": "很抱歉，暂无相关订阅！",
+    "key": "manage.no.related.subscriptions"
+  },
+  {
+    "text": "确定要退出登录吗？",
+    "key": "frontend.101bff831a5a"
+  },
+  {
+    "text": "正在退出…",
+    "key": "frontend.15f2af2179aa"
+  },
+  {
+    "text": "退出失败，请重试",
+    "key": "frontend.c4bab345d138"
+  },
+  {
+    "text": "退出失败，请检查网络后重试",
+    "key": "frontend.c7a5111d47ab"
+  },
+  {
+    "text": "关闭高级检索",
+    "key": "frontend.646771450df0"
+  },
+  {
+    "text": "高级检索条件",
+    "key": "frontend.e64162b7aaec"
+  },
+  {
+    "text": "请至少输入一个检索条件",
+    "key": "frontend.a75319f49ce5"
+  },
+  {
+    "text": "请您不要在参数中输入特殊字符和SQL关键字！",
+    "key": "frontend.58f718b60209"
+  },
+  {
+    "text": "暂无文献增长数据",
+    "key": "frontend.f804797afc16"
+  },
+  {
+    "text": "{year}年新增文献 {count} 本",
+    "key": "frontend.f2b0bed82a6a"
+  },
+  {
+    "text": "{year}年 · {count} 本",
+    "key": "frontend.2eaf47266070"
+  },
+  {
+    "text": "{start}年至{end}年已发布文献入库数量",
+    "key": "frontend.f8c46ff009a2"
+  },
+  {
+    "text": "热门检索第 {rank} 名：{word}",
+    "key": "frontend.1d36e2bc1a87"
+  },
+  {
+    "text": "暂无热门检索词",
+    "key": "frontend.0275e216dd52"
+  },
+  {
+    "text": "{year}年{month}月",
+    "key": "frontend.d2f3d682bc9f"
+  },
+  {
+    "text": "{month}：{count}次访问",
+    "key": "frontend.8ce844b65f68"
+  },
+  {
+    "text": "{month}月",
+    "key": "frontend.81313c2f8c14"
+  },
+  {
+    "text": "站点访问量统计",
+    "key": "frontend.8254b63b4b89"
+  },
+  {
+    "text": "特色库资源访问量统计",
+    "key": "frontend.7b563bc7287e"
+  },
+  {
+    "text": "{year}年 · {source} · 全年合计 {count} 次",
+    "key": "frontend.6f41b0513c46"
+  },
+  {
+    "text": "今日增加",
+    "key": "frontend.91e13f260ab5"
+  },
+  {
+    "text": "今日新增 {count}{unit}",
+    "key": "frontend.59c5d742d188"
+  },
+  {
+    "text": "，较昨日{change}{rate}%",
+    "key": "frontend.1bb057b05a82"
+  },
+  {
+    "text": "减少",
+    "key": "frontend.fe43f1577032"
+  },
+  {
+    "text": "增长",
+    "key": "frontend.b5c151ecddf0"
+  },
+  {
+    "text": "暂无最新动态",
+    "key": "frontend.9ed4cd353cb4"
+  },
+  {
+    "text": "动态读取失败，请刷新重试",
+    "key": "frontend.9c5955d8618a"
+  },
+  {
+    "text": "{month} · {count} 次访问",
+    "key": "frontend.58c83b5a3319"
+  },
+  {
+    "text": "月份",
+    "key": "frontend.51d806399a4e"
+  },
+  {
+    "text": "访问量（次）",
+    "key": "frontend.78e14ec4410a"
+  },
+  {
+    "text": "统计来源",
+    "key": "frontend.6021ce312724"
+  },
+  {
+    "text": "敦煌数据库月度访问量-",
+    "key": "frontend.793650bb6f00"
+  },
+  {
+    "text": "数据更新中…",
+    "key": "frontend.11e1819fecea"
+  },
+  {
+    "text": "页码统计暂不可用",
+    "key": "frontend.29eea25ffdb0"
+  },
+  {
+    "text": "页面索引实时统计",
+    "key": "frontend.d5c05710b917"
+  },
+  {
+    "text": "数据已更新。文献按实际入库时间统计，页码为页面索引总数，访问数据为本月访问次数。",
+    "key": "frontend.d6b4d2f25716"
+  },
+  {
+    "text": "最近更新 {time}，每分钟自动刷新",
+    "key": "frontend.f30185bc8b0f"
+  },
+  {
+    "text": "统计读取失败，请刷新重试",
+    "key": "frontend.f32840d6fbcc"
+  },
+  {
+    "text": "热词读取失败，请刷新重试",
+    "key": "frontend.1b3e0cf80cd9"
+  },
+  {
+    "text": "暂不可用",
+    "key": "frontend.4dddd9200cc9"
+  },
+  {
+    "text": "更新失败，显示上次数据",
+    "key": "frontend.0de5dc756ec1"
+  },
+  {
+    "text": "更新失败，请刷新",
+    "key": "frontend.5444d0ed20fa"
+  },
+  {
+    "text": "星期日",
+    "key": "frontend.d9636d4a9056"
+  },
+  {
+    "text": "星期一",
+    "key": "frontend.dded7a48901d"
+  },
+  {
+    "text": "星期二",
+    "key": "frontend.c80c63617b18"
+  },
+  {
+    "text": "星期三",
+    "key": "frontend.584bd4db5650"
+  },
+  {
+    "text": "星期四",
+    "key": "frontend.712173f5502c"
+  },
+  {
+    "text": "星期五",
+    "key": "frontend.9e51ca47a2e9"
+  },
+  {
+    "text": "星期六",
+    "key": "frontend.77bef63c5501"
+  },
+  {
+    "text": "*强烈建议",
+    "key": "frontend.738dcac63820"
+  },
+  {
+    "text": "你知道你的Internet Explorer是过时了吗?",
+    "key": "frontend.f23143ab9f6c"
+  },
+  {
+    "text": "我们使用了最新的技术来搭建该网站系统，使我们的平台更快和体验更好的使用效果。不幸的是，你的浏览器版本较低，不支持这些技术。你可以下载或更新以下任意一种浏览器来访问。如果要继续使用该浏览器访问，可能会影响你的体验效果！",
+    "key": "frontend.3a9b33e269ea"
+  },
+  {
+    "text": ">>>继续访问",
+    "key": "frontend.5753ca2121ea"
+  },
+  {
+    "text": "，进入文献库",
+    "key": "frontend.2c9f306111f8"
+  },
+  {
+    "text": "文献类型加载失败，请稍后重试。",
+    "key": "frontend.5ff1d8753e22"
+  },
+  {
+    "text": "类型加载失败",
+    "key": "frontend.1fa8ad9258f0"
+  },
+  {
+    "text": "重新加载",
+    "key": "frontend.5982c44c18df"
+  },
+  {
+    "text": "未命名文献",
+    "key": "frontend.d8cf5be21dab"
+  },
+  {
+    "text": "{title}（卷号：{identifier}）",
+    "key": "frontend.d6e91dc2404a"
+  },
+  {
+    "text": "{title}封面",
+    "key": "frontend.2fff96409541"
+  },
+  {
+    "text": "卷 名：",
+    "key": "frontend.85cf0ac1c24d"
+  },
+  {
+    "text": "卷 号：",
+    "key": "frontend.bc2098f8e4f9"
+  },
+  {
+    "text": "未找到符合条件的文献，请尝试其他检索内容。",
+    "key": "frontend.4758cd1b5449"
+  },
+  {
+    "text": "当前分类暂无文献资源。",
+    "key": "frontend.d7c8f5acc553"
+  },
+  {
+    "text": "文献资源列表",
+    "key": "frontend.fd9019d368b0"
+  },
+  {
+    "text": "序号",
+    "key": "frontend.6cd7c92cbd69"
+  },
+  {
+    "text": "卷名",
+    "key": "frontend.77c3e31cf68d"
+  },
+  {
+    "text": "语种",
+    "key": "frontend.48dd4b42745a"
+  },
+  {
+    "text": "学科",
+    "key": "frontend.962898f611a2"
+  },
+  {
+    "text": "录入日期",
+    "key": "frontend.48312867161c"
+  },
+  {
+    "text": "当前{count}条记录　当前页次{page}/{pages}页",
+    "key": "frontend.51325b9a4fb2"
+  },
+  {
+    "text": "文献资源加载失败，请稍后重试。",
+    "key": "frontend.3d558f6d780a"
+  },
+  {
+    "text": "资源加载失败",
+    "key": "frontend.366f041dd36a"
+  },
+  {
+    "text": "请输入登录名！",
+    "key": "pc.please.enter.login.name"
+  },
+  {
+    "text": "请输入登录密码！",
+    "key": "pc.please.enter.login.passwd"
+  },
+  {
+    "text": "错误：",
+    "key": "frontend.43a2e1aba08e"
+  },
+  {
+    "text": "图文:",
+    "key": "frontend.ea561fe55023"
+  },
+  {
+    "text": "关闭",
+    "key": "main.close"
+  },
+  {
+    "text": "会员登录",
+    "key": "frontend.baf2bd1a5ee9"
+  },
+  {
+    "text": "正在切换语言…",
+    "key": "frontend.ab66417d93d2"
+  },
+  {
+    "text": "切换失败，请重试",
+    "key": "frontend.ca19ddb30a22"
+  },
+  {
+    "text": "请阅读并同意服务条款！",
+    "key": "frontend.3aeed42941f1"
+  },
+  {
+    "text": "请求错误！",
+    "key": "frontend.fe77db0e1f69"
+  },
+  {
+    "text": "数据加载失败:",
+    "key": "frontend.08bac70b6175"
+  },
+  {
+    "text": "打开{title}",
+    "key": "frontend.f992c5d23a87"
+  },
+  {
+    "text": "第 {page} / {pages} 页 · 共 {count} 条",
+    "key": "frontend.b192cc887621"
+  },
+  {
+    "text": "责任者：",
+    "key": "frontend.26a1dfa73976"
+  },
+  {
+    "text": "未详",
+    "key": "frontend.a7a3061999bf"
+  },
+  {
+    "text": "日期：",
+    "key": "frontend.b2778afe0187"
+  },
+  {
+    "text": "暂无与此资源关联的研究内容。",
+    "key": "frontend.27df216b74cf"
+  },
+  {
+    "text": "相关研究暂时加载失败。",
+    "key": "frontend.1d3a935ff962"
+  },
+  {
+    "text": "本章节暂无正文。",
+    "key": "frontend.1b863055e468"
+  },
+  {
+    "text": "全书第 {page} / {pages} 页，{chapter}，字号 {size} 像素。",
+    "key": "frontend.3ad09e48d3df"
+  },
+  {
+    "text": "正在计算全书页码…",
+    "key": "frontend.991c7a2042b2"
+  },
+  {
+    "text": "{chapter}（全书第 {page} 页）",
+    "key": "frontend.ec8b9fdb4845"
+  },
+  {
+    "text": "格式:jpg、jpeg、bmp、png、gif",
+    "key": "frontend.966e804c5804"
+  },
+  {
+    "text": "主题",
+    "key": "frontend.e848ddd48253"
+  },
+  {
+    "text": "卷号",
+    "key": "frontend.057b38c50617"
+  },
+  {
+    "text": "高级检索：",
+    "key": "frontend.b2e7fcc05aa0"
+  },
+  {
+    "text": "或",
+    "key": "frontend.30f4d7cfe8c3"
+  },
+  {
+    "text": "且",
+    "key": "frontend.0b2c440d0e6c"
+  },
+  {
+    "text": "等于",
+    "key": "frontend.bd0f3091158a"
+  },
+  {
+    "text": "包含",
+    "key": "frontend.f896fb3776bb"
+  },
+  {
+    "text": "第{number}本文献名称：《{title}》",
+    "key": "frontend.113b5d218624"
+  },
+  {
+    "text": "详 情",
+    "key": "frontend.4f55ee1e687f"
+  },
+  {
+    "text": "查看{title}详情",
+    "key": "frontend.46ad663c20be"
+  },
+  {
+    "text": "查看第{page}页原文",
+    "key": "frontend.817bca4fba16"
+  },
+  {
+    "text": "可点击详情查看文献信息。",
+    "key": "frontend.4c0066a282aa"
+  },
+  {
+    "text": "出版者：",
+    "key": "frontend.00eeada04df8"
+  },
+  {
+    "text": "暂无摘要，可点击详情查看文献信息。",
+    "key": "frontend.a4e6e2b012a3"
+  },
+  {
+    "text": "重新检索",
+    "key": "frontend.669342906428"
+  },
+  {
+    "text": "未找到符合条件的文献，请更换检索词或检索字段。",
+    "key": "frontend.d411093be8e6"
+  },
+  {
+    "text": "当前{count}条文献记录　当前页次{page}/{pages}页",
+    "key": "frontend.46f7e6d3bc7c"
+  },
+  {
+    "text": "检索暂时失败，请稍后重试。",
+    "key": "frontend.c8e48769f166"
+  },
+  {
+    "text": "检索失败",
+    "key": "frontend.34d083c99673"
+  },
+  {
+    "text": "批注服务暂时不可用，请刷新页面后重试。",
+    "key": "frontend.ab61363a1f89"
+  },
+  {
+    "text": "批注操作失败，请稍后重试。",
+    "key": "frontend.afce736b594f"
+  },
+  {
+    "text": "删除批注",
+    "key": "frontend.f4e34b7c3b38"
+  },
+  {
+    "text": "确定删除",
+    "key": "frontend.56e90a3aeeb9"
+  },
+  {
+    "text": "编辑批注",
+    "key": "frontend.515a070e1bb8"
+  },
+  {
+    "text": "· 全书第 {page} 页",
+    "key": "frontend.de874f094ecd"
+  },
+  {
+    "text": "请填写批注内容。",
+    "key": "frontend.66e340e356d7"
+  },
+  {
+    "text": "保存中…",
+    "key": "frontend.6644f06197a4"
+  },
+  {
+    "text": "确定删除这条批注吗？删除后无法恢复。",
+    "key": "frontend.fcd65cddb92d"
+  },
+  {
+    "text": "编辑",
+    "key": "frontend.a7f814c0a40d"
+  },
+  {
+    "text": "审核不通过",
+    "key": "frontend.436557bf6c31"
+  },
+  {
+    "text": "该批注对应的原文已修改或章节已移除，暂时无法准确定位。",
+    "key": "frontend.5192375c4eae"
+  },
+  {
+    "text": "选文或整页批注将在审核通过后显示，可在“我的批注”查看状态。",
+    "key": "frontend.19286af70f15"
+  },
+  {
+    "text": "仅显示审核通过的批注，研究人员登录后可提交批注。",
+    "key": "frontend.0e1ac35fd57c"
+  },
+  {
+    "text": "点击批注可跳转原文。",
+    "key": "frontend.521a4e65100a"
+  },
+  {
+    "text": "有 {count} 条批注的原文已变化，已保留记录。",
+    "key": "frontend.585f76f6dbf7"
+  },
+  {
+    "text": "共 {count} 条批注",
+    "key": "frontend.b73a53198e52"
+  },
+  {
+    "text": "本文献暂无已审核批注",
+    "key": "frontend.86e009d5f0e5"
+  },
+  {
+    "text": "定位批注原文：",
+    "key": "frontend.692329ecc15d"
+  },
+  {
+    "text": "· 原文已变化",
+    "key": "frontend.ea6952088d9a"
+  },
+  {
+    "text": "查看批注 {number}",
+    "key": "frontend.5670355b6455"
+  },
+  {
+    "text": "暂无批注记录",
+    "key": "frontend.2134948a2c98"
+  },
+  {
+    "text": "审核时间：",
+    "key": "frontend.0c0f6228df8f"
+  },
+  {
+    "text": "审核说明：",
+    "key": "frontend.aad748635754"
+  },
+  {
+    "text": "查看原文",
+    "key": "frontend.46145cd3f62d"
+  },
+  {
+    "text": "无法加载当前文献批注。",
+    "key": "frontend.16acdfec67c2"
+  },
+  {
+    "text": "研究人员",
+    "key": "frontend.4c6f827a18ea"
+  },
+  {
+    "text": "资源不存在或已下架。",
+    "key": "frontend.b9bf0984ea44"
+  },
+  {
+    "text": "您没有该资源的阅读权限。",
+    "key": "frontend.47aa5a1662f7"
+  },
+  {
+    "text": "请登录后查看该资源的批注。",
+    "key": "frontend.627d03f23029"
+  },
+  {
+    "text": "该资源不是目录文本资源。",
+    "key": "frontend.bb23adc6b55c"
+  },
+  {
+    "text": "章节名称过长。",
+    "key": "frontend.01cfec24dff8"
+  },
+  {
+    "text": "文本章节不存在。",
+    "key": "frontend.4832a7b86f4f"
+  },
+  {
+    "text": "请选择选文批注或整页批注。",
+    "key": "frontend.07a25a5c791c"
+  },
+  {
+    "text": "原文位置已改变，请刷新页面后重新选择文字。",
+    "key": "frontend.e6c5e7e0adda"
+  },
+  {
+    "text": "批注已提交，等待管理员审核。可在个人中心查看审核状态。",
+    "key": "frontend.f70978e8c1a5"
+  },
+  {
+    "text": "批注已被删除。",
+    "key": "frontend.c15ef763d0f2"
+  },
+  {
+    "text": "只能编辑或删除自己的批注。",
+    "key": "frontend.6f418633d135"
+  },
+  {
+    "text": "批注与资源不对应。",
+    "key": "frontend.f2196145f82f"
+  },
+  {
+    "text": "批注已被其他页面修改，请刷新后重试。",
+    "key": "frontend.076e67367406"
+  },
+  {
+    "text": "批注已删除。",
+    "key": "frontend.ec427f33af02"
+  },
+  {
+    "text": "批注已更新，等待管理员重新审核。",
+    "key": "frontend.762b89483e74"
+  },
+  {
+    "text": "请先登录。",
+    "key": "frontend.05e9ef792a33"
+  },
+  {
+    "text": "请使用后台管理员账户登录。",
+    "key": "frontend.1738c99b20c2"
+  },
+  {
+    "text": "请选择审核通过或不通过。",
+    "key": "frontend.8b4185a0219c"
+  },
+  {
+    "text": "审核说明最多 1000 个字符。",
+    "key": "frontend.e01ff7ea8ca7"
+  },
+  {
+    "text": "批注已被修改，请刷新后重新审核。",
+    "key": "frontend.381280beaeb0"
+  },
+  {
+    "text": "审核通过，批注已在文献页显示。",
+    "key": "frontend.e184c642239e"
+  },
+  {
+    "text": "审核未通过，批注不会在文献页显示。",
+    "key": "frontend.8c19db505a56"
+  },
+  {
+    "text": "审核状态无效。",
+    "key": "frontend.8aeb7b65e139"
+  },
+  {
+    "text": "页面验证已失效，请刷新后重试。",
+    "key": "frontend.f2c12c2f3a03"
+  },
+  {
+    "text": "请先登录研究人员账户。",
+    "key": "frontend.063a6cd92b6b"
+  },
+  {
+    "text": "仅研究人员可新增、编辑或删除批注。",
+    "key": "frontend.d1d4e1686d61"
+  },
+  {
+    "text": "缺少批注参数。",
+    "key": "frontend.0b12b2caef60"
+  },
+  {
+    "text": "批注位置或版本无效。",
+    "key": "frontend.a483fd43ffbc"
+  },
+  {
+    "text": "批注数据过大。",
+    "key": "frontend.16c1febc86a8"
+  },
+  {
+    "text": "批注数据格式不正确。",
+    "key": "frontend.5a4f206cb14e"
+  },
+  {
+    "text": "批注内容请填写 1–2000 个字符。",
+    "key": "frontend.ed40410d3b4a"
+  },
+  {
+    "text": "批注暂时无法处理，请稍后重试。",
+    "key": "frontend.bf8e035ca9da"
+  },
+  {
+    "text": "注释",
+    "key": "frontend.detail.metadata.notes"
+  },
+  {
+    "text": "行数",
+    "key": "frontend.detail.metadata.lines"
+  },
+  {
+    "text": "题记",
+    "key": "frontend.detail.metadata.inscription"
+  }
+]

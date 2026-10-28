@@ -32,7 +32,7 @@ public class UpdateAllCache extends HttpServlet{
 	private IPlatformCacheService cacheService;
 
 	public String updateCache(){
-		SysConfigInfo.initConfig();
+		SysConfigInfo.initConfig(getServletContext().getContextPath());
 		cacheService = (IPlatformCacheService) WebApplicationContextUtils.getWebApplicationContext(getServletContext()).getBean("platformCacheService");
 		
 		long begin = System.currentTimeMillis();

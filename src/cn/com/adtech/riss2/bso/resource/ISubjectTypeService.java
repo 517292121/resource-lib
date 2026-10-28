@@ -17,6 +17,9 @@ public interface ISubjectTypeService extends ICommonService{
 	 * @return
 	 */
 	public List<ResSubjectType> getSubjectList();
+
+	/** Reuse an existing subject name, or create a top-level subject for free-form input. */
+	public Long saveSubjectName(String name, Long selectedId);
 	
 	/**
 	 * 根据ID获取学科对象

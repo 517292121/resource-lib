@@ -1,0 +1,5 @@
+@font-face { font-family: FrontendTibetan; src: local("Microsoft Himalaya"),url("../../font/Himalaya-A.ttf") format("truetype"); font-display: swap; }
+html[lang="bo"] body:not(.annotation-console) { font-family: FrontendTibetan,"Noto Serif Tibetan","Microsoft YaHei",sans-serif; }
+html[lang="bo"] body:not(.annotation-console) :is(h1,h2,h3,a,button,label,input,select,textarea,span,p,dt,dd,td,th,li) { font-family: FrontendTibetan,"Noto Serif Tibetan","Microsoft YaHei",sans-serif !important; letter-spacing: normal !important; }
+html[lang="bo"] .dh-nav-link,html[lang="bo"] .platform-page-header>nav a { line-height: 1.5; white-space: normal; text-align: center; }
+html[lang="bo"] .member-login-heading h1,html[lang="bo"] .member-register-heading h1 { letter-spacing: normal; }

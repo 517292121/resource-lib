@@ -27,6 +27,8 @@ import org.apache.lucene.queryparser.classic.QueryParser;
 import org.apache.lucene.queryparser.classic.QueryParser.Operator;
 import org.apache.lucene.search.BooleanClause.Occur;
 import org.apache.lucene.search.BooleanQuery;
+import org.apache.lucene.search.ConstantScoreQuery;
+import org.apache.lucene.queries.TermsFilter;
 import org.apache.lucene.search.Filter;
 import org.apache.lucene.search.Collector;
 import org.apache.lucene.search.Scorer;
@@ -282,6 +284,14 @@ public class LuceneSearchServiceImp implements ILuceneSearchService{
 		//2：通过BooleanQuery查询，将各个属性分别封装成Query添加到BooleanQuery；
 		//   如果条件较多逻辑较复杂的情况使用该方式更为灵活
 		BooleanQuery query = new BooleanQuery();
+		// Server-resolved category membership applies to both result rows and occurrence counts.
+		// TermsFilter supports large libraries without BooleanQuery's 1024-clause limit.
+		if (params.containsKey("resourceIds")) {
+			List<Term> ids = new ArrayList<Term>();
+			for (String id : params.get("resourceIds").split(",")) if (!id.isEmpty()) ids.add(new Term("id", id));
+			if (ids.isEmpty()) ids.add(new Term("id", "__no_category_resources__"));
+			query.add(new ConstantScoreQuery(new TermsFilter(ids)), Occur.MUST);
+		}
 		if(params.containsKey("key")){
 			String key = params.get("key"); 
 			int match = Integer.parseInt(params.get("match"));

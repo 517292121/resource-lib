@@ -1,7 +1,9 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%@ include file="../pc/common/header.jsp"%>
-		<script src="<%=basePath%>viewsjs/common/sha1.js"></script>
-		<script type="text/javascript">
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ include file="/WEB-INF/views/common/taglibInclude.jsp" %>
+<c:set var="memberSection" value="settings" />
+<%@ include file="memberCenterStart.jspf" %>
+<script src="<%=basePath%>viewsjs/common/sha1.js"></script>
+<script type="text/javascript">
 		// 会员中心 - 基本信息修改
 		function UsrRegForm_Validator(theForm) {
 			
@@ -143,169 +145,42 @@
 			return true;
 		}
 		</script>
-		
-		<!-- 会员中心中间 ============== 开始 ============== -->
-		<div class="p-cnt ucdiv shadow" >
-		   <div class="index_left">
-		   	<%@ include file="usercenterLeft.jsp"%>	
-		   </div>
-	 		<div class="index_right">
-		  		<div class="word_dqwz">
-		  			<b><fmt:message key='edit.current.location'/>：
-		  				<a href="<%=path %>/index.htm" class="navigation"><fmt:message key='home.page'/></a> >> 
-		  				<a href="<%=path %>/usercenter/infoSubscription.htm?action=showUpdate&display=block" class="navigation"><fmt:message key='addPage.membership.space'/></a> >> 
-		  				<fmt:message key='left.personal.settings'/>
-		  			</b></div>
-			
-			<form action="<%=path %>/updateUserinfo.htm" method="post" id="userinfoForm" enctype="multipart/form-data">
-	            <div class="update" style="background-color: #FFFFFF; padding-top: 20px;">
-		        	
-		        	<span class="cjzh"><h4 class="n1"><fmt:message key='user.account.information'/></h4></span>
-		            <table  cellpadding="0" cellspacing="5">
-		               <tbody>
-		               		<tr>
-		                        <td class="td1"><fmt:message key='user.name'/>：&nbsp;</td>
-		                        <td class="td2" align="left" >${sysUserinfo.suinLoginName }<input name="suinId" type="hidden" value="${sysUserinfo.suinId }"/></td>
-		                        <td class="td3"></td>
-		                    </tr>
-		        			<tr>
-		                        <td class="td1"><fmt:message key='user.password'/>：&nbsp;</td>
-		                        <td class="td2" align="left">
-		                       		<a href="javascript:updatePwd()" class="userinfo_update_down" id="userinfo_update_pwd"><fmt:message key='user.change.the.password'/></a>
-		                       		<input type="hidden" id="pwdtype" value="0"/>
-		                        </td>
-		                        <td class="td3" align="left"></td>
-		                     </tr>
-		                 </tbody>
-		            </table>
-		            
-		            <table cellpadding="0" cellspacing="5" style="width: 100%" border="0" style="display: none;" id="updatepwd">
-		               <tbody>
-		        			<tr>
-		                        <td class="td1">
-		                        	<fmt:message key='user.oid.cipher'/>：&nbsp;
-		                        </td>
-		                        <td class="td2"><input class="zckk" type="password"  id="old_password" maxlength="16" value=""></input></td>
-		                        <td class="td3" align="left"><span class="update_2">*${error }</span></td>
-		                     </tr>
-		                     <tr>
-		                        <td class="td1">
-		                        	<fmt:message key='user.new.password'/>：&nbsp;
-		                        </td>
-		                        <td class="td2" id="reg_password_td">
-		                        	<input class="zckk" type="password" id="update_password" value="" maxlength="16"></input>
-		                        	<input type="hidden" id="old_password_md5" name="old_password" value=""></input>	
-		                        	<input type="hidden" id="update_password_md5" name="update_password" value=""></input>
-		                        </td>
-		                        <td class="td3" align="left"><span class="update_2">*</span><fmt:message key='user.pass.number'/></td>
-		                     <tr>
-		                        <td class="td1">
-		                        	<fmt:message key='user.confirm.the.password'/>：&nbsp;
-		                        </td>
-		                        <td class="td2" align="left"><input class="zckk" type="password" id="update_password2"  value="" maxlength="16"></input></td>
-		                        <td class="td3" align="left"><span class="update_2">*</span></td>
-		                     </tr>
-		                 </tbody>
-		            </table>
-		            
-		            <c:if test="${!empty error}">
-		            	<script type="text/javascript">
-		            		showPwd();
-		            	</script>
-		            </c:if>
-		            
-		            <span class="cjzh"><h4 class="n2"><fmt:message key='user.my.head'/></h4></span>
-		            <table  cellpadding="0" cellspacing="5">
-		               <tbody>
-		        			<tr>
-								<td style=" float: left; width: 85px; padding: 5px 0px 0px 80px">
-							
-									<c:choose>
-										<c:when test="${!empty sysUserinfo.suinImageUrl}">  
-											<img width="70" height="70" class="tx" src="<%=SysConfigInfo.FILE_URL_PATH %>${sysUserinfo.suinImageUrl}" onerror="this.src='<%=path %>/images/platform/face.jpg'"/>
-										</c:when>
-										<c:otherwise> 
-											<img width="70" height="70" class="tx" src="<%=path %>/images/platform/face.jpg" />
-										</c:otherwise>
-									</c:choose>
-								</td>
-								<td align="left" class=" ts" colspan="2">
-									<p style="line-height: 180%"><fmt:message key='user.suggest.uploading'/></p>
-									<p style="line-height: 180%"><fmt:message key='user.allowed.upload.type'/>（<%=ConstantsObj.SUIN_IMAGE_TYPE %>）,<fmt:message key='user.cannot.exceed'/><%=ConstantsObj.SUIN_IMAGE_SIZE %>MB。</p>							
-		            				<div class="upfile" style="float:left; padding:5px 0">
-		            					 <span style="float:left"> 
-											<input id="viewfile" class="zckk" type="text"  style="border:1px solid #DFDFDF; z-index:99"/> 
-										</span>
-										<span style="float:left;position:relative; ">
-											<label class="upfile1"><img style="margin:5px 3px 0px 0px" src="<%=path %>/images/platform/upload.gif"/><fmt:message key='user.select.upload'/></label> 
-											<input id="upload" type="file" name="suinImage" onchange="document.getElementById('viewfile').value=this.value;" class="upfile2" /> 
-										</span> 
-									</div> 
-		            				<span class="update_2">${suinImageLocalNameError}</span>
-								</td>
-							</tr>
-		                 </tbody>
-		            </table>
-		            
-		            
-		            
-		            <span class="cjzh"><h4 class="n3"><fmt:message key='user.essential.information'/></h4></span>
-		            <table  cellpadding="0" cellspacing="5">
-		               <tbody>
-		               		<tr>
-		                        <td class="td1"><fmt:message key='user.real.name'/>：&nbsp;</td>
-		                        <td class="td2" align="left"><input class="zckk" name="suinName" type="text" value="${sysUserinfo.suinName }"/></td>
-		                        <td class="td3" align="left"><span class="update_2">*${suinNameError}</span></td>
-		                    </tr>
-		                    <tr>
-		                        <td class="td1"><fmt:message key='user.mailbox'/>：&nbsp;</td>
-		                        <td class="td2" align="left"><input class="zckk" name="suinEmail" type="text" value="${sysUserinfo.suinEmail }"/></td>
-		                        <td class="td3" align="left"><span class="update_2">*${suinEmailError}</span></td>
-		                    </tr>
-		                    <tr>
-		                        <td class="td1"><fmt:message key='user.gender'/>：&nbsp;</td>
-		                        <td class="td2" align="left">
-		                        	<input name="suinSex"   type="radio" value="1" <c:if test="${empty sysUserinfo.suinSex or sysUserinfo.suinSex eq 1 }">checked="checked"</c:if>> 男&nbsp;&nbsp;&nbsp;&nbsp;
-									<input name="suinSex"   type="radio" value="2" <c:if test="${sysUserinfo.suinSex eq 2 }">checked="checked"</c:if>> 女
-		                        </td>
-		                        <td class="td3" align="left"><span class="update_2">*${suinSexError }</span></td>
-		                    </tr>
-		                    <tr>
-		                        <td class="td1"><fmt:message key='user.birthday'/>：&nbsp;</td>
-		                        <td class="td2" align="left"><input class="zckk" name="suinBirthday" type="text" value='<fmt:formatDate pattern="yyyy-MM-dd" value="${sysUserinfo.suinBirthday }"/>'/></td>
-		                        <td class="td3" align="left"><span style="color:#8a8989;"><fmt:message key='edit.format'/>:yyyy-mm-dd</span></td>
-		                    </tr>
-		                    <tr>
-		                        <td class="td1"><fmt:message key='user.contact.information'/>：&nbsp;</td>
-		                        <td class="td2" align="left"><input class="zckk" name="suinMobileTelephone" type="text" value="${sysUserinfo.suinMobileTelephone }"/></td>
-		                        <td class="td3"><span class="update_2">${suinMobileTelephoneError }</span></td>
-		                    </tr>
-		                    <tr>
-		                        <td class="td1"><fmt:message key='user.last.login.time'/>：&nbsp;</td>
-		                        <td class="td2" align="left"><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${sysUserinfo.suinLastvisitDate }"/></td>
-		                        <td class="td3"></td>
-		                    </tr>
-		                    <tr>
-		                        <td class="td1">&nbsp;</td>
-		                        <td colspan="2" align="left">
-		                        	<a href="javascript:jsSubmit();" class="tbtn cabtn" ><fmt:message key='edit.preservation'/></a>
-		                        </td>
-		                     </tr>
-		                 </tbody>
-		            </table>
-		        </div>
-	            
-            </form>
-                
-			</div> 
-            <div class="clear"></div>
-		</div>
-		<!-- 会员中心中间 ============== 结束 ============== -->
-
- 		<!--底部开始-->
-		<div class="clear"></div>
-		<script type="text/javascript">
-			updatePwd();
-			updatePwd();
-		</script>
-		<%@ include file="../pc/common/footer.jsp"%>
+<main class="annotation-records-layout">
+    <%@ include file="memberCenterNav.jspf" %>
+    <section class="annotation-records-main">
+        <div class="annotation-records-heading"><h1><%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "个人设置") %></h1></div>
+        <form class="member-settings-form" action="<%=basePath%>updateUserinfo.htm" method="post" id="userinfoForm" enctype="multipart/form-data" onsubmit="jsSubmit();return false;">
+            <input name="suinId" type="hidden" value="<c:out value='${sysUserinfo.suinId}'/>" />
+            <fieldset><legend><fmt:message key="user.account.information" /></legend>
+                <div class="member-field"><span class="member-field-label"><fmt:message key="user.name" /></span><div class="member-field-control"><span class="member-readonly"><c:out value="${sysUserinfo.suinLoginName}" /></span></div></div>
+                <div class="member-field"><span class="member-field-label"><fmt:message key="user.password" /></span><div class="member-field-control"><button type="button" onclick="updatePwd()" class="userinfo_update_down" id="userinfo_update_pwd"><fmt:message key="user.change.the.password" /></button><input type="hidden" id="pwdtype" value="0" /></div></div>
+                <div class="member-password-fields" style="display:none" id="updatepwd">
+                    <div class="member-field"><label for="old_password"><fmt:message key="user.oid.cipher" /></label><div class="member-field-control"><input type="password" id="old_password" maxlength="16" autocomplete="current-password" /><span class="member-form-error"><c:out value="${error}" /></span></div></div>
+                    <div class="member-field"><label for="update_password"><fmt:message key="user.new.password" /></label><div class="member-field-control"><input type="password" id="update_password" maxlength="16" autocomplete="new-password" /><small class="member-form-hint"><fmt:message key="user.pass.number" /></small></div></div>
+                    <div class="member-field"><label for="update_password2"><fmt:message key="user.confirm.the.password" /></label><div class="member-field-control"><input type="password" id="update_password2" maxlength="16" autocomplete="new-password" /></div></div>
+                </div>
+                <input type="hidden" id="old_password_md5" name="old_password" value="" />
+                <input type="hidden" id="update_password_md5" name="update_password" value="" />
+            </fieldset>
+            <fieldset><legend><fmt:message key="user.my.head" /></legend>
+                <div class="member-field"><label for="upload"><%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "头像") %></label><div class="member-field-control">
+                    <c:choose><c:when test="${not empty sysUserinfo.suinImageUrl}"><img class="member-avatar" src="<%=SysConfigInfo.FILE_URL_PATH%><c:out value='${sysUserinfo.suinImageUrl}'/>" alt="<%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "个人头像") %>" onerror="this.onerror=null;this.src='<%=basePath%>images/platform/face.jpg'" /></c:when><c:otherwise><img class="member-avatar" src="<%=basePath%>images/platform/face.jpg" alt="<%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "个人头像") %>" /></c:otherwise></c:choose><br />
+                    <input id="upload" type="file" name="suinImage" accept=".jpg,.jpeg,.bmp,.png,.gif" />
+                    <small class="member-form-hint"><fmt:message key="user.suggest.uploading" /><br /><fmt:message key="user.allowed.upload.type" />（<%=ConstantsObj.SUIN_IMAGE_TYPE%>），<fmt:message key="user.cannot.exceed" /><%=ConstantsObj.SUIN_IMAGE_SIZE%>MB。</small>
+                    <span class="member-form-error"><c:out value="${suinImageLocalNameError}" /></span>
+                </div></div>
+            </fieldset>
+            <fieldset><legend><fmt:message key="user.essential.information" /></legend>
+                <div class="member-field"><label for="member-name"><fmt:message key="user.real.name" /><span class="member-required">*</span></label><div class="member-field-control"><input id="member-name" name="suinName" type="text" maxlength="26" value="<c:out value='${sysUserinfo.suinName}'/>" autocomplete="name" /><span class="member-form-error"><c:out value="${suinNameError}" /></span></div></div>
+                <div class="member-field"><label for="member-email"><fmt:message key="user.mailbox" /><span class="member-required">*</span></label><div class="member-field-control"><input id="member-email" name="suinEmail" type="email" value="<c:out value='${sysUserinfo.suinEmail}'/>" autocomplete="email" /><span class="member-form-error"><c:out value="${suinEmailError}" /></span></div></div>
+                <div class="member-field"><span class="member-field-label"><fmt:message key="user.gender" /><span class="member-required">*</span></span><div class="member-field-control"><div class="member-radio-options" role="group" aria-label="<%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "性别") %>"><label><input name="suinSex" type="radio" value="1" <c:if test="${empty sysUserinfo.suinSex or sysUserinfo.suinSex eq 1}">checked</c:if> /><%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "男") %></label><label><input name="suinSex" type="radio" value="2" <c:if test="${sysUserinfo.suinSex eq 2}">checked</c:if> /><%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "女") %></label></div><span class="member-form-error"><c:out value="${suinSexError}" /></span></div></div>
+                <div class="member-field"><label for="member-birthday"><fmt:message key="user.birthday" /></label><div class="member-field-control"><input id="member-birthday" name="suinBirthday" type="text" placeholder="yyyy-mm-dd" value="<fmt:formatDate pattern='yyyy-MM-dd' value='${sysUserinfo.suinBirthday}'/>" autocomplete="bday" /><small class="member-form-hint"><fmt:message key="edit.format" />：yyyy-mm-dd</small></div></div>
+                <div class="member-field"><label for="member-phone"><fmt:message key="user.contact.information" /></label><div class="member-field-control"><input id="member-phone" name="suinMobileTelephone" type="tel" maxlength="16" value="<c:out value='${sysUserinfo.suinMobileTelephone}'/>" autocomplete="tel" /><span class="member-form-error"><c:out value="${suinMobileTelephoneError}" /></span></div></div>
+                <div class="member-field"><span class="member-field-label"><fmt:message key="user.last.login.time" /></span><div class="member-field-control"><span class="member-readonly"><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${sysUserinfo.suinLastvisitDate}" /></span></div></div>
+            </fieldset>
+            <div class="member-form-actions"><button type="submit" class="member-save"><fmt:message key="edit.preservation" /></button></div>
+        </form>
+        <c:if test="${not empty error}"><script>showPwd();</script></c:if>
+    </section>
+</main>
+<%@ include file="memberCenterEnd.jspf" %>

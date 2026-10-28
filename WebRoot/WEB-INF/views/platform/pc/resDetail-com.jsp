@@ -2,8 +2,8 @@
 <%@page import="cn.com.adtech.riss2.controller.MyRequestUtil"%>
 <%@ include file="common/header.jsp" %>
 <script type="text/javascript" src="<%=basePath %>js/jquery.cookie.js"></script>
-<script type="text/javascript" src="<%=basePath %>js/platform/browseHis-font.js"></script>
-<script type="text/javascript" src="<%=basePath %>js/platform/resdetail-com.js"></script>
+<script type="text/javascript" src="<%=basePath %>js/platform/browseHis-font.js?ui=zh-zw-20261025-1"></script>
+<script type="text/javascript" src="<%=basePath %>js/platform/resdetail-com.js?ui=zh-zw-20261025-1"></script>
 <link rel="stylesheet" href="<%=basePath %>css/platform/resdetail-com.css" type="text/css"></link>
 <%@ include file="/WEB-INF/views/common/taglibInclude.jsp" %>
 <div class="main">
@@ -23,7 +23,7 @@
 					<c:if test="${isPdfViewer or (resource.rsdaSourceType > 0 and !empty resource.rsdaFileUrl)}">
 					<a href="<%=basePath %>res/browse/${idcode }" id="yulan" target="_blank"><fmt:message key="file.online.preview"/></a>
 						<c:if test="${!empty resource.rsdaFileSize and resource.rsdaFileSize > (1024*1024*20)}">
-							<div class="bigfile">源文较大，建议下载预览</div>
+							<div class="bigfile"><%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "源文较大，建议下载预览") %></div>
 						</c:if>
 					</c:if>
 					</c:if>

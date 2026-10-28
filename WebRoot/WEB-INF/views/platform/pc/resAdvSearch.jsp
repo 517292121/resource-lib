@@ -20,6 +20,7 @@ if(lang != null){
 <!DOCTYPE html>
 <html lang="en">
   <head>
+<%@ include file="/WEB-INF/views/platform/pc/common/frontendI18n.jspf" %>
     <title><fmt:message key="adv.advanced.search"/></title>
     
 	<meta http-equiv="pragma" content="no-cache">
@@ -32,7 +33,7 @@ if(lang != null){
     <link rel="stylesheet" href="<%=basePath%>css/platform/advanced-search-dialog.css?v=20261017-1">
   	<script type="text/javascript" src="<%=basePath %>js/jquery.min.js"></script>
   	<script type="text/javascript" src="<%=basePath %>layer/layer.js"></script>
-  	<script type="text/javascript" src="<%=basePath %>js/platform/advsearch.js?v=20261017-1"></script>
+    <script type="text/javascript" src="<%=basePath %>js/platform/advsearch.js?v=advanced-results-20261024-1&amp;ui=zh-zw-20261025-1"></script>
   	
   	
   </head>

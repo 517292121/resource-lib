@@ -1,0 +1,17 @@
+<%@ page pageEncoding="UTF-8" %>
+<dialog id="annotation-editor" class="annotation-dialog" aria-labelledby="annotation-editor-title">
+    <form id="annotation-editor-form">
+        <div class="annotation-dialog-heading"><h2 id="annotation-editor-title"><%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "新增批注") %></h2><button type="button" data-close-annotation aria-label="<%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "关闭批注编辑") %>">×</button></div>
+        <p id="annotation-editor-location" class="annotation-editor-location"></p>
+        <blockquote id="annotation-editor-quote"></blockquote>
+        <label for="annotation-content"><%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "批注内容") %></label>
+        <textarea id="annotation-content" rows="5" maxlength="2000" required placeholder="<%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "填写对这段原文的理解或研究说明") %>"></textarea>
+        <div class="annotation-editor-count"><span id="annotation-character-count">0</span> / 2000</div>
+        <p id="annotation-editor-error" class="annotation-error" role="alert"></p>
+        <div class="annotation-dialog-actions"><button type="button" data-close-annotation><%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "取消") %></button><button type="submit" id="annotation-save"><%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "保存批注") %></button></div>
+    </form>
+</dialog>
+<dialog id="annotation-message" class="annotation-dialog annotation-message" aria-labelledby="annotation-message-title">
+    <h2 id="annotation-message-title"><%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "提示") %></h2><p id="annotation-message-text"></p>
+    <div class="annotation-dialog-actions"><button type="button" id="annotation-message-cancel"><%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "取消") %></button><button type="button" id="annotation-message-ok"><%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "确定") %></button></div>
+</dialog>

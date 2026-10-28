@@ -1,3 +1,6 @@
+
+  var uiText=window.platformText||function(value,parameters){return String(value).replace(/\{([a-zA-Z0-9_]+)\}/g,function(match,name){return parameters&&Object.prototype.hasOwnProperty.call(parameters,name)?String(parameters[name]):match;});};
+  var uiMarkup=window.platformMarkup||function(value){return value;};
 /**
  *	全文检索前端处理
  *
@@ -306,7 +309,7 @@ function initListForObj(data){
 						if(pagedata.pageType==1){
 							res2html += "<span>pdf:</span>";
 						}else{
-							res2html += "<span>图文:</span>";
+							res2html += uiMarkup("<span>图文:</span>");
 						}
 						res2html += fpnum(pagedata.title) + " &nbsp; ";
 						res2html += pagedata.content+"</p>";

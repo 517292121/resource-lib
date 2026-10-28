@@ -168,11 +168,12 @@ public class MyFileUtil {
 				 continue;
 			 }
 			 filename = f.getName();
+			 if (filename.lastIndexOf(".") < 1) continue;
 			 String fname = filename.substring(0, filename.lastIndexOf("."));
 			 if(fname.endsWith("_small")){ //跳过缩略图
 				 continue;
 			 }
-			 if(fname.contains("cover")){ //跳过封面
+			 if(fname.toLowerCase(java.util.Locale.ROOT).contains("cover")){ //跳过封面
 				 isCover = true;
 				 continue;
 			 }
@@ -277,11 +278,12 @@ public class MyFileUtil {
 				 continue;
 			 }
 			 filename = f.getName();
+			 if (filename.lastIndexOf(".") < 1) continue;
 			 String fname = filename.substring(0, filename.lastIndexOf("."));
 			 if(fname.endsWith("_small")){ //跳过缩略图
 				 continue;
 			 }
-			 if(fname.contains("cover")){ //跳过封面
+			 if(fname.toLowerCase(java.util.Locale.ROOT).contains("cover")){ //跳过封面
 				 continue;
 			 }
 			 //文件格式

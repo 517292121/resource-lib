@@ -88,6 +88,7 @@ function sourceView(reqItem){
 
 // 表单验证
 function checkform() {
+	if (window.validateResourceDirectoryUpload && !window.validateResourceDirectoryUpload()) return false;
 	var texts = document.getElementsByTagName("textarea");
 	var result = true;
 	for(i = 0; i < texts.length; i++) {
@@ -370,9 +371,10 @@ function checkImageFileType(fileItem){
 
  //文件上传tab切换处理
  $(function(){
-	$('.tabbox .content ul').width(800*$('.tabbox .content li').length+'px');
+	$('.tabbox .content > ul').width(800*$('.tabbox .content > ul > li').length+'px');
 	$(".tabbox .tab a").click(function(){
 		$("#resFileType").val($(this).data("type"));
+		if (window.syncDirectoryUpload) window.syncDirectoryUpload();
 		$(this).addClass('on').siblings().removeClass('on');
 		var index = $(this).index();
 		var distance = -800*index;

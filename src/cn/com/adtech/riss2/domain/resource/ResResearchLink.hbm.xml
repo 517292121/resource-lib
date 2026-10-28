@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="cn.com.adtech.riss2.domain.resource.ResResearchLink" table="RES_RESEARCH_LINK" lazy="false">
+        <composite-id>
+            <key-property name="researchId" type="java.lang.Long" column="RESEARCH_ID" />
+            <key-property name="resourceId" type="java.lang.Long" column="RESOURCE_ID" />
+        </composite-id>
+    </class>
+</hibernate-mapping>

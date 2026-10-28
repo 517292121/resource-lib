@@ -1,0 +1,109 @@
+.reader-annotations-panel{position:absolute;top:12%;bottom:6%;left:8%;right:9%;display:flex;flex-direction:column;min-height:0;font:clamp(12px,.82vw,15px)/1.7 "Microsoft YaHei",sans-serif}
+.annotation-toolbar{display:flex;gap:6px;flex-wrap:wrap;padding:0 0 8px;border-bottom:1px solid #bda57c66}
+.annotation-toolbar[hidden]{display:none}
+.annotation-toolbar button,.annotation-toolbar a{border:1px solid #cbb1857a;background:#8e6745;color:#ffedc7;border-radius:3px;padding:4px 7px;font:inherit;cursor:pointer}
+.annotation-toolbar button:disabled{opacity:.45;cursor:default}
+.annotation-toolbar a{font-size:11px}
+.annotation-hint{margin:9px 0;color:#d7c39f;font-size:11px;line-height:1.7}
+.annotation-list{overflow:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#b39770 #684629;min-height:0;flex:1;padding-right:4px}
+.annotation-list-tools{display:flex;align-items:center;gap:6px;padding-bottom:9px;position:sticky;top:0;background:#674b32;z-index:2}
+.annotation-list-tools button{border:1px solid #cbb1857a;border-radius:3px;color:#ffedc7;padding:2px 8px;font:11px/1.7 "Microsoft YaHei",sans-serif;background:transparent;cursor:pointer}
+.annotation-list-tools .annotation-refresh{margin-left:auto}
+.annotation-count{font-size:11px;color:#d7c39f}
+.annotation-empty{margin:25px 0;text-align:center;opacity:.7;font-size:13px}
+.annotation-card{padding:12px 3px;border-top:1px dashed #c5a97a70;overflow-wrap:anywhere;scroll-margin-top:42px}
+.annotation-card.is-active{background:#a6744855}
+.annotation-card:hover{background:#a6744829;cursor:pointer}
+.annotation-card-heading{border:0;background:none;color:inherit;display:flex;align-items:center;gap:8px;text-align:left;font:inherit;cursor:pointer;padding:0}
+.annotation-number,.annotation-marker{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;width:21px;height:21px;border-radius:50%;background:#91442e;border:1px solid #dec28e;color:#fff0cb;font:12px/1 sans-serif}
+.annotation-author{font-size:12px;font-weight:bold}
+.annotation-meta{font-size:11px;opacity:.7;margin:5px 0 8px}
+.annotation-quote{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;border-left:2px solid #c7ae80;margin:6px 0;padding:2px 0 2px 8px;color:#d6c09c;font-size:11px;white-space:pre-wrap}
+.annotation-body{margin:8px 0;white-space:pre-wrap;overflow-wrap:anywhere;font-size:13px;line-height:1.9}
+.annotation-row-actions{display:flex;gap:12px;margin-top:8px}
+.annotation-row-actions button{border:0;border-bottom:1px solid #dbc39988;background:none;color:#ead4a9;padding:0 0 1px;font-size:11px;line-height:1.5;font-family:inherit;cursor:pointer}
+.annotation-status{font-size:12px;color:#ffd39d;margin:4px 0 0;overflow-wrap:anywhere}
+.annotation-status:empty{display:none}
+.reader-leaf .annotation-highlight{background:#cfa94b26;color:inherit;border-bottom:1px dotted #a15b36;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.annotation-markers{position:absolute;inset:0;pointer-events:none}
+.annotation-marker{position:absolute;width:18px;height:18px;font-size:10px;cursor:pointer;pointer-events:auto;z-index:3;box-shadow:0 1px 3px #59301740}
+.annotation-marker:hover,.annotation-marker.is-active{background:#ac3821;outline:2px solid #d2aa5c66}
+.annotation-dialog{box-sizing:border-box;width:min(570px,calc(100vw - 32px));max-height:85vh;overflow:auto;margin:auto;border:1px solid #b49260;border-radius:5px;background:#faf2df;color:#4c3825;padding:25px 28px;box-shadow:0 16px 65px #20160866;font:14px/1.8 "Microsoft YaHei",sans-serif}
+.annotation-dialog::backdrop{background:#18161180}
+.annotation-dialog-heading{display:flex;justify-content:space-between;align-items:center;gap:20px;margin-bottom:16px}
+.annotation-dialog h2{margin:0;font:bold 21px/1.5 SimSun,serif;letter-spacing:2px}
+.annotation-dialog-heading>button{border:0;background:none;color:#886a45;font-size:26px;line-height:1;cursor:pointer}
+.annotation-dialog blockquote{white-space:pre-wrap;overflow-wrap:anywhere;max-height:145px;overflow:auto;padding:12px 14px;margin:10px 0 20px;border-left:3px solid #b89561;background:#e9dec633;color:#8a7559;font:13px/1.8 SimSun,serif}
+.annotation-editor-location{font-size:12px;color:#927c5b;margin:0}
+.annotation-dialog label{display:block;margin:0 0 6px}
+.annotation-dialog textarea{box-sizing:border-box;width:100%;resize:vertical;min-height:120px;max-height:35vh;padding:10px;border:1px solid #c6af8a;border-radius:3px;background:#fffaf0;color:#4a3827;font:14px/1.8 "Microsoft YaHei",sans-serif}
+.annotation-dialog textarea:focus{outline:2px solid #9b713855;outline-offset:1px}
+.annotation-editor-count{font-size:11px;text-align:right;color:#a18a68}
+.annotation-error{font-size:12px;color:#a53f2f;min-height:20px;margin:0 0 10px}
+.annotation-dialog-actions{display:flex;justify-content:flex-end;gap:12px;margin-top:15px}
+.annotation-dialog-actions button{border:1px solid #baa078;border-radius:3px;padding:7px 22px;background:#eee3cc;color:#745b3e;font:14px/1.5 "Microsoft YaHei",sans-serif;cursor:pointer}
+.annotation-dialog-actions button:last-child{background:#7d4a32;border-color:#7d4a32;color:#fff2d5}
+.annotation-dialog-actions button:disabled{opacity:.5;cursor:wait}
+.annotation-dialog-actions [hidden]{display:none}
+.annotation-message{max-width:420px}
+.annotation-message p{white-space:pre-wrap}
+.reader-chapter-dialog .reader-chapters{position:static;max-height:60vh;color:#694a2d}
+.reader-chapter-dialog .reader-chapters a{color:inherit;text-decoration:none;font-size:14px;padding:12px 5px;border-color:#baa27b66}
+.reader-chapter-dialog .reader-chapter-number{border-color:#a58356}
+.reader-chapter-dialog .reader-chapters a.current{color:#803f29;background:#c1a46c22}
+.reader-chapter-dialog .reader-chapters .current .reader-chapter-number{color:#fff1d1;background:#995137}
+.reader-toolbar #reader-open-chapters{padding:0 8px}
+body.annotation-records-page{margin:0;background:#f3eddf;color:#443729;font:14px/1.8 "Microsoft YaHei",sans-serif;min-height:100vh;display:flex;flex-direction:column}
+.annotation-page-header{display:flex;align-items:center;gap:30px;background:#18342e;padding:20px 5%;color:#e2c693;border-bottom:4px double #b49a6e}
+.annotation-page-header img{display:block;width:min(35vw,440px);height:auto}
+.annotation-page-header nav{display:flex;align-items:center;gap:24px;margin-left:auto;white-space:nowrap}
+.annotation-page-header a{color:inherit;text-decoration:none}
+.annotation-page-header .is-active{color:#f8e3b9;border-bottom:1px solid #ceb382}
+.annotation-records-layout{width:min(1160px,92%);margin:35px auto;display:flex;gap:26px;flex:1;align-items:flex-start}
+.annotation-member-nav{width:160px;flex-shrink:0;display:flex;flex-direction:column;background:#fffbf2;border:1px solid #dfd2b9;padding:12px}
+.annotation-member-nav a{padding:10px 14px;color:#756047;text-decoration:none}
+.annotation-member-nav a[aria-current]{background:#e8dcc4;color:#75422c}
+.annotation-records-main{flex:1;min-width:0;background:#fffbf3;border:1px solid #dfd2b9;padding:28px 34px}
+.annotation-records-heading{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;margin-bottom:20px}
+.annotation-records-heading h1{margin:0;font:26px/1.5 SimSun,serif}
+.annotation-records-heading span{font-size:12px;color:#a28b69}
+.annotation-record-search{display:flex;gap:10px}
+.annotation-record-search input{padding:8px 12px;border:1px solid #cbb994;background:#fffaf0;min-width:220px;font:inherit;max-width:100%}
+.annotation-record-search button,.annotation-record-pagination button{padding:7px 16px;border:1px solid #ac8c5d;border-radius:2px;background:#7a5337;color:#fff3d9;font:inherit;cursor:pointer}
+.annotation-record-search label{display:flex;align-items:center;gap:12px}
+.annotation-record{padding:24px 0;border-top:1px solid #dfd4be;overflow-wrap:anywhere}
+.annotation-record h2{margin:0;font:18px/1.5 SimSun,serif}
+.annotation-record h2 a{color:#60472e;text-decoration:none}
+.annotation-record-heading{display:flex;align-items:baseline;flex-wrap:wrap;gap:8px 12px;min-width:0}
+.annotation-record-heading h2{min-width:0}
+.annotation-record-heading .annotation-audit-badge{white-space:nowrap}
+.annotation-record .annotation-record-heading .annotation-meta{margin:0;min-width:0}
+.annotation-record .annotation-meta{color:#887252;opacity:1}
+.annotation-record-quote{margin:12px 0;padding:8px 15px;border-left:3px solid #c1aa7d;background:#ebe0c733;max-height:100px;overflow:auto;white-space:pre-wrap;color:#8a7559;font-size:12px}
+.annotation-record .annotation-row-actions{display:inline-flex;margin-right:20px}
+.annotation-record .annotation-row-actions button{color:#886044;border-color:#bb9c7188;font-size:12px}
+.annotation-view{font-size:12px;color:#8a643f}
+.annotation-record-pagination{display:flex;align-items:center;justify-content:center;gap:20px;margin-top:25px}
+.annotation-record-pagination button:disabled{opacity:.35;cursor:default}
+.annotation-records-main .annotation-list{overflow:visible;padding:0}
+.annotation-records-main .annotation-status{color:#a34b30}
+.annotation-records-footer{text-align:center;color:#a18b6d;font-size:12px;padding:25px}
+.annotation-console-header{padding:12px 24px;background:#d5e2f3;border-bottom:1px solid #a9bdd8;color:#345c8a;display:flex;justify-content:space-between}
+.annotation-console-header a{color:inherit}
+.annotation-console .annotation-records-layout{width:94%;max-width:none;margin:20px auto}
+.annotation-review-search{flex-wrap:wrap;align-items:flex-end}
+.annotation-review-search label{display:flex;align-items:center;gap:10px}
+.annotation-review-search select{padding:9px 12px;min-height:42px;border:1px solid #cbb994;background:#fffaf0;color:#735739;font:inherit}
+.annotation-review-hint{font-size:12px;color:#9b805b;margin:12px 0 20px}
+.annotation-review-status{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:12px 0 6px}
+.annotation-record-heading .annotation-review-status{margin:0;gap:8px}
+.annotation-audit-badge{display:inline-block;padding:2px 10px;border:1px solid #d2ad6c;background:#f5ecd4;color:#926b29;font-size:12px;line-height:1.7;border-radius:2px}
+.annotation-audit-badge.is-approved{border-color:#9caf94;background:#e9f0e3;color:#4f6b40}
+.annotation-audit-badge.is-rejected{border-color:#ceaaa2;background:#f5e8e3;color:#9c4c3c}
+.annotation-audit-time{font-size:11px;color:#9c8869}
+.annotation-review-remark{padding:8px 12px;background:#eee2cb44;border-left:2px solid #c5aa7f;font-size:12px;color:#876646;white-space:pre-wrap;overflow-wrap:anywhere}
+.annotation-review-actions{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-top:14px}
+.annotation-review-actions button{padding:6px 15px;border:1px solid #a68c61;background:#7a5337;color:#fff3d9;cursor:pointer;border-radius:2px;font:12px/1.6 "Microsoft YaHei",sans-serif;white-space:nowrap}
+.annotation-review-actions .annotation-review-reject,.annotation-review-actions .annotation-delete{background:#fff7ea;border-color:#c5a394;color:#94533e}
+@media(max-width:1100px){.reader-annotations-panel{font-size:12px}.annotation-toolbar{gap:5px}.annotation-toolbar button{padding:3px 6px}.annotation-hint{font-size:10px}.annotation-card{padding-top:10px}.annotation-body{font-size:12px}.annotation-meta,.annotation-quote{font-size:10px}.annotation-list-tools button{font-size:10px;padding:2px 5px}.reader-toolbar{left:6%;right:5%;gap:5px}.reader-toolbar .reader-page-controls button{padding-left:7px;padding-right:7px}}
+@media(max-width:760px){.reader-toolbar{left:5%;right:4%;gap:3px;font-size:9px}.reader-toolbar .reader-page-controls button{padding:0 4px}.reader-toolbar #reader-open-chapters{padding:0 5px}.reader-toolbar .reader-font-control select{font-size:9px;max-width:66px}.reader-toolbar .reader-return{padding:0 4px}.reader-toolbar .reader-zoom{width:18px}.reader-toolbar .reader-zoom svg{width:17px}.annotation-toolbar button,.annotation-toolbar a{font-size:12px}.annotation-hint{font-size:11px}.annotation-body{font-size:13px}.annotation-meta,.annotation-quote{font-size:11px}.annotation-dialog{padding:20px}.annotation-page-header{flex-wrap:wrap;gap:15px}.annotation-page-header img{width:min(86vw,440px)}.annotation-page-header nav{margin:0;font-size:12px;gap:20px}.annotation-records-layout{display:block;margin:20px auto}.annotation-member-nav{width:auto;flex-direction:row;margin-bottom:15px;font-size:12px;padding:5px}.annotation-member-nav a{padding:7px 10px}.annotation-records-main{padding:22px 18px}.annotation-record-search label{display:block}.annotation-record-search input{min-width:0;width:100%}.annotation-record-search{align-items:flex-end}.annotation-record-search button{white-space:nowrap}.annotation-records-heading h1{font-size:23px}}

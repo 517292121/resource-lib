@@ -59,6 +59,14 @@
 					xtype : 'tbseparator'
 				},  {
 					xtype : 'tbbutton',
+					text : '批注管理',
+					handler : function() {
+						var panel = Ext.getCmp('main_tab');
+						if (!panel.getComponent('textAnnotations')) addTab(panel, 'textAnnotations', '批注管理', rootPath + 'console/annotations');
+						else panel.setActiveTab('textAnnotations');
+					}
+				}, {xtype : 'tbseparator'}, {
+					xtype : 'tbbutton',
 					text : '前台主页',
 					listeners : {
 						click:function() {

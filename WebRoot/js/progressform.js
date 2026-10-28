@@ -60,7 +60,16 @@ $(function(){
 			var result = xhr.responseText;
 			var data = eval('(' + result + ')');
 			if(data.success == true){
-				layer.confirm('保存成功，是否返回列表？', {
+				if ($('#sourceform').attr('data-save-return') === 'maintenance') {
+					if (data.syncWarning) {
+						layer.alert(data.msg, {icon: 0}, function(index) { layer.close(index); goback(); });
+					} else {
+						goback();
+					}
+					return;
+				}
+				var savedMessage = data.syncWarning ? data.msg + '，是否返回列表？' : '保存成功，是否返回列表？';
+				layer.confirm(savedMessage, {
 					btn: ['返回','取消'] //按钮
 				}, function(){
 				  	goback();

@@ -1,3 +1,6 @@
+
+  var uiText=window.platformText||function(value,parameters){return String(value).replace(/\{([a-zA-Z0-9_]+)\}/g,function(match,name){return parameters&&Object.prototype.hasOwnProperty.call(parameters,name)?String(parameters[name]):match;});};
+  var uiMarkup=window.platformMarkup||function(value){return value;};
 /**
  *	用户注册处理
  *  wanglin
@@ -5,32 +8,82 @@
  */
 
 $(function(){
-	//var width = 400; //跟外面盒子的宽度一样，或者写成 var width = $(".content").width();
-	var width = $(".container").width();
-	$(".content ul").width(width);
-	var ulNum = $(".content ul").length; //获取ul的个数
-	var contentWidth = width * ulNum; //获取整个box应该的长度，刚开始box设置成了1100，但是应该把所有的ul防到一行里面去，这样box向左移动的时候才是无缝滚动
+	var $card = $(".member-register-card");
+	if(!$card.length){
+		// Keep the existing mobile registration page's sliding tabs.
+		var width = $(".container").width();
+		var $legacyPanels = $(".content ul").width(width);
+		$(".content .box").width(width * $legacyPanels.length);
+		$(".nav span").on('click', function(){
+			$(this).addClass('active').siblings().removeClass('active');
+			$(".content .box").stop(true).animate({left: -$(this).index() * width}, 600);
+		});
+		return;
+	}
 
-	$(".box").width(contentWidth); //给box设置宽度  .width() 是获取宽度  .width(value)是设置宽度
-	$(".reg_btn").width($("#e_imgCode").width());
+	// Also remove the phone option when an older compiled JSP is still being served.
+	$card.find('.member-register-tabs span').slice(1).remove();
+	$card.find('.member-register-content ul').slice(1).remove();
+	$card.find('.member-register-content ul').first().addClass('is-active');
+	notifyRegisterHeight();
 
-	$(".nav span").click(function(){
-		$(this).addClass('active').siblings().removeClass('active');
-		var clickNum = $(this).index(); //判断点击的是第几个span .index()方法返回第几个，从0开始算起
-		var moveLeft = clickNum * width * -1; //应该向左移动的距离
-		$(".box").animate({'left':moveLeft}, 600);
-	})
-
+	// Observe content without changing its size, so height updates cannot restart layout.
+	if(window.ResizeObserver){
+		new ResizeObserver(notifyRegisterHeight).observe($card[0]);
+	}
+	$(window).on('load resize', notifyRegisterHeight);
 });
 
  
 //弹出服务协议 
 function openserver(){
-	window.parent.openRegServer();
+	var host = window;
+	try {
+		if (window.parent !== window && typeof window.parent.openRegServer === 'function') {
+			window.parent.openRegServer();
+			return false;
+		}
+		// A separate dialog leaves the registration iframe and its values intact.
+		if (window.parent !== window && window.parent.document) host = window.parent;
+	} catch (ignore) { host = window; }
+	var doc = host.document;
+	if (host !== window && !doc.getElementById('member-terms-theme')) {
+		var theme = document.querySelector('link[href*="/css/platform/member-login.css"]');
+		if (theme) { theme = theme.cloneNode(true); theme.id = 'member-terms-theme'; doc.head.appendChild(theme); }
+	}
+	var dialog = doc.getElementById('member-terms-dialog');
+	if (!dialog) {
+		dialog = doc.createElement('dialog');
+		if (typeof dialog.showModal !== 'function') return true; // Follow the real link in older browsers.
+		dialog.id = 'member-terms-dialog';
+		dialog.className = 'member-terms-dialog';
+		dialog.setAttribute('aria-label', uiText('服务条款及法律声明'));
+		var close = doc.createElement('button');
+		close.type = 'button'; close.className = 'member-terms-close'; close.textContent = '×';
+		close.setAttribute('aria-label', uiText('关闭'));
+		close.addEventListener('click', function(){ dialog.close(); });
+		var frame = doc.createElement('iframe');
+		frame.title = uiText('服务条款及法律声明');
+		frame.src = basePath + 'reg/server';
+		dialog.append(close, frame);
+		doc.body.appendChild(dialog);
+	}
+	if (!dialog.open) dialog.showModal();
+	return false;
 }
 
 function inLogin(){
-	window.parent.openLogin();
+	if(window.parent && typeof window.parent.openLogin === 'function') window.parent.openLogin();
+}
+
+var lastRegisterHeight = 0;
+function notifyRegisterHeight(){
+	if(window.parent === window) return;
+	var card = document.querySelector('.member-register-card');
+	var height = Math.ceil(card ? card.getBoundingClientRect().height : document.body.scrollHeight);
+	if(!height || height === lastRegisterHeight) return;
+	lastRegisterHeight = height;
+	window.parent.postMessage({type:'platform-member-resize', height:height}, window.location.origin);
 }
 
 function refcode(){
@@ -194,12 +247,12 @@ function mobileRegSubmit(){
 		return;
     }
     
-    if($("#regServer").is(':checked') == false){
-    	layer.tips(poput_alert_reginstration_agreement, '#regServer', {tips: [3, '#FF7F00'], time: 4000});
+	if($("#e_regServer").is(':checked') == false){
+		layer.tips(poput_alert_reginstration_agreement, '#e_regServer', {tips: [3, '#FF7F00'], time: 4000});
 		return;
     }
-    if($("#regServer").is(':checked') == false){
-    	layer.tips('请阅读并同意服务条款！', '#regServer', {tips: [3, '#FF7F00'], time: 4000});
+	if($("#e_regServer").is(':checked') == false){
+		layer.tips(uiText('请阅读并同意服务条款！'), '#e_regServer', {tips: [3, '#FF7F00'], time: 4000});
 		return;
     }
     
@@ -319,9 +372,8 @@ function emailReg(){
         layer.tips(poput_alert_picture_input_incorrect, '#e_imgCode', {tips: [3, '#FF7F00'], time: 4000});
 		return;
     }
-    console.log($("#e_regServer").is(':checked'));
-    if($("#e_regServer").is(':checked') == false){
-    	layer.tips('请阅读并同意服务条款！', '#e_regServer', {tips: [3, '#FF7F00'], time: 4000});
+	if($("#regServer").is(':checked') == false){
+		layer.tips(uiText('请阅读并同意服务条款！'), '#regServer', {tips: [3, '#FF7F00'], time: 4000});
 		return;
     }
 	
@@ -358,13 +410,16 @@ function emailReg(){
 }
 
 function printResult(loginName, msg){
-	var html = "<div class='regTips'>";
-	html += "<img src='"+basePath+"images/platform/"+skin+"/success.png'></img> ";
+	var html = "<section class='member-register-success' aria-live='polite'>";
+	html += "<div class='regTips'>";
+	html += "<img src='"+basePath+"images/platform/"+skin+"/success.png' alt=''>";
 	html += "<span><i>"+loginName+"</i> "+poput_alert_login_success+"</span>";
 	html += "</div>";
-	html += "<p class='incenter'><br>";
+	html += "<p class='incenter'>";
 	html += msg;
 	html += "</p>";
+	html += "</section>";
 	$(".container").html(html);
+	notifyRegisterHeight();
 }
 

@@ -69,8 +69,8 @@
 		<property name="uploadService" ref="localUploadService" />
 		<property name="commandName" value="sysUserinfo" />
 		<property name="commandClass" value="cn.com.adtech.riss2.domain.SysUserinfo" />
-		<property name="formView" value="platform/usercenterIndex" />
-		<property name="successView" value="platform/usercenterIndex" />
+		<property name="formView" value="platform/userCenter/usercenterIndex" />
+		<property name="successView" value="platform/userCenter/usercenterIndex" />
 		<property name="sysUserPlatformService" ref="sysUserPlatformService" />
 	</bean>
 	<!-- 忘记密码 -->

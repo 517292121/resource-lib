@@ -1,12 +1,9 @@
 package cn.com.unionlib.reader;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStreamReader;
+
+import cn.com.adtech.riss2.core.file.ResourceDirectoryFiles;
 
 /**
  * 
@@ -82,65 +79,19 @@ public class CommonReader {
 	 */
 	public static String readerTxt(String filepath){
 		File file = new File(filepath);
-		if(file.exists() == false){
+		if(file.isFile() == false){
 			System.out.println("文件“" + filepath + "”不存在");
 			return null;
 		}
-		String line = null;
-		StringBuffer buffer = new StringBuffer();
 		try {
-			//获取编码格式，不同编码文件要用不同的编码读取
-			String encode = getCharset(filepath);
-			InputStreamReader isr = new InputStreamReader(new FileInputStream(file),encode);
-			BufferedReader br = new BufferedReader(isr);
-			line = br.readLine();
-			while(line != null){
-				buffer.append(line + "\n");
-				line = br.readLine();
-			}
-			line = buffer.toString();
-			buffer = null;
-			isr.close();
-			br.close();
-			return line;
-		} catch (FileNotFoundException e) {
-			System.out.println("文件“" + filepath + "”不存在");
-			return null;
+			// Use the same Unicode decoder as the reader: a BOM is optional for UTF-8.
+			// Defaulting BOM-less files to GBK corrupted Tibetan during both full and incremental indexing.
+			String text = ResourceDirectoryFiles.readText(file).replace("\r\n", "\n").replace('\r', '\n');
+			// Preserve the legacy reader's line-ending and final-newline contract.
+			return text.isEmpty() || text.endsWith("\n") ? text : text + "\n";
 		} catch (IOException e) {
 			System.out.println("文件“"+filepath+"”读取失败：" + e.getMessage());
 			return null;
 		}
 	}
-	
-	/**
-	 * 获取txt文件的编码格式
-	 *
-	 * @author MaChao
-	 * @date Jun 26, 2015
-	 *
-	 * @param fileName
-	 * @return
-	 * @throws IOException
-	 */
-	private static String getCharset(String fileName) throws IOException{  
-        BufferedInputStream bin = new BufferedInputStream(new FileInputStream(fileName));    
-        int p = (bin.read() << 8) + bin.read();    
-          
-        String code = null;    
-          
-        switch (p) {    
-            case 0xefbb:    
-                code = "UTF-8";    
-                break;    
-            case 0xfffe:    
-                code = "Unicode";    
-                break;    
-            case 0xfeff:    
-                code = "UTF-16BE";    
-                break;    
-            default:    
-                code = "GBK";    
-        }    
-        return code;  
-}
 }

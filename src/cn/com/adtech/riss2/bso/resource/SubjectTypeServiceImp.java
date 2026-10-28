@@ -36,6 +36,27 @@ public class SubjectTypeServiceImp extends CommonServiceImp implements ISubjectT
 		return list;
 	}
 
+	@Override
+	public Long saveSubjectName(String name, Long selectedId) {
+		String subjectName = name == null ? "" : name.trim();
+		if(subjectName.length() == 0) return null;
+		if(selectedId != null && selectedId > 0) {
+			ResSubjectType selected = getSubjectById(selectedId);
+			if(selected != null && subjectName.equals(selected.getRstyName())) return selectedId;
+		}
+		List<ResSubjectType> matches = getHibernateTemplate().find(
+				"from ResSubjectType rst where rst.rstyId>0 and rst.rstyName=? order by rst.rstyId", subjectName);
+		if(!matches.isEmpty()) return matches.get(0).getRstyId();
+		ResSubjectType subject = new ResSubjectType();
+		subject.setRstyName(subjectName);
+		subject.setRstyPid(0L);
+		subject.setRstyGrade(1L);
+		subject.setRstyIndex(0);
+		subject.setRstyCode("");
+		save(subject);
+		return subject.getRstyId();
+	}
+
 	/**
 	 * 获取学科分类的下拉选项
 	 * @param selectid 选择的选项ID

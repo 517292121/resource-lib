@@ -27,6 +27,7 @@ import cn.com.adtech.riss2.core.CommonUtil;
 import cn.com.adtech.riss2.core.ConstantsObj;
 import cn.com.adtech.riss2.core.MmSettingConstant;
 import cn.com.adtech.riss2.core.json.DateJsonValueProcessor;
+import cn.com.adtech.riss2.core.i18n.FrontendMessages;
 import cn.com.adtech.riss2.domain.resource.ResDynamicType;
 import cn.com.adtech.riss2.domain.resource.ResLiterType;
 import cn.com.adtech.riss2.domain.resource.ResMetaStore;
@@ -195,7 +196,7 @@ public class ResListController {
 		}
 	}
 	
-	/** Read the backend library/type associations, not library names or resource counts. */
+	/** Read category one configured in the backend resource libraries, including empty categories. */
 	@RequestMapping(value="/literature/types")
 	public void literatureTypes(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		response.setContentType("application/json;charset=UTF-8");
@@ -207,7 +208,7 @@ public class ResListController {
 			for (Object[] row : resourceSearchService.getLiteratureTypes(storeId)) {
 				Map<String, Object> item = new LinkedHashMap<String, Object>();
 				item.put("id", String.valueOf(row[0]));
-				item.put("name", row[1]);
+				item.put("name", FrontendMessages.backendName(request, (String)row[1], (String)row[4]));
 				items.add(item);
 			}
 			result.put("success", true);
@@ -221,7 +222,7 @@ public class ResListController {
 		response.getWriter().write(JSONObject.fromObject(result).toString());
 	}
 
-	/** Literature design: five columns, three rows, and the real volume identifier. */
+	/** Literature grid/list resources, including the real volume and classification fields. */
 	@RequestMapping(value="/literature/resources")
 	public void literatureResources(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		response.setContentType("application/json;charset=utf-8");
@@ -229,12 +230,12 @@ public class ResListController {
 		Map<String, Object> result = new LinkedHashMap<String, Object>();
 		Map<String, Object> query = new HashMap<String, Object>();
 		Long storeId = ServletRequestUtils.getLongParameter(request, "rmstId", 0L);
-		Long typeId = ServletRequestUtils.getLongParameter(request, "rltyId", 0L);
+		Long categoryId = ServletRequestUtils.getLongParameter(request, "rdtyAId", 0L);
 		int page = Math.max(0, ServletRequestUtils.getIntParameter(request, "pn", 0));
 		String key = ServletRequestUtils.getStringParameter(request, "key", "").trim();
 		String field = ServletRequestUtils.getStringParameter(request, "field", "all");
 		if (storeId > 0L) query.put("rmstId", storeId);
-		if (typeId > 0L) query.put("rltyId", typeId);
+		if (categoryId > 0L) query.put("literatureCategoryId", categoryId);
 		if (!key.isEmpty()) query.put("key", key);
 		query.put("field", field);
 		query.put("sort", "time");
@@ -246,6 +247,7 @@ public class ResListController {
 			List<Object[]> rows = this.resourceSearchService.getResourceList(pagination, query);
 			ResCommonController.parseCoverList(request, rows, 7, 11, 10);
 			List<Map<String, Object>> items = new ArrayList<Map<String, Object>>();
+			java.text.SimpleDateFormat entryDateFormat = new java.text.SimpleDateFormat("yyyy-MM-dd");
 			if (rows != null) {
 				for (Object[] row : rows) {
 					Map<String, Object> item = new LinkedHashMap<String, Object>();
@@ -254,12 +256,16 @@ public class ResListController {
 					item.put("creator", row[2]);
 					item.put("cover", row[7]);
 					item.put("identifier", row[12]);
+					item.put("language", row[13]);
+					item.put("discipline", row[14]);
+					item.put("entryDate", row[8] == null ? null : entryDateFormat.format(row[8]));
 					items.add(item);
 				}
 			}
 			result.put("success", true);
 			result.put("items", items);
 			result.put("currentPage", pagination.getCurrentPage());
+			result.put("pageSize", pagination.getPageResults());
 			result.put("totalPage", pagination.getTotalPages());
 			result.put("totalLine", pagination.getTotalResults());
 		} catch (Exception e) {

@@ -36,8 +36,10 @@ public interface IResourceSearchService extends ICommonService{
 	 */
 	public List<Object[]> getResType(Long rmstId);
 
-	/** Distinct resource types configured on enabled libraries; zero means all libraries. */
+	/** Enabled-library category rows: ID, Chinese name, parent ID, library ID, Tibetan name; zero means all libraries. */
 	public List<Object[]> getLiteratureTypes(Long rmstId);
+	/** Published resource IDs in category one, including its descendants, for full-text filtering. */
+	public List<Long> getLiteratureResourceIds(Long categoryId, Long rmstId);
 	
 	/**
 	 * 获取特色库的所有自定义分类
@@ -80,8 +82,10 @@ public interface IResourceSearchService extends ICommonService{
 	 */
 	public List<Object[]> getResRelated(Long rssuId, Long rsdaId);
 
-	/** Published research linked through the resource's existing subject. */
+	/** Published explicitly linked research, retaining legacy subject associations. */
 	public List<Object[]> getRelatedResearch(Pagination pagination, Long rsdaId);
+	/** Explicit/legacy associations, optionally restricted to paper or book resource types. */
+	public List<Object[]> getRelatedResearch(Pagination pagination, Long rsdaId, String kind);
 	
 	/**
 	 * 获取资源附件
@@ -113,6 +117,7 @@ public interface IResourceSearchService extends ICommonService{
 	 * @return
 	 */
 	public List<Object[]> getResAdvSearch(Pagination p, Map<String, Object> params, String rmstIds, String rltyIds, String sort);
+	public long getResAdvSearchHitCount(Map<String, Object> params, String rmstIds, String typeIds);
 	
 	/**
 	 * 获取热门资源

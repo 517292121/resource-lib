@@ -35,6 +35,8 @@ import cn.com.adtech.riss2.core.MyFileCatalogUtil;
 import cn.com.adtech.riss2.core.ParseUrl;
 import cn.com.adtech.riss2.core.file.FileDownloadFactory;
 import cn.com.adtech.riss2.core.file.MyFileUtil;
+import cn.com.adtech.riss2.core.file.ResourceDirectoryFiles;
+import cn.com.adtech.riss2.core.file.SpreadsheetPreview;
 import cn.com.adtech.riss2.core.file.WordToPdf;
 import cn.com.adtech.riss2.domain.resource.ResSourceData;
 import cn.com.adtech.riss2.exception.ErrorMessageException;
@@ -70,6 +72,34 @@ public class ResBrowseController extends ResCommonController{
 		try {
 			Map<String, Object> map = model.asMap();
 			ResSourceData resource = (ResSourceData) map.get("resource");
+			if (cn.com.adtech.riss2.core.file.TextFilePreview.supports(resource)) {
+				if (!(map.get("userRight") instanceof Number) || ((Number)map.get("userRight")).intValue()<4) {
+					request.setAttribute("message","您没有该资源的阅读权限！");
+					return "platform/pc/browse/error";
+				}
+				try { model.addAllAttributes(cn.com.adtech.riss2.core.file.TextFilePreview.readerModel(resource)); }
+				catch (Exception previewError) {
+					org.apache.commons.logging.LogFactory.getLog(getClass()).warn("TXT preview failed for resource "+resource.getRsdaId(),previewError);
+					request.setAttribute("message","文本文件暂时无法预览，请检查源文件是否存在、编码是否正确及文件是否超过10MB。");
+					return "platform/pc/browse/error";
+				}
+				return "platform/pc/browse/textDirectory";
+			}
+			if ((resource.getRsdaSourceType()==null || resource.getRsdaSourceType()==0) && SpreadsheetPreview.supports(resource)) {
+				if (!(map.get("userRight") instanceof Number) || ((Number)map.get("userRight")).intValue()<4) {
+					request.setAttribute("message","您没有该资源的阅读权限！");
+					return "platform/pc/browse/error";
+				}
+				try {
+					model.addAttribute("excel",SpreadsheetPreview.read(SpreadsheetPreview.resourceFile(resource),
+							ServletRequestUtils.getIntParameter(request,"sheet",-1),ServletRequestUtils.getIntParameter(request,"page",1),
+							ServletRequestUtils.getIntParameter(request,"columns",1)));
+				} catch (Exception previewError) {
+					org.apache.commons.logging.LogFactory.getLog(getClass()).warn("Excel preview failed for resource "+resource.getRsdaId(),previewError);
+					model.addAttribute("excelError","该 Excel 文件暂时无法预览，请检查文件是否完整、加密或超出预览容量。");
+				}
+				return "platform/pc/browse/spreadsheet";
+			}
 			if(resource.getRsdaSourceType() == null || resource.getRsdaSourceType() == 0){
 				String pdfurl = null;
 				if(CommonUtil.isNotNull(resource.getRsdaFileType())){
@@ -156,6 +186,9 @@ public class ResBrowseController extends ResCommonController{
 			File imgDir = new File(path);
 			if(!imgDir.exists() || !imgDir.isDirectory()){
 				throw new ErrorMessageException("该资源预览文件目录无效！");
+			}
+			if (useTextDirectoryReader(path, request)) {
+				return textDirectoryBrowser(resource, request);
 			}
 			
 			File[] fileArr = imgDir.listFiles();
@@ -737,6 +770,54 @@ public class ResBrowseController extends ResCommonController{
         return null;
     }
 	
+	private boolean useTextDirectoryReader(String path, HttpServletRequest request) {
+		List<File> texts = ResourceDirectoryFiles.textFiles(path);
+		if (texts.isEmpty()) return false;
+		List<String> imagePages = MyFileUtil.getPageNameList(path);
+		if (imagePages == null || imagePages.isEmpty()) return true;
+		String requested = cn.com.adtech.riss2.annotation.TextAnchor.chapterParameter(request, "p");
+		if (!imagePages.contains(requested)) {
+			for (File text : texts) if (ResourceDirectoryFiles.relativeTitle(new File(path), text).equals(requested)) return true;
+		}
+		return false;
+	}
+
+	private String textDirectoryBrowser(ResSourceData resource, HttpServletRequest request) {
+		File root = new File(resource.getRsdaFileUrl());
+		List<File> files = ResourceDirectoryFiles.textFiles(root.getPath());
+		String requested = cn.com.adtech.riss2.annotation.TextAnchor.chapterParameter(request, "p");
+		List<Map<String, String>> chapters = new ArrayList<Map<String, String>>();
+		int current = 0;
+		for (int i = 0; i < files.size(); i++) {
+			String title = ResourceDirectoryFiles.relativeTitle(root, files.get(i));
+			Map<String, String> chapter = new HashMap<String, String>();
+			chapter.put("path", title);
+			chapter.put("title", title);
+			chapters.add(chapter);
+			if (title.equals(requested) || (title + ".txt").equals(requested)) current = i;
+		}
+		if (files.isEmpty()) {
+			request.setAttribute("message", "该资源没有可阅读的文本章节。");
+			return "platform/pc/browse/error";
+		}
+		try {
+			// The browser needs every chapter to calculate one accurate, responsive book-wide page count.
+			for (int i = 0; i < files.size(); i++) {
+				String text = ResourceDirectoryFiles.readText(files.get(i));
+				chapters.get(i).put("text", text);
+				chapters.get(i).put("hash", cn.com.adtech.riss2.annotation.TextAnchor.hash(text));
+			}
+			request.setAttribute("chapterText", chapters.get(current).get("text"));
+		} catch (IOException e) {
+			request.setAttribute("message", "资源中的文本章节暂时无法读取，请联系管理员。");
+			return "platform/pc/browse/error";
+		}
+		request.setAttribute("textChapters", chapters);
+		request.setAttribute("currentChapter", current);
+		request.setAttribute("chapterTitle", chapters.get(current).get("title"));
+		return "platform/pc/browse/textDirectory";
+	}
+
 	private String imgBrowserWap(ResSourceData resource, Model model, HttpServletRequest request) {
 		 String path = resource.getRsdaFileUrl();
 		 if(!CommonUtil.isNotNull(path)){
@@ -748,6 +829,9 @@ public class ResBrowseController extends ResCommonController{
 			 return "platform/pc/browse/error";
 		 }
 		 File[] fileArr = imgDir.listFiles();
+		 if (useTextDirectoryReader(path, request)) {
+			 return textDirectoryBrowser(resource, request);
+		 }
 		 if(fileArr == null || fileArr.length < 1){
 			 request.setAttribute("message", "该资源没有可预览文件！");
 			 return "platform/pc/browse/imgtxt";

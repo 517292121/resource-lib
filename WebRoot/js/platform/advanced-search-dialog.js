@@ -1,5 +1,8 @@
 (function () {
   'use strict';
+  var uiText=window.platformText||function(value,parameters){return String(value).replace(/\{([a-zA-Z0-9_]+)\}/g,function(match,name){return parameters&&Object.prototype.hasOwnProperty.call(parameters,name)?String(parameters[name]):match;});};
+  var uiMarkup=window.platformMarkup||function(value){return value;};
+
   if (window.openAdvancedSearch) return;
   var script = document.currentScript;
   var endpoint = new URL('../../resAdv', script.src);
@@ -25,15 +28,15 @@
     var title = document.createElement('h2');
     title.className = 'dh-advanced-dialog-title';
     title.id = 'dh-advanced-dialog-title';
-    title.textContent = '高级检索';
+    title.textContent = uiText('高级检索');
     closeButton = document.createElement('button');
     closeButton.type = 'button';
     closeButton.className = 'dh-advanced-dialog-close';
-    closeButton.setAttribute('aria-label', '关闭高级检索');
+    closeButton.setAttribute('aria-label', uiText('关闭高级检索'));
     closeButton.textContent = '×';
     closeButton.addEventListener('click', close);
     frame = document.createElement('iframe');
-    frame.title = '高级检索条件';
+    frame.title = uiText('高级检索条件');
     frame.addEventListener('load', function () {
       // The form submits to _parent, preserving the existing results handler.
       var doc = frame.contentDocument;
@@ -60,7 +63,10 @@
     var target = new URL(endpoint.href);
     var context = new URL(location.href).searchParams;
     var selected = document.querySelector('[data-type-filter].is-selected');
-    var typeId = selected ? selected.dataset.typeFilter : context.get('rltyId');
+    var typeId = selected ? selected.dataset.typeFilter : (context.get('rdtyAId') || context.get('rltyId'));
+    context.forEach(function (value, name) {
+      if (/^(?:KEY[1-4]|COL[1-4]|LIKE[1-4]|CON[2-4]|libId|typeId)$/.test(name)) target.searchParams.append(name, value);
+    });
     if (/^\d+$/.test(context.get('rmstId') || '')) target.searchParams.set('rmstId', context.get('rmstId'));
     if (/^\d+$/.test(typeId || '')) target.searchParams.set('typeId', typeId);
     frame.src = target.href;

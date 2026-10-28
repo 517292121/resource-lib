@@ -2,8 +2,8 @@
 <%@ include file="common/header.jsp" %>
 <link rel="stylesheet" href="<%=basePath %>css/platform/reslist.css" type="text/css"></link>
 <script type="text/javascript" src="<%=basePath %>js/jquery.cookie.js"></script>
-<script type="text/javascript" src="<%=basePath %>js/platform/myPager.js"></script>
-<script type="text/javascript" src="<%=basePath %>js/platform/textResList.js"></script>
+<script type="text/javascript" src="<%=basePath %>js/platform/myPager.js?ui=zh-zw-20261025-1"></script>
+<script type="text/javascript" src="<%=basePath %>js/platform/textResList.js?ui=zh-zw-20261025-1"></script>
 <link rel="stylesheet" href="<%=basePath %>/wtree/dtree.css" type="text/css"></link>
 <script type="text/javascript" src="<%=basePath %>/wtree/dtree.js"></script>
 
@@ -14,8 +14,11 @@
 			<p class="slide-left">${textLib.rtliName }</p>
 			<ul>
 			     <script type="text/javascript">
+  var uiText=window.platformText||function(value,parameters){return String(value).replace(/\{([a-zA-Z0-9_]+)\}/g,function(match,name){return parameters&&Object.prototype.hasOwnProperty.call(parameters,name)?String(parameters[name]):match;});};
+  var uiMarkup=window.platformMarkup||function(value){return value;};
+
 			           var d0 = new dTree("d0");
-				       d0.add(0,-1,"全部分类","javascript:classQuery(0);","","");
+				       d0.add(0,-1,uiText("全部分类"),"javascript:classQuery(0);","","");
 			           <c:forEach items="${classList }" var="v" varStatus="s">
 			           		d0.add("${v.rlclId }","${empty v.rlclParentId ? 0 : v.rlclParentId }","${v.rlclName }","javascript:classQuery(${v.rlclId });","","");
 			           </c:forEach>

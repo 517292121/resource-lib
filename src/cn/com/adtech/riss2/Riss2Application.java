@@ -30,6 +30,7 @@ import org.springframework.context.annotation.ImportResource;
 
 import cn.com.adtech.riss2.filter.AccessFilter;
 import cn.com.adtech.riss2.filter.MyXssFilter;
+import cn.com.adtech.riss2.fileservice.FileServiceSettings;
 import cn.com.adtech.riss2.listener.AccessCounterListener;
 import cn.com.adtech.riss2.servlet.CreateLuceneIndex;
 import cn.com.adtech.riss2.servlet.UpdateAllCache;
@@ -128,7 +129,7 @@ public class Riss2Application extends SpringBootServletInitializer {
         return new ServletContextInitializer() {
             @Override
             public void onStartup(ServletContext servletContext) {
-                servletContext.setInitParameter("downLoadPath", "http://localhost:8080/fileService");
+                servletContext.setInitParameter("downLoadPath", FileServiceSettings.property("file.dir", ""));
                 servletContext.setInitParameter("fileDe", "views/common/adlib.key");
             }
         };

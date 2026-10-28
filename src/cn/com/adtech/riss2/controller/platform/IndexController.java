@@ -21,8 +21,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import cn.com.adtech.riss2.bean.ResourceForTypeBean;
 import cn.com.adtech.riss2.bso.platform.IIndexDataService;
+import cn.com.adtech.riss2.annotation.TextAnnotationRepository;
 import cn.com.adtech.riss2.core.json.DateJsonValueProcessor;
-import cn.com.adtech.riss2.core.CommonUtil;
+import cn.com.unionlib.lucene.dao.IAllDataIndexService;
 
 /**
  * 
@@ -37,10 +38,15 @@ public class IndexController {
 	
 	@Resource(name="indexDataService")
 	private IIndexDataService indexDataService;
+	@Resource(name="alldataIndexService")
+	private IAllDataIndexService indexService;
+	@Resource(name="textAnnotationRepository")
+	private TextAnnotationRepository annotations;
 	
 	//进入用户中心 
 	@RequestMapping(value="/index")
 	public String index(HttpServletRequest request) {
+		loadHomeStatistics(request);
 		List<ResourceForTypeBean> cmdlist = this.indexDataService.getRcmdResource();
 		if(cmdlist != null && cmdlist.size() > 0){
 			for(ResourceForTypeBean obj : cmdlist){
@@ -56,16 +62,36 @@ public class IndexController {
 		return "platform/pc/index";
 	}
 
+	private void loadHomeStatistics(HttpServletRequest request) {
+		try {
+			Map<String, Object> totals = indexDataService.getHomeStatistics();
+			request.setAttribute("homeDocumentCount", totals.get("resourceTotal"));
+			request.setAttribute("homeVisitCount", totals.get("visitTotal"));
+		} catch (Exception ex) {
+			org.apache.log4j.Logger.getLogger(IndexController.class).error("Unable to load homepage catalogue totals", ex);
+		}
+		try {
+			request.setAttribute("homePageCount", Long.valueOf(indexService.getResCounts().split(",")[3]));
+		} catch (Exception ex) {
+			org.apache.log4j.Logger.getLogger(IndexController.class).error("Unable to load homepage page total", ex);
+		}
+		try {
+			request.setAttribute("homeAnnotationCount", annotations.countPublished());
+		} catch (Exception ex) {
+			org.apache.log4j.Logger.getLogger(IndexController.class).error("Unable to load homepage annotation total", ex);
+		}
+	}
+
 	/**
-	 * Spring Boot does not apply the old web.xml welcome-file rule when the
-	 * application is run from an executable WAR. Keep the original index.jsp
-	 * device detection behavior for requests to the root URL.
+	 * 根路径入口：暂时关闭设备识别，手机与电脑统一进入 PC 首页。
 	 */
 	@RequestMapping(value="/")
 	public String root(HttpServletRequest request) {
-		boolean isPhone = CommonUtil.judgeIsPhone(request);
-		request.getSession().setAttribute("CLIENTTYPE", isPhone ? "WAP" : "PC");
-		return isPhone ? "redirect:/mobile" : "redirect:/index";
+		// boolean isPhone = CommonUtil.judgeIsPhone(request);
+		// request.getSession().setAttribute("CLIENTTYPE", isPhone ? "WAP" : "PC");
+		// return isPhone ? "redirect:/mobile" : "redirect:/index";
+		request.getSession().setAttribute("CLIENTTYPE", "PC");
+		return "redirect:/index";
 	}
 	
 	//异步获取最新资源

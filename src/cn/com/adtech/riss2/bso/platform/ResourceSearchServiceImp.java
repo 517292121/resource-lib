@@ -3,6 +3,8 @@ package cn.com.adtech.riss2.bso.platform;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.LinkedHashSet;
 
 import cn.com.adtech.riss2.bso.CommonServiceImp;
 import cn.com.adtech.riss2.core.CommonUtil;
@@ -22,7 +24,7 @@ public class ResourceSearchServiceImp extends CommonServiceImp implements IResou
 		String key = CommonUtil.nullToBlank(query.get("key"));
 		if (key.isEmpty()) return 0L;
 		String hql = "select rsda.rsdaIdentifier from ResSourceData rsda where "
-				+ PlatformBasicService.getSearchCommonConditionByHql("rsda", true)
+				+ PlatformBasicService.getSearchCommonConditionByHql("rsda", !Boolean.TRUE.equals(query.get("literatureFields")))
 				+ " and rsda.rsdaIdentifier like ?";
 		List<Object> params = new ArrayList<Object>();
 		params.add("%" + key + "%");
@@ -34,6 +36,9 @@ public class ResourceSearchServiceImp extends CommonServiceImp implements IResou
 			hql += " and rsda.rsdaRltyId=?";
 			params.add(query.get("rltyId"));
 		}
+		if (query.containsKey("literatureCategoryId")) {
+			hql += " and " + literatureCategoryCondition((Long)query.get("literatureCategoryId"), (Long)query.get("rmstId"));
+		}
 		long hits = 0L;
 		for (Object value : getHibernateTemplate().find(hql, params.toArray())) {
 			hits += SearchOccurrenceCounter.countLiteralOccurrences(CommonUtil.nullToBlank(value), key);
@@ -43,7 +48,8 @@ public class ResourceSearchServiceImp extends CommonServiceImp implements IResou
 
 	@Override
 	public List<Object[]> getResourceList(Pagination p, Map<String, Object> map) {
-		String where = PlatformBasicService.getSearchCommonConditionByHql("rsda", true);
+		// Interface language controls labels, not the language of documents in the literature library.
+		String where = PlatformBasicService.getSearchCommonConditionByHql("rsda", !Boolean.TRUE.equals(map.get("literatureFields")));
 		List<Object> params = new ArrayList<Object>();
 		StringBuffer sb = new StringBuffer();
 		sb.append("select rsda.rsdaId,");
@@ -59,9 +65,13 @@ public class ResourceSearchServiceImp extends CommonServiceImp implements IResou
 		sb.append("rsda.rsdaFileUrl,");
 		sb.append("rsda.rsdaSourceType");
 		if (Boolean.TRUE.equals(map.get("literatureFields"))) {
-			sb.append(",rsda.rsdaIdentifier");
+			sb.append(",rsda.rsdaIdentifier,rsda.rsdaLanguage,literatureSubject.rstyName");
 		}
 		sb.append(" from ResSourceData rsda");
+		if (Boolean.TRUE.equals(map.get("literatureFields"))) {
+			// Missing subject classifications must not remove resources from the list.
+			sb.append(" left join rsda.resSubjectType literatureSubject");
+		}
 		sb.append(" where ").append(where);
 		if(map.containsKey("rmstId")){
 			sb.append(" and rsda.rsdaRmstId=?");
@@ -70,6 +80,9 @@ public class ResourceSearchServiceImp extends CommonServiceImp implements IResou
 		if(map.containsKey("rltyId")){
 			sb.append(" and rsda.rsdaRltyId=?");
 			params.add(map.get("rltyId"));
+		}
+		if (map.containsKey("literatureCategoryId")) {
+			sb.append(" and ").append(literatureCategoryCondition((Long)map.get("literatureCategoryId"), (Long)map.get("rmstId")));
 		}
 		if(map.containsKey("rstyId")){
 			String ids = getSubjectChilds((Long) map.get("rstyId"));
@@ -177,15 +190,42 @@ public class ResourceSearchServiceImp extends CommonServiceImp implements IResou
 
 	@Override
 	public List<Object[]> getLiteratureTypes(Long rmstId) {
-		String hql = "select distinct rsl.resLiterType.rltyId, rsl.resLiterType.rltyName"
-				+ " from ResStoreLiter rsl where rsl.resMetaStore.rmstStatus=1";
+		String hql = "select d.rdtyId, d.rdtyName, d.rdtyPid, d.rmstId, d.rdtyZwName"
+				+ " from ResDynamicType d where d.rdtyType=1 and d.resMetaStore.rmstStatus=1";
 		List<Object> params = new ArrayList<Object>();
 		if (rmstId != null && rmstId > 0L) {
-			hql += " and rsl.rmstId=?";
+			hql += " and d.rmstId=?";
 			params.add(rmstId);
 		}
-		hql += " order by rsl.resLiterType.rltyId ASC";
+		hql += " order by d.rdtyIndex ASC, d.rdtyId ASC";
 		return getHibernateTemplate().find(hql, params.toArray());
+	}
+
+	private String literatureCategoryCondition(Long categoryId, Long rmstId) {
+		List<Object[]> categories = getLiteratureTypes(rmstId);
+		Long categoryStore = null;
+		for (Object[] row : categories) if (categoryId.equals(row[0])) categoryStore = (Long)row[3];
+		if (categoryStore == null) return "1=0";
+		Set<Long> ids = new LinkedHashSet<Long>(); ids.add(categoryId);
+		boolean changed;
+		do {
+			changed = false;
+			for (Object[] row : categories) {
+				if (categoryStore.equals(row[3]) && ids.contains(row[2]) && ids.add((Long)row[0])) changed = true;
+			}
+		} while (changed);
+		StringBuilder values = new StringBuilder();
+		// IDs come only from mapped numeric category fields, never from an interpolated request string.
+		for (Long id : ids) { if (values.length() > 0) values.append(','); values.append(id.longValue()); }
+		return "rsda.rsdaRdtyId in (" + values + ") and rsda.rsdaRmstId=" + categoryStore.longValue();
+	}
+
+	@Override
+	public List<Long> getLiteratureResourceIds(Long categoryId, Long rmstId) {
+		String hql = "select rsda.rsdaId from ResSourceData rsda where "
+				+ PlatformBasicService.getSearchCommonConditionByHql("rsda", false)
+				+ " and " + literatureCategoryCondition(categoryId, rmstId);
+		return getHibernateTemplate().find(hql);
 	}
 
 	@Override
@@ -320,19 +360,35 @@ public class ResourceSearchServiceImp extends CommonServiceImp implements IResou
 	
 	@Override
 	public List<Object[]> getRelatedResearch(Pagination pagination, Long rsdaId) {
+		return getRelatedResearch(pagination, rsdaId, null);
+	}
+
+	@Override
+	public List<Object[]> getRelatedResearch(Pagination pagination, Long rsdaId, String kind) {
+		if (rsdaId == null || rsdaId < 1L) return new ArrayList<Object[]>();
+		if (kind != null && !"paper".equals(kind) && !"book".equals(kind)) throw new IllegalArgumentException("Invalid research kind");
 		String sourceHql = "from ResSourceData rsda where rsda.rsdaId=? and "
 				+ PlatformBasicService.getSearchCommonConditionByHql("rsda", false);
 		List<ResSourceData> sources = getHibernateTemplate().find(sourceHql, rsdaId);
-		if (sources.isEmpty() || sources.get(0).getRsdaRssuId() == null || sources.get(0).getRsdaRssuId() < 1L) {
+		if (sources.isEmpty()) {
 			return new ArrayList<Object[]>();
 		}
-		StringBuilder hql = new StringBuilder("select rsda.rsdaId,rsda.rsdaTitle,rsda.rsdaCreator,rsda.rsdaDate"
-				+ " from ResSourceData rsda where ");
-		hql.append(PlatformBasicService.getSearchCommonConditionByHql("rsda", true));
-		hql.append(" and rsda.rsdaRssuId=? and rsda.rsdaId<>?");
+		StringBuilder hql = new StringBuilder("select rsda.rsdaId,rsda.rsdaTitle,rsda.rsdaCreator,rsda.rsdaDate,rsda.rsdaSource from ResSourceData rsda");
+		if (kind != null) hql.append(" left join rsda.resLiterType researchType");
+		hql.append(" where ").append(PlatformBasicService.getSearchCommonConditionByHql("rsda", true));
+		Long subject=sources.get(0).getRsdaRssuId();
+		hql.append(" and rsda.rsdaId<>? and (exists (from ResResearchLink link where link.researchId=rsda.rsdaId and link.resourceId=?)");
 		List<Object> params = new ArrayList<Object>();
-		params.add(sources.get(0).getRsdaRssuId());
-		params.add(rsdaId);
+		params.add(rsdaId); params.add(rsdaId);
+		if (subject!=null && subject>0) { hql.append(" or rsda.rsdaRssuId=?"); params.add(subject); }
+		hql.append(")");
+		if ("paper".equals(kind)) {
+			hql.append(" and (researchType.rltyName like ? or researchType.rltyName like ?)");
+			params.add("%论文%"); params.add("%期刊%");
+		} else if ("book".equals(kind)) {
+			hql.append(" and (researchType.rltyName like ? or researchType.rltyName like ? or researchType.rltyName like ?)");
+			params.add("%专著%"); params.add("%图书%"); params.add("%著作%");
+		}
 		String countHql = "select count(*)" + hql.substring(hql.indexOf(" from "));
 		hql.append(" order by rsda.rsdaBuilddate DESC,rsda.rsdaId DESC");
 		return getPageHibernateTemplate().find(pagination, hql.toString(), countHql, params.toArray());
@@ -430,6 +486,15 @@ public class ResourceSearchServiceImp extends CommonServiceImp implements IResou
 	@Override
 	public List<Object[]> getResAdvSearch(Pagination p,
 			Map<String, Object> params, String rmstIds, String rltyIds, String sort) {
+		if (Boolean.TRUE.equals(params.get("advancedResultFields"))) {
+			List<Object> bindings = new ArrayList<Object>();
+			String hql = "select rsda.rsdaId,rsda.rsdaTitle,rsda.rsdaCreator,rsda.rsdaPublisher,rsda.rsdaDate,"
+					+ "rsda.rsdaDescription,rsda.rsdaKeyword,rsda.rsdaBigimgUrl,rsda.rsdaBuilddate,rsda.rsdaLooknum,"
+					+ "rsda.rsdaFileUrl,rsda.rsdaSourceType,rsda.rsdaSubject,rsda.rsdaIdentifier"
+					+ advancedResultsFrom(params, rmstIds, rltyIds, bindings)
+					+ " order by rsda.rsdaBuilddate DESC,rsda.rsdaId DESC";
+			return getPageHibernateTemplate().find(p, hql, bindings.toArray());
+		}
 		String where = PlatformBasicService.getSearchCommonConditionByHql("rsda", true);
 		StringBuffer sb = new StringBuffer();
 		sb.append("select rsda.rsdaId,");
@@ -543,6 +608,58 @@ public class ResourceSearchServiceImp extends CommonServiceImp implements IResou
 		return dataList;
 	}
 	
+	private String advancedResultsFrom(Map<String, Object> params, String libraryIds, String typeIds, List<Object> bindings) {
+		StringBuilder hql = new StringBuilder(" from ResSourceData rsda where ");
+		hql.append(PlatformBasicService.getSearchCommonConditionByHql("rsda", true));
+		String libraries = AdvancedSearchQuery.numericIds(libraryIds);
+		String types = AdvancedSearchQuery.numericIds(typeIds);
+		if (!libraries.isEmpty()) hql.append(" and rsda.rsdaRmstId in (").append(libraries).append(')');
+		if (!types.isEmpty()) {
+			// The dialog lists the same configured category-one types as the literature page.
+			hql.append(" and (");
+			boolean first = true;
+			for (String type : types.split(",")) {
+				if (!first) hql.append(" or "); first = false;
+				hql.append('(').append(literatureCategoryCondition(Long.valueOf(type), null)).append(')');
+			}
+			hql.append(')');
+		}
+		hql.append(AdvancedSearchQuery.conditions(params, bindings));
+		return hql.toString();
+	}
+
+	@Override
+	public long getResAdvSearchHitCount(Map<String, Object> params, String libraryIds, String typeIds) {
+		List<String> fields = new ArrayList<String>();
+		for (int i = 1; i <= 4; i++) {
+			if (CommonUtil.nullToBlank(params.get("key" + i)).trim().isEmpty()) continue;
+			String field = AdvancedSearchQuery.field(params.get("col" + i));
+			if (!fields.contains(field)) fields.add(field);
+		}
+		if (fields.isEmpty()) return 0L;
+		StringBuilder select = new StringBuilder("select ");
+		for (String field : fields) { if (select.length() > 7) select.append(','); select.append("rsda.").append(field); }
+		List<Object> bindings = new ArrayList<Object>();
+		String hql = select + advancedResultsFrom(params, libraryIds, typeIds, bindings);
+		List<?> matches = getHibernateTemplate().find(hql, bindings.toArray());
+		long hits = 0L;
+		for (Object match : matches) {
+			Object[] row = fields.size() == 1 ? new Object[]{match} : (Object[]) match;
+			Set<String> counted = new LinkedHashSet<String>();
+			for (int i = 1; i <= 4; i++) {
+				String key = CommonUtil.nullToBlank(params.get("key" + i));
+				if (key.trim().isEmpty()) continue;
+				String field = AdvancedSearchQuery.field(params.get("col" + i));
+				String value = CommonUtil.nullToBlank(row[fields.indexOf(field)]);
+				if ("=".equals(params.get("like" + i)) && !value.equalsIgnoreCase(key)) continue;
+				if (counted.add(field + "\u0000" + key.toLowerCase(java.util.Locale.ROOT))) {
+					hits += SearchOccurrenceCounter.countLiteralOccurrences(value, key);
+				}
+			}
+		}
+		return hits;
+	}
+
 	@Override
 	public List<Object[]> getHotReslist(int num) {
 		String where = PlatformBasicService.getSearchCommonConditionByHql("rsda", true);

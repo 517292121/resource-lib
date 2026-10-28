@@ -1,15 +1,18 @@
 package cn.com.adtech.riss2.wsClient;
 
 import cn.com.adtech.riss2.core.ServiceLocator;
+import cn.com.adtech.riss2.fileservice.FileServiceSettings;
 
 public class FileConvertServiceUtil {
-	private static FileConvertServicePortType service = null;
-
 	private static FileConvertServicePortType getFileConvertService(String webServicePath) {
+		if (FileServiceSettings.embedded()) {
+			return (FileConvertServicePortType) ServiceLocator.getService("localFileConvertService");
+		}
 		FileConvertServiceClient fileConvertServiceClient = (FileConvertServiceClient)ServiceLocator.getInstance().getService(
 				"fileConvertService");
-		service = fileConvertServiceClient.getFileConvertServiceHttpPort();
-		return service;
+		return webServicePath != null && webServicePath.startsWith("http")
+				? fileConvertServiceClient.getFileConvertServiceHttpPort(webServicePath.replaceAll("/+$", "") + "/services/FileConvertService")
+				: fileConvertServiceClient.getFileConvertServiceHttpPort();
 	}
 
 	/**

@@ -1,5 +1,4 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
-<%@page import="cn.com.adtech.riss2.core.ConstantsObj"%>
 <%@page import="java.util.Locale"%>
 <%@ page import="org.springframework.web.servlet.i18n.SessionLocaleResolver"%>
 <%@ include file="/WEB-INF/views/common/taglibInclude.jsp" %>
@@ -17,22 +16,18 @@ if(lang != null){
 %>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="<%= "zw".equals(language) ? "bo" : ("en".equals(language) ? "en" : "zh-CN") %>">
   <head>
-    <title><fmt:message key="pc.riss.user.login"/></title>
-	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<%@ include file="/WEB-INF/views/platform/pc/common/frontendI18n.jspf" %>
+    <title><fmt:message key="pc.login"/></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="shortcut icon" href="<%=basePath%>favicon.ico" type="image/x-icon" />
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">   
 	<meta name=renderer content=webkit> <!-- 默认采用极速模式 -->
-  	<link rel="stylesheet" href="<%=basePath %>css/platform/common.css" type="text/css"></link>
-  	<link rel="stylesheet" href="<%=basePath %>css/platform/regLogin.css" type="text/css"></link>
-  	<link rel="stylesheet" href="<%=basePath %>css/platform/skin-<%=ConstantsObj.getSkinCode() %>.css" type="text/css"></link>
-  	<style type="text/css">
-  		@media screen and (max-width:1200px){
-			body{min-width:100%;}
-		}
-  	</style>
+    <link rel="stylesheet" href="<%=basePath%>css/platform/member-login.css?v=frontend-login-20261025-1">
+    <script>if (window.parent !== window) document.documentElement.classList.add('is-embedded');</script>
   	<script type="text/javascript">var basePath = "<%=basePath %>";</script>
   	<script type="text/javascript" src="<%=basePath %>js/jquery.min.js"></script>
   	<script type="text/javascript" src="<%=basePath %>layer/layer.js"></script>
@@ -42,7 +37,6 @@ if(lang != null){
 		
 	%>js/switchLang.js"></script>
 
-  	<script src="<%=path %>/js/platform/login.js" type="text/javascript"></script> 
   	<script type="text/javascript">
 
   		function onLogin(){
@@ -86,47 +80,43 @@ if(lang != null){
   		}
   		
   		$(function(){
-  			$("#loginform").keydown(function(e){
-				var e = e || event,
-				keycode = e.which || e.keyCode;
-				if (keycode==13) {
-					$("#anniu").trigger("click");
-				}
-			});
+            $("#loginform").on("submit", function(e){
+                e.preventDefault();
+                onLogin();
+            });
   		})
   		function reg(){
-  			window.parent.openReg();
+            if (typeof window.parent.openReg === "function") window.parent.openReg();
+            else window.location.assign(basePath + "register");
   		}
   	</script>
   </head>
   
-  <body>
-    <div class="login_subject"><fmt:message key="pc.riss.user.login"/></div>
-    <div class="login_panelbox">
-    <form name="loginform" id="loginform">
-    	<p><fmt:message key="pc.login.name"/>：</p>
-    	<ul class="k-panel">
-    		<li id="usericon"></li>
-    		<li><input type="text" id="loginname" class="k" maxlength="32"></li>
-    	</ul>
-    	<p><fmt:message key="pc.login.passwd"/>：</p>
-    	<ul class="k-panel">
-    		<li id="pwdicon"></li>
-    		<li><input type="password" id="loginpwd" class="k" maxlength="32"></li>
-    	</ul>
-    	<ul>
-    		<li>
-    			<input type="button" value="<fmt:message key='pc.login'/>" id="anniu" onclick="onLogin();">
-    			<span id="zc">
-    					<fmt:message key='pc.no.account.number'/>
-    				<a href="javascript:reg();">
-    					<fmt:message key="pc.immediaate.registration"/>
-    				<font style="font-family: 宋体;">>> 
-    					</font></a></span>	
-    		</li>
-    	</ul>
-    	<ul id="msg"></ul>
-    </form>	
-    </div>
+  <body class="member-login-page">
+    <main class="member-login-card" aria-labelledby="member-login-title">
+        <header class="member-login-heading">
+            <img class="member-login-brand" src="<%=basePath%>images/platform/psb/home/brand-logo.png" width="537" height="74" alt="<%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "西藏大学敦煌文献智能数据库") %>">
+            <h1 id="member-login-title"><fmt:message key="pc.login"/></h1>
+        </header>
+        <form name="loginform" id="loginform" class="member-login-form" method="post">
+            <div class="member-login-field">
+                <label for="loginname"><fmt:message key="pc.login.name"/></label>
+                <div class="member-login-input">
+                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="4"/><path d="M4 21v-3a8 8 0 0 1 16 0v3"/></svg>
+                    <input type="text" id="loginname" name="username" maxlength="32" autocomplete="username" autocapitalize="none" spellcheck="false">
+                </div>
+            </div>
+            <div class="member-login-field">
+                <label for="loginpwd"><fmt:message key="pc.login.passwd"/></label>
+                <div class="member-login-input">
+                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="5" y="10" width="14" height="11" rx="1"/><path d="M8 10V6a4 4 0 0 1 8 0v4M12 14v3"/></svg>
+                    <input type="password" id="loginpwd" name="password" maxlength="32" autocomplete="current-password">
+                </div>
+            </div>
+            <button type="submit" id="anniu" class="member-login-submit"><fmt:message key="pc.login"/></button>
+            <p class="member-login-register"><fmt:message key="pc.no.account.number"/> <a href="<%=basePath%>register" onclick="reg(); return false;"><fmt:message key="pc.immediaate.registration"/><span aria-hidden="true"> →</span></a></p>
+            <div id="msg" role="status" aria-live="polite"></div>
+        </form>
+    </main>
   </body>
 </html>

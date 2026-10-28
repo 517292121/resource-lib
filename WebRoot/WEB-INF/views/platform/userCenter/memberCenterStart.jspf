@@ -1,0 +1,14 @@
+<%@ page pageEncoding="UTF-8" %>
+<%@ page import="cn.com.adtech.riss2.core.ConstantsObj,cn.com.adtech.riss2.cache.SysConfigInfo" %>
+<% String path = request.getContextPath(); String basePath = path + "/"; %>
+<!DOCTYPE html>
+<html lang="zh-CN"><head>
+<%@ include file="/WEB-INF/views/platform/pc/common/frontendI18n.jspf" %>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>${memberSection eq 'favorites' ? frontendText['我的收藏'] : frontendText['个人设置']} <%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "- 敦煌文献智能数据库") %></title>
+    <link rel="stylesheet" href="<%=basePath%>css/platform/page-header.css?v=logout-20261024-1">
+    <link rel="stylesheet" href="<%=basePath%>css/platform/text-annotations.css?v=admin-actions-20261024-6">
+    <link rel="stylesheet" href="<%=basePath%>css/platform/member-center.css?v=footer-home-20261024-3">
+    <script src="<%=basePath%>js/platform/page-header.js?v=frontend-member-dialog-20261025-2&amp;ui=zh-zw-20261025-1" defer></script>
+</head><body class="annotation-records-page member-center-page">
+<%@ include file="memberCenterHeader.jspf" %>

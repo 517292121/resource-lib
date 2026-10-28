@@ -9,6 +9,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE html>
 <html lang="en">
   <head>
+<%@ include file="/WEB-INF/views/platform/pc/common/frontendI18n.jspf" %>
     <title><fmt:message key="file.enclosure.details"/></title>
 	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
 	<meta http-equiv="pragma" content="no-cache">

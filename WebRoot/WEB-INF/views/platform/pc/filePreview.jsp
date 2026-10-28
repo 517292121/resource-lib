@@ -8,7 +8,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>${title }文件预览—敦煌研究数据库</title>
+<%@ include file="/WEB-INF/views/platform/pc/common/frontendI18n.jspf" %>
+    <title>${title }<%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "文件预览—敦煌研究数据库") %></title>
 
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">

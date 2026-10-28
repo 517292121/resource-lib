@@ -22,15 +22,16 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+<%@ include file="/WEB-INF/views/platform/pc/common/frontendI18n.jspf" %>
     <title><c:if test="${!empty title }">${title }—</c:if><fmt:message key="main.title"/></title>
-	<meta name="description" content="藏汉敦煌文献研究数据库，汇聚敦煌文献、历史图像与数字人文研究资源。">
-	<meta property="og:title" content="藏汉敦煌文献研究数据库">
-	<meta property="og:description" content="汇聚藏汉敦煌文献、历史图像与研究数据。">
+	<meta name="description" content="<%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "藏汉敦煌文献研究数据库，汇聚敦煌文献、历史图像与数字人文研究资源。") %>">
+	<meta property="og:title" content="<%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "藏汉敦煌文献研究数据库") %>">
+	<meta property="og:description" content="<%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "汇聚藏汉敦煌文献、历史图像与研究数据。") %>">
 	<meta property="og:type" content="website">
 	<meta property="og:image" content="<%=basePath %>images/platform/dunhuang/og.png">
 	<meta name="twitter:card" content="summary_large_image">
-	<meta name="twitter:title" content="藏汉敦煌文献研究数据库">
-	<meta name="twitter:description" content="汇聚藏汉敦煌文献、历史图像与研究数据。">
+	<meta name="twitter:title" content="<%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "藏汉敦煌文献研究数据库") %>">
+	<meta name="twitter:description" content="<%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "汇聚藏汉敦煌文献、历史图像与研究数据。") %>">
 	<meta name="twitter:image" content="<%=basePath %>images/platform/dunhuang/og.png">
 	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
 	<meta http-equiv="pragma" content="no-cache">
@@ -40,6 +41,7 @@
   	<link rel="stylesheet" href="<%=basePath %>css/platform/common.css" type="text/css"></link>
   	<link rel="stylesheet" href="<%=basePath %>css/platform/skin-<%=ConstantsObj.getSkinCode() %>.css" type="text/css"></link>
   	<link rel="stylesheet" href="<%=basePath %>css/platform/shared-header.css?v=dunhuang-shared-6" type="text/css"></link>
+    <link rel="stylesheet" href="<%=basePath%>css/platform/member-login.css?v=frontend-login-20261025-1">
   	<script type="text/javascript">var basePath = "<%=basePath %>"; var fileUrl = "<%=SysConfigInfo.FILE_URL_PATH %>"; var language = "<%=language%>"; </script>
   	
 
@@ -48,9 +50,9 @@
   	<script type="text/javascript" src="<%=basePath %>js/jquery-1.7.2.min.js"></script>
   	<script type="text/javascript" src="<%=basePath %>js/jquery.cookie.js"></script>
 	<script type="text/javascript" src="<%=basePath %>layer/layer.js"></script>
-	<script src="<%=basePath %>js/platform/iealert.js" type="text/javascript"></script>
+	<script src="<%=basePath %>js/platform/iealert.js?ui=zh-zw-20261025-1" type="text/javascript"></script>
 	<link rel="stylesheet" type="text/css" href="<%=basePath %>css/platform/iealert.css" />
-	<script type="text/javascript" src="<%=basePath %>js/platform/common.js"></script>
+	<script type="text/javascript" src="<%=basePath %>js/platform/common.js?v=frontend-member-dialog-20261025-2&amp;ui=zh-zw-20261025-1"></script>
     <%@ include file="/WEB-INF/views/platform/pc/common/advancedSearchInclude.jsp" %>
 	
 	<!-- 下拉框插件 -->
@@ -58,7 +60,7 @@
 	<link rel="stylesheet" type="text/css" href="<%=basePath %>plugin/selector/css/cs-skin-elastic.css" />
 	<script src="<%=basePath %>plugin/selector/js/classie.js"></script>
 	<script src="<%=basePath %>plugin/selector/js/selectFx.js"></script>
-	<script src="<%=basePath %>js/platform/jquery.i18n.properties.js"></script>
+	<script src="<%=basePath %>js/platform/jquery.i18n.properties.js?ui=zh-zw-20261025-1"></script>
 	<!-- 语言切换 -->
 	<script src="<%=basePath %>js/switchLang.js"></script>
 	
@@ -204,24 +206,24 @@
 	</div>
     --%>
     <header class="dh-shared-header">
-      <a class="dh-shared-brand" href="<%=path%>/index" aria-label="&#35199;&#34255;&#22823;&#23398;&#25958;&#29004;&#25991;&#29486;&#26234;&#33021;&#25968;&#25454;&#24211;&#39318;&#39029;">
-        <img src="<%=basePath%>images/platform/psb/home/brand-logo.png" alt="&#35199;&#34255;&#22823;&#23398;&#25958;&#29004;&#25991;&#29486;&#26234;&#33021;&#25968;&#25454;&#24211;" width="537" height="74">
+      <a class="dh-shared-brand" href="<%=path%>/index" aria-label="<%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "西藏大学敦煌文献智能数据库首页") %>">
+        <img src="<%=basePath%>images/platform/psb/home/brand-logo.png" alt="<%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "西藏大学敦煌文献智能数据库") %>" width="537" height="74">
       </a>
-      <nav class="dh-shared-nav" aria-label="&#20027;&#23548;&#33322;">
-        <a href="<%=path%>/index">&#39318; &#39029;</a>
-        <a class="is-current" href="<%=path%>/literature" aria-current="page">&#25991;&#29486;&#24211;</a>
-        <a href="<%=path%>/database">&#25968;&#25454;&#24211;</a>
+      <nav class="dh-shared-nav" aria-label="<%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "主导航") %>">
+        <a href="<%=path%>/index"><%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "首 页") %></a>
+        <a class="is-current" href="<%=path%>/literature" aria-current="page"><%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "文献库") %></a>
+        <a href="<%=path%>/database"><%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "数据库") %></a>
       </nav>
       <div class="dh-shared-tools">
-        <label class="dh-shared-language"><span class="dh-shared-sr-only">&#20999;&#25442;&#35821;&#35328;</span>
-          <select aria-label="&#20999;&#25442;&#35821;&#35328;" onchange="switch_lang(this.value)">
-            <option value="zh_CN" <%= "zh".equals(language) ? "selected" : "" %>>&#27721; &#35821;</option>
-            <option value="zw_XZ" <%= "zw".equals(language) ? "selected" : "" %>>&#3926;&#3964;&#3921;&#3851;&#3937;&#3954;&#3906;</option>
+        <label class="dh-shared-language"><span class="dh-shared-sr-only"><%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "切换语言") %></span>
+          <select aria-label="<%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "切换语言") %>" onchange="switch_lang(this.value)">
+            <option value="zh_CN" lang="zh-CN" translate="no" <%= "zh".equals(language) ? "selected" : "" %>><%= "汉文" %></option>
+            <option value="zw_XZ" lang="bo" translate="no" <%= "zw".equals(language) ? "selected" : "" %>>&#3926;&#3964;&#3921;&#3851;&#3937;&#3954;&#3906;</option>
           </select>
         </label>
         <c:choose>
-          <c:when test="${not empty sessionScope.sysUserinfo}"><a class="dh-shared-login" href="<%=basePath%>member/center">&#36827;&#20837;&#20010;&#20154;&#20013;&#24515;</a></c:when>
-          <c:otherwise><button class="dh-shared-login" type="button" onclick="openLogin();">&#30331; &#24405;</button></c:otherwise>
+          <c:when test="${not empty sessionScope.sysUserinfo}"><a class="dh-shared-login" href="<%=basePath%>member/center"><%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "进入个人中心") %></a></c:when>
+          <c:otherwise><button class="dh-shared-login" type="button" onclick="openLogin();"><%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "登 录") %></button></c:otherwise>
         </c:choose>
       </div>
     </header>

@@ -8,6 +8,12 @@
 	<bean id="commonService" class="cn.com.adtech.riss2.bso.CommonServiceImp">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
+	<bean id="textAnnotationRepository" class="cn.com.adtech.riss2.annotation.TextAnnotationRepository" init-method="initializeSchema">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<bean id="resourceResearchLinks" class="cn.com.adtech.riss2.core.ResourceResearchLinks" init-method="initializeSchema">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
 	<aop:config>
 		<aop:advisor pointcut="execution(* cn.com.adtech.riss2.bso.*Service.*(..))"
 			advice-ref="txAdvice" />

@@ -8,7 +8,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE html>
 <html>
   <head>
-    <title>资源章节目录</title>
+<%@ include file="/WEB-INF/views/platform/pc/common/frontendI18n.jspf" %>
+    <title><%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "资源章节目录") %></title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -34,7 +35,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
     <div class="c-body">
     	<p class="header">
-    		<span id="js">章节目录</span>
+        <span id="js"><%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "章节目录") %></span>
     		<span id="gb"><a href="">×</a></span>
     	</p>
     	<div class="list-div">

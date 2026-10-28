@@ -286,6 +286,39 @@ public class ResourceController extends MultiActionController {
 		int fileType = ServletRequestUtils.getIntParameter(request, "type", 0);
 		long sourceId = ServletRequestUtils.getLongParameter(request, "sourceId", 0L);
 		ResSourceData resource = resourceService.getResourceMetaInfo(sourceId);
+		if (fileType==3) {
+			Object session=request.getSession().getAttribute("userSession");
+			if (!(session instanceof cn.com.adtech.riss2.core.CurrentUserSession)
+					|| !((cn.com.adtech.riss2.core.CurrentUserSession)session).isManager()
+					|| ServiceUtil.getCurrentUser(request)==null) {
+				response.sendError(403,"请先登录后台"); return null;
+			}
+			if (resource==null) { response.sendError(404,"源文件所属资源不存在"); return null; }
+			if (cn.com.adtech.riss2.core.file.TextFilePreview.supports(resource)) {
+				ModelAndView view=new ModelAndView("platform/pc/browse/textDirectory");
+				view.addObject("resource",resource);view.addObject("title",resource.getRsdaTitle());view.addObject("consolePreview",true);
+				view.addObject("idcode",CommonUtil.idToString(String.valueOf(sourceId)));
+				try { view.addAllObjects(cn.com.adtech.riss2.core.file.TextFilePreview.readerModel(resource)); }
+				catch (Exception previewError) {
+					logger.warn("TXT preview failed for resource "+sourceId,previewError);
+					view=new ModelAndView("platform/pc/browse/error");
+					view.addObject("message","文本文件暂时无法预览，请检查源文件是否存在、编码是否正确及文件是否超过10MB。");
+				}
+				return view;
+			}
+			if (cn.com.adtech.riss2.core.file.SpreadsheetPreview.supports(resource)) {
+				ModelAndView view=new ModelAndView("platform/pc/browse/spreadsheet");
+				view.addObject("resource",resource);view.addObject("title",resource.getRsdaTitle());view.addObject("consolePreview",true);
+				view.addObject("consoleSourceId",sourceId);
+				try { view.addObject("excel",cn.com.adtech.riss2.core.file.SpreadsheetPreview.read(cn.com.adtech.riss2.core.file.SpreadsheetPreview.resourceFile(resource),
+						ServletRequestUtils.getIntParameter(request,"sheet",-1),ServletRequestUtils.getIntParameter(request,"page",1),ServletRequestUtils.getIntParameter(request,"columns",1))); }
+				catch (Exception previewError) {
+					logger.warn("Excel preview failed for resource "+sourceId,previewError);
+					view.addObject("excelError","该 Excel 文件暂时无法预览，请检查文件是否完整、加密或超出预览容量。");
+				}
+				return view;
+			}
+		}
 		String sourceType = "";
 		String fileUrl = "";
 		String fileName = "";

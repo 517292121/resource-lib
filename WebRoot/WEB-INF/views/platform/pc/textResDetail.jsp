@@ -1,7 +1,7 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ include file="common/header.jsp" %>
 <link rel="stylesheet" href="<%=basePath %>css/platform/textres.css" type="text/css"></link>
-<script type="text/javascript" src="<%=basePath %>js/platform/textResDetail.js"></script>
+<script type="text/javascript" src="<%=basePath %>js/platform/textResDetail.js?ui=zh-zw-20261025-1"></script>
 <div class="main">
 	<div class="pleft">
 		<!-- 元数据信息 -->
