@@ -33,6 +33,8 @@ public interface IIndexDataService extends ICommonService{
 	 * @return
 	 */
 	public List<Object[]> getIndexResource(String sort, int num);
+	/** Dashboard feeds may include all resource languages independently of the interface locale. */
+	public List<Object[]> getIndexResource(String sort, int num, boolean filterByInterfaceLanguage);
 	
 	/**
 	 * 获取热门检索词

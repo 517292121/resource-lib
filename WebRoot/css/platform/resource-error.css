@@ -1,0 +1,28 @@
+@charset "UTF-8";
+/* Reuse the resource-detail artwork, header, search and footer proportions. */
+.dh-resource-error { display: flex; flex-direction: column; min-height: 100vh; }
+.dh-resource-error .rd-masthead, .dh-resource-error .rd-footer { flex-shrink: 0; }
+.rd-error-main { flex: 1; display: grid; place-items: center; min-height: calc(450 * var(--rd-px)); padding: calc(54 * var(--rd-px)) 24px; background: #efede9 url("../../images/platform/psb/resource-detail/detail-background.webp") center / cover no-repeat; }
+.rd-error-card { width: min(100%,calc(1204 * var(--rd-px))); border: 1px solid #ac9271; outline: 1px solid #caba9d; outline-offset: 5px; padding: calc(38 * var(--rd-px)) calc(55 * var(--rd-px)) calc(44 * var(--rd-px)); color: #534b3e; background: #e2dfd3 url("../../images/platform/psb/resource-detail/metadata-paper.webp") center / 100% 100% no-repeat; box-shadow: 0 8px 24px #66523a14; text-align: center; }
+.rd-error-icon { display: block; width: calc(60 * var(--rd-px)); height: calc(60 * var(--rd-px)); margin: 0 auto calc(8 * var(--rd-px)); color: #957755; }
+.rd-error-card h1 { display: flex; align-items: center; justify-content: center; gap: .6em; margin: 0 0 calc(18 * var(--rd-px)); color: #36352e; font: 700 calc(30 * var(--rd-px))/1.6 "SimSun","Songti SC",serif; letter-spacing: .12em; }
+.rd-error-card h1::before, .rd-error-card h1::after { content: "‖"; color: #9a7950; font-weight: 400; font-size: .8em; letter-spacing: 0; }
+.rd-error-card p { margin: 0; font-size: calc(19 * var(--rd-px)); line-height: 1.9; overflow-wrap: anywhere; white-space: pre-line; }
+.rd-error-actions { display: flex; justify-content: center; flex-wrap: wrap; gap: calc(18 * var(--rd-px)); margin-top: calc(30 * var(--rd-px)); }
+.rd-error-actions a { display: inline-flex; align-items: center; justify-content: center; min-width: calc(150 * var(--rd-px)); min-height: calc(44 * var(--rd-px)); border: 1px solid #9c8361; padding: .5em 1.5em; color: #65543f; background: #f4ead7; font-size: calc(18 * var(--rd-px)); line-height: 1.5; }
+.rd-error-actions .rd-error-library { border-color: #356d6d; color: #fff8e9; background: #356d6d; }
+.rd-error-actions a:hover { filter: brightness(1.08); }
+@media (max-width: 900px) {
+  .rd-error-main { min-height: 350px; padding: 36px 24px; }
+  .rd-error-card { padding: 28px 24px 32px; }
+  .rd-error-icon { width: 50px; height: 50px; }
+  .rd-error-card h1 { margin-bottom: 12px; font-size: 24px; }
+  .rd-error-card p { font-size: 15px; }
+  .rd-error-actions { gap: 12px; margin-top: 24px; }
+  .rd-error-actions a { min-width: 125px; min-height: 40px; font-size: 14px; }
+}
+@media (max-width: 600px) {
+  .rd-error-main { padding: 32px 18px; }
+  .rd-error-card { padding: 24px 18px 28px; }
+  .rd-error-card h1 { font-size: 22px; }
+}

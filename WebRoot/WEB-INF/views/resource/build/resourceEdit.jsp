@@ -94,7 +94,7 @@
 		   }
 	   }
     </script>
-	<script type="text/javascript" src="<%=path %>/viewsjs/resource/build/ResourceData.js"></script>
+	<script type="text/javascript" src="<%=path %>/viewsjs/resource/build/ResourceData.js?v=discipline-input-20261031-2"></script>
 	<link rel="stylesheet" href="<%=path%>/css/console/resource-association.css?v=20261025-1" />
 	<script defer="defer" src="<%=path%>/viewsjs/resource/build/resource-association.js?v=20261025-1"></script>
   </head>
@@ -174,6 +174,23 @@
 				                   sourceElement="true">${v.repoData }</textarea>
 	             		</c:when>
 	             		
+					<%-- 学科改为手工输入；原下拉实现保留在下方 repoDatatype 分支。 --%>
+					<c:when test="${fn:toLowerCase(fn:trim(v.repoName)) == 'discipline'}">
+						<%-- 原学科多行输入保留，现改为单行输入框。
+						<textarea name="${v.repoId}" class="source_text"
+						          restrict="${v.repoRestrict}" sourceElement="true"
+						          title="${fn:escapeXml(v.repoTitle)}"
+						          onpropertychange="setTextAreaHeight(this);"
+						          onkeyup="setTextAreaHeight(this);"
+						          onkeydown="setTextAreaHeight(this);">${fn:escapeXml(v.repoData)}</textarea>
+						--%>
+						<input type="text" name="${v.repoId}" class="source_text"
+						       data-discipline-input="true" maxlength="1600"
+						       restrict="${v.repoRestrict}" sourceElement="true"
+						       title="${fn:escapeXml(v.repoTitle)}"
+						       style="width: 514px;margin-left: 2px;height: 22px;"
+						       value="${fn:escapeXml(v.repoData)}">
+					</c:when>
 					<c:when test="${fn:toLowerCase(v.repoName) == 'language' }">
 	             		  <input name="${v.repoId }" 
 			                       type="text" class="source_text"
@@ -233,6 +250,15 @@
 		           </td>
 		           <td> 
 		           	<c:choose>
+					<c:when test="${fn:toLowerCase(fn:trim(vc.repoName)) == 'discipline'}">
+					    <%-- 子元素原下拉实现保留在下方 repoDatatype 分支。 --%>
+					    <input type="text" name="${vc.repoId}" class="source_text"
+					           data-discipline-input="true" maxlength="1600"
+					           restrict="${vc.repoRestrict}" sourceElement="true"
+					           title="${fn:escapeXml(vc.repoTitle)}"
+					           style="width: 514px;margin-left: 2px;height: 22px;"
+					           value="${fn:escapeXml(vc.repoData)}">
+					</c:when>
 		           		<c:when test="${fn:toLowerCase(vc.repoName) == 'accessrights' }">
 	             		  <select name="${vc.repoId }" id="${vc.repoId }" sourceElement="true" style="width: 514px;margin-left: 2px;height: 22px;"> 
 				              <option value="<%=SysUserType.PURIVEW_DOWNLOAD %>" <c:if test="${vc.repoData == 5 }"> selected="selected"</c:if>>可下载</option>
@@ -284,7 +310,14 @@
        
        <!-- 选择分类 -->
        <div class="title" style="margin-top: 0">选择分类</div>
+       <%-- 隐藏控件的现有值仍提交，避免编辑保存时清空原分类或关联。 --%>
+       <input type="hidden" name="rsty_id" value="${resource.rsdaRstyId}">
+       <input type="hidden" name="language_id" value="${requestScope.language.rltyId}">
+       <input type="hidden" name="rsdaRssuId" value="${resource.rsdaRssuId}">
+       <input type="hidden" name="rdty_id_two" value="${resource.rsdaRdtyTwo}">
+       <input type="hidden" name="rdty_id_three" value="${resource.rsdaRdtyThree}">
 	     <table cellpadding="0" width="100%" border="0" cellspacing="1" bgcolor="#ECECEC" >
+	       <%-- 暂停显示学科分类，保留原控件实现。
 	       <tr bgcolor="#FAFAFA" height="25">
 	          <td width="250px" align="right">
 	            <img src="<%=path %>/images/extform/bullet_add_2.png"></img> 
@@ -304,6 +337,7 @@
 		          
 		      </td>    
 	       </tr>
+	       --%>
 	       
 	       <!-- 自定义分类一 -->
 	       <c:if test="${fn:length(dynamicTypeOptions) > 4 }">
@@ -320,6 +354,7 @@
 		       </tr>
 	       </c:if>
 	       
+	       <%-- 暂停显示其余分类、语种及主题，保留原控件实现。
 	       <!-- 自定义分类二 -->
 	       <c:if test="${fn:length(dynamicTypeOptions2) > 4 }">
 		       <tr bgcolor="#FFFFFF" height="25">
@@ -369,6 +404,7 @@
 					    ${requestScope.sourceSubjectOptions }
 					</select></td>
 	       </tr>
+	       --%>
 	 </table>
 		   
 	 

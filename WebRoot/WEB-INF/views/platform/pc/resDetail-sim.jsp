@@ -63,8 +63,9 @@
                     <dl id="rd-metadata-list" class="rd-metadata-list">
                         <c:if test="${not empty resource.rsdaLanguage}"><div><dt><%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "语 种") %></dt><dd><c:out value="${resource.rsdaLanguage}"/></dd></div></c:if>
                         <c:if test="${not empty resource.rsdaIdentifier}"><div><dt><%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "卷 号") %></dt><dd><c:out value="${resource.rsdaIdentifier}"/></dd></div></c:if>
-                        <c:if test="${not empty resource.resSubjectType}"><div><dt><%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "学 科") %></dt><dd><c:out value="${resource.resSubjectType.rstyName}"/></dd></div></c:if>
+                        <c:if test="${not empty resource.rsdaTitle}"><div><dt><%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "题名") %></dt><dd><c:out value="${resource.rsdaTitle}"/></dd></div></c:if>
                         <c:if test="${not empty resource.rsdaDescription}"><div><dt><c:choose><c:when test="${resource.rsdaRltyId eq 1}"><%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "注释") %></c:when><c:otherwise><%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "描述") %></c:otherwise></c:choose></dt><dd><c:out value="${resource.rsdaDescription}"/></dd></div></c:if>
+                        <c:if test="${not empty resource.resSubjectType}"><div><dt><%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "学 科") %></dt><dd><c:out value="${resource.resSubjectType.rstyName}"/></dd></div></c:if>
                         <c:if test="${not empty resource.rsdaCreator}"><div><dt><%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "责任者") %></dt><dd><c:out value="${resource.rsdaCreator}"/></dd></div></c:if>
                         <c:if test="${not empty resource.rsdaPublisher}"><div><dt><%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "出版者") %></dt><dd><c:out value="${resource.rsdaPublisher}"/></dd></div></c:if>
                         <c:if test="${not empty resource.rsdaDate}"><div><dt><%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "日 期") %></dt><dd><c:out value="${resource.rsdaDate}"/></dd></div></c:if>
@@ -86,7 +87,7 @@
         </section>
     </main>
     <footer class="rd-footer"><span><%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "地址：拉萨市藏大东路10号") %></span><i></i><span><%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "网站举报电话：0891-6405074") %></span><i></i><span><%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "网站举报邮箱：zdwljb@xzu.edu.cn") %></span><i></i><span><%= cn.com.adtech.riss2.core.i18n.FrontendMessages.html(request, "Copyright © 西藏大学文学院版权所有") %></span></footer>
-    <script src="<%=basePath%>js/platform/resource-detail.js?v=fixed-metadata-labels-20261028-1&amp;ui=zh-zw-20261025-1" defer></script>
+    <script src="<%=basePath%>js/platform/resource-detail.js?v=metadata-order-20261031-1&amp;ui=zh-zw-20261025-1" defer></script>
     <%@ include file="/WEB-INF/views/platform/pc/common/advancedSearchInclude.jsp" %>
 </body>
 </html>

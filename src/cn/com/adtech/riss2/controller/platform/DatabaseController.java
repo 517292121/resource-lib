@@ -43,7 +43,8 @@ public class DatabaseController {
                 List<Object[]> rows = indexDataService.getInfoList(5);
                 String type = "info";
                 if (rows == null || rows.isEmpty()) {
-                    rows = indexDataService.getIndexResource("rsdaBuilddate", 5);
+                    // Interface language controls UI labels, not which published resources exist.
+                    rows = indexDataService.getIndexResource("rsdaBuilddate", 5, false);
                     type = "resource";
                 }
                 if (rows != null) for (Object[] row : rows) {

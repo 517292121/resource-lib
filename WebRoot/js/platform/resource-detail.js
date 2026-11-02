@@ -42,14 +42,19 @@
   // Current book metadata uses Subject/Medium for 题记 and Keyword for 卷号.
   var metadataTypeLabels = {
     '1': {creator:'创建者', subject:'题记', description:'注释', abstract:'内容',
-      extent:'行数', medium:'题记', keyword:'卷号', coverage:'空间范围', bibliographiccitation:'书目引文'},
+      extent:'行号', medium:'题记', keyword:'卷号', coverage:'空间范围', bibliographiccitation:'书目引文'},
     '3': {abstract:'文摘', discipline:'学科专业', location:'馆藏信息', available:'全文可获得日期'}
   };
   function metadataLabel(code) {
     var typeLabels = metadataTypeLabels[body.dataset.resourceType] || {};
     var label = Object.prototype.hasOwnProperty.call(typeLabels, code) ? typeLabels[code] :
       Object.prototype.hasOwnProperty.call(metadataLabels, code) ? metadataLabels[code] : '其他信息';
-    return uiText(label);
+    return label;
+  }
+  var metadataOrder = ['语种', '卷号', '题名', '注释', '学科', '内容', '行号', '题记'];
+  function metadataPriority(code) {
+    var index = metadataOrder.indexOf(metadataLabel(code));
+    return index < 0 ? metadataOrder.length : index;
   }
 
   function text(value) { return value == null || value === 'null' ? '' : String(value).trim(); }
@@ -71,11 +76,15 @@
       var rows = result && Array.isArray(result.dataList) ? result.dataList : [];
       var fragment = document.createDocumentFragment();
       var count = 0;
-      rows.forEach(function (row) {
+      // Sort by fixed headings before translation, independently of backend template order.
+      rows.map(function (row, index) { return {row: row, index: index}; }).sort(function (a, b) {
+        return metadataPriority(text(a.row[0]).toLowerCase()) - metadataPriority(text(b.row[0]).toLowerCase()) || a.index - b.index;
+      }).forEach(function (entry) {
+        var row = entry.row;
         var code = text(row[0]).toLowerCase();
         var value = plainText(row[2]);
-        var label = metadataLabel(code);
-        if (!value || (code === 'title' && value === text(document.getElementById('rd-title').textContent))) return;
+        var label = uiText(metadataLabel(code));
+        if (!value) return;
         var line = document.createElement('div');
         var term = document.createElement('dt');
         var definition = document.createElement('dd');

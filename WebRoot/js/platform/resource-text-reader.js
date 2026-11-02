@@ -20,7 +20,7 @@
     if (!chapters.length) return;
     var chapterLinks = Array.prototype.slice.call(document.querySelectorAll('.reader-chapters [data-chapter-index]'));
     var sourceCharacters = chapters.reduce(function (sum, chapter) { return sum + chapter.text.length; }, 0);
-    var spreads = [], current = 0, started = false, timer, generation = 0, pending = false, catalogChapter = -1, queuedJump = null;
+    var spreads = [], current = 0, started = false, timer, generation = 0, pending = false, catalogChapter = -1, queuedJump = null, focusedPosition = null;
     var fontSize = 18;
     var availableSizes = [14, 16, 18, 20, 22, 24];
     var initial = new URL(window.location.href);
@@ -75,10 +75,19 @@
     function offset() {
         var spread = spreads[current];
         if (!spread) return {chapter:initialChapter,offset:0};
-        var end = spread.start + spread.left.length + spread.right.length;
-        // Resizing a freshly located search page should keep the hit visible, not just its preceding whitespace.
-        return searchTarget && searchTarget.chapter === spread.chapter && searchTarget.offset >= spread.start && searchTarget.offset < end
-            ? {chapter:spread.chapter,offset:searchTarget.offset} : {chapter:spread.chapter,offset:spread.start};
+        if (focusedPosition && containsPosition(spread,focusedPosition)) return focusedPosition;
+        if (searchTarget && containsPosition(spread,searchTarget)) return searchTarget;
+        return {chapter:spread.leaves[0].chapter,offset:spread.leaves[0].start};
+    }
+    function containsPosition(spread, position) {
+        return spread.leaves.some(function (leaf) {
+            return leaf.chapter === position.chapter && position.offset >= leaf.start &&
+                (position.offset < leaf.end || (leaf.end === chapters[leaf.chapter].text.length && position.offset === leaf.end));
+        });
+    }
+    function findSpread(position) {
+        for (var index = 0; index < spreads.length; index++) if (containsPosition(spreads[index],position)) return index;
+        return chapters[position.chapter].startPage;
     }
     function safeEnd(text, end) {
         if (end > 0 && end < text.length && /[\uDC00-\uDFFF]/.test(text.charAt(end)) && /[\uD800-\uDBFF]/.test(text.charAt(end - 1))) return end - 1;
@@ -88,28 +97,30 @@
     function paintSearchHighlights() {
         var page = book.readerPage;
         if (!page || !searchExpressions.length) return;
-        // Include nearby characters so a match split across leaves/spreads keeps its exact offsets.
-        var begin = Math.max(0,page.start - 1024), finish = Math.min(page.text.length,page.end + 1024);
-        var text = page.text.slice(begin,finish), ranges = [];
-        searchExpressions.forEach(function (expression) {
-            expression.lastIndex = 0;
-            var match, count = 0;
-            while ((match = expression.exec(text)) && count++ < 2000) {
-                var start = begin + match.index, end = start + match[0].length;
-                if (end > page.start && start < page.end) ranges.push({start:start,end:end});
-            }
-        });
-        ranges.sort(function (a,b) { return a.start - b.start || a.end - b.end; });
-        var merged = [];
-        ranges.forEach(function (range) {
-            var previous = merged[merged.length - 1];
-            if (previous && range.start <= previous.end) previous.end = Math.max(previous.end,range.end);
-            else merged.push({start:range.start,end:range.end});
-        });
         [left,right].forEach(function (leaf,index) {
             leaf.querySelectorAll('mark.reader-search-highlight').forEach(function (mark) { mark.replaceWith(document.createTextNode(mark.textContent)); });
             leaf.normalize();
-            var walker = document.createTreeWalker(leaf,NodeFilter.SHOW_TEXT), nodes = [], node, offset = index ? page.rightStart : page.leftStart;
+            var location = page.leaves[index];
+            if (!location) return;
+            // Each leaf can belong to a different volume; offsets always refer to its own source text.
+            var begin = Math.max(0,location.start - 1024), finish = Math.min(location.text.length,location.end + 1024);
+            var text = location.text.slice(begin,finish), ranges = [];
+            searchExpressions.forEach(function (expression) {
+                expression.lastIndex = 0;
+                var match, count = 0;
+                while ((match = expression.exec(text)) && count++ < 2000) {
+                    var start = begin + match.index, end = start + match[0].length;
+                    if (end > location.start && start < location.end) ranges.push({start:start,end:end});
+                }
+            });
+            ranges.sort(function (a,b) { return a.start - b.start || a.end - b.end; });
+            var merged = [];
+            ranges.forEach(function (range) {
+                var previous = merged[merged.length - 1];
+                if (previous && range.start <= previous.end) previous.end = Math.max(previous.end,range.end);
+                else merged.push({start:range.start,end:range.end});
+            });
+            var walker = document.createTreeWalker(leaf,NodeFilter.SHOW_TEXT), nodes = [], node, offset = location.start;
             while ((node = walker.nextNode())) { nodes.push({node:node,start:offset}); offset += node.length; }
             nodes.forEach(function (entry) {
                 var value = entry.node.textContent, start = entry.start, end = start + value.length;
@@ -135,10 +146,17 @@
         current = Math.max(0, Math.min(count - 1, current));
         var spread = spreads[current];
         if (!spread) return;
-        var chapter = chapters[spread.chapter];
+        var position = offset();
+        var chapter = chapters[position.chapter];
+        var locations = spread.leaves.map(function (leaf) {
+            var source = chapters[leaf.chapter];
+            return {chapter:source.path,title:source.title,text:source.text,textHash:source.hash,start:leaf.start,end:leaf.end};
+        });
+        var primary = locations.filter(function (leaf) { return leaf.chapter === chapter.path; });
+        var start = primary[0].start, end = primary[primary.length - 1].end;
         left.textContent = spread.left;
         right.textContent = spread.right;
-        if (!chapter.text) left.textContent = uiText('本章节暂无正文。');
+        if (!locations[0].text) left.textContent = uiText('本章节暂无正文。');
         number.value = current + 1;
         number.max = count;
         total.textContent = '/ ' + count;
@@ -151,8 +169,8 @@
         book.setAttribute('data-chapter-count', chapters.length);
         book.setAttribute('data-current-chapter', chapter.path);
         document.getElementById('reader-title').textContent = book.getAttribute('data-resource-title') + ' · ' + chapter.title;
-        if (catalogChapter !== spread.chapter) {
-            catalogChapter = spread.chapter;
+        if (catalogChapter !== position.chapter) {
+            catalogChapter = position.chapter;
             chapterLinks.forEach(function (link, index) {
                 link.classList.toggle('current', index === catalogChapter);
                 if (index === catalogChapter) link.setAttribute('aria-current', 'page');
@@ -167,11 +185,11 @@
         url.searchParams.set('paging', 'resource');
         url.searchParams.set('p', chapter.path);
         url.searchParams.delete('last');
-        url.searchParams.set('offset', spread.start);
+        url.searchParams.set('offset', start);
         window.history.replaceState(null, '', url.toString());
-        var page = {chapter:chapter.path, title:chapter.title, text:chapter.text, textHash:chapter.hash, start:spread.start,
-            end:spread.start + spread.left.length + spread.right.length, leftStart:spread.start,
-            rightStart:spread.start + spread.left.length, page:current + 1};
+        var page = {chapter:chapter.path, title:chapter.title, text:chapter.text, textHash:chapter.hash, start:start,
+            end:end, leftStart:locations[0].start, rightStart:locations[1] ? locations[1].start : locations[0].end,
+            page:current + 1, leaves:locations};
         book.readerPage = page;
         book.dispatchEvent(new CustomEvent('reader:pagechange', {detail:page}));
         paintSearchHighlights();
@@ -189,7 +207,7 @@
         status.textContent = uiText('正在计算全书页码…');
         measure.style.width = bounds.width + 'px';
         measure.style.height = bounds.height + 'px';
-        var calculated = [], ranges = [], batchStart = performance.now();
+        var calculated = [], ranges = [], allLeaves = [], batchStart = performance.now();
         for (var chapterIndex = 0; chapterIndex < chapters.length; chapterIndex++) {
             var text = chapters[chapterIndex].text, leaves = [], start = 0;
             while (start < text.length) {
@@ -202,7 +220,7 @@
                 }
                 var end = safeEnd(text, low);
                 if (end <= start) end = safeEnd(text, Math.min(text.length, start + 2));
-                leaves.push({start:start, end:end, text:text.slice(start, end)});
+                leaves.push({chapter:chapterIndex, start:start, end:end, text:text.slice(start, end)});
                 start = end;
                 if (performance.now() - batchStart > 16) {
                     await new Promise(function (resolve) { window.setTimeout(resolve, 0); });
@@ -210,13 +228,15 @@
                     batchStart = performance.now();
                 }
             }
-            var chapterStart = calculated.length;
-            if (!leaves.length) leaves.push({start:0, end:0, text:''});
-            // Each chapter begins on a fresh spread, retaining its original text and chapter boundary.
-            for (var leafIndex = 0; leafIndex < leaves.length; leafIndex += 2) {
-                calculated.push({chapter:chapterIndex, start:leaves[leafIndex].start, left:leaves[leafIndex].text, right:leaves[leafIndex + 1] ? leaves[leafIndex + 1].text : ''});
-            }
-            ranges.push({start:chapterStart, count:calculated.length - chapterStart});
+            if (!leaves.length) leaves.push({chapter:chapterIndex, start:0, end:0, text:''});
+            var chapterStart = Math.floor(allLeaves.length / 2);
+            allLeaves = allLeaves.concat(leaves);
+            ranges.push({start:chapterStart, count:Math.floor((allLeaves.length - 1) / 2) - chapterStart + 1});
+        }
+        // Pair consecutive leaves across volume boundaries instead of leaving a right-hand page blank.
+        for (var leafIndex = 0; leafIndex < allLeaves.length; leafIndex += 2) {
+            var pair = allLeaves.slice(leafIndex,leafIndex + 2);
+            calculated.push({left:pair[0].text,right:pair[1] ? pair[1].text : '',leaves:pair});
         }
         if (token !== generation) return;
         spreads = calculated;
@@ -226,6 +246,7 @@
             var url = new URL(link.href);
             url.searchParams.set('page', chapters[index].startPage + 1);
             url.searchParams.set('paging', 'resource');
+            url.searchParams.set('offset', '0');
             link.href = url.toString();
             link.setAttribute('data-start-page', chapters[index].startPage + 1);
             link.setAttribute('data-end-page', chapters[index].startPage + chapters[index].pageCount);
@@ -235,14 +256,17 @@
             var selected = chapters[initialChapter];
             current = initialGlobal ? initialPage - 1 : selected.startPage + (startAtEnd ? selected.pageCount - 1 : Math.min(selected.pageCount - 1, initialPage - 1));
             if (initial.searchParams.has('offset') || searchTarget) {
-                current = selected.startPage;
-                while (current + 1 < spreads.length && spreads[current + 1].chapter === initialChapter && spreads[current + 1].start <= initialOffset) current++;
+                focusedPosition = {chapter:initialChapter,offset:initialOffset};
+                current = findSpread(focusedPosition);
+            } else if (!initialGlobal) {
+                var selectedLeaf = spreads[current].leaves.find(function (leaf) { return leaf.chapter === initialChapter; });
+                if (selectedLeaf) focusedPosition = {chapter:initialChapter,offset:selectedLeaf.start};
             }
             started = true;
         } else {
             var position = anchor || {chapter:initialChapter, offset:0};
-            current = chapters[position.chapter].startPage;
-            while (current + 1 < spreads.length && spreads[current + 1].chapter === position.chapter && spreads[current + 1].start <= position.offset) current++;
+            focusedPosition = position;
+            current = findSpread(position);
         }
         pending = false;
         number.disabled = false;
@@ -256,6 +280,7 @@
 
     function turn(step) {
         if (!pending && current + step >= 0 && current + step < spreadCount()) {
+            focusedPosition = null;
             current += step;
             render();
         }
@@ -263,8 +288,8 @@
     function locateAnnotation(target) {
         var index = chapters.findIndex(function (chapter) { return chapter.path === target.chapter; });
         if (index < 0) return false;
-        current = chapters[index].startPage;
-        while (current + 1 < spreads.length && spreads[current + 1].chapter === index && spreads[current + 1].start <= target.offset) current++;
+        focusedPosition = {chapter:index,offset:Math.max(0,Math.min(chapters[index].text.length,target.offset || 0))};
+        current = findSpread(focusedPosition);
         return true;
     }
     book.addEventListener('reader:jump', function (event) {
@@ -281,7 +306,7 @@
     }
     previous.addEventListener('click', function () { turn(-1); });
     next.addEventListener('click', function () { turn(1); });
-    function jumpToPage() { if (pending) return; current = (parseInt(number.value, 10) || 1) - 1; render(); }
+    function jumpToPage() { if (pending) return; focusedPosition = null; current = (parseInt(number.value, 10) || 1) - 1; render(); }
     number.addEventListener('change', jumpToPage);
     number.addEventListener('keydown', function (event) { if (event.key === 'Enter') { event.preventDefault(); jumpToPage(); number.blur(); } });
     sizes.addEventListener('change', function () { changeSize(parseInt(sizes.value, 10)); });
@@ -290,7 +315,7 @@
             if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || event.button !== 0) return;
             event.preventDefault();
             if (pending) return;
-            current = chapters[index].startPage;
+            locateAnnotation({chapter:chapters[index].path,offset:0});
             chapterDialog.close();
             render();
         });
@@ -304,21 +329,25 @@
     var lastWidth = 0, lastHeight = 0;
     var scene = document.querySelector('.reader-scene');
     var layout = document.querySelector('.reader-layout');
-    var header = document.querySelector('.reader-header');
-    var footer = document.querySelector('.reader-footer');
+    var annotationPanel = document.getElementById('reader-catalog');
+    var annotationToggle = document.getElementById('reader-annotations-toggle');
+    function showAnnotations(visible) {
+        if (!annotationPanel || !annotationToggle) return;
+        annotationPanel.hidden = !visible;
+        annotationToggle.setAttribute('aria-expanded', String(visible));
+        layout.classList.toggle('is-annotations-collapsed', !visible);
+        resized();
+    }
+    if (annotationToggle && annotationPanel) {
+        annotationToggle.addEventListener('click', function () {
+            showAnnotations(annotationPanel.hidden);
+        });
+        book.addEventListener('reader:showannotations', function () { showAnnotations(true); });
+        showAnnotations(false);
+    }
     function fitWindow() {
-        if (window.matchMedia('(max-width:760px), (max-width:1100px) and (orientation:portrait)').matches) {
-            layout.style.removeProperty('width');
-            resized();
-            return;
-        }
-        var style = window.getComputedStyle(scene);
-        var gap = parseFloat(window.getComputedStyle(layout).columnGap) || 5;
-        var availableWidth = scene.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight);
-        var availableHeight = Math.max(340, window.innerHeight - header.getBoundingClientRect().height - footer.getBoundingClientRect().height - parseFloat(style.paddingTop) - parseFloat(style.paddingBottom));
-        // Preserve the original book/frame proportions while fitting both window dimensions.
-        var width = Math.floor(Math.min(availableWidth, availableHeight * 1423 / 805 + gap));
-        if (layout.style.width !== width + 'px') layout.style.width = width + 'px';
+        // Follow available width at the book's natural aspect ratio; the document may scroll vertically.
+        layout.style.removeProperty('width');
         resized();
     }
     function resized() {
@@ -330,9 +359,7 @@
     }
     if (window.ResizeObserver) {
         new ResizeObserver(resized).observe(book);
-        var frameObserver = new ResizeObserver(fitWindow);
-        frameObserver.observe(header);
-        frameObserver.observe(footer);
+        new ResizeObserver(fitWindow).observe(scene);
     }
     window.addEventListener('resize', fitWindow);
     (document.fonts ? document.fonts.ready : Promise.resolve()).then(function () {

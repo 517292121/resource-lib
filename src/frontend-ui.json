@@ -2690,5 +2690,9 @@
   {
     "text": "题记",
     "key": "frontend.detail.metadata.inscription"
+  },
+  {
+    "text": "行号",
+    "key": "frontend.detail.metadata.lineNumber"
   }
 ]

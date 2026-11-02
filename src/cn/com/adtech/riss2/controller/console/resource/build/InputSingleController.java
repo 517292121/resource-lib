@@ -1323,7 +1323,7 @@ public class InputSingleController extends ResourceFileLoad {
 		// Date date = null;
 		for(int i = 0, s = elelist.size(); i < s; i++) {
 			element = elelist.get(i);
-			elename = ToolUnit.NullToBlank(element.getRepoName()).toLowerCase();
+			elename = ToolUnit.NullToBlank(element.getRepoName()).trim().toLowerCase(java.util.Locale.ROOT);
 			eleid = element.getRepoId().toString();
 			if(elename.equals("title")) {
 				resource.setRsdaTitle(MyRequestUtil.getStringParameter(request, eleid));
@@ -1333,6 +1333,11 @@ public class InputSingleController extends ResourceFileLoad {
 			}
 			if(elename.equals("subject")) {
 				resource.setRsdaSubject(MyRequestUtil.getStringParameter(request, eleid));
+			}
+			if(elename.equals("discipline") && request.getParameter(eleid) != null) {
+				// The single free-text discipline field also supplies the subject shown in resource lists.
+				resource.setRsdaRstyId(subjectTypeService.saveSubjectName(
+						MyRequestUtil.getStringParameter(request, eleid), resource.getRsdaRstyId()));
 			}
 			if(elename.equals("description")) {
 				resource.setRsdaDescription(MyRequestUtil.getStringParameter(request, eleid));

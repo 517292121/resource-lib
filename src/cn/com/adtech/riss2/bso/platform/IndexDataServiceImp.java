@@ -163,7 +163,12 @@ public class IndexDataServiceImp extends CommonServiceImp implements IIndexDataS
 	
 	@Override
 	public List<Object[]> getIndexResource(String sort, int num) {
-		String where = PlatformBasicService.getSearchCommonConditionByHql("rsda", true);
+		return getIndexResource(sort, num, true);
+	}
+
+	@Override
+	public List<Object[]> getIndexResource(String sort, int num, boolean filterByInterfaceLanguage) {
+		String where = PlatformBasicService.getSearchCommonConditionByHql("rsda", filterByInterfaceLanguage);
 		StringBuffer sb = new StringBuffer();
 		sb.append("select rsda.rsdaId,");
 		sb.append("rsda.rsdaTitle,");

@@ -89,11 +89,12 @@ function sourceView(reqItem){
 // 表单验证
 function checkform() {
 	if (window.validateResourceDirectoryUpload && !window.validateResourceDirectoryUpload()) return false;
-	var texts = document.getElementsByTagName("textarea");
+	var texts = Array.prototype.slice.call(document.getElementsByTagName("textarea"));
+	texts = texts.concat(Array.prototype.slice.call(document.querySelectorAll("input[data-discipline-input]")));
 	var result = true;
 	for(i = 0; i < texts.length; i++) {
-		if(texts[i].sourceElement == "true") {
-			if(texts[i].restrict == "M" && texts[i].value.length < 1) {
+		if((texts[i].getAttribute("sourceElement") || texts[i].sourceElement) == "true") {
+			if((texts[i].getAttribute("restrict") || texts[i].restrict) == "M" && texts[i].value.length < 1) {
 				document.getElementById(texts[i].name + "_msg").innerHTML = "<img src='" + getPath()
 						+ "/images/icon/error.png' class='icon'><span style='color:red'>" + texts[i].title + " 不能为空！</span>"
 				window.location.href = "#" + texts[i].name + "_msg";

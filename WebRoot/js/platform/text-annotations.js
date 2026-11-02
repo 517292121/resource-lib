@@ -5,7 +5,6 @@
 
     var book = document.getElementById('reader-book');
     if (book && book.dataset.previewOnly === 'true') {
-        document.getElementById('annotation-hint').textContent = uiText('只读预览');
         return;
     }
     var manager = document.getElementById('annotation-records');
@@ -21,11 +20,12 @@
     var saveButton = document.getElementById('annotation-save');
     var message = document.getElementById('annotation-message');
     var canWrite = false, csrfToken = '', rows = [], page = null, selected = null, editing = null;
-    var saving = false, loading = 0, activeId = '', annotationsLoaded = false, recordsPage = 1, recordsPages = 1;
+    var saving = false, loading = 0, activeId = '', annotationsLoaded = false, recordsPage = 1, recordsPages = 1, activeLeaf = 0;
     var tools = document.getElementById('annotation-tools');
+    var readerToolbar = document.querySelector('.reader-toolbar');
+    var myAnnotations = document.getElementById('reader-my-annotations');
     var selectionButton = document.getElementById('annotation-selection');
     var pageButton = document.getElementById('annotation-page');
-    var hint = document.getElementById('annotation-hint');
     var reviewDialog=document.getElementById('annotation-review'), reviewing=null, reviewSaving=false;
     var markerLayer;
     if (book) { markerLayer = node('div','annotation-markers'); book.appendChild(markerLayer); }
@@ -129,15 +129,47 @@
             finally{reviewSaving=false;submit.disabled=false;}
         });
     }
+    function pageLeaves() {
+        if (!page) return [];
+        return page.leaves || [
+            {chapter:page.chapter,title:page.title,text:page.text,textHash:page.textHash,start:page.leftStart,end:page.rightStart},
+            {chapter:page.chapter,title:page.title,text:page.text,textHash:page.textHash,start:page.rightStart,end:page.end}
+        ];
+    }
+    function matchesLeaf(row, leaf) {
+        return row.chapter===leaf.chapter && row.textHash===leaf.textHash && row.end>leaf.start && row.start<leaf.end;
+    }
     function isVisible(row) {
-        return page && row.chapter===page.chapter && row.textHash===page.textHash && row.end>page.start && row.start<page.end;
+        return pageLeaves().some(function(leaf){return matchesLeaf(row,leaf);});
+    }
+    function pageAnchor() {
+        var current=pageLeaves()[activeLeaf];
+        if(!current||current.end<=current.start)return null;
+        var start=current.start,end=current.end;
+        return {chapter:current.chapter,textHash:current.textHash,start:start,end:end,quote:current.text.slice(start,end),scope:'page'};
+    }
+    function updatePageButton() {
+        var anchor=pageAnchor(),locations=pageLeaves();pageButton.disabled=!canWrite||!anchor;
+        [document.getElementById('reader-left'),document.getElementById('reader-right')].forEach(function(leaf,index){
+            var selectable=canWrite&&locations[index]&&locations[index].end>locations[index].start;
+            var current=!!selectable&&index===activeLeaf;
+            leaf.classList.toggle('is-annotation-page-selected',current);
+            if(selectable)leaf.setAttribute('tabindex','0');else leaf.removeAttribute('tabindex');
+            if(current)leaf.setAttribute('aria-current','page');else leaf.removeAttribute('aria-current');
+        });
     }
     function activate(row, navigate) {
         activeId=row.id;
+        if (!navigate) {
+            if (!row.stale) book.dispatchEvent(new CustomEvent('reader:jump',{detail:{chapter:row.chapter,offset:row.start}}));
+            book.dispatchEvent(new CustomEvent('reader:showannotations'));
+        }
         if (navigate && row.stale) { notify(uiText('该批注对应的原文已修改或章节已移除，暂时无法准确定位。')); return; }
-        if (navigate && (!page || row.chapter!==page.chapter || row.start<page.start || row.start>=page.end)) {
+        if (navigate && !pageLeaves().some(function(leaf){return matchesLeaf(row,leaf)&&row.start>=leaf.start&&row.start<leaf.end;})) {
             book.dispatchEvent(new CustomEvent('reader:jump',{detail:{chapter:row.chapter,offset:row.start}}));
         }
+        var selectedPage=pageLeaves().findIndex(function(leaf){return matchesLeaf(row,leaf)&&row.start>=leaf.start&&row.start<leaf.end;});
+        if(selectedPage>=0){activeLeaf=selectedPage;updatePageButton();}
         document.querySelectorAll('[data-annotation-id]').forEach(function(element){element.classList.toggle('is-active',element.dataset.annotationId===row.id);});
         var card=list.querySelector('[data-annotation-id="'+row.id+'"]');
         var panel=document.querySelector('.reader-catalog');
@@ -148,10 +180,6 @@
     function readerList() {
         list.setAttribute('aria-label',uiText('当前文献全部批注'));
         list.replaceChildren();
-        var stale=rows.filter(function(row){return row.stale;}).length;
-        hint.textContent=canWrite ? uiText('选文或整页批注将在审核通过后显示，可在“我的批注”查看状态。') : uiText('仅显示审核通过的批注，研究人员登录后可提交批注。');
-        hint.textContent+=uiText(' 点击批注可跳转原文。');
-        if(stale) hint.textContent+=uiText(' 有 {count} 条批注的原文已变化，已保留记录。', {count:stale});
         var controls=node('div','annotation-list-tools');
         controls.append(node('span','annotation-count',uiText('共 {count} 条批注', {count:rows.length})),button(uiText('刷新'),load,'annotation-refresh'));list.appendChild(controls);
         if(!rows.length) list.appendChild(node('p','annotation-empty',uiText('本文献暂无已审核批注')));
@@ -197,16 +225,20 @@
     }
     function paint() {
         if(!book||!page) return;
-        var visible=rows.filter(isVisible), left=document.getElementById('reader-left'),right=document.getElementById('reader-right');
-        paintLeaf(left,page.leftStart,page.text.slice(page.leftStart,page.rightStart),visible.filter(function(row){return row.start<page.rightStart&&row.end>page.leftStart;}));
-        paintLeaf(right,page.rightStart,page.text.slice(page.rightStart,page.end),visible.filter(function(row){return row.end>page.rightStart;}));
-        if(!page.text) left.textContent=uiText('本章节暂无正文。');
+        var visible=rows.filter(isVisible), left=document.getElementById('reader-left'),right=document.getElementById('reader-right'), locations=pageLeaves(), leaves=[left,right];
+        leaves.forEach(function(leaf,index){
+            var location=locations[index];
+            if(!location){leaf.replaceChildren();return;}
+            paintLeaf(leaf,location.start,location.text.slice(location.start,location.end),visible.filter(function(row){return matchesLeaf(row,location);}));
+        });
+        if(locations[0]&&!locations[0].text) left.textContent=uiText('本章节暂无正文。');
         if(book.paintSearchHighlights) book.paintSearchHighlights();
         markerLayer.replaceChildren();
         var bounds=book.getBoundingClientRect(), positions=[];
         visible.forEach(function(row){
-            var position=Math.max(page.start,row.start), leaf=position<page.rightStart?left:right, leafStart=leaf===left?page.leftStart:page.rightStart;
-            var range=textRange(leaf,position-leafStart,Math.min(position+1,page.end)-leafStart);
+            var index=locations.findIndex(function(location){return matchesLeaf(row,location);});
+            var location=locations[index],leaf=leaves[index],position=Math.max(location.start,row.start),leafStart=location.start;
+            var range=textRange(leaf,position-leafStart,Math.min(position+1,location.end)-leafStart);
             if(!range) return;
             var rect=range.getBoundingClientRect(), leafRect=leaf.getBoundingClientRect();
             if(rect.height===0) return;
@@ -223,17 +255,17 @@
         if(!canWrite || !page || book.hasAttribute('aria-busy') || editor.open) return;
         var selection=window.getSelection();
         if(!selection || selection.isCollapsed || !selection.rangeCount) {selected=null;selectionButton.disabled=true;return;}
-        var range=selection.getRangeAt(0), leaves=[document.getElementById('reader-left'),document.getElementById('reader-right')];
+        var range=selection.getRangeAt(0), leaves=[document.getElementById('reader-left'),document.getElementById('reader-right')], locations=pageLeaves();
         function absolute(container,offset){
             for(var i=0;i<leaves.length;i++) if(leaves[i].contains(container)||leaves[i]===container){
                 var prefix=document.createRange();prefix.selectNodeContents(leaves[i]);prefix.setEnd(container,offset);
-                return (i===0?page.leftStart:page.rightStart)+prefix.toString().length;
+                return locations[i] ? {location:locations[i],offset:locations[i].start+prefix.toString().length} : null;
             }
             return null;
         }
         var start=absolute(range.startContainer,range.startOffset),end=absolute(range.endContainer,range.endOffset);
-        if(start===null||end===null||end<=start||!page.text.slice(start,end).trim()){selected=null;selectionButton.disabled=true;return;}
-        selected={chapter:page.chapter,textHash:page.textHash,start:start,end:end,quote:page.text.slice(start,end),scope:'selection'};
+        if(start===null||end===null||start.location.chapter!==end.location.chapter||start.location.textHash!==end.location.textHash||end.offset<=start.offset||!start.location.text.slice(start.offset,end.offset).trim()){selected=null;selectionButton.disabled=true;return;}
+        selected={chapter:start.location.chapter,textHash:start.location.textHash,start:start.offset,end:end.offset,quote:start.location.text.slice(start.offset,end.offset),scope:'selection'};
         selectionButton.disabled=false;
     }
     function recordsList(data) {
@@ -280,24 +312,35 @@
             rows=book ? data.annotations : data.records;canWrite=data.canWrite;csrfToken=data.csrfToken||'';
             if(book) {
                 annotationsLoaded=true;
-                tools.hidden=!canWrite;pageButton.disabled=page.end<=page.start;
+                var authenticated=data.authenticated===true;
+                canWrite=authenticated&&canWrite;
+                tools.hidden=!canWrite;updatePageButton();
+                if(readerToolbar)readerToolbar.classList.toggle('has-annotation-tools',canWrite);
+                if(myAnnotations)myAnnotations.hidden=!canWrite;
                 readerList();paint();
                 var wanted=new URLSearchParams(window.location.hash.slice(1)).get('annotation');
                 if(wanted){var row=rows.find(function(item){return item.id===wanted;});if(row)activate(row,false);}
             } else recordsList(data);
         } catch(error) {
             if(token!==loading) return;status.textContent=error.message;
-            if(book){annotationsLoaded=false;canWrite=false;tools.hidden=true;hint.textContent=uiText('无法加载当前文献批注。');rows=[];list.replaceChildren(button(uiText('重新加载'),load));paint();}
+            if(book){annotationsLoaded=false;canWrite=false;tools.hidden=true;updatePageButton();if(readerToolbar)readerToolbar.classList.remove('has-annotation-tools');if(myAnnotations)myAnnotations.hidden=true;rows=[];list.replaceChildren(button(uiText('重新加载'),load));paint();}
         }
     }
     if(book) {
-        book.addEventListener('reader:pagechange',function(event){page=event.detail;selected=null;selectionButton.disabled=true;pageButton.disabled=page.end<=page.start;paint();if(!annotationsLoaded)load();});
+        book.addEventListener('reader:pagechange',function(event){page=event.detail;activeLeaf=pageLeaves().findIndex(function(leaf){return leaf.chapter===page.chapter&&leaf.end>leaf.start;});if(activeLeaf<0)activeLeaf=Math.max(0,pageLeaves().findIndex(function(leaf){return leaf.end>leaf.start;}));selected=null;selectionButton.disabled=true;updatePageButton();paint();if(!annotationsLoaded)load();});
+        function selectPage(event){
+            if(!canWrite||!page||editor.open||(event.type==='mousedown'&&event.button!==0))return;
+            [document.getElementById('reader-left'),document.getElementById('reader-right')].forEach(function(leaf,index){if(leaf.contains(event.target)){activeLeaf=index;updatePageButton();}});
+        }
+        book.addEventListener('mousedown',selectPage);
+        book.addEventListener('touchstart',selectPage,{passive:true});
+        book.addEventListener('focusin',selectPage);
         book.addEventListener('mouseup',captureSelection);
         book.addEventListener('keyup',captureSelection);
         document.addEventListener('selectionchange',function(){if(!editor.open && selectionButton && document.activeElement!==selectionButton) captureSelection();});
         selectionButton.addEventListener('mousedown',function(event){event.preventDefault();});
         selectionButton.addEventListener('click',function(){if(selected)openEditor(null,Object.assign({},selected));});
-        pageButton.addEventListener('click',function(){if(page&&page.end>page.start)openEditor(null,{chapter:page.chapter,textHash:page.textHash,start:page.start,end:page.end,quote:page.text.slice(page.start,page.end),scope:'page'});});
+        pageButton.addEventListener('click',function(){var anchor=pageAnchor();if(anchor&&anchor.end>anchor.start)openEditor(null,anchor);});
         if(book.readerPage){page=book.readerPage;load();}
     } else {
         document.getElementById('annotation-search-form').addEventListener('submit',function(event){event.preventDefault();recordsPage=1;load();});
